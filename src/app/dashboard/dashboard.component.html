@@ -1,0 +1,27 @@
+<mat-tab-group>
+    <mat-tab *ngFor="let date of dates; let i = index">
+        <ng-template mat-tab-label>
+            <div class="col-sm-12 p-0" (click)="postDate(date)">
+              <div>{{date}}</div>
+              <span class="badge badge-secondary">{{i+10}}</span>
+            </div>
+        </ng-template>
+        <app-stat>
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let employee of employees; let j = index">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>{{employee.name}}</mat-panel-title>
+                        <mat-panel-description><small>Applied date : {{employee.appliedDate}}/{{employee.appliedMonth}}/{{employee.appliedYear}}</small></mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-chip-list>
+                        <mat-chip color="primary" selected="true">Leave Balance: {{employee.leave_bal}}</mat-chip>
+                    </mat-chip-list>
+                </mat-expansion-panel>
+            </mat-accordion>
+        <!-- <div *ngFor="let employee of employees; let j = index">
+            <span class="col-sm-6">{{employee.name}}</span>
+            <span class="col-sm-6">{{employee.leave_bal}}</span>
+        </div> -->
+        </app-stat>
+    </mat-tab>
+</mat-tab-group>

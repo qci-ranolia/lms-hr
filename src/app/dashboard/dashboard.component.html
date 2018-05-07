@@ -1,27 +1,59 @@
-<mat-tab-group>
-    <mat-tab *ngFor="let date of dates; let i = index">
-        <ng-template mat-tab-label>
-            <div class="col-sm-12 p-0" (click)="postDate(date)">
-              <div>{{date}}</div>
-              <span class="badge badge-secondary">{{i+10}}</span>
-            </div>
-        </ng-template>
-        <app-stat>
-            <mat-accordion>
-                <mat-expansion-panel *ngFor="let employee of employees; let j = index">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>{{employee.name}}</mat-panel-title>
-                        <mat-panel-description><small>Applied date : {{employee.appliedDate}}/{{employee.appliedMonth}}/{{employee.appliedYear}}</small></mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <mat-chip-list>
-                        <mat-chip color="primary" selected="true">Leave Balance: {{employee.leave_bal}}</mat-chip>
-                    </mat-chip-list>
-                </mat-expansion-panel>
-            </mat-accordion>
-        <!-- <div *ngFor="let employee of employees; let j = index">
-            <span class="col-sm-6">{{employee.name}}</span>
-            <span class="col-sm-6">{{employee.leave_bal}}</span>
-        </div> -->
-        </app-stat>
-    </mat-tab>
-</mat-tab-group>
+<div class="col-sm-12 p-0">
+    <div class="col-sm-2 float-left bg-white h-100 pt-3 pb-2 text-center">
+        <i class="material-icons float-left" (click)="previousMonth()">arrow_back_ios</i>
+        <div class="d-inline-block">{{date.format('MMMM')}} {{date.format('YYYY')}}</div>
+        <i class="material-icons float-right" (click)="nextMonth()">arrow_forward_ios</i>
+    </div>
+    <div class="col-sm-10 h-100 float-left">
+        <mat-tab-group>
+            <mat-tab *ngFor="let day of daysArr; let i = index">
+                <ng-template mat-tab-label>
+                    <div class="col-sm-12 p-0" (click)="postData(day?.date())" style="height:100%">
+                    <div [ngClass]="{ 'today':todayCheck(day) }">{{ day?.date() }}</div>
+                    <!-- <span class="badge badge-secondary">{{d.noeol}}</span> -->
+                    </div>
+                </ng-template>
+                <app-stat>
+                    <mat-accordion>
+                        <mat-expansion-panel *ngFor="let employee of employees">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <mat-chip color="primary" selected="true">{{employee.name}}</mat-chip>
+                                    <mat-chip color="warn" selected="true">Leave Balance:{{employee.leave_bal}}</mat-chip>
+                                </mat-panel-title>
+                                <mat-panel-description>Location:{{employee.loc}}</mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <mat-chip-list>Some description here to be added here</mat-chip-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </app-stat>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+<div class="col-sm-7 pos-abs" style="display:none">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title></mat-panel-title>
+                <mat-panel-description>See all the holiday lists according to&nbsp;<strong> Quality Council Of India</strong></mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-chip-list>
+                <div class="flex-container flex-center">
+                    <div id="calendar-container" class="flex-container flex-column flex-ceneter">
+                        <div class="flex-container flex-center-horz">
+                            <i class="material-icons" (click)="previousMonth()">arrow_back_ios</i>
+                            <div class="">{{date.format('MMMM')}} {{date.format('YYYY')}}</div>
+                            <i class="material-icons" (click)="nextMonth()">arrow_forward_ios</i>
+                        </div>
+                        <div class="flex-container flex-wrap">
+                            <div *ngFor="let day of daysArr">
+                                <div class="calendar-days flex-container flex-center" [ngClass]="{'today':todayCheck(day)}">{{ day?.date() }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-chip-list>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

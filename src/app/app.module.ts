@@ -17,6 +17,7 @@ import { EditprofileComponent } from './editprofile/editprofile.component'
 
 import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { StatComponent } from './stat/stat.component';
+import { ApiService } from './api.service';
 
 @NgModule({
   declarations:[
@@ -42,7 +43,7 @@ import { StatComponent } from './stat/stat.component';
     MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
     MatTabsModule, MatToolbarModule, MatTooltipModule
     ],
-  providers:[LmsService],
+  providers:[LmsService, ApiService],
   bootstrap:[
     AppComponent
   ]

@@ -23117,8 +23117,8 @@ label {
 }
 .mat-tab-body, .mat-tab-body.mat-tab-body-active {
     flex-grow:0 !important;
-    right:-28.5% !important;
-    margin:10px auto 10px;
+    right:-29% !important;
+    margin:11px auto 10px;
     left:inherit !important;
     max-width:41.66667%;
     width:100%;
@@ -23142,4 +23142,12 @@ div.mat-expansion-panel-content:not(.mat-expanded) {
 }
 mat-tab-header {
     background:#fff
+}
+
+.pos-rel{
+    position:relative;
+} .pos-abs {
+    position:absolute;
+    top:60px;
+    left:0;
 }

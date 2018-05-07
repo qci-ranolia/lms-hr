@@ -1,0 +1,13 @@
+.mat-toolbar-row .col-sm-5, .mat-toolbar-row .col-sm-7{
+    height:100%;
+} span {
+    cursor:pointer;
+    font-size:15px;
+    height:100%;
+    line-height:300%;
+    display:inline-block;
+} .mat-toolbar-multiple-rows,
+    .mat-toolbar-row {
+    min-height:44px;
+    height:44px;
+}

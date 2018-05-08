@@ -23151,3 +23151,42 @@ mat-tab-header {
     top:60px;
     left:0;
 }
+
+
+// tabels
+.table > tbody > tr > td {
+    padding:0 8px;
+}
+.table > thead > tr > th.modify {
+    width:20% !important
+}
+
+
+
+
+::-moz-selection{
+    background:#9124a3;
+    color:white;
+}
+//Scrollbar
+::-webkit-scrollbar{
+    width:7px;
+    height:5px;
+    background-color:transparent;
+    border-radius:10px;
+}
+::-webkit-scrollbar-thumb{
+    background-color:#9124a3;
+    border-radius:10px;
+}
+::-webkit-scrollbar-track{
+    background-color:transparent;
+    border-radius:10px;
+}
+.h78 {
+    height:78vh
+}
+.ovf-y {
+    overflow:hidden;
+    overflow-y:auto
+}

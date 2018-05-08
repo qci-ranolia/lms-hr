@@ -1,18 +1,108 @@
-<table id="table_id" class="display">
-    <thead>
-        <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-        </tr>
-    </tbody>
-</table>
+<div class="col-sm-12 p-0">
+  <div class="col-sm-12 p-0">
+    <div class="col-sm-8 float-left">
+        <h5>Employee List</h5>
+    </div>
+    <div class="col-sm-4 float-left">
+        <h5>Add Employee</h5>
+    </div>
+    </div>
+    <div class="col-sm-8 float-left">
+        <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block">
+            <table id="table_id" class="table table-striped " cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>QCI ID</th>
+                        <th>Employee</th>
+                        <th>Designation</th>
+                        <th>Gender</th>
+                        <th class="modify">Modify</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ABCD ID</td>
+                        <td>Deepak Ranolia</td>
+                        <td>Junior Analyst</td>
+                        <td>Male</td>
+                        <td>
+                            <button mat-button class="btn btn-info p-2">Edit</button>
+                            <button mat-button class="ml-2 btn btn-danger p-2">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ABCD ID</td>
+                        <td>Deepak Ranolia</td>
+                        <td>Junior Analyst</td>
+                        <td>Male</td>
+                        <td>
+                            <button mat-button class="btn btn-info p-2">Edit</button>
+                            <button mat-button class="ml-2 btn btn-danger p-2">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ABCD ID</td>
+                        <td>Deepak Ranolia</td>
+                        <td>Junior Analyst</td>
+                        <td>Male</td>
+                        <td>
+                            <button mat-button class="btn btn-info p-2">Edit</button>
+                            <button mat-button class="ml-2 btn btn-danger p-2">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ABCD ID</td>
+                        <td>Deepak Ranolia</td>
+                        <td>Junior Analyst</td>
+                        <td>Male</td>
+                        <td>
+                            <button mat-button class="btn btn-info p-2">Edit</button>
+                            <button mat-button class="ml-2 btn btn-danger p-2">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ABCD ID</td>
+                        <td>Deepak Ranolia</td>
+                        <td>Junior Analyst</td>
+                        <td>Male</td>
+                        <td>
+                            <button mat-button class="btn btn-info p-2">Edit</button>
+                            <button mat-button class="ml-2 btn btn-danger p-2">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-4 float-left">
+        <div class="col-sm-12 bg-white pt-2 pb-2">
+            <div class="col-sm-12 bg-white pt-2 pb-2 d-inline-block">
+                <form class="example-form">
+                    <mat-form-field class="example-full-width col-sm-5 float-left pl-0">
+                        <input matInput placeholder="Qci ID" [(ngModel)]="qciId" name="qciId" />
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width col-sm-7 float-left pr-0">
+                        <input matInput placeholder="Designation" [(ngModel)]="designation" name="designation" />
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width col-sm-7 float-left pl-0">
+                        <input matInput placeholder="Employee Name" [(ngModel)]="empname" name="empname" />
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width col-sm-5 float-left pr-0">
+                        <mat-select placeholder="Employee Type" [(ngModel)]="toe" (change)="gettoe(toe)" name="toe">
+                            <mat-option *ngFor="let typ of emp" [value]="typ.value">{{typ.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width col-sm-5 float-left pl-0">
+                        <mat-select placeholder="Select Gender" [(ngModel)]="gendr" (change)="getGender(gendr)" name="gendr">
+                            <mat-option *ngFor="let gender of genders" [value]="gender.value">{{gender.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width col-sm-7 float-left pr-0">
+                        <input matInput placeholder="Password" type="password" [(ngModel)]="password" name="password" />
+                    </mat-form-field>
+                    <button mat-button class="mt-2 btn btn-primary p-2" (click)="addEmployee($event)">Add Employee</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

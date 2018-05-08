@@ -1,16 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component'
-import { NavComponent } from './nav/nav.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { CrudComponent } from './crud/crud.component';
-import { EolComponent } from './eol/eol.component';
-import { NewappComponent } from './newapp/newapp.component';
-import { LmsService } from './lms.service';
-import { AppRoutingModule } from './/app-routing.module';
-import { LoginComponent } from './login/login.component';
+import { NavComponent } from './nav/nav.component'
+import { DashboardComponent } from './dashboard/dashboard.component'
+import { CrudComponent } from './crud/crud.component'
+import { EolComponent } from './eol/eol.component'
+import { NewappComponent } from './newapp/newapp.component'
+import { LmsService } from './lms.service'
+import { AppRoutingModule } from './/app-routing.module'
+import { LoginComponent } from './login/login.component'
 import { EditprofileComponent } from './editprofile/editprofile.component'
 
 
@@ -33,6 +34,7 @@ import { ApiService } from './api.service';
   ],
   imports:[
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
     MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
@@ -43,10 +45,10 @@ import { ApiService } from './api.service';
     MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
     MatTabsModule, MatToolbarModule, MatTooltipModule
     ],
-  providers:[LmsService, ApiService],
+  providers:[ LmsService, ApiService ],
   bootstrap:[
     AppComponent
   ]
 })
 
-export class AppModule{ }
+export class AppModule {}

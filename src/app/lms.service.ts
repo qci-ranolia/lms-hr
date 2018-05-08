@@ -1,5 +1,5 @@
 import{ EventEmitter, Injectable } from '@angular/core'
-import { ApiService } from 'leave-management-system/src/app/api.service'
+import { ApiService } from './api.service'
 
 @Injectable()
 

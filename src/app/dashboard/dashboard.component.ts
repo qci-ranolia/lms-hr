@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { LmsService } from 'leave-management-system/src/app/lms.service'
+import { LmsService } from '../lms.service'
 import * as moment from 'moment'
 
 @Component({

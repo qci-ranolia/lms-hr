@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import { MatTabsModule } from '@angular/material/tabs';
-import { LmsService } from 'leave-management-system/src/app/lms.service';
+import { LmsService } from '../lms.service';
 
 @Component({
   selector:'app-nav',

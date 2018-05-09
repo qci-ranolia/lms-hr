@@ -4,7 +4,7 @@
         <div class="d-inline-block">{{date.format('MMMM')}} {{date.format('YYYY')}}</div>
         <i class="material-icons float-right" (click)="nextMonth()">arrow_forward_ios</i>
     </div>
-    <div class="col-sm-10 h-100 float-left">
+    <div class="col-sm-10 h-100 float-left pr-0">
         <mat-tab-group>
             <mat-tab *ngFor="let day of daysArr; let i = index">
                 <ng-template mat-tab-label>
@@ -14,44 +14,56 @@
                     </div>
                 </ng-template>
                 <app-stat>
-                    <mat-accordion>
-                        <mat-expansion-panel *ngFor="let employee of employees">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    <mat-chip color="primary" selected="true">{{employee.name}}</mat-chip>
-                                    <mat-chip color="warn" selected="true">Leave Balance:{{employee.leave_bal}}</mat-chip>
-                                </mat-panel-title>
-                                <mat-panel-description>Location:{{employee.loc}}</mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <mat-chip-list>Some description here to be added here</mat-chip-list>
-                        </mat-expansion-panel>
-                    </mat-accordion>
+                    <div class="pt-1 pb-2">
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <mat-chip color="primary" selected="true">sasasasa</mat-chip>
+                                        <mat-chip color="warn" selected="true">Leave Balance:</mat-chip>
+                                    </mat-panel-title>
+                                    <mat-panel-description></mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <mat-chip-list>Some description here to be added here</mat-chip-list>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
                 </app-stat>
             </mat-tab>
         </mat-tab-group>
     </div>
 </div>
-<div class="col-sm-7 pos-abs" style="display:none">
+<div class="col-sm-7 pos-abs pt-1 pb-2">
     <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title></mat-panel-title>
+                <mat-panel-description>See all the holiday lists according to&nbsp;<strong> Quality Council Of India</strong></mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-chip-list>
+                <div class="col-sm-12 p-0">
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
+                </div>
+            </mat-chip-list>
+        </mat-expansion-panel>
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title></mat-panel-title>
                 <mat-panel-description>See all the holiday lists according to&nbsp;<strong> Quality Council Of India</strong></mat-panel-description>
             </mat-expansion-panel-header>
             <mat-chip-list>
-                <div class="flex-container flex-center">
-                    <div id="calendar-container" class="flex-container flex-column flex-ceneter">
-                        <div class="flex-container flex-center-horz">
-                            <i class="material-icons" (click)="previousMonth()">arrow_back_ios</i>
-                            <div class="">{{date.format('MMMM')}} {{date.format('YYYY')}}</div>
-                            <i class="material-icons" (click)="nextMonth()">arrow_forward_ios</i>
-                        </div>
-                        <div class="flex-container flex-wrap">
-                            <div *ngFor="let day of daysArr">
-                                <div class="calendar-days flex-container flex-center" [ngClass]="{'today':todayCheck(day)}">{{ day?.date() }}</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-sm-12 p-0">
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
+                    <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
                 </div>
             </mat-chip-list>
         </mat-expansion-panel>

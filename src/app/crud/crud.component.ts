@@ -9,18 +9,28 @@ declare var $
 })
 
 export class CrudComponent implements OnInit {
-  genders:any
-  emp:any
-
+  
   getGendr : any
   getEmpTyp : any
-  arr = []
-  ruleElement : any
+  
+
+
   qciId : any
-  designation : any
   empname : any
+  email:any
+  board:any
+  designation : any
+  emp:any
+  genders:any
+  balCl:any
+  balSl:any
+  balPl:any
+  balMl:any
+  balPtl:any
   password : any
   
+  show: boolean = false
+  hide: boolean = false
   constructor( private lms:LmsService) {
     
     setTimeout(() => {
@@ -50,6 +60,15 @@ export class CrudComponent implements OnInit {
   
   getGender(item){
     this.getGendr = item
+    // console.log(this.getGendr)
+    if ( this.getGendr == 'Male' ){
+      this.hide = true
+      this.show = false
+    }
+    else{
+     this.show = true
+     this.hide = false
+    }
   }
   gettoe(item){
     this.getEmpTyp = item
@@ -57,13 +76,7 @@ export class CrudComponent implements OnInit {
 
   addEmployee($event){
     $event.preventDefault()
-    this.arr.push(this.qciId)
-    this.arr.push(this.designation)
-    this.arr.push(this.empname)
-    this.arr.push(this.password)
-    this.arr.push(this.getGendr)
-    this.arr.push(this.getEmpTyp)
-    this.lms.addEmp(this.arr)
+    this.lms.addEmp(this.qciId,this.empname,this.email,this.board,this.designation,this.password,this.getGendr,this.getEmpTyp,this.balCl,this.balSl,this.balPl,this.balMl,this.balPtl)
   }
 
 }

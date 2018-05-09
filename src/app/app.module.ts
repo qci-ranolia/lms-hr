@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { FormsModule }   from '@angular/forms';
+import { FormsModule }   from '@angular/forms'
+import { HttpModule } from '@angular/http'
 
 import { AppComponent } from './app.component'
 import { NavComponent } from './nav/nav.component'
@@ -35,6 +36,7 @@ import { ApiService } from './api.service';
   imports:[
     BrowserModule,
     FormsModule,
+    HttpModule,
     AppRoutingModule,
     BrowserAnimationsModule,MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
     MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,

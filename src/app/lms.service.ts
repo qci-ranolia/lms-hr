@@ -1,27 +1,41 @@
 import{ EventEmitter, Injectable } from '@angular/core'
+
 import { ApiService } from './api.service'
+
+import { Mid } from './middleware'
 
 @Injectable()
 
 export class LmsService {
-  
-  details:any
-  
-  emitNames = new EventEmitter<any>()
-  emitCalendar = new EventEmitter<any>()
-  emitfd = new EventEmitter<any>()
-  
 
-  constructor( private api:ApiService ) {
+  emitEmployee = new EventEmitter<any>()
+  
+  mid: Mid = {
+    qci_id: 1,
+    name: 'string',
+    email: 'string',
+    board: 'string',
+    designation: 'string',
+    type_of_employee: 'string',
+    Gender: 'string',
+    bal_cl: 10,
+    bal_sl: 10,
+    bal_pl: 10,
+    bal_ml: 10,
+    bal_ptl: 10,
+    bal_eol: 10,
+    password: 'string'
   }
 
-  addEmp( qciId:number, designation:string, empname:string, password:any, getGendr:string, getEmpTyp:string ){
-    let tmp = { qciId:qciId, designation:designation, empname:empname, password:password, getGendr:getGendr, getEmpTyp:getEmpTyp }
-    this.api.addEmpl(tmp)//.subscribe( res=> console.log(res) )
+  constructor( private api: ApiService ) {
   }
 
-  get(){
-    this.emitCalendar.emit(this.details)
+  getEmp(){
+    this.emitEmployee.emit(this.mid)
+  }
+  addEmp(){
+    // let tmp = { qciId:qciId, designation:designation, empname:empname, password:password, getGendr:getGendr, getEmpTyp:getEmpTyp }
+    // this.api.addEmpl(tmp)//.subscribe( res=> console.log(res) )
   }
   
   postData(data:any){

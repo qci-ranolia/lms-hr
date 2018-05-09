@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-center">
+    <div class="col-sm-7 bg-white pt-2 pb-2">
+        <div class="col-sm-12 bg-white pt-2 pb-2 d-inline-block">
+            <form class="example-form">
+                <mat-form-field class="example-full-width col-sm-2 float-left mb-4">
+                    <input matInput placeholder="Qci ID" [(ngModel)]="qciId" name="qciId" />
+                </mat-form-field>
+                <mat-form-field class="example-full-width col-sm-5 float-left mb-4">
+                    <input matInput placeholder="Employee Name" [(ngModel)]="empname" name="empname" />
+                </mat-form-field>
+                <mat-form-field class="example-full-width col-sm-5 float-left mb-4">
+                    <input matInput placeholder="Email" [(ngModel)]="email" name="email" />
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width col-sm-4 float-left mb-4">
+                    <input matInput placeholder="Designation" [(ngModel)]="designation" name="designation" />
+                </mat-form-field>
+                <mat-form-field class="example-full-width col-sm-4 float-left mb-4">
+                    <input matInput placeholder="Board" [(ngModel)]="board" name="board" />
+                </mat-form-field>
+                <mat-form-field class="example-full-width col-sm-4 float-left mb-4">
+                    <mat-select placeholder="Employee Type" [(ngModel)]="toe" (change)="gettoe(toe)" name="toe">
+                        <mat-option *ngFor="let typ of emp" [value]="typ.value">{{typ.value}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width col-sm-3 float-left mb-4">
+                    <mat-select placeholder="Select Gender" [(ngModel)]="gendr" (change)="getGender(gendr)" name="gendr">
+                        <mat-option *ngFor="let gender of genders" [value]="gender.value">{{gender.value}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="example-full-width col-sm-3 float-left mb-4">
+                    <input matInput placeholder="Casual Leave" [(ngModel)]="balCl" name="balCl" />
+                </mat-form-field>
+                <mat-form-field class="example-full-width col-sm-3 float-left mb-4">
+                    <input matInput placeholder="Sick Leave" [(ngModel)]="balSl" name="balSl" />
+                </mat-form-field>
+                <mat-form-field class="example-full-width col-sm-3 float-left mb-4">
+                    <input matInput placeholder="privileged Leave" [(ngModel)]="balPl" name="balPl" />
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width col-sm-6 float-left mb-4">
+                    <input matInput placeholder="Extra Ordinary Leave" [(ngModel)]="balEol" name="balEol" />
+                </mat-form-field>
+                <mat-form-field class="example-full-width col-sm-6 float-left mb-4" *ngIf="show">
+                    <input matInput placeholder="Maternity Leave" [(ngModel)]="balMl" name="balMl" />
+                </mat-form-field>
+                <mat-form-field class="example-full-width col-sm-6 float-left mb-4" *ngIf="hide">
+                    <input matInput placeholder="Paterinity Leave" [(ngModel)]="balPtl" name="balPtl" />
+                </mat-form-field>
+                <mat-form-field class="example-full-width col-sm-12 float-left mb-4">
+                    <input matInput placeholder="Password" type="password" [(ngModel)]="password" name="password" />
+                </mat-form-field>
+                <div class="clearfix"></div>
+                <button mat-button class="ml-3 mt-3 btn btn-primary p-2" (click)="addEmployee($event)">Add Employee</button>
+            </form>
+        </div>
+    </div>
+</div>

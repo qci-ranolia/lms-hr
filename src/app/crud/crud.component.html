@@ -1,94 +1,46 @@
 <div class="col-sm-12 p-0">
-  <div class="col-sm-12 p-0">
-    <div class="col-sm-8 float-left">
-        <h5>Employee List</h5>
-    </div>
-    <div class="col-sm-4 float-left">
-        <h5>Add Employee</h5>
-    </div>
-    </div>
-    <div class="col-sm-8 float-left">
+    <div class="col-sm-12 float-left">
+        <h5 class="d-inline-block">Employee's List</h5>
+        <div class="d-inline-block float-right">
+            <button mat-button class="btn btn-primary p-2" [routerLink]="['/add-employee']">Add Employee</button>
+        </div>
         <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block">
-            <table id="table_id" class="table table-striped " cellspacing="0" width="100%">
+            <table id="table_id" class="table table-striped" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>QCI ID</th>
-                        <th>Employee</th>
-                        <th>Designation</th>
+                        <th>Employee's</th>
                         <th>Gender</th>
+                        <th>Designation</th>
+                        <th>Employee Type</th>
+                        <th>Board</th>
+                        <th>Leave details</th>
                         <th class="modify">Modify</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>ABCD ID</td>
-                        <td>Deepak Ranolia</td>
-                        <td>Junior Analyst</td>
+                        <td>//Deep ( deep@qcin.org )<br />
+                            QCI ID</td>
                         <td>Male</td>
+                        <td>Unknown</td>
+                        <td>Contractual</td>
+                        <td>NABL</td>
                         <td>
-                            <button mat-button class="btn btn-info p-2">Edit</button>
+                            <mat-chip-list>
+                                <mat-chip>CL: 10</mat-chip>
+                                <mat-chip>SL: 10</mat-chip>
+                                <mat-chip>ML: 10</mat-chip>
+                                <mat-chip>PL: 10</mat-chip>
+                                <mat-chip>EOL: 10</mat-chip>
+                            </mat-chip-list>                                  
+                        </td>
+                        <td>
+                            <button mat-button class="btn btn-info p-2" [routerLink]="['/employee-list/:id']">Edit</button>
                             <button mat-button class="ml-2 btn btn-danger p-2">Delete</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
-    <div class="col-sm-4 float-left">
-        <div class="col-sm-12 bg-white pt-2 pb-2">
-            <div class="col-sm-12 bg-white pt-2 pb-2 d-inline-block">
-                <form class="example-form">
-                    <mat-form-field class="example-full-width col-sm-6 float-left pl-0">
-                        <input matInput placeholder="Qci ID" [(ngModel)]="qciId" name="qciId" />
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pr-0">
-                        <input matInput placeholder="Employee Name" [(ngModel)]="empname" name="empname" />
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pl-0">
-                        <input matInput placeholder="Email" [(ngModel)]="email" name="email" />
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pr-0">
-                        <input matInput placeholder="Board" [(ngModel)]="board" name="board" />
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pl-0">
-                        <input matInput placeholder="Designation" [(ngModel)]="designation" name="designation" />
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pr-0">
-                        <mat-select placeholder="Employee Type" [(ngModel)]="toe" (change)="gettoe(toe)" name="toe">
-                            <mat-option *ngFor="let typ of emp" [value]="typ.value">{{typ.value}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pl-0">
-                        <mat-select placeholder="Select Gender" [(ngModel)]="gendr" (change)="getGender(gendr)" name="gendr">
-                            <mat-option *ngFor="let gender of genders" [value]="gender.value">{{gender.value}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pr-0">
-                        <input matInput placeholder="Casual Leave" [(ngModel)]="balCl" name="balCl" />
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pl-0">
-                        <input matInput placeholder="Sick Leave" [(ngModel)]="balSl" name="balSl" />
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pr-0">
-                        <input matInput placeholder="privileged Leave" [(ngModel)]="balPl" name="balPl" />
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pl-0">
-                        <input matInput placeholder="Extra Ordinary Leave" [(ngModel)]="balEol" name="balEol" />
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pr-0" *ngIf="show">
-                        <input matInput placeholder="Maternity Leave" [(ngModel)]="balMl" name="balMl" />
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-6 float-left pr-0" *ngIf="hide">
-                        <input matInput placeholder="Paterinity Leave" [(ngModel)]="balPtl" name="balPtl" />
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width col-sm-12 float-left pl-0">
-                        <input matInput placeholder="Password" type="password" [(ngModel)]="password" name="password" />
-                    </mat-form-field>
-                    <div class="col-sm-12 p-0">
-                        <button mat-button class="mt-3 ml-3 btn btn-primary p-2" (click)="addEmployee($event)">Add Employee</button>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 </div>

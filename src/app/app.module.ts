@@ -20,6 +20,8 @@ import { EditprofileComponent } from './editprofile/editprofile.component'
 import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { StatComponent } from './stat/stat.component';
 import { ApiService } from './api.service';
+import { AddEmpComponent } from './crud/add-emp/add-emp.component';
+import { EditEmpComponent } from './crud/edit-emp/edit-emp.component';
 
 @NgModule({
   declarations:[
@@ -32,6 +34,8 @@ import { ApiService } from './api.service';
     LoginComponent,
     EditprofileComponent,
     StatComponent,
+    AddEmpComponent,
+    EditEmpComponent,
   ],
   imports:[
     BrowserModule,

@@ -15,9 +15,6 @@ import { AddEmpComponent } from './crud/add-emp/add-emp.component';
 import { EditEmpComponent } from './crud/edit-emp/edit-emp.component';
 import { NewappComponent } from './newapp/newapp.component';
 
-// User components
-import { EditprofileComponent } from './editprofile/editprofile.component';
-
 const routes: Routes = [
   { path:'', component:NavComponent, children:[
     { path:'dashboard', component:DashboardComponent },
@@ -27,7 +24,6 @@ const routes: Routes = [
     { path:'employee-list/:id', component:EditEmpComponent },
     { path:'employee-section', component:NewappComponent },
     { path:'application-status', component:EolComponent },
-    { path:'edit', component:EditprofileComponent }
   ]},
   { path:'login', component:LoginComponent }
 ];

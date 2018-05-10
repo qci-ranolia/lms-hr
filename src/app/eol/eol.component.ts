@@ -11,6 +11,7 @@ declare var $
 export class EolComponent implements OnInit {
 
   constructor( private lms: LmsService ) {
+    // this.lms.ge
     setTimeout(() => {
       $(function() {
         let user = $('#table_id').DataTable({

@@ -7,12 +7,12 @@ declare var $
   templateUrl: './crud.component.html',
   styleUrls: ['./crud.component.scss']
 })
-
 export class CrudComponent implements OnInit {
-  
+  employee = new Array
   constructor( private lms: LmsService ) { 
-    
-    this.lms.emitEmployee.subscribe( res => console.log(res) ) 
+    this.lms.emitgetEmployees.subscribe( r => {
+      this.employee = r
+    })
     setTimeout(() => {
       $(function() {
         let user = $('#table_id').DataTable({
@@ -22,17 +22,9 @@ export class CrudComponent implements OnInit {
           scrollY:300
         });
       });
-    }, 1 ) 
-    
+    }, 1 )
   }
-
   ngOnInit() {
-    this.lms.getEmp()
+    this.lms.getEmployees()
   }
-  
-  addEmployee($event) {
-    $event.preventDefault()
-    this.lms.addEmp()
-  }
-
 }

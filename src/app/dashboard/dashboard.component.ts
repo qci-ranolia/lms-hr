@@ -38,10 +38,6 @@ export class DashboardComponent implements OnInit {
       return days
   }
 
-  public postData( data ) {
-    this.service.postData(data )
-  }
-
   public nextMonth() {
     this.date.add(1, 'M' )
     this.daysArr = this.createCalendar( this.date )

@@ -13,7 +13,7 @@ import { NewappComponent } from './newapp/newapp.component'
 import { LmsService } from './lms.service'
 import { AppRoutingModule } from './/app-routing.module'
 import { LoginComponent } from './login/login.component'
-import { EditprofileComponent } from './editprofile/editprofile.component'
+
 
 
 
@@ -32,7 +32,6 @@ import { EditEmpComponent } from './crud/edit-emp/edit-emp.component';
     EolComponent,
     NewappComponent,
     LoginComponent,
-    EditprofileComponent,
     StatComponent,
     AddEmpComponent,
     EditEmpComponent,

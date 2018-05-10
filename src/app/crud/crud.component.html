@@ -8,34 +8,35 @@
             <table id="table_id" class="table table-striped" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>Employee's</th>
-                        <th>Gender</th>
-                        <th>Designation</th>
-                        <th>Employee Type</th>
-                        <th>Board</th>
-                        <th>Leave details</th>
+                        <th class="wd-16">Employee's</th>
+                        <th class="wd-7">Gender</th>
+                        <th class="wd-10">Designation</th>
+                        <th class="wd-12">Employee Type</th>
+                        <th class="wd-7">Board</th>
+                        <th class="wd-">Leave details</th>
                         <th class="modify">Modify</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>//Deep ( deep@qcin.org )<br />
-                            QCI ID</td>
-                        <td>Male</td>
-                        <td>Unknown</td>
-                        <td>Contractual</td>
-                        <td>NABL</td>
-                        <td>
+                    <tr *ngFor="let emp of employee; let i = index">
+                        <td class="wd-16">{{ emp.name }} <small color="primary">{{ emp.email }}</small><br />
+                            <small color="primary">Qci ID : {{ emp.qci_id }}</small></td>
+                        <td class="wd-7">{{ emp.gender }}</td>
+                        <td class="wd-10">{{ emp.designation }}</td>
+                        <td class="wd-12">{{ emp.type_of_employee }}</td>
+                        <td class="wd-7">{{ emp.board }}</td>
+                        <td class="wd-">
                             <mat-chip-list>
-                                <mat-chip>CL: 10</mat-chip>
-                                <mat-chip>SL: 10</mat-chip>
-                                <mat-chip>ML: 10</mat-chip>
-                                <mat-chip>PL: 10</mat-chip>
-                                <mat-chip>EOL: 10</mat-chip>
+                                <mat-chip>CL: {{ emp.bal_cl }}</mat-chip>
+                                <mat-chip>SL: {{ emp.bal_sl }}</mat-chip>
+                                <mat-chip>PL: {{ emp.bal_pl }}</mat-chip>
+                                <mat-chip>ML: {{ emp.bal_ml }}</mat-chip>
+                                <mat-chip>ML: {{ emp.bal_ptl }}</mat-chip>
+                                <mat-chip>EOL: {{ emp.bal_eol }}</mat-chip>
                             </mat-chip-list>                                  
                         </td>
                         <td>
-                            <button mat-button class="btn btn-info p-2" [routerLink]="['/employee-list/:id']">Edit</button>
+                            <button mat-button class="btn btn-info p-2" :routerLink="/employee-list/{{emp.qci_id}}">Edit</button>
                             <button mat-button class="ml-2 btn btn-danger p-2">Delete</button>
                         </td>
                     </tr>

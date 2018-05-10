@@ -6,46 +6,54 @@ import { LmsService } from '../../lms.service';
   templateUrl: './add-emp.component.html',
   styleUrls: ['./add-emp.component.scss']
 })
-export class AddEmpComponent implements OnInit {
-  getGendr: any
-  getEmpTyp: any
 
-  emp: any
-  genders:any
+export class AddEmpComponent implements OnInit {
+  gender : any
+  type_of_employee : any
+
+  showEmpTyp : any
+  showGender : any
   
-  show: boolean = false
-  hide: boolean = false
+  show : boolean = false
+  hide : boolean = false
   
-  mid:any
+  employee : any = new Object()
 
   constructor( private lms: LmsService ) {
-    this.genders = [
+    
+    this.showGender = [
       { value: 'Male' },
       { value: 'Female' }
     ]
 
-    this.emp = [
+    this.showEmpTyp = [
       { value: 'Regular' },
       { value: 'Contract' },
       { value: 'Professional' }
     ]
+  
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
+
   getGender(item) {
-    this.getGendr = item
-    if ( this.getGendr == 'Male' ){
+    this.gender = item
+    if ( this.gender == 'Male' ) {
       this.hide = true
       this.show = false
     }
-    else if ( this.getGendr == 'Female' ) {
+    else if ( this.gender == 'Female' ) {
       this.show = true
       this.hide = false
     }
   }
 
   gettoe(item) {
-    this.getEmpTyp = item
+    this.type_of_employee = item
   }
+
+  addEmployee(){
+    this.lms.addEmp(this.employee)
+  }
+
 }

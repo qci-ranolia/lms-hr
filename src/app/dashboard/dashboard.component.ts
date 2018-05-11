@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   
   employees:any
   
-  constructor( private service: LmsService ) { }
+  constructor( private lms: LmsService ) { }
   
   public ngOnInit() {
     this.daysArr = this.createCalendar( this.date )

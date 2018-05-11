@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { LmsService } from '../../lms.service';
+import { Component, OnInit } from '@angular/core'
+import { LmsService } from '../../lms.service'
 
 @Component({
   selector: 'app-add-emp',
@@ -18,7 +18,7 @@ export class AddEmpComponent implements OnInit {
   hide : boolean = false
   
   employee : any = new Object()
-
+  
   constructor( private lms: LmsService ) {
     
     this.showGender = [

@@ -1,12 +1,13 @@
 <div class="d-flex justify-content-center">
-    <div class="col-sm-7 bg-white pt-2 pb-2">
+    <div class="col-sm-7 pt-2 pb-2">
+        <h5>Add Employee</h5>
         <div class="col-sm-12 bg-white pt-2 pb-2 d-inline-block">
             <form class="example-form">
                 <mat-form-field class="example-full-width col-sm-2 float-left mb-4">
                     <input matInput placeholder="Qci ID" [(ngModel)]="employee.qci_id" name="qciId" />
                 </mat-form-field>
                 <mat-form-field class="example-full-width col-sm-5 float-left mb-4">
-                    <input matInput placeholder="Employee Name" [(ngModel)]="employee.name" name="empname" />
+                    <input matInput placeholder="Employee Name" [(ngModel)]="employee.name" name="name" />
                 </mat-form-field>
                 <mat-form-field class="example-full-width col-sm-5 float-left mb-4">
                     <input matInput placeholder="Email" [(ngModel)]="employee.email" name="email" />

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule }   from '@angular/forms'
 import { HttpModule } from '@angular/http'
+import { RouterModule } from '@angular/router'
 
 import { AppComponent } from './app.component'
 import { NavComponent } from './nav/nav.component'
@@ -15,13 +16,16 @@ import { AppRoutingModule } from './/app-routing.module'
 import { LoginComponent } from './login/login.component'
 
 
-
+import { AuthService } from './auth.service'
 
 import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { StatComponent } from './stat/stat.component';
 import { ApiService } from './api.service';
 import { AddEmpComponent } from './crud/add-emp/add-emp.component';
 import { EditEmpComponent } from './crud/edit-emp/edit-emp.component';
+
+
+import { Ng4SpinnerModule } from 'ng4-spinner';
 
 @NgModule({
   declarations:[
@@ -48,9 +52,13 @@ import { EditEmpComponent } from './crud/edit-emp/edit-emp.component';
     MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule,
     MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
     MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
-    MatTabsModule, MatToolbarModule, MatTooltipModule
+    MatTabsModule, MatToolbarModule, MatTooltipModule,
+    Ng4SpinnerModule,
+    RouterModule.forRoot([
+      { path: 'login', component: LoginComponent }
+    ])
     ],
-  providers:[ LmsService, ApiService ],
+  providers:[ LmsService, ApiService, AuthService ],
   bootstrap:[
     AppComponent
   ]

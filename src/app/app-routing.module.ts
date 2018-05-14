@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthService } from './auth.service';
+
 //login platform for admin and employee
 import { LoginComponent } from './login/login.component';
 
@@ -17,15 +19,16 @@ import { NewappComponent } from './newapp/newapp.component';
 
 const routes: Routes = [
   { path:'', component:NavComponent, children:[
-    { path:'dashboard', component:DashboardComponent },
-    { path:'', redirectTo:'/dashboard', pathMatch:'full' },
-    { path:'employee-list', component:CrudComponent },
-    { path:'add-employee', component:AddEmpComponent },
-    { path:'employee-list/:id', component:EditEmpComponent },
-    { path:'employee-section', component:NewappComponent },
-    { path:'application-status', component:EolComponent },
+    { path:'dashboard', component:DashboardComponent, canActivate:[AuthService] },
+    { path:'', redirectTo:'/dashboard', pathMatch:'full', canActivate:[AuthService] },
+    { path:'employee-list', component:CrudComponent, canActivate:[AuthService] },
+    { path:'add-employee', component:AddEmpComponent , canActivate:[AuthService]},
+    { path:'employee-list/:id', component:EditEmpComponent , canActivate:[AuthService]},
+    { path:'employee-section', component:NewappComponent , canActivate:[AuthService]},
+    { path:'application-status', component:EolComponent , canActivate:[AuthService]},
   ]},
-  { path:'login', component:LoginComponent }
+  { path:'login', component:LoginComponent },
+  { path: '**', redirectTo: '/login'}
 ];
 
 @NgModule({

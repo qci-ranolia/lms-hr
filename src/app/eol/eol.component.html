@@ -1,39 +1,36 @@
 <div class="col-sm-12 p-0">
     <div class="col-sm-12 float-left">
         <h5 class="d-inline-block">Employee's List</h5>
-        <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block">
+        <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box">
             <table id="table_id" class="table table-striped" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>Employee's</th>
-                        <th>Gender</th>
-                        <th>Designation</th>
-                        <th>Employee Type</th>
-                        <th>Board</th>
-                        <th>Leave details</th>
-                        <th class="modify">Modify</th>
+                        <th class="wd-7">QCID</th>
+                        <th class="wd-16">Employee name</th>
+                        <th class="wd-7">Email</th>
+                        <th class="wd-7">Gender</th>
+                        <th class="wd-10">Designation</th>
+                        <th class="wd-7">Board</th>
+                        <th class="wd-">Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>//Deep ( deep@qcin.org )<br />
-                            QCI ID</td>
-                        <td>Male</td>
-                        <td>Unknown</td>
-                        <td>Contractual</td>
-                        <td>NABL</td>
-                        <td>
+                        <td class="wd-7">emp.qci_id</td>
+                        <td class="wd-16">emp.name</td>
+                        <th class="wd-7">emp.email</th>
+                        <td class="wd-7">emp.gender</td>
+                        <td class="wd-10">emp.designation<br /><small>emp.type_of_employee</small></td>
+                        <td class="wd-7">emp.board</td>
+                        <td class="wd-">
                             <mat-chip-list>
-                                <mat-chip>CL: 10</mat-chip>
-                                <mat-chip>SL: 10</mat-chip>
-                                <mat-chip>ML: 10</mat-chip>
-                                <mat-chip>PL: 10</mat-chip>
-                                <mat-chip>EOL: 10</mat-chip>
+                                <mat-chip><span matTooltip="Casual Leave">CL: emp.bal_cl</span></mat-chip>
+                                <mat-chip><span matTooltip="Sick Leave">SL: emp.bal_sl</span></mat-chip>
+                                <mat-chip><span matTooltip="Privileged Leave">PL: emp.bal_pl</span></mat-chip>
+                                <mat-chip><span matTooltip="Materinity Leave">ML: emp.bal_ml</span></mat-chip>
+                                <mat-chip><span matTooltip="Paterinity Leave">PTL: emp.bal_ptl</span></mat-chip>
+                                <mat-chip><span matTooltip="Extraordinary Leave">EOL: emp.bal_eol</span></mat-chip>
                             </mat-chip-list>                                  
-                        </td>
-                        <td>
-                            <button mat-button class="btn btn-info p-2" [routerLink]="['/employee-list/:id']">Edit</button>
-                            <button mat-button class="ml-2 btn btn-danger p-2">Delete</button>
                         </td>
                     </tr>
                 </tbody>

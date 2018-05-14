@@ -11,6 +11,13 @@ declare var $
 export class EolComponent implements OnInit {
 
   constructor( private lms: LmsService ) {
+    
+    // this.lms.emitsload.subscribe( el => this.loader = el )
+    // this.lms.emithload.subscribe( el => this.loader = el )
+    // this.lms.showLoader()
+    // setTimeout(() => {
+    //   this.lms.hideLoader()
+    // }, 1000 )
     // this.lms.ge
     setTimeout(() => {
       $(function() {

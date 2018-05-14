@@ -23158,7 +23158,7 @@ mat-tab-header {
     padding:0 8px;
 }
 .table > thead > tr > th.modify {
-    width:13% !important
+    width:10% !important
 }
 
 
@@ -23191,7 +23191,7 @@ mat-tab-header {
 form .ng-valid .mat-focused .mat-form-field-label, form .ng-valid .mat-form-field-label, form .ng-valid.mat-focused .mat-form-field-label
 {
     color:#3f51b5 !important;
-}form .ng-valid .mat-input-underline, form .ng-valid .mat-input-underline .mat-input-ripple{
+} form .ng-valid .mat-input-underline, form .ng-valid .mat-input-underline .mat-input-ripple{
     background-color: #3f51b3;
     height:1px
 }
@@ -23200,3 +23200,28 @@ form .ng-valid .mat-focused .mat-form-field-label, form .ng-valid .mat-form-fiel
 .wd-10 { width: 10% !important }
 .wd-12 { width: 12% !important }
 .wd-16 { width: 16% !important }
+
+.mat-tooltip {
+    font-size: 13px !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button, .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    border:1px solid #c2c2c2;
+    background:rgba(250,250,250,1);
+    border-radius:0px;
+    box-shadow:1px 1px 1px 0px #fff inset;
+    text-shadow:1px 1px 0px #fff;
+    padding:0px;
+    margin:0 1px
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+    border:1px solid #c2c2c2;
+    background:rgba(200,200,200,0.8);
+    border-radius:0px;
+    box-shadow:1px 1px 1px 0px #fff inset;
+    text-shadow:1px 1px 0px #fff;
+    padding:0px;
+    margin:0 1px
+}
+.rad-box {
+    box-shadow:0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12) 
+}

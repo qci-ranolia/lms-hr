@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { LmsService } from '../../lms.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-emp',
@@ -19,8 +20,14 @@ export class AddEmpComponent implements OnInit {
   
   employee : any = new Object()
   
-  constructor( private lms: LmsService ) {
+  constructor( private lms: LmsService, private router:Router ) {
     
+    // this.lms.emitsload.subscribe( el => this.loader = el )
+    // this.lms.emithload.subscribe( el => this.loader = el )
+    // this.lms.showLoader()
+    // setTimeout(() => {
+    //   this.lms.hideLoader()
+    // }, 1000 )
     this.showGender = [
       { value: 'Male' },
       { value: 'Female' }

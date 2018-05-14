@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { LmsService } from '../lms.service'
 import * as moment from 'moment'
+import { Ng4SpinnerService } from 'ng4-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,10 +16,19 @@ export class DashboardComponent implements OnInit {
   
   employees:any
   
-  constructor( private lms: LmsService ) { }
+  constructor( private lms: LmsService, private ngSpinner:Ng4SpinnerService) {
+    this.ngSpinner.show()
+    // this.lms.emitsload.subscribe( el => this.loader = el )
+    // this.lms.emithload.subscribe( el => this.loader = el )
+    // this.lms.showLoader()
+    // setTimeout(() => {
+    //   this.lms.hideLoader()
+    // }, 1000 )
+  }
   
   public ngOnInit() {
     this.daysArr = this.createCalendar( this.date )
+    this.ngSpinner.hide()
   }
   
   public todayCheck(day){

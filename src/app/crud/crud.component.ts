@@ -9,10 +9,21 @@ declare var $
 })
 export class CrudComponent implements OnInit {
   employee = new Array
+  loader : boolean = false;
+
   constructor( private lms: LmsService ) { 
+    // this.lms.emitsload.subscribe( el => this.loader = el )
+    // this.lms.emithload.subscribe( el => this.loader = el )
+    // this.lms.showLoader()
+    // setTimeout(() => {
+    //   this.lms.hideLoader()
+    // }, 1000 )
+
     this.lms.emitgetEmployees.subscribe( r => {
       this.employee = r
+      // console.log(this.employee)
     })
+    
     setTimeout(() => {
       $(function() {
         let user = $('#table_id').DataTable({
@@ -22,9 +33,13 @@ export class CrudComponent implements OnInit {
           scrollY:300
         });
       });
-    }, 1 )
+    }, 800 )
   }
   ngOnInit() {
+    this.lms.getEmployees()
+  }
+  deleteEmp(qci_id){
+    this.lms.deleteEmp(qci_id)
     this.lms.getEmployees()
   }
 }

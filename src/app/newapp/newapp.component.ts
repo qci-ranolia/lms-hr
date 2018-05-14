@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LmsService } from '../lms.service';
 
 @Component({
   selector: 'app-newapp',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewappComponent implements OnInit {
 
-  constructor() { }
+  constructor( private lms:LmsService) {
+    // this.lms.emitsload.subscribe( el => this.loader = el )
+    // this.lms.emithload.subscribe( el => this.loader = el )
+    // this.lms.showLoader()
+    // setTimeout(() => {
+    //   this.lms.hideLoader()
+    // }, 1000 )
+  }
 
   ngOnInit() {
   }

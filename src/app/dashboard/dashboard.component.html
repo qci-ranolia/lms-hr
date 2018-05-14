@@ -1,4 +1,7 @@
+<ng4-default-spinner>
+    </ng4-default-spinner>
 <div class="col-sm-12">
+    <h5>Dashboard</h5>
     <div class="col-sm-2 float-left bg-white h-100 pt-3 pb-2 text-center">
         <i class="material-icons float-left" (click)="previousMonth()">arrow_back_ios</i>
         <div class="d-inline-block">{{date.format('MMMM')}} {{date.format('YYYY')}}</div>
@@ -43,16 +46,15 @@
                 </mat-expansion-panel-header>
                 <mat-chip-list>
                     <div class="col-sm-12 p-0">
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
+                        <div class="col-sm-4 mt-2 float-left text-center">
+                            <mat-chip color="primary" selected="true">January 26</mat-chip> <div>Republic Day</div>
+                        </div>
+                        <div class="col-sm-4 mt-2 float-left text-center">
+                            <mat-chip color="primary" selected="true">Holi date</mat-chip> <div>Holi</div>
+                        </div>
+                        <div class="col-sm-4 mt-2 float-left text-center">
+                            <mat-chip color="primary" selected="true">January 26</mat-chip> <div>Republic Day</div>
+                        </div>
                     </div>
                 </mat-chip-list>
             </mat-expansion-panel>

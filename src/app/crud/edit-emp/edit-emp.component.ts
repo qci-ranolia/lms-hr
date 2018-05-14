@@ -16,17 +16,14 @@ export class EditEmpComponent implements OnInit {
   gender : any
   show : boolean = false
   hide : boolean = false
+
+  loader : boolean = false
   
   constructor( private route:ActivatedRoute, private router:Router, private lms:LmsService ) {
     
-    // this.lms.emitsload.subscribe( el => this.loader = el )
-    // this.lms.emithload.subscribe( el => this.loader = el )
-    // this.lms.showLoader()
-    // setTimeout(() => {
-    //   this.lms.hideLoader()
-    // }, 1000 )
+    this.lms.emitsload.subscribe( el => this.loader = el )
+    this.lms.showLoader()
     
-
     this.uid = this.route.snapshot.paramMap.get('id')
     this.lms.emitgetEmployees.subscribe( r => {
       let arr = Object.values(r)

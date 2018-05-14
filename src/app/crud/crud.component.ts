@@ -12,16 +12,13 @@ export class CrudComponent implements OnInit {
   loader : boolean = false;
 
   constructor( private lms: LmsService ) { 
-    // this.lms.emitsload.subscribe( el => this.loader = el )
-    // this.lms.emithload.subscribe( el => this.loader = el )
-    // this.lms.showLoader()
-    // setTimeout(() => {
-    //   this.lms.hideLoader()
-    // }, 1000 )
+    this.lms.emitsload.subscribe( el => this.loader = el )
+    this.lms.showLoader()
+    
 
     this.lms.emitgetEmployees.subscribe( r => {
       this.employee = r
-      // console.log(this.employee)
+      console.log(this.employee)
     })
     
     setTimeout(() => {
@@ -30,7 +27,7 @@ export class CrudComponent implements OnInit {
           paging: true,
           searching:true,
           ordering:true,
-          scrollY:300
+          scrollY:335
         });
       });
     }, 800 )
@@ -40,6 +37,5 @@ export class CrudComponent implements OnInit {
   }
   deleteEmp(qci_id){
     this.lms.deleteEmp(qci_id)
-    this.lms.getEmployees()
   }
 }

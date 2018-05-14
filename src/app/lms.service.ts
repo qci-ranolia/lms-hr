@@ -1,6 +1,7 @@
-import{ EventEmitter, Injectable } from '@angular/core'
+import { EventEmitter, Injectable } from '@angular/core'
 import { ApiService } from './api.service'
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'
+import { MatSnackBar } from '@angular/material'
 
 @Injectable()
 export class LmsService {
@@ -9,36 +10,41 @@ export class LmsService {
   emithload = new EventEmitter<any>()
 
   emitgetEmployees = new EventEmitter<any>()
-  emitLogin = new EventEmitter<any>();
+  emitLogin = new EventEmitter<any>()
   emitErr = new EventEmitter<any>()
 
-  constructor( private api: ApiService, private router: Router ) { }
+  constructor( private api: ApiService, private router: Router, public snackBar: MatSnackBar ) { }
 
   showLoader(){
     this.loader = true
     this.emitsload.emit(this.loader)
+    setTimeout(() => {
+      this.hideLoader()
+    }, 1000 )
   }
+
   hideLoader(){
     this.loader = false
     this.emithload.emit(this.loader)
   }
+  
   isLogin() {
     if ( localStorage.getItem('token')) {
       this.router.navigate(['./'])
     }
   }
 
-  login(uname: string, pwd: string) {
+  login( uname: string, pwd: string ) {
     let tmp : any
     tmp = { email:uname, password:pwd }
     let temp = JSON.stringify(tmp)
-    this.api.Login(temp).subscribe( response => {
-      if(response.success){
-        localStorage.setItem('token',response.token)
+    this.api.Login(temp).subscribe( el => {
+      if ( el.success ) {
+        localStorage.setItem( 'token', el.token )
         this.emitLogin.emit()
-      } else {
-        this.emitErr.emit()
-      }
+      } // else {
+      //   this.emitErr.emit()
+      // }
     }, err => {
       alert(err)
     })
@@ -47,27 +53,25 @@ export class LmsService {
   getEmployees(){
     this.api.GetEmployeeDetails().subscribe( el => {
       //console.log(el)
-      this.emitgetEmployees.emit(el)
-      // if (el.success){
-      //   //console.log("s")
-      //   this.emitgetEmployees.emit(el)
-      // } else { console.log(el) }
-    }, err => {
-      alert(err)
-    })
+      /* if ( el.success ) */ this.emitgetEmployees.emit(el)
+      /* else */ console.log(el) //this.snackBar.open( 'el.success was not true')
+    }, err => this.snackBar.open( 'err found') )
   }
   addEmp(employee:any) {
-    this.api.addEmp(employee).subscribe(/*  r => {
-      if ( r.success ) console.log("1")
-      else console.log("2")
+    this.api.addEmp(employee).subscribe( /*  el => {
+      if ( el.success ) console.log(el) //this.router.navigate(['/employee-list'])
+      else console.log(el)
     }, err => {
       console.log(err)
-    } */)
+    } */
+    )
   }
 
   updateEmployee(employee:any){
     this.api.updateEmployee(employee).subscribe( el => { 
-      this.emitgetEmployees.emit(el)
+      // console.log(el)
+      // if ( el.success == true )
+      this.getEmployees()
     }, err => alert(err))
   }
 
@@ -75,7 +79,7 @@ export class LmsService {
     let tmp = { qci_id:qci_id }
     this.api.deleteEmp(tmp).subscribe( el => {
       if ( el.success == true ){
-        this.emitgetEmployees.emit(el)
+        this.getEmployees()
       } //  else {
       //   alert("Try Again Later");
       // }

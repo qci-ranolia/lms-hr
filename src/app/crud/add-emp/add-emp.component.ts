@@ -19,15 +19,13 @@ export class AddEmpComponent implements OnInit {
   hide : boolean = false
   
   employee : any = new Object()
-  
-  constructor( private lms: LmsService, private router:Router ) {
+  loader : boolean = false
+
+  constructor( private lms: LmsService, private router : Router ) {
     
-    // this.lms.emitsload.subscribe( el => this.loader = el )
-    // this.lms.emithload.subscribe( el => this.loader = el )
-    // this.lms.showLoader()
-    // setTimeout(() => {
-    //   this.lms.hideLoader()
-    // }, 1000 )
+    this.lms.emitsload.subscribe( el => this.loader = el )
+    this.lms.showLoader()
+    
     this.showGender = [
       { value: 'Male' },
       { value: 'Female' }

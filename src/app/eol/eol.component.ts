@@ -9,26 +9,24 @@ declare var $
   styleUrls: ['./eol.component.scss']
 })
 export class EolComponent implements OnInit {
-
+  loader : boolean = false
+  
   constructor( private lms: LmsService ) {
     
-    // this.lms.emitsload.subscribe( el => this.loader = el )
-    // this.lms.emithload.subscribe( el => this.loader = el )
-    // this.lms.showLoader()
-    // setTimeout(() => {
-    //   this.lms.hideLoader()
-    // }, 1000 )
+    this.lms.emitsload.subscribe( el => this.loader = el )
+    this.lms.showLoader()
+    
     // this.lms.ge
     setTimeout(() => {
-      $(function() {
+      $(function(){
         let user = $('#table_id').DataTable({
-          paging: true,
-          searching:true,
-          ordering:true,
-          scrollY:300
-        });
-      });
-    }, 1 )
+          paging : true,
+          searching : true,
+          ordering : true,
+          scrollY : 335
+        })
+      })
+    }, 850 )
   }
 
   ngOnInit() {

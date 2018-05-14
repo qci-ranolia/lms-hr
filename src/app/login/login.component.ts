@@ -15,11 +15,10 @@ export class LoginComponent implements OnInit {
 
   constructor( private lms: LmsService, private router: Router) {
     this.lms.isLogin();
-    this.lms.emitLogin.subscribe( (res) => this.router.navigate(['/']) );
+    this.lms.emitLogin.subscribe( (res) => this.router.navigate(['/']) )
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   isLogin(){
     this.lms.login(this.uname, this.pwd )

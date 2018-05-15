@@ -7,17 +7,18 @@ declare var $
   templateUrl: './crud.component.html',
   styleUrls: ['./crud.component.scss']
 })
+
 export class CrudComponent implements OnInit {
+
   employee = new Array
   loader : boolean = false;
 
-  constructor( private lms: LmsService ) { 
+  constructor( private lms: LmsService ) {
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
-    
 
     this.lms.emitgetEmployees.subscribe( r => {
-      this.employee = r
+      this.employee = Object.values(r)
       console.log(this.employee)
     })
     
@@ -31,11 +32,15 @@ export class CrudComponent implements OnInit {
         });
       });
     }, 800 )
+    
   }
+
   ngOnInit() {
     this.lms.getEmployees()
   }
+
   deleteEmp(qci_id){
     this.lms.deleteEmp(qci_id)
   }
+
 }

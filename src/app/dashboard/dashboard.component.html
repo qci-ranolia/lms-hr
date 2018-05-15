@@ -1,8 +1,17 @@
-<ng4-default-spinner>
-    </ng4-default-spinner>
 <div class="col-sm-12">
     <h5>Dashboard</h5>
-    <div class="col-sm-2 float-left bg-white h-100 pt-3 pb-2 text-center">
+    <div class="col-sm-12 d-block p-0">
+        <div class="divTable">
+            <div class="divTableBody">
+                <div class="divTableRow">
+                    <div class="divTableCell col-sm-6 float-left pl-0 mb-3"><pie-chart [data]="data1" [config]="config1" [elementId]="elementId1"></pie-chart></div>
+                    <div class="divTableCell col-sm-6 float-left pr-0 mb-3"><pie-chart [data]="data2" [config]="config2" [elementId]="elementId2"></pie-chart></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-sm-2 float-left bg-white h-100 pt-3 pb-2 text-center rad-box">
         <i class="material-icons float-left" (click)="previousMonth()">arrow_back_ios</i>
         <div class="d-inline-block">{{date.format('MMMM')}} {{date.format('YYYY')}}</div>
         <i class="material-icons float-right" (click)="nextMonth()">arrow_forward_ios</i>
@@ -12,7 +21,7 @@
             <mat-tab *ngFor="let day of daysArr; let i = index">
                 <ng-template mat-tab-label>
                     <div class="col-sm-12 p-0" (click)="postData(day?.date())" style="height:100%">
-                    <div [ngClass]="{ 'today':todayCheck(day) }">{{ day?.date() }}</div>
+                     <div [ngClass]="{ 'today':todayCheck(day) }">{{ day?.date() }}</div>
                     <!-- <span class="badge badge-secondary">{{d.noeol}}</span> -->
                     </div>
                 </ng-template>
@@ -36,6 +45,7 @@
         </mat-tab-group>
     </div>
 </div>
+
 <div class="col-sm-12">
     <div class="col-sm-6 pos-abs pt-1 pb-2">
         <mat-accordion>

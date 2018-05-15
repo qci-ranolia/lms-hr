@@ -9,17 +9,20 @@ import 'rxjs/add/operator/map'
 
 export class ApiService {
 
-  // URL:string = "http://13.127.13.175:5000/"
-  URL:string = "http://192.168.15.219:5000/"
-  token: string // Useful in Authentication
-  headers: any // Useful when backend and frontend have different IP's
+  URL:string = "http://13.127.13.175:5000/"
+  // URL : string = "http://192.168.15.219:5000/"
+  token : string // Useful in Authentication
+  headers : any // Useful when backend and frontend have different IP's
   opts : any
-  constructor( private http:Http, private router: Router ) { //private http:Http, private router:Router  // we will use both imports here. Are we using anywhere in comments only ???
+  
+  constructor( private http : Http, private router : Router ) { //private http:Http, private router:Router  // we will use both imports here. Are we using anywhere in comments only ???
+    
     this.token = localStorage.getItem('token') // If this token available, login using can activate gaurd 
     this.headers =  new Headers() // Default headers
     this.headers.append( 'Authorization', this.token ) // ADD/Append your authorized token to Default headers
     this.opts = new RequestOptions()
-    this.opts.headers = this.headers    
+    this.opts.headers = this.headers
+  
   }
 
   // Login Section
@@ -29,30 +32,30 @@ export class ApiService {
   
   // Get Requests
   //HINT : Are we checking the response is a success or not ???
+  
   // Get Employee
   GetEmployeeDetails() {
-    return this.http.get( this.URL+'lms/employeeDetails', this.opts).map( r => r.json() )
+    return this.http.get( this.URL+'lms/employeeDetails', this.opts ).map( r => r.json() )
   }
+
   // Get Employee_on_leave
-  GetEOL(){
-    return this.http.get( this.URL+'lms/applications', this.opts).map( r => r.json() )  
+  GetEOL() {
+    return this.http.get( this.URL+'lms/applications', this.opts ).map( r => r.json() )  
   }
 
   // Post( Add New Employee ) requests
   addEmp( data : any ) {
-    return this.http.post( this.URL+'lms/addEmployee', data, this.opts).map( r => r.json() )
+    return this.http.post( this.URL+'lms/addEmployee', data, this.opts ).map( r => r.json() )
   }
 
   // Post( Update Existing Employee ) requests
   updateEmployee( data : any ) {
-    return this.http.post( this.URL+'lms/editEmployeeDetails', data, this.opts).map( r => {
-      r.json() 
-      this.router.navigate(['/employee-list'])
-    })
+    return this.http.post( this.URL+'lms/editEmployeeDetails', data, this.opts ).map( r => r.json() )
   }
   
   // Post( Delete Existing Employee ) requests
   deleteEmp( data : any ) {
-    return this.http.post( this.URL+'lms/deleteEmployee', JSON.stringify(data), this.opts).map( r => r.json() )
+    return this.http.post( this.URL+'lms/deleteEmployee', JSON.stringify(data), this.opts ).map( r => r.json() )
   }
+
 }

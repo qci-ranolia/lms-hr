@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthService } from './auth.service';
-
-//login platform for admin and employee
+// Login platform for admin and employee
 import { LoginComponent } from './login/login.component';
 
-//common components
+// Common components
 import { NavComponent } from './nav/nav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
@@ -17,6 +15,8 @@ import { AddEmpComponent } from './crud/add-emp/add-emp.component';
 import { EditEmpComponent } from './crud/edit-emp/edit-emp.component';
 import { NewappComponent } from './newapp/newapp.component';
 
+// Auth
+import { AuthService } from './auth.service';
 const routes: Routes = [
   { path:'', component:NavComponent, children:[
     { path:'dashboard', component:DashboardComponent, canActivate:[AuthService] },

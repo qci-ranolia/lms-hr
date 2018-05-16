@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import { MatTabsModule } from '@angular/material/tabs';
-import { LmsService } from '../lms.service';
+import { LmsService } from '../../services/lms.service';
 import { Router } from '@angular/router';
 
 @Component({

@@ -34,26 +34,27 @@ export class LmsService {
     }
   }
 
-  login( uname: string, pwd: string ) {
+  login( uname : string, pwd : string ) {
     let tmp : any
-    tmp = { email:uname, password:pwd }
+    tmp = { email : uname, password : pwd }
     let temp = JSON.stringify(tmp)
-    this.api.Login(temp).subscribe( el => {
+    this.api.Login(temp).subscribe(el => {
       console.log(el)
-      if ( el.success ) {
-        localStorage.setItem( 'token', el.token )
+      if ( el.success ){
+        localStorage.setItem( 'token' , el.token )
         this.emitLogin.emit()
       } // else {
       //   this.emitErr.emit()
       // }
-    }, err => alert(err) )
+    }, err => alert( err ) )
   }
 
   getEmployees(){
-    this.api.GetEmployeeDetails().subscribe( el => {
-      if ( el.success ) this.emitgetEmployees.emit(el.data)
-      else console.log(el) //this.snackBar.open( 'el.success was not true')
-    }, err => this.snackBar.open( 'err found, api issue ') )
+    this.api.GetEmployeeDetails().subscribe( //el => {
+      //if ( el.success ) this.emitgetEmployees.emit(el.data)
+      //else console.log(el) //this.snackBar.open( 'el.success was not true')
+    //}, err => this.snackBar.open( 'err found, api issue ') 
+  )
   }
   addEmp(employee:any) {
     this.api.addEmp(employee).subscribe( /*  el => {

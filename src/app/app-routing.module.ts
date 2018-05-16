@@ -5,18 +5,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 
 // Common components
-import { NavComponent } from './nav/nav.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavComponent } from './main/nav/nav.component';
+import { DashboardComponent } from './main/dashboard/dashboard.component';
 
 // Admin components
-import { CrudComponent } from './crud/crud.component';
-import { EolComponent } from './eol/eol.component';
-import { AddEmpComponent } from './crud/add-emp/add-emp.component';
-import { EditEmpComponent } from './crud/edit-emp/edit-emp.component';
-import { NewappComponent } from './newapp/newapp.component';
+import { CrudComponent } from './main/crud/crud.component';
+import { AddEmpComponent } from './main/crud/add-emp/add-emp.component';
+import { EditEmpComponent } from './main/crud/edit-emp/edit-emp.component';
+import { EolComponent } from './main/eol/eol.component';
+import { NewappComponent } from './main/newapp/newapp.component';
 
 // Auth
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 const routes: Routes = [
   { path:'', component:NavComponent, children:[
     { path:'dashboard', component:DashboardComponent, canActivate:[AuthService] },

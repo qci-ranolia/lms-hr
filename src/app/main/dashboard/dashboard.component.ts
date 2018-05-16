@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { LmsService } from '../lms.service'
-import { PieChartConfig } from '../Models/PieChartConfig'
+import { LmsService } from '../../services/lms.service'
+import { PieChartConfig } from '../../Models/PieChartConfig'
 
 // import { NgxChartsModule } from '@swimlane/ngx-charts'
 import * as moment from 'moment'

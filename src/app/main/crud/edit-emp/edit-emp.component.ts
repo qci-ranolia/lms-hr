@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { LmsService } from '../../lms.service';
+import { LmsService } from '../../../services/lms.service';
 
 // import * as _ from "lodash"
 

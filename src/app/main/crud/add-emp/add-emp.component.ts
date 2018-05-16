@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { LmsService } from '../../lms.service'
+import { LmsService } from '../../../services/lms.service'
 import { Router } from '@angular/router';
 
 @Component({

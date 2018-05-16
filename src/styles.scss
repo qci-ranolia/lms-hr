@@ -23183,8 +23183,15 @@ mat-tab-header {
     background-color:transparent;
     border-radius:10px;
 } .h78 {
-    height:78vh
-} .ovf-y {
+    height : 78vh
+} .h50 {
+    height : 50vh
+} .h68 {
+    height : 68vh
+}
+/*  .h50 svg rect {
+    height:50vh !important
+} */.ovf-y {
     overflow:hidden;
     overflow-y:auto
 } form .ng-valid .mat-form-field-label, form .ng-valid .mat-form-field-label, form .ng-valid.mat-focused .mat-form-fieled-label

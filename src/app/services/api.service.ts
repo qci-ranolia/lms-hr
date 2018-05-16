@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map'
 @Injectable()
 
 export class ApiService {
-
+  
   URL:string = "http://13.127.13.175:5000/"
   // URL : string = "http://192.168.15.219:5000/"
   token : string // Useful in Authentication
@@ -35,7 +35,7 @@ export class ApiService {
   
   // Get Employee
   GetEmployeeDetails() {
-    return this.http.get( this.URL+'lms/employeeDetails', this.opts ).map( r => r.json() )
+    return this.http.get( this.URL+'lms/employeeDetails', this.opts ).map( r => console.log(r.json()) )
   }
 
   // Get Employee_on_leave

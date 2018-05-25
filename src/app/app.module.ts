@@ -13,7 +13,7 @@ import { EolComponent } from './main/eol/eol.component'
 import { NewappComponent } from './main/newapp/newapp.component'
 import { AppRoutingModule } from './app-routing.module'
 import { LoginComponent } from './login/login.component'
-import { StatComponent } from './stat/stat.component';
+import { StatComponent } from './main/stat/stat.component';
 import { AddEmpComponent } from './main/crud/add-emp/add-emp.component';
 import { EditEmpComponent } from './main/crud/edit-emp/edit-emp.component';
 

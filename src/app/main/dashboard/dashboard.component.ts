@@ -6,7 +6,7 @@ import { PieChartConfig } from '../../Models/PieChartConfig'
 import * as moment from 'moment'
 // import { Ng4SpinnerService } from 'ng4-spinner'
 
-declare var google:any
+declare var google : any
 
 @Component({
   selector:'app-dashboard',
@@ -15,15 +15,17 @@ declare var google:any
 })
 
 export class DashboardComponent implements OnInit {
-  title = 'Reusable charts sample';
+  title = 'Reusable charts sample'
 
-  data1: any[]
-  config1: PieChartConfig
-  elementId1: String
+  getDate : number
 
-  data2: any[]
-  config2: PieChartConfig
-  elementId2: String
+  data1 : any[]
+  config1 : PieChartConfig
+  elementId1 : String
+
+  data2 : any[]
+  config2 : PieChartConfig
+  elementId2 : String
     
   // Calendar
   public date = moment()
@@ -36,36 +38,44 @@ export class DashboardComponent implements OnInit {
   loader : boolean = false
 
   constructor( private lms: LmsService ){ //, private ngSpinner:Ng4SpinnerService
+    var tmp = new Date()
+    this.getDate = tmp.getDate()
     
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
+    
     this.lms.emitgetEmployees.subscribe( r => {
       this.employee = Object.values(r)
-      console.log(this.employee)
+      // console.log(this.employee)
     })
   
   }
 
   public ngOnInit() {
-    this.data1 = [['Task', 'Hours per Day'],
-    ['ZED', 3],
-    ['NBQP', 2],
-    ['NABET', 5],
-    ['NABH', 4],
-    ['NABCB', 10]]
+    
+    this.data1 = [
+      ['Task', 'Hours per Day'],
+      ['ZED', 3],
+      ['NBQP', 2],
+      ['NABET', 5],
+      ['NABH', 4],
+      ['NABCB', 10]
+    ]
 
-    this.config1 = new PieChartConfig('Board Section 1', 0.4)
+    this.config1 = new PieChartConfig( 'Board Section 1', 0.4 )
     this.elementId1 = 'myPieChart1'
 
     //Piechart2 Data & Config
-    this.data2 = [['Task', 'Hours per Day'],
-                  ['QZED', 21],
-                  ['NBQP', 2],
-                  ['NABET', 2],
-                  ['NABH', 2],
-                  ['NABCB', 7]]
+    this.data2 = [
+      ['Task', 'Hours per Day'],
+      ['QZED', 21],
+      ['NBQP', 2],
+      ['NABET', 2],
+      ['NABH', 2],
+      ['NABCB', 7]
+    ]
 
-    this.config2 = new PieChartConfig('Board Section 2', 0.4)
+    this.config2 = new PieChartConfig( 'Board Section 2', 0.4 )
     this.elementId2 = 'myPieChart2'
 
     this.lms.getEmployees()
@@ -73,7 +83,7 @@ export class DashboardComponent implements OnInit {
     // this.ngSpinner.hide()
   }
   
-  public todayCheck(day){
+  public todayCheck( day ){
     if (!day){
       return false
     }
@@ -91,13 +101,13 @@ export class DashboardComponent implements OnInit {
   }
 
   public nextMonth() {
-    this.date.add(1, 'M')
-    this.daysArr = this.createCalendar(this.date)
+    this.date.add( 1, 'M' )
+    this.daysArr = this.createCalendar( this.date )
   }
 
   public previousMonth() {
     this.date.subtract( 1, 'M' )
-    this.daysArr = this.createCalendar(this.date)
+    this.daysArr = this.createCalendar( this.date )
   }
 
 }

@@ -29,6 +29,7 @@ export class EditEmpComponent implements OnInit {
       let arr = Object.values(r)
       var item = arr.find( it => it.qci_id == this.uid )
       this.employee = item
+      this.employee.password = null
       // var skey = _.findKey( r, this.employee )
       // this.key = skey
       if ( this.employee.gender == 'Male' ) {

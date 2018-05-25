@@ -16,11 +16,11 @@
         <i class="material-icons float-right" (click)="nextMonth()">arrow_forward_ios</i>
     </div>
     <div class="col-sm-10 h-100 float-left pr-0">
-        <mat-tab-group>
+        <mat-tab-group :selectedIndex="{{getDate-1}}" mat-stretch-tabs>
             <mat-tab *ngFor="let day of daysArr; let i = index">
                 <ng-template mat-tab-label>
                     <div class="col-sm-12 p-0" (click)="postData(day?.date())" style="height:100%">
-                     <div [ngClass]="{ 'today':todayCheck(day) }">{{ day?.date() }}</div>
+                     <div [ngClass]="{'today':todayCheck(day)}">{{ day?.date() }}</div>
                     <!-- <span class="badge badge-secondary">{{d.noeol}}</span> -->
                     </div>
                 </ng-template>
@@ -30,12 +30,15 @@
                             <mat-expansion-panel>
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>
-                                        <mat-chip color="primary" selected="true">sasasasa</mat-chip>
-                                        <mat-chip color="warn" selected="true">Leave Balance:</mat-chip>
+                                        <mat-chip color="warn" selected="true">Pankaj</mat-chip>
+                                        <mat-chip>Junior Analyst</mat-chip>
+                                        <mat-chip>ask.pankaj@qcin.org</mat-chip>
                                     </mat-panel-title>
                                     <mat-panel-description></mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <mat-chip-list>Some description here to be added here</mat-chip-list>
+                                <mat-chip-list>
+                                    <!-- <p class="mt-4">QCI ID: 1345</p> -->
+                                </mat-chip-list>
                             </mat-expansion-panel>
                         </mat-accordion>
                     </div>
@@ -46,7 +49,7 @@
 </div>
 
 <div class="col-sm-12">
-    <div class="col-sm-6 pos-abs pt-2 pb-2">
+    <div class="col-sm-6 pos-abs pt-1 pb-2">
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
                 <mat-expansion-panel-header>
@@ -67,18 +70,9 @@
                     </div>
                 </mat-chip-list>
             </mat-expansion-panel>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title></mat-panel-title>
-                    <mat-panel-description>See all the holiday lists according to&nbsp;<strong> Quality Council Of India</strong></mat-panel-description>
-                </mat-expansion-panel-header>
-                <mat-chip-list>
-                    <div class="col-sm-12 p-0">
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">January 26</mat-chip>&nbsp;Republic Day</div>
-                        <div class="col-sm-6 mt-4 float-left"><mat-chip color="primary" selected="true">Holi date</mat-chip>&nbsp;Holi</div>
-                    </div>
-                </mat-chip-list>
-            </mat-expansion-panel>
         </mat-accordion>
     </div>
+    <nav mat-tab-nav-bar>
+        <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{link.label}}</a>
+    </nav>
 </div>

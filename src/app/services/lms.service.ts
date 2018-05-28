@@ -78,12 +78,14 @@ export class LmsService {
 
   GetEOL() {
     this.api.GetEOL().subscribe( el => {
-      if ( el.success ) this.emitEOL.emit(el.data)
-      else this.snackBars( "Success is false" , "Try again" )
+      this.emitEOL.emit(el.data)
+      // if ( el.success ) this.emitEOL.emit(el.data)
+      // else this.snackBars( "Success is false" , "Try again" )
     }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) )  
   }
 
   updateEmployee( employee : any ) {
+    //var temp = {employee : employee, uid : uid }
     this.api.updateEmployee(employee).subscribe( el => { 
       this.router.navigate(['/employee-list'])
       // console.log(el)
@@ -100,5 +102,17 @@ export class LmsService {
       } else this.snackBars( "Success is false" , "Try again" )
     }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) )
   }
+
+
+  postHoliday( data:any ) {
+    // console.log(data)
+    this.api.postHoliday(data).subscribe(/*  el => {
+      // this.emitEOL.emit(el.data)
+      // if ( el.success ) this.emitEOL.emit(el.data)
+      // else this.snackBars( "Success is false" , "Try again" )
+    // }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) */ ) 
+  }
+
+  
 
 }

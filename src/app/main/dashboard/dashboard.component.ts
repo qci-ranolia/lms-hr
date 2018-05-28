@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { LmsService } from '../../services/lms.service'
 import { PieChartConfig } from '../../Models/PieChartConfig'
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
+
 
 // import { NgxChartsModule } from '@swimlane/ngx-charts'
 import * as moment from 'moment'
@@ -9,9 +11,9 @@ import * as moment from 'moment'
 declare var google : any
 
 @Component({
-  selector:'app-dashboard',
-  templateUrl:'./dashboard.component.html',
-  styleUrls:['./dashboard.component.scss']
+  selector : 'app-dashboard',
+  templateUrl : './dashboard.component.html',
+  styleUrls : ['./dashboard.component.scss']
 })
 
 export class DashboardComponent implements OnInit {
@@ -26,7 +28,7 @@ export class DashboardComponent implements OnInit {
   data2 : any[]
   config2 : PieChartConfig
   elementId2 : String
-    
+  
   // Calendar
   public date = moment()
   public daysArr
@@ -37,18 +39,64 @@ export class DashboardComponent implements OnInit {
   // page loader
   loader : boolean = false
 
-  constructor( private lms: LmsService ){ //, private ngSpinner:Ng4SpinnerService
+  file:any
+  formGroup = this.fb.group({
+    file: [null, Validators.required]
+  })
+  filesToUpload: Array<File> = [];
+  constructor( private lms: LmsService, private fb:FormBuilder ){ //, private ngSpinner:Ng4SpinnerService
     var tmp = new Date()
     this.getDate = tmp.getDate()
     
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
+
     
     this.lms.emitgetEmployees.subscribe( r => {
       this.employee = Object.values(r)
       // console.log(this.employee)
-    })
+    }) 
   
+  }
+
+  upload() {
+    const formData: any = new FormData();
+    const files: Array<File> = this.filesToUpload;
+    console.log(files);
+
+    for(let i =0; i < files.length; i++){
+        formData.append("uploads[]", files[i], files[i]['name']);
+    }
+    console.log('form data variable :   '+ formData.toString());
+    this.lms.postHoliday(formData)
+    // this.http.post('http://localhost:3003/upload', formData)
+    //     .map(files => files.json())
+    //     .subscribe(files => console.log('files', files))
+}
+
+fileChangeEvent(fileInput: any) {
+    this.filesToUpload = <Array<File>>fileInput.target.files;
+    //this.product.photo = fileInput.target.files[0]['name'];
+}
+  onFileChange(event) {
+    let reader = new FileReader()
+    // console.log(reader)
+    if( event.target.files && event.target.files.length ){
+      console.log(event.target.files)
+      const [file] = event.target.files
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        this.formGroup.patchValue({
+          file: reader.result
+        })  
+        // need to run CD since file load runs outside of zone
+        // this.cd.markForCheck()
+      }
+      this.file = file
+    }
+  }
+  onSubmit(){
+    this.lms.postHoliday( this.file )
   }
 
   public ngOnInit() {

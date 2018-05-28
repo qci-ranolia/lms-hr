@@ -9,18 +9,20 @@ import 'rxjs/add/operator/map'
 
 export class ApiService {
 
-  // URL:string = "http://13.127.13.175:5000/"
+  // URL : string = "http://13.127.13.175:5000/"
   URL : string = "http://192.168.15.55:5000/"
   token : string // Useful in Authentication
   headers : any // Useful when backend and frontend have different IP's
   opts : any  // Find more details about backend configuration
   
   constructor( private http : Http, private router : Router ) { //private http:Http, private router:Router  // we will use both imports here. Are we using anywhere in comments only ???
+    
     this.token = localStorage.getItem('token') // If this token available, login using can activate gaurd 
     this.headers =  new Headers() // Default headers
     this.headers.append( 'Authorization', this.token ) // ADD/Append your authorized token to Default headers
     this.opts = new RequestOptions()
-    this.opts.headers = this.headers 
+    this.opts.headers = this.headers
+
   }
 
   // Login Section
@@ -29,7 +31,7 @@ export class ApiService {
   }
   
   // Get Requests
-  //HINT : Are we checking the response is a success or not ???
+  // HINT : Are we checking the response is a success or not ???
   
   // Get Employee
   GetEmployeeDetails() {
@@ -48,12 +50,19 @@ export class ApiService {
 
   // Post( Update Existing Employee ) requests
   updateEmployee( data : any ) {
+    // console.log(data)
     return this.http.post( this.URL+'lms/editEmployeeDetails', data, this.opts ).map( r => r.json() )
   }
   
-  // Post( Delete Existing Employee ) requests
+  // Post ( Delete Existing Employee ) requests
   deleteEmp( data : any ) {
     return this.http.post( this.URL+'lms/deleteEmployee', JSON.stringify(data), this.opts ).map( r => r.json() )
+  }
+
+  // Get Employee_on_leave
+  postHoliday(data:any){
+    console.log(data)
+    return this.http.post( this.URL+'lms/holiday', data ).map( r => console.log(r.json() ))
   }
 
 }

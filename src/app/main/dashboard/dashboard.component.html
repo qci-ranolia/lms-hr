@@ -54,7 +54,9 @@
             <mat-expansion-panel [expanded]="true">
                 <mat-expansion-panel-header>
                     <mat-panel-title></mat-panel-title>
-                    <mat-panel-description>See all the holiday lists according to&nbsp;<strong> Quality Council Of India</strong></mat-panel-description>
+                    <mat-panel-description>
+                        See all the holiday lists according to&nbsp;<strong> Quality Council Of India</strong>
+                    </mat-panel-description>
                 </mat-expansion-panel-header>
                 <mat-chip-list>
                     <div class="col-sm-12 p-0">
@@ -76,3 +78,16 @@
         <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{link.label}}</a>
     </nav>
 </div>
+
+<div class="clearfix mt-5 pt-5"></div>
+<div class="clearfix mt-5 pt-5"></div>
+
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+    <input type="file" (change)="onFileChange($event)" />
+    <button type="submit" [disabled]="formGroup.invalid || formGroup.prestine">Submit</button>
+</form>
+
+<input id="cin" name="cin" type="file" (change)="fileChangeEvent($event)" placeholder="Upload a file..." multiple />
+<button type="button" class="btn btn-success btn-s" (click)="upload()">
+    <i class="glyphicon glyphicon-open-file"></i>&nbsp;Upload
+</button>

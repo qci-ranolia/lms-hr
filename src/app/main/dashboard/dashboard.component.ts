@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { LmsService } from '../../services/lms.service'
 import { PieChartConfig } from '../../Models/PieChartConfig'
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
-
-
+import { HttpClient } from '@angular/common/http'
 // import { NgxChartsModule } from '@swimlane/ngx-charts'
 import * as moment from 'moment'
-// import { Ng4SpinnerService } from 'ng4-spinner'
+// import { Options } from 'selenium-webdriver/edge';
+// import { MatDialogRef } from '@angular/material';
+// // import { Ng4SpinnerService } from 'ng4-spinner'
+// import { forkJoin } from 'rxjs/observable/forkJoin';
 
 declare var google : any
 
@@ -39,65 +40,106 @@ export class DashboardComponent implements OnInit {
   // page loader
   loader : boolean = false
 
-  file:any
-  formGroup = this.fb.group({
-    file: [null, Validators.required]
-  })
-  filesToUpload: Array<File> = [];
-  constructor( private lms: LmsService, private fb:FormBuilder ){ //, private ngSpinner:Ng4SpinnerService
+  /* file : File = null
+  uploadUrl : 'http://192.168.15.55:5000/lms/holiday' */
+
+  //.......State Variables
+  // progress;
+  // canBeClosed = true 
+  // primaryButtonText = 'Upload'
+  // showCancelButton = true 
+  // uploading = false
+  // uploadSuccessful = false
+
+  // @ViewChild('file') file
+  // public files: Set<File> = new Set()
+
+  constructor( private lms : LmsService, private httpClient : HttpClient ) {
+    //, private ngSpinner:Ng4SpinnerService
+    //  private dialogRef:MatDialogRef<DashboardComponent>
     var tmp = new Date()
     this.getDate = tmp.getDate()
-    
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
+    this.lms.emitgetEmployees.subscribe( r => this.employee = Object.values(r) )
 
-    
-    this.lms.emitgetEmployees.subscribe( r => {
-      this.employee = Object.values(r)
-      // console.log(this.employee)
-    }) 
+  }
+
+  // addFiles() {
+  //   this.file.nativeElement.click()
+  // }
+  // onFilesAdded() {
+  //   const files: { [key: string]: File } = this.file.nativeElement.files
+  //   console.log(files)
+  //   for (let key in files) {
+  //     if ( !isNaN(parseInt(key) )) {
+  //       this.files.add(files[key])
+  //       console.log(key)
+  //     }
+  //   }
+  // }
   
-  }
 
-  upload() {
-    const formData: any = new FormData();
-    const files: Array<File> = this.filesToUpload;
-    console.log(files);
-
-    for(let i =0; i < files.length; i++){
-        formData.append("uploads[]", files[i], files[i]['name']);
+  /* closeDialog() {
+    // if everything was uploaded already, just close the dialog
+    if (this.uploadSuccessful) {
+      return this.dialogRef.close()
     }
-    console.log('form data variable :   '+ formData.toString());
-    this.lms.postHoliday(formData)
-    // this.http.post('http://localhost:3003/upload', formData)
-    //     .map(files => files.json())
-    //     .subscribe(files => console.log('files', files))
-}
-
-fileChangeEvent(fileInput: any) {
-    this.filesToUpload = <Array<File>>fileInput.target.files;
-    //this.product.photo = fileInput.target.files[0]['name'];
-}
-  onFileChange(event) {
-    let reader = new FileReader()
-    // console.log(reader)
-    if( event.target.files && event.target.files.length ){
-      console.log(event.target.files)
-      const [file] = event.target.files
-      reader.readAsDataURL(file)
-      reader.onload = () => {
-        this.formGroup.patchValue({
-          file: reader.result
-        })  
-        // need to run CD since file load runs outside of zone
-        // this.cd.markForCheck()
-      }
-      this.file = file
+    // set the component state to "uploading"
+    this.uploading = true
+    // start the upload and save the progress map
+    this.progress = this.lms.upload(this.files)  
+    // convert the progress map into an array
+    let allProgressObservables = []
+    for ( let key in this.progress ) {
+      allProgressObservables.push( this.progress[key].progress )
     }
+    // Adjust the state variables
+    // The OK-button should have the text "Finish" now
+    this.primaryButtonText = 'Finish'
+    // The dialog should not be closed while uploading
+    this.canBeClosed = false
+    this.dialogRef.disableClose = true
+    // Hide the cancel-button
+    this.showCancelButton = false
+    // When all progress-observables are completed...
+    forkJoin(allProgressObservables).subscribe( end => {
+      // ... the dialog can be closed again...
+      this.canBeClosed = true
+      this.dialogRef.disableClose = false
+      // ... the upload was successful...
+      this.uploadSuccessful = true
+      // ... and the component is no longer uploading
+      this.uploading = false
+    })
+  } */
+
+  /* onFileSelected( event ) {
+      this.file = <File>event.target.files[0]
   }
-  onSubmit(){
-    this.lms.postHoliday( this.file )
-  }
+  onUpload() {
+    //this.uploadFileToUrl( this.file, this.uploadUrl )
+    var fd = new FormData()
+    fd.append('csv', this.file, this.file.name)
+    var options = { content: fd }
+    console.log(options)
+    this.lms.postHoliday(options)
+    console.log(fd)
+  } */
+
+
+  /* uploadFileToUrl(file, uploadUrl){
+      var fd = new FormData();
+      fd.append('file', file);
+      this.httpClient.post(uploadUrl, fd, {
+          transformRequest: angular.identity,
+          headers: {'Content-Type': undefined}
+      })
+      .success(function(){
+      })
+      .error(function(){
+      })
+  } */
 
   public ngOnInit() {
     

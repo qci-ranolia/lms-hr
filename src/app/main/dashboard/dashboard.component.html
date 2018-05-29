@@ -75,19 +75,36 @@
         </mat-accordion>
     </div>
     <nav mat-tab-nav-bar>
-        <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{link.label}}</a>
+        <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{ link.label }}</a>
     </nav>
 </div>
-
 <div class="clearfix mt-5 pt-5"></div>
 <div class="clearfix mt-5 pt-5"></div>
 
-<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
-    <input type="file" (change)="onFileChange($event)" />
-    <button type="submit" [disabled]="formGroup.invalid || formGroup.prestine">Submit</button>
-</form>
+<!--<form enctype="text/plain">
+    <input type="file" (change)="onFileSelected($event)">
+    <button type="button" (click)="onUpload()" class="btn btn-primary">Upload</button>
+</form>-->
 
-<input id="cin" name="cin" type="file" (change)="fileChangeEvent($event)" placeholder="Upload a file..." multiple />
-<button type="button" class="btn btn-success btn-s" (click)="upload()">
-    <i class="glyphicon glyphicon-open-file"></i>&nbsp;Upload
-</button>
+<!-- https:url -->
+    <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
+    <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+        <h1 mat-dialog-title>Upload Files</h1>
+        <div>
+            <button [disabled]="uploading || uploadSuccessful" mat-raised-button color="primary" class="add-files-btn" (click)="addFiles()">Add Files</button>
+        </div>
+        <!-- This is the content of the dialog, containing a list of the files to upload -->
+        <mat-dialog-content fxFlex>
+            <mat-list>
+                <mat-list-item *ngFor="let file of files">
+                <h4 mat-line>{{ file.name }}</h4>
+                <mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[file.name].progress | async"></mat-progress-bar>
+                </mat-list-item>
+            </mat-list>
+        </mat-dialog-content>            
+        <!-- This are the actions of the dialog, containing the primary and the cancel button-->
+        <mat-dialog-actions class="actions">
+            <button *ngIf="showCancelButton" mat-button mat-dialog-close>Cancel</button>
+            <button mat-raised-button color="primary" [disabled]="!canBeClosed" (click)="closeDialog()">{{ primaryButtonText }}</button>
+        </mat-dialog-actions>
+    </div>

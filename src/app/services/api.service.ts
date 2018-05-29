@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Http, Headers, RequestOptions } from '@angular/http' 
-import { HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http'
+import { HttpErrorResponse, HttpParams, HttpHeaders, HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 // import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
@@ -15,7 +15,7 @@ export class ApiService {
   headers : any // Useful when backend and frontend have different IP's
   opts : any  // Find more details about backend configuration
   
-  constructor( private http : Http, private router : Router ) { //private http:Http, private router:Router  // we will use both imports here. Are we using anywhere in comments only ???
+  constructor( private http : Http, private router : Router, private httpCSV:HttpClient ) { //private http:Http, private router:Router  // we will use both imports here. Are we using anywhere in comments only ???
     
     this.token = localStorage.getItem('token') // If this token available, login using can activate gaurd 
     this.headers =  new Headers() // Default headers
@@ -50,7 +50,6 @@ export class ApiService {
 
   // Post( Update Existing Employee ) requests
   updateEmployee( data : any ) {
-    // console.log(data)
     return this.http.post( this.URL+'lms/editEmployeeDetails', data, this.opts ).map( r => r.json() )
   }
   
@@ -60,9 +59,8 @@ export class ApiService {
   }
 
   // Get Employee_on_leave
-  postHoliday(data:any){
-    console.log(data)
-    return this.http.post( this.URL+'lms/holiday', data ).map( r => console.log(r.json() ))
+  postHoliday( data : any ) {
+    return this.httpCSV.post( this.URL+'lms/holiday', data, { reportProgress:true, observe:"events" } )
   }
 
 }

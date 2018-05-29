@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule, Http } from '@angular/http'
+import { HttpClientModule } from '@angular/common/http'
 import { RouterModule } from '@angular/router'
 
 import { AppComponent } from './app.component'
@@ -24,7 +25,12 @@ import { GoogleChartsBaseService } from './services/google-charts.base.service';
 import { GoogleComboChartService } from './services/google-combo-chart.service'
 import { GooglePieChartService } from './services/google-pie-chart.service'
 
-import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
+import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
+  MatChipsModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule,
+  MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule,
+  MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule,
+  MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
+  MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { Ng4SpinnerModule } from 'ng4-spinner';
 import { PiechartComponent } from './main/dashboard/piechart/piechart.component';
 // import { NgxChartsModule } from '@swimlane/ngx-charts'
@@ -47,6 +53,7 @@ import { PiechartComponent } from './main/dashboard/piechart/piechart.component'
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     // NgxChartsModule,
     HttpModule,
     AppRoutingModule,

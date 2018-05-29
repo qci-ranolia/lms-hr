@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { LmsService } from '../../../services/lms.service';
+import { Component, Input, OnInit } from '@angular/core'
+import { LmsService } from '../../../services/lms.service'
 // import { GooglePieChartService } from '../../../services/google-pie-chart.service';
 // import { PieChartConfig } from '../../../Models/PieChartConfig';
+//// import { MatDialog } from '@angular/material'
+//// import { DashboardComponent } from '../dashboard.component'
 
-declare var google: any;
-
+declare var google: any
 
 @Component({
   selector: 'pie-chart',
@@ -12,17 +13,21 @@ declare var google: any;
 })
 export class PiechartComponent implements OnInit {
     //pageLoaded : boolean = false
-    
+
     // @Input() data: any[];
     // @Input() config: PieChartConfig;
     // @Input() elementId: String;
 
-    constructor( private lms : LmsService ) {
+    constructor( private lms : LmsService) {//, public dialog: MatDialog 
         this.lms.emitgetEmployees.subscribe(
             el => console.log(el)
-        )
+        )    
     }
 
+    /* public openUploadDialog() {
+        let dialogRef = this.dialog.open( DashboardComponent, { width: '50%', height: '50%' })
+    } */
+    
     ngOnInit() : void {
       // Load Charts and the corechart package.
       google.charts.load( 'current', { 'packages' : ['corechart']} )

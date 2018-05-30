@@ -4,11 +4,9 @@ import { HttpErrorResponse, HttpParams, HttpHeaders, HttpClient } from '@angular
 import { Router } from '@angular/router'
 // import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
-
 @Injectable()
 
 export class ApiService {
-
   // URL : string = "http://13.127.13.175:5000/"
   URL : string = "http://192.168.15.55:5000/"
   token : string // Useful in Authentication
@@ -55,12 +53,12 @@ export class ApiService {
   
   // Post ( Delete Existing Employee ) requests
   deleteEmp( data : any ) {
-    return this.http.post( this.URL+'lms/deleteEmployee', JSON.stringify(data), this.opts ).map( r => r.json() )
+    return this.http.post( this.URL+'lms/deleteEmployee', JSON.stringify( data ), this.opts ).map( r => r.json() )
   }
 
   // Get Employee_on_leave
   postHoliday( data : any ) {
-    return this.httpCSV.post( this.URL+'lms/holiday', data, { reportProgress:true, observe:"events" } )
+    return this.httpCSV.post( this.URL+'lms/holiday', data, { reportProgress : true, observe : "events" } )
   }
-
+  
 }

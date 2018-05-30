@@ -2,9 +2,6 @@ import { Component, Input, OnInit } from '@angular/core'
 import { LmsService } from '../../../services/lms.service'
 // import { GooglePieChartService } from '../../../services/google-pie-chart.service';
 // import { PieChartConfig } from '../../../Models/PieChartConfig';
-//// import { MatDialog } from '@angular/material'
-//// import { DashboardComponent } from '../dashboard.component'
-
 declare var google: any
 
 @Component({
@@ -23,10 +20,6 @@ export class PiechartComponent implements OnInit {
             el => console.log(el)
         )    
     }
-
-    /* public openUploadDialog() {
-        let dialogRef = this.dialog.open( DashboardComponent, { width: '50%', height: '50%' })
-    } */
     
     ngOnInit() : void {
       // Load Charts and the corechart package.

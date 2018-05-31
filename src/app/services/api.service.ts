@@ -37,8 +37,8 @@ export class ApiService {
   }
 
   // Get Employee_on_leave
-  GetEOL() {
-    return this.http.get( this.URL+'lms/applications', this.opts ).map( r => r.json() )
+  getEOL() {
+    return this.http.get( this.URL+'lms/application', this.opts ).map( r => r.json() )
   }
 
   // Post( Add New Employee ) requests
@@ -57,8 +57,8 @@ export class ApiService {
   }
 
   // Get Employee_on_leave
-  postHoliday( data : any ) {
+  /* postHoliday( data : any ) {
     return this.httpCSV.post( this.URL+'lms/holiday', data, { reportProgress : true, observe : "events" } )
-  }
+  } */
   
 }

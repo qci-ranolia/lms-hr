@@ -17,7 +17,7 @@ export class PiechartComponent implements OnInit {
 
     constructor( private lms : LmsService) {//, public dialog: MatDialog 
         this.lms.emitgetEmployees.subscribe(
-            el => console.log(el)
+            el => el//console.log(el)
         )    
     }
     

@@ -21,10 +21,6 @@ import { EditEmpComponent } from './main/crud/edit-emp/edit-emp.component';
 import { ApiService } from './services/api.service';
 import { LmsService } from './services/lms.service'
 import { AuthService } from './services/auth.service'
-import { GoogleChartsBaseService } from './services/google-charts.base.service';
-import { GoogleComboChartService } from './services/google-combo-chart.service'
-import { GooglePieChartService } from './services/google-pie-chart.service'
-
 
 import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
   MatChipsModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule,
@@ -34,7 +30,10 @@ import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardM
   MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { Ng4SpinnerModule } from 'ng4-spinner';
 import { PiechartComponent } from './main/dashboard/piechart/piechart.component';
+import { DialogComponent } from './main/dashboard/dialog/dialog.component';
 // import { NgxChartsModule } from '@swimlane/ngx-charts'
+
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations:[
@@ -49,6 +48,7 @@ import { PiechartComponent } from './main/dashboard/piechart/piechart.component'
     AddEmpComponent,
     EditEmpComponent,
     PiechartComponent,
+    DialogComponent
   ],
   imports:[
     BrowserModule,
@@ -58,10 +58,22 @@ import { PiechartComponent } from './main/dashboard/piechart/piechart.component'
     // NgxChartsModule,
     HttpModule,
     AppRoutingModule,
-    BrowserAnimationsModule,MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
-    MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
-    MatDialogModule, MatExpansionModule, MatGridListModule, MatIconModule,
-    MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
     MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule,
     MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
     MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
@@ -71,7 +83,13 @@ import { PiechartComponent } from './main/dashboard/piechart/piechart.component'
       { path: 'login', component: LoginComponent }
     ])
     ],
-  providers: [ LmsService, ApiService, AuthService, GooglePieChartService, GoogleComboChartService, GoogleChartsBaseService ],
+  providers: [ LmsService, ApiService, AuthService ],
+  exports: [
+    DashboardComponent
+  ],
+  entryComponents: [
+    DialogComponent
+  ],
   bootstrap: [
     AppComponent
   ]

@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { LmsService } from '../../services/lms.service'
-import { PieChartConfig } from '../../Models/PieChartConfig'
+import { MatDialog } from '@angular/material'
 import { HttpClient } from '@angular/common/http'
 // import { NgxChartsModule } from '@swimlane/ngx-charts'
 import * as moment from 'moment'
+import { DialogComponent } from './dialog/dialog.component'
+import { PieChartConfig } from '../../Models/PieChartConfig'
+import { LmsService } from '../../services/lms.service'
+
 // import { Ng4SpinnerService } from 'ng4-spinner'
 declare var $ : any
 declare var google : any
@@ -38,14 +41,14 @@ export class DashboardComponent implements OnInit {
   // page loader
   loader : boolean = false
 
-  constructor( private lms : LmsService, private httpClient : HttpClient ) {
+  constructor( public dialog: MatDialog, private lms : LmsService, private httpClient : HttpClient ) {
     //, private ngSpinner:Ng4SpinnerService
     var tmp = new Date()
     this.getDate = tmp.getDate()
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
     this.lms.emitgetEmployees.subscribe( r => this.employee = Object.values(r) )
-    console.log(this.employee)
+    //console.log(this.employee)
     /* $(function () { 
       var myChart = Highcharts.chart('container', {
           chart: {
@@ -96,6 +99,10 @@ export class DashboardComponent implements OnInit {
 
 
 
+  }
+
+  public openUploadDialog() {
+    let dialogRef = this.dialog.open(DialogComponent, { width: '50%', height: '50%' })
   }
 
   public ngOnInit() {

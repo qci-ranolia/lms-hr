@@ -8,32 +8,71 @@
     </div>
   </div>
   <mat-accordion class="col-sm-6 float-left h78 ovf-y">
-    <mat-expansion-panel class="d-inline-block col-sm-12 p-0">
+    <mat-expansion-panel class="d-inline-block col-sm-12 p-0" *ngFor="let app of application; let i=index;">
       <mat-expansion-panel-header>
-        <mat-panel-title>Jitesh</mat-panel-title>
-        <mat-panel-description>Junior Analyst, NABL</mat-panel-description>
+        <mat-panel-title>
+          <strong style="line-height:16px">
+            <small>{{app.name}}</small>
+            <small class="d-block text-muted" style="line-height:20px">{{app.email}}</small>
+          </strong>
+        </mat-panel-title>
+        <mat-panel-description class="pt-1">{{ app.designation }}, {{ app.board }}</mat-panel-description>
       </mat-expansion-panel-header>
       <mat-list>
         <mat-list-item>
-          <div class="col-sm-3 float-left p-0">Applied date :</div>
-          <div class="col-sm-3 float-left p-0">date</div>
-          <div class="col-sm-2 float-left p-0">Leave Type :</div>
-          <div class="col-sm-3 float-left p-0">Casual</div>
+          <div class="col-sm-6 p-0 mt-3">
+            <strong class="text-muted">
+              <small class="d-block">Applied date</small>
+            </strong>
+            <small class="d-block">{{ app.date_from }} to {{ app.date_to }}</small>
+          </div>
+          <div class="col-sm-6 p-0 mt-3 text-right">
+            <strong class="text-muted">
+              <small class="d-block">Application ID</small>
+            </strong>
+            <small class="d-block">{{ app.application_id }}</small>
+          </div>
         </mat-list-item>
+        <br />  
         <mat-divider></mat-divider>
         <mat-list-item>
-          <div class="col-sm-5 float-left pl-0">Reason :</div>
-          <div class="col-sm-7 float-left pr-0">/././././././././././././././././</div>
+          <div class="col-sm-6 p-0 mt-3">
+            <strong class="text-muted">
+              <small class="d-block">Leave Type</small>
+            </strong>
+            <small class="d-block">{{ app.leave_type }}</small>
+          </div>
+          <div class="col-sm-6 p-0 mt-3 text-right">
+            <strong class="text-muted">
+              <small class="d-block">Date of application</small>
+            </strong>
+            <small class="d-block">{{ app.date_of_apply }}</small>
+          </div>
         </mat-list-item>
+        <br />  
         <mat-divider></mat-divider>
         <mat-list-item>
-          <div class="col-sm-5 float-left pl-0">Any Attachment <mat-icon>help_outline</mat-icon></div>
-          <div class="col-sm-7 float-left pr-0">Not Found</div>
+          <div class="col-sm-12 p-0 mt-3">
+            <strong class="text-muted">
+              <small class="d-block">Reason </small>
+            </strong>
+            <small class="d-block">{{app.leave_reason}}</small>
+          </div>
+        </mat-list-item>
+        <br />  
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <div class="col-sm-12 p-0 mt-3">
+            <strong class="text-muted">
+              <small class="d-block">Any Attachment <mat-icon>help_outline</mat-icon></small>
+            </strong>
+            <small class="d-block">Not Found</small>
+          </div>
         </mat-list-item>
         <br />
         <mat-list-item>
-          <button mat-raised-button>Accept</button>&nbsp;&nbsp;&nbsp;
-          <button mat-raised-button color="accent">Cancel</button>
+          <button mat-raised-button (click)="acceptApp()">Accept</button>&nbsp;&nbsp;&nbsp;
+          <button mat-raised-button color="accent" (click)="declineApp()">Cancel</button>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
@@ -62,9 +101,7 @@
           <div class="col-sm-7 float-left pr-0">Not Found</div>
         </mat-list-item>
         <br />
-        <mat-list-item>
-          Accepted
-        </mat-list-item>
+        <mat-list-item>Accepted</mat-list-item>
       </mat-list>
     </mat-expansion-panel>
   </mat-accordion>

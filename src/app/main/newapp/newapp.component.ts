@@ -10,14 +10,22 @@ import * as moment from 'moment'
 
 export class NewappComponent implements OnInit {
   loader : boolean = false
+  application = new Array()
 
-  constructor( private lms:LmsService) {
+  constructor( private lms:LmsService ) {
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
+
+    this.lms.emitEOL.subscribe( el => {
+      this.application = el 
+      console.log( this.application )    
+    })
   }
 
-  ngOnInit(){}
-
+  ngOnInit(){
+    this.lms.getEOL()
+  }
+    
   // countSundays(){
   //   // Calculate sundays between two days using Moment JS
   //   var f = moment( this.firstDate ),
@@ -48,5 +56,7 @@ export class NewappComponent implements OnInit {
   //   }
   //   console.log( timeValues )
   // }
+
+  
   
 }

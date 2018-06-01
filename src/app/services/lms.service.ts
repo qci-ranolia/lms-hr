@@ -142,8 +142,12 @@ export class LmsService {
     }, err => this.snackBars( "API err" , "LMS deleteEmployee" ) )
   }
 
-  /* postHoliday( data:any ) {
-    this.api.postHoliday(data).subscribe( event => console.log(event) )
-  } */
+  postdata( data : any ){
+    this.api.postData(data).subscribe( el => {
+      if ( el.success ){
+        // this.getEmployees()
+      } else this.snackBars( "Success is false" , "Try again" )
+    }, err => this.snackBars( "API err" , "LMS deleteEmployee" ) )
+  }
 
 }

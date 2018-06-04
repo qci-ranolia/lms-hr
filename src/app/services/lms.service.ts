@@ -19,49 +19,34 @@ export class LmsService {
   emitLogin = new EventEmitter<any>() // Emit Login
   emitErr = new EventEmitter<any>() // Emit Err , not using right now
   emitEOL = new EventEmitter<any>() // Emit Employee On Leaves
+  emitgetHoliday = new EventEmitter<any>()
 
   constructor( private api : ApiService, private router : Router, public snackBar : MatSnackBar, private http: HttpClient ){}
-  public upload( files: Set < File > ) : { [ key : string ] : Observable < number > } {
   
-  const status = {} 
+  // CSV Upload
+  public upload( files: Set < File > ) : { [ key : string ] : Observable < number > } {
+  const status = {}
     files.forEach( file => {
-      // create a new multipart-form for every file
-      const formData : FormData = new FormData()
-      // console.log(formData)
+      const formData:FormData = new FormData()
       formData.append( 'file' , file , file.name )
-      // create a http-post request and pass the form
-      // tell it to report the upload progress
-      const req = new HttpRequest( 'POST' , url , formData , {
-        reportProgress: true
+      const req = new HttpRequest('POST', url , formData, {
+        reportProgress : true
       })
-      console.log(req)
-      // create a new progress-subject for every file
       const progress = new Subject< number > ()
-      // send the http-request and subscribe for progress-updates
-      console.log( progress )
-      this.http.request(req).subscribe( event => {
-        console.log( event )
+      this.http.request( req ).subscribe( event => {
         if ( event.type === HttpEventType.UploadProgress ) {
-          // calculate the progress percentage
           const percentDone = Math.round( 100 * event.loaded / event.total )
-          // pass the percentage into the progress-stream
           progress.next( percentDone )
         } else if ( event instanceof HttpResponse ) {
-          // Close the progress-stream if we get an answer form the API
-          // The upload is complete
           progress.complete()
         }
       })
-      // Save every progress-observable in a map of all observables
       status[ file.name ] = {
-        progress: progress.asObservable()
+        progress:progress.asObservable()
       }
     })
-    console.log(status)
-    // return the map of progress.observables
     return status
   }
-
   showLoader() {
     this.loader = true
     this.emitsload.emit(this.loader)
@@ -69,24 +54,20 @@ export class LmsService {
       this.hideLoader()
     }, 1000 )
   }
-
   hideLoader(){
     this.loader = false
     this.emithload.emit(this.loader)
   }
-
   snackBars( message:string, action:string ){  
     this.snackBar.open(message,action,{
       duration:2600,
     })
-  }
-  
+  }  
   isLogin() {
     if(localStorage.getItem('token')){
       this.router.navigate(['./'])
     }
   }
-
   login( uname:string, pwd:string ){
     let tmp : any
     tmp = { email : uname, password : pwd }
@@ -106,7 +87,11 @@ export class LmsService {
       else this.snackBars( "Employee Success is false" , "Try again" ) // this.snackBar.open('el.success was not true')
     }, err => this.snackBars("API err" , "Contact back-end IT or try one more time" ) 
   )}
-
+  getHoliday(){
+    this.api.getHoliday().subscribe( el => {
+      this.emitgetHoliday.emit(el.result)
+    }, err => this.snackBars("API err" , "Contact back-end IT or try one more time" ) 
+  )}
   addEmp( employee : any ) {
     this.api.addEmp(employee).subscribe( el => {
       // this.router.navigate(['/employee-list'])
@@ -142,7 +127,7 @@ export class LmsService {
     }, err => this.snackBars( "API err" , "LMS deleteEmployee" ) )
   }
 
-  postdata( data : any ){
+  postData( data : any ){
     this.api.postData(data).subscribe( el => {
       if ( el.success ){
         // this.getEmployees()

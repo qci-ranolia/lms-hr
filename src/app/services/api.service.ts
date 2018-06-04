@@ -41,6 +41,9 @@ export class ApiService {
     return this.http.get( this.URL+'lms/application', this.opts ).map( r => r.json() )
   }
 
+  postData( data : any ) {
+    return this.http.get( this.URL+'lms/application', this.opts ).map( r => r.json() )
+  }
   // Post( Add New Employee ) requests
   addEmp( data : any ) {
     return this.http.post( this.URL+'lms/addEmployee', data, this.opts ).map( r => r.json() )
@@ -56,9 +59,9 @@ export class ApiService {
     return this.http.post( this.URL+'lms/deleteEmployee', JSON.stringify( data ), this.opts ).map( r => r.json() )
   }
 
-  // Get Employee_on_leave
-  /* postHoliday( data : any ) {
-    return this.httpCSV.post( this.URL+'lms/holiday', data, { reportProgress : true, observe : "events" } )
-  } */
+  // Get QCI Calendar
+  getHoliday() {
+    return this.http.get( this.URL+'lms/holiday', this.opts ).map( r => r.json() )
+  }
   
 }

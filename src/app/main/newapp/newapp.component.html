@@ -1,14 +1,20 @@
-<div class="col-sm-12 p-0">
+<div class="col-sm-12 mt-5 pt-5 justify-content-center" *ngIf="!hide">
+  <div class="text-center mt-5 pt-5">No application found...</div>
+</div>
+<div class="col-sm-12 p-0" *ngIf="hide">
   <div class="col-sm-12 p-0">
     <div class="col-sm-6 float-left">
       <h5>New Applications</h5>
+      <div class="nav-pos-search col-sm-3">
+        <input class="text-white col-sm-12" placeholder="Search..." [(ngModel)]="term" >
+      </div>  
     </div>
     <div class="col-sm-6 float-left">
-      <h5>Rest Applications</h5>
+      <h5>Rest Applications <small class="text-muted"> ( Cancelled and accepted applications shown below )</small></h5>
     </div>
   </div>
   <mat-accordion class="col-sm-6 float-left h78 ovf-y">
-    <mat-expansion-panel class="d-inline-block col-sm-12 p-0" *ngFor="let app of application; let i=index;">
+    <mat-expansion-panel class="d-inline-block col-sm-12 p-0" *ngFor="let app of application | reverse | filter : term; let i=index;">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <strong style="line-height:16px">

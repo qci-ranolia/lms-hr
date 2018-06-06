@@ -13,19 +13,17 @@ export class ApiService {
   headers : any // Useful when backend and frontend have different IP's
   opts : any  // Find more details about backend configuration
   
-  constructor( private http : Http, private router : Router, private httpCSV:HttpClient ) { //private http:Http, private router:Router  // we will use both imports here. Are we using anywhere in comments only ???
-    
-    this.token = localStorage.getItem('token') // If this token available, login using can activate gaurd 
+  constructor( private http : Http, private router : Router, private httpCSV : HttpClient ) { //private http:Http, private router:Router  // we will use both imports here. Are we using anywhere in comments only ???
+    this.token = localStorage.getItem('token') // If this token available, login using can activate gaurd
     this.headers =  new Headers() // Default headers
     this.headers.append( 'Authorization', this.token ) // ADD/Append your authorized token to Default headers
     this.opts = new RequestOptions()
     this.opts.headers = this.headers
-
   }
-
+  
   // Login Section
   Login( data : any ) {
-    return this.http.post( this.URL+'lms/loginAdmin', data ).map( r => r.json()  )
+    return this.http.post( this.URL+'lms/loginAdmin', data ).map( r => r.json() )
   }
   
   // Get Requests
@@ -35,20 +33,21 @@ export class ApiService {
   GetEmployeeDetails() {
     return this.http.get( this.URL+'lms/employeeDetails', this.opts ).map( r => r.json() )
   }
-
+  
   // Get Employee_on_leave
   getEOL() {
     return this.http.get( this.URL+'lms/application', this.opts ).map( r => r.json() )
   }
-
+  
   postData( data : any ) {
     return this.http.get( this.URL+'lms/application', this.opts ).map( r => r.json() )
   }
+  
   // Post( Add New Employee ) requests
   addEmp( data : any ) {
     return this.http.post( this.URL+'lms/addEmployee', data, this.opts ).map( r => r.json() )
   }
-
+  
   // Post( Update Existing Employee ) requests
   updateEmployee( data : any ) {
     return this.http.post( this.URL+'lms/editEmployeeDetails', data, this.opts ).map( r => r.json() )
@@ -58,10 +57,10 @@ export class ApiService {
   deleteEmp( data : any ) {
     return this.http.post( this.URL+'lms/deleteEmployee', JSON.stringify( data ), this.opts ).map( r => r.json() )
   }
-
+  
   // Get QCI Calendar
   getHoliday() {
     return this.http.get( this.URL+'lms/holiday', this.opts ).map( r => r.json() )
-  }
-  
+  }  
+
 }

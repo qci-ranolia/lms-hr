@@ -20,6 +20,7 @@ export class AddEmpComponent implements OnInit {
   
   employee : any = new Object()
   loader : boolean = false
+  form : any
 
   constructor( private lms: LmsService, private router : Router ) {
     
@@ -57,8 +58,16 @@ export class AddEmpComponent implements OnInit {
     this.type_of_employee = item
   }
 
-  addEmployee(){
+  addEmployee({value, valid}){
     this.lms.addEmp(this.employee)
+  }
+
+  keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
 
 }

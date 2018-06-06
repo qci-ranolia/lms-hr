@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { LmsService } from '../../services/lms.service';
+import { Component, OnInit } from '@angular/core'
+import { LmsService } from '../../services/lms.service'
 import * as moment from 'moment'
 import * as _ from "lodash"
 
@@ -10,33 +10,25 @@ import * as _ from "lodash"
 })
 
 export class NewappComponent implements OnInit {
-
+  hide : boolean = true
   loader : boolean = false
   application = new Array()
-  // employee = new Array()
-  // t = new Array()
-  constructor( private lms:LmsService ) {
-  
+  constructor( private lms : LmsService ) {
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
 
+    this.lms.emitZeroEOL.subscribe( r => this.hide = false )
     this.lms.emitEOL.subscribe( el => {
       for ( var i = 0; i < el.length; i++ ) {
         el[i].info.map( r => {
           var t = Object.assign( el[i], r )
-          var prop = "info"
-          delete el[i][prop]
-          // el.filter( (i) => i != "info" )
+          delete el[i].info // [prop]
         })
       }
-      // console.log( el )
       this.application = el
-      //this.t.map( el => console.log( el ) )
-      // console.log( this.t )
     })
-  
   }
-
+ 
   ngOnInit(){
     this.lms.getEOL()
   }
@@ -71,5 +63,5 @@ export class NewappComponent implements OnInit {
   //   }
   //   console.log( timeValues )
   // }
-  
+
 }

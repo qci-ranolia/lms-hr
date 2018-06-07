@@ -19,9 +19,9 @@
         <mat-tab-group :selectedIndex="{{getDate-1}}" mat-stretch-tabs>
             <mat-tab *ngFor="let day of daysArr; let i = index">
                 <ng-template mat-tab-label>
-                    <div class="col-sm-12 p-0" (click)="postData(day?.date())" style="height:100%">
-                     <div [ngClass]="{'today':todayCheck(day)}">{{ day?.date() }}</div>
-                    <!-- <span class="badge badge-secondary">{{d.noeol}}</span> -->
+                    <div class="col-sm-12 p-0" (click)="postEOLBSDate(day?.date())" style="height:100%">
+                        <div [ngClass]="{'today':todayCheck(day)}">{{day?.date()}}</div>
+                        <!-- <span class="badge badge-secondary">{{d.noeol}}</span> -->
                     </div>
                 </ng-template>
                 <app-stat>
@@ -47,28 +47,24 @@
         </mat-tab-group>
     </div>
 </div>
-
 <div class="col-sm-12">
     <div class="col-sm-6 pos-abs pt-1 pb-2">
         <mat-accordion>
             <mat-expansion-panel [expanded]="true">
                 <mat-expansion-panel-header>
                     <mat-panel-title class="mb-2 mt-2">
-                        <button mat-raised-button (click)="openUploadDialog()">Upload</button>
+                        <button mat-raised-button (click)="openUploadDialog($event)">Upload</button>
                         <span class="pt-2 pl-3 text-muted">Upload CSV file for updating holiday's</span>
                     </mat-panel-title>
                     <!-- <mat-panel-description class="pt-2"></mat-panel-description> -->
                 </mat-expansion-panel-header>
                 <mat-chip-list>
-                    <div class="col-sm-12 p-0" *ngFor="let hols of holiday; let i = index">
-                        <div class="col-sm-4 mt-2 float-left text-center" *ngFor="let hol of hols; let j = index">
-                            <mat-chip color="primary" selected="true"></mat-chip> <div>Republic Day</div>
+                    <div class="col-sm-12 p-0">
+                        <div class="col-sm-4 mt-2 mb-2 float-left text-center" *ngFor="let hol of holiday; let i=index;">
+                            <mat-chip color="primary" selected="true">{{ hol.Dates }}</mat-chip><div>{{ hol.Holidays }}</div>
                         </div>
-                        <div class="col-sm-4 mt-2 float-left text-center">
-                            <mat-chip color="primary" selected="true">Holi date</mat-chip> <div>Holi</div>
-                        </div>
-                        <div class="col-sm-4 mt-2 float-left text-center">
-                            <mat-chip color="primary" selected="true">January 26</mat-chip> <div>Republic Day</div>
+                        <div class="col-sm-4 mt-2 mb-2 float-left text-center" *ngFor="let hols of holday; let i=index;">
+                            <mat-chip color="accent" selected="true">{{ hols.Dates }}</mat-chip><div>{{ hols.Holidays }}</div>
                         </div>
                     </div>
                 </mat-chip-list>
@@ -79,10 +75,8 @@
         <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{ link.label }}</a>
     </nav>
 </div>
-
 <div class="clearfix mt-5 pt-5"></div>
 <div class="clearfix mt-5 pt-5"></div>
-
 <div class="col-sm-6" style="display:none">
     <div class="col-sm-12 rad-box p-0" id="container"></div>
 </div>

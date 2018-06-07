@@ -21,6 +21,7 @@ import { EditEmpComponent } from './main/crud/edit-emp/edit-emp.component'
 import { ApiService } from './services/api.service'
 import { LmsService } from './services/lms.service'
 import { AuthService } from './services/auth.service'
+import { DatePipe } from '@angular/common'
 
 import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
   MatChipsModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule,
@@ -28,6 +29,7 @@ import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardM
   MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule,
   MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
   MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material'
+
 import { Ng4SpinnerModule } from 'ng4-spinner'
 import { PiechartComponent } from './main/dashboard/piechart/piechart.component'
 import { DialogComponent } from './main/dashboard/dialog/dialog.component'
@@ -41,7 +43,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter'
 export function tokenGetter() {
   return localStorage.getItem('access_token')
 }
-
 @NgModule({
   declarations:[
     AppComponent,
@@ -99,7 +100,7 @@ export function tokenGetter() {
       }
     })
     ],
-  providers: [ LmsService, ApiService, AuthService ],
+  providers: [ LmsService, ApiService, AuthService,DatePipe],
   exports: [
     DashboardComponent
   ],

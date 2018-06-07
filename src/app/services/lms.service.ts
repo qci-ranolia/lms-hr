@@ -7,7 +7,8 @@ import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/c
 import { Subject } from 'rxjs/Subject'
 import { Observable } from 'rxjs/Observable'
 
-const url = 'http://13.127.13.175:5000/lms/holiday'
+// const url = 'http://13.127.13.175:5000/'
+const url = 'http://192.168.15.55:5000/'
 
 @Injectable()
 export class LmsService {
@@ -20,80 +21,95 @@ export class LmsService {
   emitErr = new EventEmitter<any>() // Emit Err , not using right now
   emitEOL = new EventEmitter<any>() // Emit Employee On Leaves
   emitgetHoliday = new EventEmitter<any>()
-  emitZeroEOL = new EventEmitter<any>() // Emit zero employees on leaves
+  emitZeroEOL = new EventEmitter<any>() // Emit Zero employees on leaves
+  emitMyApplication = new EventEmitter<any>()
 
-  constructor( private api : ApiService, private router : Router, public snackBar : MatSnackBar, private http: HttpClient ){}
+  constructor(
+    private api : ApiService,
+    private router : Router,
+    public snackBar : MatSnackBar,
+    private http: HttpClient
+  ){}
   
   // CSV Upload
-  public upload( files: Set < File > ) : { [ key : string ] : Observable < number > } {
-  const status = {}
+  public upload( files : Set < File > ) : { [ key : string ] : Observable < number > } {
+    
+    const status = {}
     files.forEach( file => {
-      const formData:FormData = new FormData()
+      const formData : FormData = new FormData()
       formData.append( 'file' , file , file.name )
-      const req = new HttpRequest('POST', url , formData, {
+      // console.log(formData)
+      const req = new HttpRequest( 'POST', url+'lms/holiday' , formData, {
         reportProgress : true
       })
-      const progress = new Subject< number > ()
+      // console.log(req)
+      const progress = new Subject< number >()
+      // console.log(progress)
       this.http.request( req ).subscribe( event => {
         if ( event.type === HttpEventType.UploadProgress ) {
           const percentDone = Math.round( 100 * event.loaded / event.total )
+          // console.log(percentDone)
           progress.next( percentDone )
-        } else if ( event instanceof HttpResponse ) {
+        } else if ( event instanceof HttpResponse ){
           progress.complete()
+          // console.log(req)
         }
       })
-      status[ file.name ] = {
+      status[file.name] = {
         progress:progress.asObservable()
       }
     })
+    // console.log(status)
     return status
   }
   showLoader() {
     this.loader = true
-    this.emitsload.emit(this.loader)
-    setTimeout(() => {
-      this.hideLoader()
-    }, 1000 )
+    this.emitsload.emit( this.loader )
+    setTimeout(() => this.hideLoader(), 1000 )
   }
   hideLoader(){
     this.loader = false
-    this.emithload.emit(this.loader)
+    this.emithload.emit( this.loader )
   }
-  snackBars( message:string, action:string ){  
-    this.snackBar.open(message,action,{
+  snackBars( message : string, action : string ){  
+    this.snackBar.open( message, action, {
       duration:2600,
     })
-  }  
+  }
   isLogin() {
-    if(localStorage.getItem('token')){
+    if( localStorage.getItem('token') ){
       this.router.navigate(['./'])
     }
   }
-  login( uname:string, pwd:string ){
+  login( uname : string, pwd : string ){
     let tmp : any
     tmp = { email : uname, password : pwd }
-    let temp = JSON.stringify(tmp)
-    this.api.Login(temp).subscribe(el => {
-      // console.log(el)
+    let temp = JSON.stringify( tmp )
+    this.api.Login( temp ).subscribe( el => {
       if ( el.success ){
         localStorage.setItem( 'token' , el.token )
         this.emitLogin.emit()
-      } else this.snackBars("Success is false" , "Try again" )
-    }, err => this.snackBars("API err" , "Contact back-end IT or try one more time" ) )
+      } else this.snackBars( "Success is false" , "Try again" )
+    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ))
   }
   getEmployees(){
     this.api.GetEmployeeDetails().subscribe( el => {
-      if ( el.success ) this.emitgetEmployees.emit(el.data)
+      if ( el.success ) this.emitgetEmployees.emit( el.data )
       else this.snackBars( "Employee Success is false" , "Try again" ) // this.snackBar.open('el.success was not true')
-    }, err => this.snackBars("API err" , "Contact back-end IT or try one more time" ) 
+    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) 
   )}
   getHoliday(){
     this.api.getHoliday().subscribe( el => {
-      this.emitgetHoliday.emit(el.result)
-    }, err => this.snackBars("API err" , "Contact back-end IT or try one more time" ) 
+      // console.log(el.result.length)
+      if ( el.success ){
+         if (el.result.length == 0 ) console.log("d")
+         else this.emitgetHoliday.emit( el.result )
+      }
+      else this.snackBars( "Response failed" , "Try again" )
+    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) 
   )}
   addEmp( employee : any ) {
-    this.api.addEmp(employee).subscribe( el => {
+    this.api.addEmp( employee ).subscribe( el => {
       // this.router.navigate(['/employee-list'])
       if ( el.success ) this.router.navigate(['/employee-list'])
       else this.snackBars( "Success is false" , "Try again" )
@@ -101,36 +117,40 @@ export class LmsService {
   }
   getEOL() {
     this.api.getEOL().subscribe( el => {
-      console.log( el.data )
       if ( el.success ) {
-        if ( el.data.length > 0 ) this.emitEOL.emit(el.data)
-        else this.emitZeroEOL.emit(el)
+        if ( el.data.length > 0 ) this.emitEOL.emit( el.data )
+        else this.emitZeroEOL.emit( el )
       } else this.snackBars( "leave Applications is false" , "Try Again" )
     }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) )  
   }
   updateEmployee( employee : any ) {
-    this.api.updateEmployee(employee).subscribe( el => {
-      console.log( el )
+    this.api.updateEmployee( employee ).subscribe( el => {
       if ( el.success ) {
-        this.router.navigate(['/employee-list'])
+        this.router.navigate( ['/employee-list'] )
         this.getEmployees()
       } else this.snackBars( "Not Updated" , "Try again" )
     }, err => this.snackBars( "API err" , "LMS updateEmployee" ) )
   }
   deleteEmp( qci_id : any ) {
     let tmp = { qci_id:qci_id }
-    this.api.deleteEmp(tmp).subscribe( el => {
-      console.log( el )
+    this.api.deleteEmp( tmp ).subscribe( el => {
       if ( el.success ){
         this.getEmployees()
       } else this.snackBars( "Success is false" , "Try again" )
     }, err => this.snackBars( "API err" , "LMS deleteEmployee" ) )
   }
-  postData( data : any ){
-    this.api.postData(data).subscribe( el => {
+  postEOLBSDate( data : any ) {
+    this.api.postEOLBSDate( data ).subscribe( el => {
       if ( el.success ){
         // this.getEmployees()
       } else this.snackBars( "Success is false" , "Try again" )
     }, err => this.snackBars( "API err" , "LMS deleteEmployee" ) )
+  }
+  ApproveLeave( application : any ){
+    this.api.approveLeave( application ).subscribe( el => {
+      if( el.success ) {
+        this.emitMyApplication.emit(el)
+      } else this.snackBars( "! Success" , "Try Again" ) //stepper.next() //
+    }, err => this.snackBars( "API Error" , "Try Again" ))
   }
 }

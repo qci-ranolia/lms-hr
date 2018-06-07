@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { LmsService } from '../../services/lms.service'
 import * as moment from 'moment'
 import * as _ from "lodash"
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-newapp',
@@ -11,15 +12,18 @@ import * as _ from "lodash"
 
 export class NewappComponent implements OnInit {
   hide : boolean = true
+  date : any
   loader : boolean = false
   application = new Array()
-  constructor( private lms : LmsService ) {
+  constructor( private lms : LmsService, public datepipe: DatePipe ) {
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
 
     this.lms.emitZeroEOL.subscribe( r => this.hide = false )
     this.lms.emitEOL.subscribe( el => {
-      for ( var i = 0; i < el.length; i++ ) {
+      // console.log( el )
+      for ( var i = 0; i < el.length; i++ ){
+        console.log(el[0].info)
         el[i].info.map( r => {
           var t = Object.assign( el[i], r )
           delete el[i].info // [prop]
@@ -37,15 +41,12 @@ export class NewappComponent implements OnInit {
   //   // Calculate sundays between two days using Moment JS
   //   var f = moment( this.firstDate ),
   //   s = moment( this.secondDate ),
-  //   sunday = 0 // Sunday
-    
+  //   sunday = 0 // Sunday    
   //   let result = []
   //   var current = f.clone()
-    
   //   while ( current.day(7 + sunday).isBefore(s) ) {
   //     result.push( current.clone() )
   //   }
-
   //   // Calculate leavedays
   //   let totalDays = s.diff(f, 'days')
   //   let sundayCount = result.map( m => m ).length
@@ -63,5 +64,12 @@ export class NewappComponent implements OnInit {
   //   }
   //   console.log( timeValues )
   // }
+
+  acceptApp( data : any ) {
+    let date = new Date(),
+    latest_date = this.datepipe.transform( date, 'dd/MM/yyyy' )
+    var tmp = { application_id : data, date_reviewed : latest_date }
+    this.lms.ApproveLeave( tmp )
+  }
 
 }

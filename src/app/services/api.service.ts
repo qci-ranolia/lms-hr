@@ -11,7 +11,7 @@ export class ApiService {
   URL : string = "http://192.168.15.55:5000/"
   token : string // Useful in Authentication
   headers : any // Useful when backend and frontend have different IP's
-  opts : any  // Find more details about backend configuration
+  opts : any // Find more details about backend configuration
   
   constructor( private http : Http, private router : Router, private httpCSV : HttpClient ) { //private http:Http, private router:Router  // we will use both imports here. Are we using anywhere in comments only ???
     this.token = localStorage.getItem('token') // If this token available, login using can activate gaurd
@@ -33,34 +33,30 @@ export class ApiService {
   GetEmployeeDetails() {
     return this.http.get( this.URL+'lms/employeeDetails', this.opts ).map( r => r.json() )
   }
-  
   // Get Employee_on_leave
   getEOL() {
     return this.http.get( this.URL+'lms/application', this.opts ).map( r => r.json() )
   }
-  
-  postData( data : any ) {
-    return this.http.get( this.URL+'lms/application', this.opts ).map( r => r.json() )
+  postEOLBSDate( data : any ) {
+    return this.http.post( this.URL+'lms/application', this.opts ).map( r => r.json() )
   }
-  
   // Post( Add New Employee ) requests
   addEmp( data : any ) {
     return this.http.post( this.URL+'lms/addEmployee', data, this.opts ).map( r => r.json() )
   }
-  
   // Post( Update Existing Employee ) requests
   updateEmployee( data : any ) {
     return this.http.post( this.URL+'lms/editEmployeeDetails', data, this.opts ).map( r => r.json() )
   }
-  
   // Post ( Delete Existing Employee ) requests
   deleteEmp( data : any ) {
     return this.http.post( this.URL+'lms/deleteEmployee', JSON.stringify( data ), this.opts ).map( r => r.json() )
   }
-  
   // Get QCI Calendar
   getHoliday() {
     return this.http.get( this.URL+'lms/holiday', this.opts ).map( r => r.json() )
-  }  
-
+  }
+  approveLeave( data:any ) {
+    return this.http.post( this.URL+'lms/approveLeave', data, this.opts ).map( r => r.json() )
+  }
 }

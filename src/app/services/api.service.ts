@@ -13,7 +13,9 @@ export class ApiService {
   headers : any // Useful when backend and frontend have different IP's
   opts : any // Find more details about backend configuration
   
-  constructor( private http : Http, private router : Router, private httpCSV : HttpClient ) { //private http:Http, private router:Router  // we will use both imports here. Are we using anywhere in comments only ???
+  constructor( private http : Http, private router : Router, private httpCSV : HttpClient ) {
+    // Private http:Http, private router:Router
+    // We will use both imports here. Are we using anywhere in comments only ???
     this.token = localStorage.getItem('token') // If this token available, login using can activate gaurd
     this.headers =  new Headers() // Default headers
     this.headers.append( 'Authorization', this.token ) // ADD/Append your authorized token to Default headers
@@ -22,41 +24,48 @@ export class ApiService {
   }
   
   // Login Section
-  Login( data : any ) {
+  Login( data : any ){
     return this.http.post( this.URL+'lms/loginAdmin', data ).map( r => r.json() )
   }
   
   // Get Requests
   // HINT : Are we checking the response is a success or not ???
-  
   // Get Employee
-  GetEmployeeDetails() {
+  GetEmployeeDetails(){
     return this.http.get( this.URL+'lms/employeeDetails', this.opts ).map( r => r.json() )
   }
+
   // Get Employee_on_leave
-  getEOL() {
+  getEOL(){
     return this.http.get( this.URL+'lms/application', this.opts ).map( r => r.json() )
   }
-  postEOLBSDate( data : any ) {
+
+  postEOLBSDate( data : any ){
     return this.http.post( this.URL+'lms/application', this.opts ).map( r => r.json() )
   }
+
   // Post( Add New Employee ) requests
-  addEmp( data : any ) {
+  addEmp( data : any ){
     return this.http.post( this.URL+'lms/addEmployee', data, this.opts ).map( r => r.json() )
   }
+
   // Post( Update Existing Employee ) requests
-  updateEmployee( data : any ) {
+  updateEmployee( data : any ){
     return this.http.post( this.URL+'lms/editEmployeeDetails', data, this.opts ).map( r => r.json() )
   }
+
   // Post ( Delete Existing Employee ) requests
-  deleteEmp( data : any ) {
+  deleteEmp( data : any ){
     return this.http.post( this.URL+'lms/deleteEmployee', JSON.stringify( data ), this.opts ).map( r => r.json() )
   }
+
   // Get QCI Calendar
-  getHoliday() {
+  getHoliday(){
     return this.http.get( this.URL+'lms/holiday', this.opts ).map( r => r.json() )
   }
-  approveLeave( data:any ) {
+
+  approveLeave( data:any ){
     return this.http.post( this.URL+'lms/approveLeave', data, this.opts ).map( r => r.json() )
   }
+
 }

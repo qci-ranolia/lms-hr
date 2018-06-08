@@ -5,8 +5,6 @@ import * as moment from 'moment'
 import { DialogComponent } from './dialog/dialog.component'
 import { PieChartConfig } from '../../Models/PieChartConfig'
 import { LmsService } from '../../services/lms.service'
-// import { PipeTransform, Pipe } from '@angular/core'
-// import { Ng4SpinnerService } from 'ng4-spinner'
 
 declare var $ : any
 declare var google : any
@@ -17,9 +15,8 @@ declare var Highcharts : any
   templateUrl : './dashboard.component.html',
   styleUrls : [ './dashboard.component.scss' ]
 })
-// @Pipe({name:'keys'})
+
 export class DashboardComponent implements OnInit {
-  
   title = 'Reusable charts sample'
   getDate : number
   data1 : any[]
@@ -42,17 +39,14 @@ export class DashboardComponent implements OnInit {
   employee = new Array()
   holiday : any
   holday : any
-  
+  workingDays : any
   // page loader
   loader : boolean = false
-
   constructor(
     public dialog : MatDialog,
     private lms : LmsService,
     private httpClient : HttpClient
   ) {
-    
-    //, private ngSpinner:Ng4SpinnerService
     var tmp = new Date()
     this.getDate = tmp.getDate()
     
@@ -64,9 +58,8 @@ export class DashboardComponent implements OnInit {
     this.lms.emitgetHoliday.subscribe( el => {
       this.holiday = JSON.parse( el[0].data )
       this.holday = JSON.parse( el[1].data )
-      // else console.log("1")
-      // this.holiday = JSON.parse(el[0].data)
-      // console.log( this.holiday )
+      // var t = Object.assign( this.holday, this.holiday )
+      // console.log(t)
     })
       
     $(function () { 
@@ -92,6 +85,7 @@ export class DashboardComponent implements OnInit {
         ]
       })
     })
+
     /* $.getJSON('http://192.168.15.55:5000/lms/employeeDetails', function (d) {
       console.log(d)
       var myChart = Highcharts.chart('container', {
@@ -129,24 +123,13 @@ export class DashboardComponent implements OnInit {
         }]
       }) */
    /* })*/
-  }/* 
-  transform( value, args : string[] ) : any {
-    console.log( value )
-    console.log( args )
-    let keys = []
-    for ( let key in value ) {
-      keys.push( { key : key, value : value[key] } )
-    }console.log( keys )
-    return keys
-  } */
-
+  }
   // CSV Dialog 
   public openUploadDialog($e){
     $e.stopPropagation()
     let dialogRef = this.dialog.open( DialogComponent, { width:'50%', height:'50%' })
   }
   public ngOnInit() {
-    // this.transform( this.holiday , this.employee )
     // Google chart 1
     this.data1 = [
       [ 'Task', 'Hours per Day' ],
@@ -156,7 +139,6 @@ export class DashboardComponent implements OnInit {
       [ 'NABH', 4 ],
       [ 'NABCB', 10 ]
     ]
-
     this.config1 = new PieChartConfig( 'Board Section 1' , 0.4 )
     this.elementId1 = 'myPieChart1'
     // Google chart 2
@@ -177,48 +159,67 @@ export class DashboardComponent implements OnInit {
     this.lms.getHoliday()
     // this.ngSpinner.hide()
   }
-
   postEOLBSDate( day ){
     this.getMonth = this.date.format( "MM/YYYY" )
-    let d = day
-    if ( d < 10 ) {
-      this.postDate = '0' + d
-    } else this.postDate = d
+    this.postDate = day
     let temp = this.postDate+'/'+this.getMonth
     this.lms.postEOLBSDate( temp )
   }
-
   public todayCheck( day ){
     if (!day){
       return false
     }
     return moment().format( "L" ) === day.format 
   }
+  public createCalendar( month ){
+    let f = moment( month ).startOf( "M" ),
+    s = moment( f ).endOf( 'month' ),
+    sunday = 0,
+    r = [],
+    c = f.clone()
+    while( c.day( 7 + sunday).isBefore( s ) ) r.push( c.clone().format("DD/MM/YYYY") )
+    // Calculate leavedays
+    let td : number = s.diff( f, 'days' ) + 1
+    // let leavedays : number = td - r.length
+    // Get dates between current month
+    var temp = [],
+    dates = []
+    while( f < s ){
+      temp.push( f.format('DD/MM/YYYY') )
+      f.add( 1, 'day' )
+    }
+    var sundayExcluded = temp.filter( item => {
+      return r.indexOf(item) < 0
+    })
+    // this.workingDays = sundayExcluded.filter( item => {
+    //   return this.holiday.indexOf(item) < 0
+    // })
+    
+    // var q = Object.values( this.holiday )
+    // console.log( q )
+    console.log( this.holiday )
+    // console.log(Object.keys( this.holiday ))
+    // console.log(this.workingDays)
 
-  public createCalendar( month ) {
-    let firstDay = moment( month ).startOf( "M" )
-    let days = Array.apply( null, { length : month.daysInMonth() } )
-      .map( Number.call, Number )
-      .map ( ( n ) => {
-        // console.log( n )
-        return moment( firstDay ).add( n, 'd' )
-      })
-      return days
+    // this.holiday
+    let days = Array.apply( null, { length : month.daysInMonth() })
+    .map( Number.call, Number )
+    .map( ( n ) => {
+      return moment( f ).add( n, 'd' ).format( "DD" )
+    })
+    return days
   }
-
-  public nextMonth() {
+  public nextMonth(){
     this.date.add(1,'M')
     this.cmnProgram()
   }
-
-  public previousMonth() {
+  public previousMonth(){
     this.date.subtract(1,'M')
     this.cmnProgram()
   }
-
   cmnProgram(){
-    this.daysArr = this.createCalendar( this.date )
-    if ( !this.postDate ) this.getMonth = this.date.format( "DD/MM/YYYY" )
-    else this.getMonth = this.date.format( this.postDate+'/'+"MM/YYYY" )
+    this.daysArr = this.createCalendar(this.date)
+    if (!this.postDate) this.getMonth = this.date.format("DD/MM/YYYY")
+    else this.getMonth = this.date.format(this.postDate+'/'+"MM/YYYY")
   }
 }

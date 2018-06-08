@@ -19,11 +19,9 @@ export class NewappComponent implements OnInit {
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
 
-    this.lms.emitZeroEOL.subscribe( r => this.hide = false )
+    this.lms.emitZeroEOL.subscribe( r => this.hide=false )
     this.lms.emitEOL.subscribe( el => {
-      // console.log( el )
       for ( var i = 0; i < el.length; i++ ){
-        console.log(el[0].info)
         el[i].info.map( r => {
           var t = Object.assign( el[i], r )
           delete el[i].info // [prop]

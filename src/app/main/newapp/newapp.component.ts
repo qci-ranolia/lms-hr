@@ -21,18 +21,30 @@ export class NewappComponent implements OnInit {
 
     this.lms.emitZeroEOL.subscribe( r => this.hide=false )
     this.lms.emitEOL.subscribe( el => {
-      for ( var i = 0; i < el.length; i++ ){
-        el[i].info.map( r => {
-          var t = Object.assign( el[i], r )
-          delete el[i].info // [prop]
-        })
-      }
+      console.log(el)
+      // for ( var i = 0; i < el.length; i++ ){
+      //   el[i].info.map( r => {
+      //     var t = Object.assign( el[i], r )
+      //     delete el[i].info // [prop]
+      //   })
+      // }
       this.application = el
+      // console.log(el)
+    })
+    this.lms.emitApprovedApplication.subscribe( el => {
+      // for ( var i = 0; i < el.length; i++ ){
+      //   el[i].info.map( r => {
+      //     var t = Object.assign( el[i], r )
+      //     delete el[i].info // [prop]
+      //   })
+      // }
+      console.log(el)
     })
   }
  
   ngOnInit(){
     this.lms.getEOL()
+    this.lms.approvedLeave()
   }
     
   // countSundays(){
@@ -67,7 +79,7 @@ export class NewappComponent implements OnInit {
     let date = new Date(),
     latest_date = this.datepipe.transform( date, 'dd/MM/yyyy' )
     var tmp = { application_id : data, date_reviewed : latest_date }
-    this.lms.ApproveLeave( tmp )
+    this.lms.leaveForApproval( tmp )
   }
 
 }

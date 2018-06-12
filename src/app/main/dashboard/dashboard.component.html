@@ -17,11 +17,13 @@
     </div>
     <div class="col-sm-10 h-100 float-left pr-0">
         <mat-tab-group :selectedIndex="{{getDate-1}}" mat-stretch-tabs>
-            <mat-tab *ngFor="let day of daysArr; let i = index">
+            <mat-tab *ngFor="let day of daysArr;let i = index">
                 <ng-template mat-tab-label>
-                    <div class="col-sm-12 p-0" (click)="postEOLBSDate(day)" style="height:100%">
-                        <div [ngClass]="{'today':todayCheck(day)}">{{day}}</div>
-                        <!-- <span class="badge badge-secondary">{{d.noeol}}</span> -->
+                    <div><!-- *ngIf="offDays"-->
+                        <div class="col-sm-12 p-0" (click)="postEOLBSDate(day)" style="height:100%">
+                            <div [ngClass]="{'today':todayCheck(day)}">{{day}}{{offDays}}</div>
+                            <!-- <span class="badge badge-secondary">{{d.noeol}}</span> -->
+                        </div>
                     </div>
                 </ng-template>
                 <app-stat>

@@ -9,32 +9,33 @@ declare var $
 })
 
 export class CrudComponent implements OnInit {
-
   employee = new Array
   loader : boolean = false
 
-  constructor( private lms: LmsService ) {
+  constructor( private lms : LmsService ) {
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
+
     this.lms.emitgetEmployees.subscribe( r => {
       this.employee = Object.values( r )
       // console.log( this.employee )
-    }) 
+    })
     setTimeout(() => {
       $(function() {
         let user = $('#table_id').DataTable({
-          paging: true,
-          searching:true,
-          ordering:true,
-          scrollY:335
+          paging : true,
+          searching : true,
+          ordering : true,
+          scrollY : 335
         })
       })
     }, 800 )
   }
-  ngOnInit() {
+  
+  ngOnInit(){
     this.lms.getEmployees()
   }
-  deleteEmp(qci_id){
-    this.lms.deleteEmp(qci_id)
+  deleteEmp( qci_id ){
+    this.lms.deleteEmp( qci_id )
   }
 }

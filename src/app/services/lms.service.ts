@@ -23,7 +23,7 @@ export class LmsService {
   emitgetHoliday = new EventEmitter<any>()
   emitZeroEOL = new EventEmitter<any>() // Emit Zero employees on leaves
   emitMyApplication = new EventEmitter<any>()
-
+  emitApprovedApplication = new EventEmitter<any>()
   constructor(
     private api : ApiService,
     private router : Router,
@@ -73,12 +73,12 @@ export class LmsService {
   }
   snackBars( message : string, action : string ){  
     this.snackBar.open( message, action, {
-      duration:2600,
+      duration : 2600,
     })
   }
   isLogin() {
     if( localStorage.getItem('token') ){
-      this.router.navigate(['./'])
+      this.router.navigate( ['./'] )
     }
   }
   login( uname : string, pwd : string ){
@@ -86,21 +86,22 @@ export class LmsService {
     tmp = { email : uname, password : pwd }
     let temp = JSON.stringify( tmp )
     this.api.Login( temp ).subscribe( el => {
+      // console.log( el )
       if ( el.success ){
         localStorage.setItem( 'token' , el.token )
         this.emitLogin.emit()
       } else this.snackBars( "Success is false" , "Try again" )
-    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ))
-  }
+    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" )
+  )}
   getEmployees(){
     this.api.GetEmployeeDetails().subscribe( el => {
+      console.log( el )
       if ( el.success ) this.emitgetEmployees.emit( el.data )
       else this.snackBars( "Employee Success is false" , "Try again" ) // this.snackBar.open('el.success was not true')
     }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) 
   )}
   getHoliday(){
     this.api.getHoliday().subscribe( el => {
-      // console.log(el.result.length)
       if ( el.success ){
          if (el.result.length == 0 ) console.log("d")
          else this.emitgetHoliday.emit( el.result )
@@ -108,49 +109,57 @@ export class LmsService {
       else this.snackBars( "Response failed" , "Try again" )
     }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) 
   )}
-  addEmp( employee : any ) {
-    this.api.addEmp( employee ).subscribe( el => {
-      // this.router.navigate(['/employee-list'])
-      if ( el.success ) this.router.navigate(['/employee-list'])
-      else this.snackBars( "Success is false" , "Try again" )
-    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) )
-  }
   getEOL() {
     this.api.getEOL().subscribe( el => {
+      // console.log( el )
       if ( el.success ) {
         if ( el.data.length > 0 ) this.emitEOL.emit( el.data )
         else this.emitZeroEOL.emit( el )
       } else this.snackBars( "leave Applications is false" , "Try Again" )
-    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) )  
-  }
+    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" )
+  )}
+  approvedLeave(){
+    this.api.approvedLeave().subscribe( el => {
+      if( el.success ){
+        this.emitApprovedApplication.emit(el.data)
+      } else this.snackBars( "! Success" , "Try Again" ) //stepper.next() //
+    }, err => this.snackBars( "API Error" , "Try Again" )
+  )}
+  addEmp( employee : any ) {
+    this.api.addEmp( employee ).subscribe( el => {
+      if ( el.success ) this.router.navigate(['/employee-list'])
+      else this.snackBars( "Success is false" , "Try again" )
+    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" )
+  )}
   updateEmployee( employee : any ) {
     this.api.updateEmployee( employee ).subscribe( el => {
       if ( el.success ) {
         this.router.navigate( ['/employee-list'] )
         this.getEmployees()
       } else this.snackBars( "Not Updated" , "Try again" )
-    }, err => this.snackBars( "API err" , "LMS updateEmployee" ) )
-  }
+    }, err => this.snackBars( "API err" , "LMS updateEmployee" )
+  )}
   deleteEmp( qci_id : any ) {
     let tmp = { qci_id:qci_id }
     this.api.deleteEmp( tmp ).subscribe( el => {
-      if ( el.success ){
+      if ( el.success ) {
         this.getEmployees()
       } else this.snackBars( "Success is false" , "Try again" )
-    }, err => this.snackBars( "API err" , "LMS deleteEmployee" ) )
-  }
-  postEOLBSDate( data : any ) {
+    }, err => this.snackBars( "API err" , "LMS deleteEmployee" )
+  )}
+  postEOLBSDate( data : any ){
     this.api.postEOLBSDate( data ).subscribe( el => {
+      // console.log(el)
       if ( el.success ){
         // this.getEmployees()
       } else this.snackBars( "Success is false" , "Try again" )
-    }, err => this.snackBars( "API err" , "LMS deleteEmployee" ) )
-  }
-  ApproveLeave( application : any ){
-    this.api.approveLeave( application ).subscribe( el => {
-      if( el.success ) {
+    }, err => this.snackBars( "API err" , "LMS deleteEmployee" )
+  )}
+  leaveForApproval( application : any ){
+    this.api.leaveForApproval( application ).subscribe( el => {
+      if ( el.success ) {
         this.emitMyApplication.emit(el)
       } else this.snackBars( "! Success" , "Try Again" ) //stepper.next() //
-    }, err => this.snackBars( "API Error" , "Try Again" ))
-  }
+    }, err => this.snackBars( "API Error" , "Try Again" )
+  )}
 }

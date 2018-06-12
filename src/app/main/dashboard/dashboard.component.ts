@@ -40,48 +40,43 @@ export class DashboardComponent implements OnInit {
   holiday : any
   holday : any
   workingDays : any
+  offDays : any = []
   // page loader
   loader : boolean = false
-  constructor(
-    public dialog : MatDialog,
-    private lms : LmsService,
-    private httpClient : HttpClient
-  ) {
+  constructor( public dialog : MatDialog, private lms : LmsService, private httpClient : HttpClient ) {
     var tmp = new Date()
     this.getDate = tmp.getDate()
     
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
     
-    this.lms.emitgetEmployees.subscribe( r => this.employee = Object.values( r ) )
+    this.lms.emitgetEmployees.subscribe( r => this.employee = Object.values(r) )
     this.lms.emitEOL.subscribe( r => this.applications = r )
     this.lms.emitgetHoliday.subscribe( el => {
       this.holiday = JSON.parse( el[0].data )
       this.holday = JSON.parse( el[1].data )
-      // var t = Object.assign( this.holday, this.holiday )
-      // console.log(t)
     })
       
-    $(function () { 
+    $( function() { 
       var myChart = Highcharts.chart( 'container' , {
         chart : {
-          type:'bar'
+          type :'bar'
         },
         title : {
-          text:'Employees'
+          text :'Employees'
         },
         xAxis : {
-          categories:[ 'Male', 'Female', 'Other' ]
+          categories : [ 'Male', 'Female', 'Other' ]
         },
         yAxis : {
-          title:{
-            text:'Consolidated'
+          title : {
+            text : 'Consolidated'
           }
         },
         series : [
-          { name:'Deep', data:[4, 0, 0] },
-          { name:'Epak', data:[0, 4, 0] },
-          { name:'Akran', data:[0, 0, 2] }
+          { name : 'Deep', data : [4, 0, 0] },
+          { name : 'Epak', data : [0, 4, 0] },
+          { name : 'Akran', data : [0, 0, 2] }
         ]
       })
     })
@@ -125,11 +120,14 @@ export class DashboardComponent implements OnInit {
    /* })*/
   }
   // CSV Dialog 
-  public openUploadDialog($e){
+  public openUploadDialog( $e ){
     $e.stopPropagation()
     let dialogRef = this.dialog.open( DialogComponent, { width:'50%', height:'50%' })
   }
   public ngOnInit() {
+    // $(window).focus(function() {
+    //   alert("1")
+    // })
     // Google chart 1
     this.data1 = [
       [ 'Task', 'Hours per Day' ],
@@ -152,74 +150,108 @@ export class DashboardComponent implements OnInit {
       [ 'NABCB', 7 ]
     ]
     this.config2 = new PieChartConfig( 'Board Section 2', 0.4 )
-    this.elementId2 = 'myPieChart2' 
-    this.lms.getEmployees()
-    this.lms.getEOL()  
-    this.daysArr = this.createCalendar( this.date )
+    this.elementId2 = 'myPieChart2'
+    // Order does not matter here after console.log( new Date().getTime() )
     this.lms.getHoliday()
+    this.lms.getEmployees()
+    this.lms.getEOL()
+    // this.holiday = JSON.parse( this.holiday )
+    this.daysArr = this.createCalendar( this.date )
     // this.ngSpinner.hide()
   }
   postEOLBSDate( day ){
     this.getMonth = this.date.format( "MM/YYYY" )
     this.postDate = day
     let temp = this.postDate+'/'+this.getMonth
-    this.lms.postEOLBSDate( temp )
+    // this.lms.getHoliday()
   }
   public todayCheck( day ){
-    if (!day){
+    if ( !day ){
       return false
     }
     return moment().format( "L" ) === day.format 
   }
+  
+  
+  
+  
   public createCalendar( month ){
-    let f = moment( month ).startOf( "M" ),
-    s = moment( f ).endOf( 'month' ),
+    let f = moment(month).startOf("M"),
+    s = moment(f).endOf('month'),
     sunday = 0,
     r = [],
-    c = f.clone()
-    while( c.day( 7 + sunday).isBefore( s ) ) r.push( c.clone().format("DD/MM/YYYY") )
+    c = f.clone(),
+    h = [],
+    z = [],
+    y : number,
+    m : number,
+    temp = [],
+    dates = []    
+    //find sundays in a month
+    while( c.day( 7 + sunday ).isBefore(s)) r.push(c.clone().format("DD/MM/YYYY"))
     // Calculate leavedays
     let td : number = s.diff( f, 'days' ) + 1
     // let leavedays : number = td - r.length
     // Get dates between current month
-    var temp = [],
-    dates = []
+    // push all dates in an array
     while( f < s ){
-      temp.push( f.format('DD/MM/YYYY') )
+      temp.push( f.format( 'DD/MM/YYYY' ) )
       f.add( 1, 'day' )
     }
-    var sundayExcluded = temp.filter( item => {
-      return r.indexOf(item) < 0
-    })
-    // this.workingDays = sundayExcluded.filter( item => {
-    //   return this.holiday.indexOf(item) < 0
-    // })
-    
-    // var q = Object.values( this.holiday )
-    // console.log( q )
-    console.log( this.holiday )
-    // console.log(Object.keys( this.holiday ))
-    // console.log(this.workingDays)
-
-    // this.holiday
+    // exclude working days and sundays from current month 
+    setTimeout(() => {
+      // map CSV holiday and push in an empty array
+      this.holday.map( e => h.push( e["Dates"] ) )
+      // combine two arrays and sort them accordingly
+      var x = h.concat( r ).sort( function( a, b ){
+        a = a.split('/').reverse().join('')
+        b = b.split('/').reverse().join('')
+        return a > b ? 1 : a < b ? -1 : 0
+      })
+      // filter total working days in a given month
+      this.workingDays = temp.filter( k => {
+        // Find total holidays in "DD" format for styling
+        if( x.indexOf(k) >= 0 ){
+          y = k.split('/').reverse().join('').slice(-2)
+          z.push(y)
+        }
+        return x.indexOf( k ) < 0
+      })
+      this.lms.postEOLBSDate( this.workingDays )
+      // Add some ~ delay so that .subscribe() method fetch holidays from the api in given time
+      // To add exact delays find epoch values of constructor, NGONINT & subscribe method
+    }, 400 )
+    // Create a calendar for whole month which includes sundays & holidays
     let days = Array.apply( null, { length : month.daysInMonth() })
     .map( Number.call, Number )
     .map( ( n ) => {
-      return moment( f ).add( n, 'd' ).format( "DD" )
+      return moment(f).add(n,'d').format("DD")
     })
+    // setTimeout is set to get 'z' value after some delay
+    setTimeout(() => {
+      days.map( n => {
+        if( z.indexOf( n ) >= 0 ) this.offDays.push(n)
+      })
+      // console.log(this.offDays)
+    }, 400 )
+    // console.log( days )
     return days
   }
+
+
+
   public nextMonth(){
-    this.date.add(1,'M')
+    this.date.add( 1, 'M' )
     this.cmnProgram()
   }
-  public previousMonth(){
-    this.date.subtract(1,'M')
+  public previousMonth() {
+    this.date.subtract( 1, 'M' )
     this.cmnProgram()
   }
   cmnProgram(){
-    this.daysArr = this.createCalendar(this.date)
-    if (!this.postDate) this.getMonth = this.date.format("DD/MM/YYYY")
-    else this.getMonth = this.date.format(this.postDate+'/'+"MM/YYYY")
+    this.daysArr = this.createCalendar( this.date )
+    if ( !this.postDate ) this.getMonth = this.date.format( "DD/MM/YYYY" )
+    else this.getMonth = this.date.format( this.postDate+'/'+"MM/YYYY" )
   }
+
 }

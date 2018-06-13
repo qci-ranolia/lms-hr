@@ -14,18 +14,18 @@
     </div>
   </div>
   <mat-accordion class="col-sm-6 float-left h78 ovf-y">
-    <mat-expansion-panel class="d-inline-block col-sm-12 p-0" *ngFor="let app of application | reverse | filter : term; let i=index;">
+    <mat-expansion-panel class="d-inline-block col-sm-12 p-0" *ngFor="let app of application | reverse | filter : term; let i = index;">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <strong style="line-height:16px">
-            <small>{{app.name}}</small>
+            <small>{{ app.name }}</small>
             <small class="d-block text-muted" style="line-height:20px">{{app.email}}</small>
           </strong>
         </mat-panel-title>
         <mat-panel-description class="pt-1">{{app.designation}}, {{app.board}}</mat-panel-description>
       </mat-expansion-panel-header>
       <mat-list>
-        <mat-list-item>
+        <mat-list-item *ngIf="!toggle">
           <div class="col-sm-6 p-0 mt-3">
             <strong class="text-muted">
               <small class="d-block">Applied date</small>
@@ -39,9 +39,9 @@
             <small class="d-block">{{app.application_id}}</small>
           </div>
         </mat-list-item>
-        <br />  
-        <mat-divider></mat-divider>
-        <mat-list-item>
+        <br *ngIf="!toggle" />  
+        <mat-divider *ngIf="!toggle"></mat-divider>
+        <mat-list-item *ngIf="!toggle">
           <div class="col-sm-6 p-0 mt-3">
             <strong class="text-muted">
               <small class="d-block">Leave Type</small>
@@ -55,8 +55,8 @@
             <small class="d-block">{{ app.date_of_apply }}</small>
           </div>
         </mat-list-item>
-        <br />  
-        <mat-divider></mat-divider>
+        <br *ngIf="!toggle" />  
+        <mat-divider *ngIf="!toggle"></mat-divider>
         <mat-list-item>
           <div class="col-sm-12 p-0 mt-3">
             <strong class="text-muted">
@@ -76,9 +76,21 @@
           </div>
         </mat-list-item>
         <br />
-        <mat-list-item>
+        <mat-divider></mat-divider>
+        <br />
+        <mat-list-item *ngIf="toggle">
+          <mat-form-field class="col-sm-12 p-0 mt-3">
+            <textarea matInput placeholder="Reason for cancel" [(ngModel)]="decline_reason" name="Decline Reason"></textarea>
+          </mat-form-field>
+        </mat-list-item>
+        <br />
+        <mat-list-item *ngIf="toggle">
+          <button mat-raised-button (click)="!toggler()">Go Back</button>&nbsp;&nbsp;&nbsp;
+          <button mat-raised-button (click)="declineApp(decline_reason)">Submit</button>
+        </mat-list-item>
+        <mat-list-item *ngIf="!toggle">
           <button mat-raised-button (click)="acceptApp(app.application_id)">Accept</button>&nbsp;&nbsp;&nbsp;
-          <button mat-raised-button color="accent" (click)="declineApp()">Cancel</button>
+          <button mat-raised-button color="accent" (click)="toggler()">Cancel</button>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>

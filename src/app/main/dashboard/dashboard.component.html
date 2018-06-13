@@ -62,11 +62,23 @@
                 </mat-expansion-panel-header>
                 <mat-chip-list>
                     <div class="col-sm-12 p-0">
-                        <div class="col-sm-4 mt-2 mb-2 float-left text-center" *ngFor="let hol of holiday; let i=index;">
-                            <mat-chip color="primary" selected="true">{{ hol.Dates }}</mat-chip><div>{{ hol.Holidays }}</div>
+                        <div class="col-sm-12 p-0">
+                            <div class="float-left col-sm-6"><strong class="text-info d-inline-block">*</strong> Restricted Holidays</div>
+                            <div class="float-left col-sm-6"><strong class="text-muted d-inline-block">*</strong> Compulsory Holidays</div>
                         </div>
-                        <div class="col-sm-4 mt-2 mb-2 float-left text-center" *ngFor="let hols of holday; let i=index;">
-                            <mat-chip color="accent" selected="true">{{ hols.Dates }}</mat-chip><div>{{ hols.Holidays }}</div>
+                        <br />
+                        <br />
+                        <div class="col-sm-6 mt-2 mb-2 float-left" *ngFor="let all of holidays; let i=index;">
+                            <div class="mb-3" *ngIf="all.type=='one'">
+                                <span class="p-2 bg-light">{{i+1}}</span>
+                                <strong class="text-info">{{all.Holidays}}<small class="d-block mt-2">{{all.Dates}}</small></strong>
+                            </div>
+                            <div class="mb-3" *ngIf="all.type=='two'">
+                                <span class="p-2 bg-light">{{i+1}}</span>
+                                <strong class="text-muted">{{all.Holidays}}<small class="d-block mt-2">{{all.Dates}}</small></strong>
+                            </div><!-- 
+                            <mat-chip color="primary" selected="true" *ngIf="all.type=='one'">{{all.Dates}}<div>{{all.Holidays}}</div></mat-chip>
+                            <mat-chip color="accent" selected="true" *ngIf="all.type=='two'">{{all.Dates}}<div>{{all.Holidays}}</div></mat-chip> -->
                         </div>
                     </div>
                 </mat-chip-list>

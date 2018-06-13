@@ -24,7 +24,8 @@ export class CrudComponent implements OnInit {
       $(function() {
         let user = $('#table_id').DataTable({
           paging : true,
-          searching : true,
+          searching : true,/* 
+          pageLength: 1, */
           ordering : true,
           scrollY : 335
         })

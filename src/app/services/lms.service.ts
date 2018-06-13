@@ -24,6 +24,8 @@ export class LmsService {
   emitZeroEOL = new EventEmitter<any>() // Emit Zero employees on leaves
   emitMyApplication = new EventEmitter<any>()
   emitApprovedApplication = new EventEmitter<any>()
+  emitCancelledApplication = new EventEmitter<any>()
+
   constructor(
     private api : ApiService,
     private router : Router,
@@ -95,7 +97,7 @@ export class LmsService {
   )}
   getEmployees(){
     this.api.GetEmployeeDetails().subscribe( el => {
-      console.log( el )
+      // console.log( el )
       if ( el.success ) this.emitgetEmployees.emit( el.data )
       else this.snackBars( "Employee Success is false" , "Try again" ) // this.snackBar.open('el.success was not true')
     }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) 
@@ -120,8 +122,17 @@ export class LmsService {
   )}
   approvedLeave(){
     this.api.approvedLeave().subscribe( el => {
+      // console.log(el)
       if( el.success ){
         this.emitApprovedApplication.emit(el.data)
+      } else this.snackBars( "! Success" , "Try Again" ) //stepper.next() //
+    }, err => this.snackBars( "API Error" , "Try Again" )
+  )}
+  cancelledLeave(){
+    this.api.cancelledLeave().subscribe( el => {
+      // console.log(el)
+      if(el.success){
+        this.emitCancelledApplication.emit(el.data)
       } else this.snackBars( "! Success" , "Try Again" ) //stepper.next() //
     }, err => this.snackBars( "API Error" , "Try Again" )
   )}
@@ -142,6 +153,7 @@ export class LmsService {
   deleteEmp( qci_id : any ) {
     let tmp = { qci_id:qci_id }
     this.api.deleteEmp( tmp ).subscribe( el => {
+      // console.log(el)
       if ( el.success ) {
         this.getEmployees()
       } else this.snackBars( "Success is false" , "Try again" )

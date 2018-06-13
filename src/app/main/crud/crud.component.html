@@ -26,12 +26,12 @@
                         <td class="wd-7">{{ emp.board }}</td>
                         <td class="wd-">
                             <mat-chip-list>
-                                <mat-chip><span matTooltip="Casual Leave">CL: {{ emp.bal_cl }}</span></mat-chip>
-                                <mat-chip><span matTooltip="Sick Leave">SL: {{ emp.bal_sl }}</span></mat-chip>
-                                <mat-chip><span matTooltip="Privileged Leave">PL: {{ emp.bal_pl }}</span></mat-chip>
-                                <mat-chip *ngIf="emp.gender == 'Female'"><span matTooltip="Materinity Leave">ML: {{ emp.bal_ml }}</span></mat-chip>
-                                <mat-chip *ngIf="emp.gender == 'Male'"><span matTooltip="Paterinity Leave">PTL: {{ emp.bal_ptl }}</span></mat-chip>
-                                <mat-chip><span matTooltip="Extraordinary Leave">EOL: {{ emp.bal_eol }}</span></mat-chip>
+                                <mat-chip class="bg-light rad-box"><span matTooltip="Casual Leave">CL: {{ emp.bal_cl }}</span></mat-chip>
+                                <mat-chip class="bg-light rad-box"><span matTooltip="Sick Leave">SL: {{ emp.bal_sl }}</span></mat-chip>
+                                <mat-chip class="bg-light rad-box"><span matTooltip="Privileged Leave">PL: {{ emp.bal_pl }}</span></mat-chip>
+                                <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Female'"><span matTooltip="Materinity Leave">ML: {{ emp.bal_ml }}</span></mat-chip>
+                                <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Male'"><span matTooltip="Paterinity Leave">PTL: {{ emp.bal_ptl }}</span></mat-chip>
+                                <mat-chip class="bg-light rad-box"><span matTooltip="Extraordinary Leave">EOL: {{ emp.bal_eol }}</span></mat-chip>
                             </mat-chip-list>                                  
                         </td>
                         <td class="modify">

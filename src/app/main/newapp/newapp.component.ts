@@ -14,6 +14,7 @@ export class NewappComponent implements OnInit {
   hide : boolean = true
   date : any
   loader : boolean = false
+  toggle : boolean = false
   application = new Array()
   constructor( private lms : LmsService, public datepipe: DatePipe ) {
     this.lms.emitsload.subscribe( el => this.loader = el )
@@ -21,7 +22,7 @@ export class NewappComponent implements OnInit {
 
     this.lms.emitZeroEOL.subscribe( r => this.hide=false )
     this.lms.emitEOL.subscribe( el => {
-      console.log(el)
+      // console.log(el)
       // for ( var i = 0; i < el.length; i++ ){
       //   el[i].info.map( r => {
       //     var t = Object.assign( el[i], r )
@@ -31,22 +32,18 @@ export class NewappComponent implements OnInit {
       this.application = el
       // console.log(el)
     })
-    this.lms.emitApprovedApplication.subscribe( el => {
-      // for ( var i = 0; i < el.length; i++ ){
-      //   el[i].info.map( r => {
-      //     var t = Object.assign( el[i], r )
-      //     delete el[i].info // [prop]
-      //   })
-      // }
-      console.log(el)
-    })
+    this.lms.emitApprovedApplication.subscribe( el => el )
+    this.lms.emitCancelledApplication.subscribe( el => el )
   }
  
   ngOnInit(){
     this.lms.getEOL()
     this.lms.approvedLeave()
+    this.lms.cancelledLeave()
   }
-    
+  toggler(){
+    this.toggle = !this.toggle
+  }
   // countSundays(){
   //   // Calculate sundays between two days using Moment JS
   //   var f = moment( this.firstDate ),

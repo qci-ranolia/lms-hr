@@ -37,12 +37,16 @@ export class DashboardComponent implements OnInit {
   public daysArr
   applications = new Array()
   employee = new Array()
-  holiday : any
-  holday : any
+  items = new Array()
+  restricted : any
+  compulsory : any
+  holidays : any
   workingDays : any
   offDays : any = []
   // page loader
   loader : boolean = false
+  hide : boolean = false
+
   constructor( public dialog : MatDialog, private lms : LmsService, private httpClient : HttpClient ) {
     var tmp = new Date()
     this.getDate = tmp.getDate()
@@ -53,12 +57,19 @@ export class DashboardComponent implements OnInit {
     this.lms.emitgetEmployees.subscribe( r => this.employee = Object.values(r) )
     this.lms.emitEOL.subscribe( r => this.applications = r )
     this.lms.emitgetHoliday.subscribe( el => {
-      this.holiday = JSON.parse( el[0].data )
-      this.holday = JSON.parse( el[1].data )
+      this.restricted = JSON.parse( el[0].data )
+      this.restricted.map( ans => ans.type = "one" )
+      this.compulsory = JSON.parse( el[1].data )
+      this.compulsory.map( ans => ans.type = "two" )
+      this.holidays = this.restricted.concat(this.compulsory).sort(function(a,b){
+        a = a.Dates.split('/').reverse().join('')
+        b = b.Dates.split('/').reverse().join('')
+        return a > b ? 1 : a < b ? -1 : 0
+      })
     })
       
-    $( function() { 
-      var myChart = Highcharts.chart( 'container' , {
+    $(function() { 
+      var myChart = Highcharts.chart('container',{
         chart : {
           type :'bar'
         },
@@ -155,7 +166,7 @@ export class DashboardComponent implements OnInit {
     this.lms.getHoliday()
     this.lms.getEmployees()
     this.lms.getEOL()
-    // this.holiday = JSON.parse( this.holiday )
+    // this.restricted = JSON.parse( this.restricted )
     this.daysArr = this.createCalendar( this.date )
     // this.ngSpinner.hide()
   }
@@ -201,7 +212,7 @@ export class DashboardComponent implements OnInit {
     // exclude working days and sundays from current month 
     setTimeout(() => {
       // map CSV holiday and push in an empty array
-      this.holday.map( e => h.push( e["Dates"] ) )
+      this.compulsory.map( e => h.push( e["Dates"] ) )
       // combine two arrays and sort them accordingly
       var x = h.concat( r ).sort( function( a, b ){
         a = a.split('/').reverse().join('')
@@ -217,7 +228,7 @@ export class DashboardComponent implements OnInit {
         }
         return x.indexOf( k ) < 0
       })
-      this.lms.postEOLBSDate( this.workingDays )
+      this.lms.postEOLBSDate(this.workingDays)
       // Add some ~ delay so that .subscribe() method fetch holidays from the api in given time
       // To add exact delays find epoch values of constructor, NGONINT & subscribe method
     }, 400 )
@@ -227,7 +238,7 @@ export class DashboardComponent implements OnInit {
     .map( ( n ) => {
       return moment(f).add(n,'d').format("DD")
     })
-    // setTimeout is set to get 'z' value after some delay
+    // setTimeout is set to get 'z' value after some delay and find all off days in a given month
     setTimeout(() => {
       days.map( n => {
         if( z.indexOf( n ) >= 0 ) this.offDays.push(n)
@@ -237,6 +248,39 @@ export class DashboardComponent implements OnInit {
     // console.log( days )
     return days
   }
+
+  // $('.main h3').attr('id','myd_1')
+  // (function() {
+  //   var fixed = $('.navbar')
+  //   $(window).on('scroll',function() {
+  //     var currentFixedDivPosition = fixed.position().top + fixed.height() + $(window).scrollTop()
+  //     var temp, whichOne
+  //     $('.mains h3').each( function (i,s) {
+  //       var diff = Math.abs( $(s).position().top - currentFixedDivPosition)
+  //       if (temp) {
+  //         if( diff < temp ) {
+  //           temp = diff
+  //           whichOne = s
+  //           var tct = $(whichOne).text()
+  //           $('.left-menus').text(tct)
+  //         }
+  //       } else {
+  //         temp = diff;
+  //         whichOne = s;
+  //         var tcta = $(whichOne).text();
+  //         $('.left-menus').text(tcta);
+  //       }
+  //     })
+  //     $('.mblView > .navbar-nav:visible').css('height','100vh')
+  //   })
+  // })()
+
+
+
+
+
+
+
 
 
 

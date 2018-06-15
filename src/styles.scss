@@ -706,7 +706,7 @@ input.mat-input-element {
 
 .cdk-overlay-container {
     position: fixed;
-    z-index: 1000
+    z-index: 1060
 }
 
 .cdk-overlay-container:empty {
@@ -23215,4 +23215,20 @@ form .ng-valid .mat-focused .mat-form-field-label, form .ng-valid .mat-form-fiel
     box-shadow: 2px 1px 3px 0px #f0f0f0;
     padding: 4px 8px 4px 12px;
     margin-right:4px;
+}
+
+.material-icons.pos-abs{
+    top:0px;
+    left:1px;
+    font-size:13px;
+    opacity:0.9;
+    &.rej {
+        color:#E83360
+    }
+    &.appr {
+        color:#39AE2F
+    }
+    &.pend {
+        color:#DC9862
+    }
 }

@@ -16,67 +16,69 @@ export class NewappComponent implements OnInit {
   loader : boolean = false
   toggle : boolean = false
   application = new Array()
+  cmn : any
+  approvedLeave : any
+  cancelledLeave : any
   constructor( private lms : LmsService, public datepipe: DatePipe ) {
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
-
+    // if zero employee on leave
     this.lms.emitZeroEOL.subscribe( r => this.hide=false )
+    // if pending leave
     this.lms.emitEOL.subscribe( el => {
-      // console.log(el)
-      // for ( var i = 0; i < el.length; i++ ){
-      //   el[i].info.map( r => {
-      //     var t = Object.assign( el[i], r )
-      //     delete el[i].info // [prop]
-      //   })
-      // }
-      this.application = el
-      // console.log(el)
+      this.cmn = el
+      // console.log( new Date().getTime() )
+      this.simplyfyData()
+      this.application = this.cmn
+      // console.log(this.application)
     })
-    this.lms.emitApprovedApplication.subscribe( el => el )
-    this.lms.emitCancelledApplication.subscribe( el => el )
+    // if approved leave
+    this.lms.emitApprovedApplication.subscribe( el =>{
+      this.cmn = el
+      // console.log( new Date().getTime() )
+      this.simplyfyData()
+      this.approvedLeave = this.cmn
+      console.log(this.approvedLeave)
+    })
+    // if cancelled leave
+    this.lms.emitCancelledApplication.subscribe( el =>{
+      this.cmn = el
+      this.simplyfyData()
+      this.cancelledLeave = this.cmn
+      console.log(this.cancelledLeave)
+    })
   }
- 
   ngOnInit(){
     this.lms.getEOL()
     this.lms.approvedLeave()
     this.lms.cancelledLeave()
   }
+  // simplyfy Response from all http request
+  simplyfyData(){
+    // console.log( new Date().getTime() )
+    for ( var i = 0; i < this.cmn.length; i++ ){
+      this.cmn[i].info.map( r => {
+        var t = Object.assign( this.cmn[i], r )
+        delete this.cmn[i].info
+      })
+    }
+  }
   toggler(){
     this.toggle = !this.toggle
   }
-  // countSundays(){
-  //   // Calculate sundays between two days using Moment JS
-  //   var f = moment( this.firstDate ),
-  //   s = moment( this.secondDate ),
-  //   sunday = 0 // Sunday    
-  //   let result = []
-  //   var current = f.clone()
-  //   while ( current.day(7 + sunday).isBefore(s) ) {
-  //     result.push( current.clone() )
-  //   }
-  //   // Calculate leavedays
-  //   let totalDays = s.diff(f, 'days')
-  //   let sundayCount = result.map( m => m ).length
-  //   this.leavedays =  1 + totalDays - sundayCount
-  // }
-  
-  // df(){
-  //   var dateStart = moment(this.firstDate)
-  //   var dateEnd = moment(this.secondDate)
-  //   var timeValues = []
-
-  //   while ( dateEnd > dateStart ) {
-  //     timeValues.push( dateStart.format( 'YYYY-MM-DD' ) )
-  //     dateStart.add( 1,'day' )
-  //   }
-  //   console.log( timeValues )
-  // }
-
+  // accept leave application
   acceptApp( data : any ) {
     let date = new Date(),
     latest_date = this.datepipe.transform( date, 'dd/MM/yyyy' )
     var tmp = { application_id : data, date_reviewed : latest_date }
     this.lms.leaveForApproval( tmp )
   }
-
+  // decline leave application
+  declineApp( dec_reason, apps ){
+    let date = moment().format("DD/MM/YYYY")
+    // console.log(date)
+    let tmp = { application_id:apps, date_reviewed:date, decline_reason:dec_reason }
+    // console.log(tmp)
+    this.lms.declineLeave(tmp)
+  }
 }

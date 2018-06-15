@@ -174,7 +174,7 @@ export class DashboardComponent implements OnInit {
     this.getMonth = this.date.format( "MM/YYYY" )
     this.postDate = day
     let temp = this.postDate+'/'+this.getMonth
-    // this.lms.getHoliday()
+    //this.lms.getHoliday()
   }
   public todayCheck( day ){
     if ( !day ){

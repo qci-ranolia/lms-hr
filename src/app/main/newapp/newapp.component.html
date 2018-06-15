@@ -10,13 +10,14 @@
       </div>  
     </div>
     <div class="col-sm-6 float-left">
-      <h5>Rest Applications <small class="text-muted"> ( Cancelled and accepted applications shown below )</small></h5>
+      <h5>Rest Applications <small class="text-muted"> ( Rejected and accepted applications shown below )</small></h5>
     </div>
   </div>
   <mat-accordion class="col-sm-6 float-left h78 ovf-y">
-    <mat-expansion-panel class="d-inline-block col-sm-12 p-0" *ngFor="let app of application | reverse | filter : term; let i = index;">
+    <mat-expansion-panel class="d-inline-block col-sm-12 p-0 pos-rel" *ngFor="let app of application | reverse | filter : term; let i = index;">
       <mat-expansion-panel-header>
         <mat-panel-title>
+          <i class="material-icons pos-abs pend">note</i>
           <strong style="line-height:16px">
             <small>{{ app.name }}</small>
             <small class="d-block text-muted" style="line-height:20px">{{app.email}}</small>
@@ -85,41 +86,70 @@
         </mat-list-item>
         <br />
         <mat-list-item *ngIf="toggle">
-          <button mat-raised-button (click)="!toggler()">Go Back</button>&nbsp;&nbsp;&nbsp;
-          <button mat-raised-button (click)="declineApp(decline_reason)">Submit</button>
+          <button mat-raised-button color="accent" (click)="!toggler()">Go Back</button>&nbsp;&nbsp;&nbsp;
+          <button mat-raised-button (click)="declineApp( decline_reason, app.application_id )">Submit</button>
         </mat-list-item>
         <mat-list-item *ngIf="!toggle">
-          <button mat-raised-button (click)="acceptApp(app.application_id)">Accept</button>&nbsp;&nbsp;&nbsp;
-          <button mat-raised-button color="accent" (click)="toggler()">Cancel</button>
+          <button mat-raised-button color="accent" (click)="toggler()">Cancel</button>&nbsp;&nbsp;&nbsp;
+          <button mat-raised-button (click)="acceptApp( app.application_id )">Accept</button>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
   </mat-accordion>
   <mat-accordion class="col-sm-6 float-left h78 ovf-y">
-    <mat-expansion-panel class="d-inline-block col-sm-12 p-0">
+    <mat-expansion-panel class="d-inline-block col-sm-12 p-0 pos-rel" *ngFor="let approve of approvedLeave | reverse | filter : term; let i = index;">
       <mat-expansion-panel-header>
-        <mat-panel-title>Jitesh</mat-panel-title>
-        <mat-panel-description>Junior Analyst, NABL</mat-panel-description>
+        <mat-panel-title>
+          <i class="material-icons pos-abs appr">note</i>
+          <strong style="line-height:16px">
+            <small>{{ approve.name }}</small>
+            <small class="d-block text-muted" style="line-height:20px">{{approve.email}}</small>
+          </strong>
+        </mat-panel-title>
+        <mat-panel-description class="pt-1">{{approve.designation}}, {{approve.board}}</mat-panel-description>
       </mat-expansion-panel-header>
       <mat-list>
-        <mat-list-item>
-          <div class="col-sm-3 float-left p-0">Applied date :</div>
-          <div class="col-sm-3 float-left p-0">date</div>
-          <div class="col-sm-2 float-left p-0">Leave Type :</div>
-          <div class="col-sm-3 float-left p-0">Casual</div>
+        <mat-list-item *ngIf="!toggle">
+          <div class="col-sm-6 p-0 mt-3">
+            <strong class="text-muted">
+              <small class="d-block">Applied date</small>
+            </strong>
+            <small class="d-block">{{approve.date_from}} to {{approve.date_to}}</small>
+          </div>
+          <div class="col-sm-6 p-0 mt-3 text-right">
+            <strong class="text-muted">
+              <small class="d-block">Application ID</small>
+            </strong>
+            <small class="d-block">{{approve.application_id}}</small>
+          </div>
         </mat-list-item>
+        <br *ngIf="!toggle" />  
+        <mat-divider *ngIf="!toggle"></mat-divider>
+        <mat-list-item *ngIf="!toggle">
+          <div class="col-sm-6 p-0 mt-3">
+            <strong class="text-muted">
+              <small class="d-block">Leave Type</small>
+            </strong>
+            <small class="d-block">{{ approve.leave_type }}</small>
+          </div>
+          <div class="col-sm-6 p-0 mt-3 text-right">
+            <strong class="text-muted">
+              <small class="d-block">Date of application</small>
+            </strong>
+            <small class="d-block">{{ approve.date_of_apply }}</small>
+          </div>
+        </mat-list-item>
+        <br />  
         <mat-divider></mat-divider>
         <mat-list-item>
-          <div class="col-sm-5 float-left pl-0">Reason :</div>
-          <div class="col-sm-7 float-left pr-0">/././././././././././././././././</div>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <div class="col-sm-5 float-left pl-0">Any Attachment <mat-icon>help_outline</mat-icon></div>
-          <div class="col-sm-7 float-left pr-0">Not Found</div>
+          <div class="col-sm-12 p-0 mt-3">
+            <strong class="text-muted">
+              <small class="d-block">Reason </small>
+            </strong>
+            <small class="d-block">{{approve.leave_reason}}</small>
+          </div>
         </mat-list-item>
         <br />
-        <mat-list-item>Accepted</mat-list-item>
       </mat-list>
     </mat-expansion-panel>
   </mat-accordion>

@@ -46,6 +46,10 @@ export class ApiService {
   cancelledLeave(){
     return this.http.get( this.URL+'lms/output2', this.opts ).map( r => r.json() )
   }
+  // Post decline leave of employee's
+  declineLeave(data:any){
+    return this.http.post( this.URL+'lms/declineLeave', data, this.opts ).map( r => r.json() )
+  }
   // Post month dates to get employee on leave in a month
   postEOLBSDate(data : any){
     let tmp = { dates:data }

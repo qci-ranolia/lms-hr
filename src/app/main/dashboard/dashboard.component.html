@@ -1,4 +1,22 @@
 <div class="col-sm-12">
+    <!-- <input id="files" type="file" accept="image/*" multiple/> -->
+    <!-- <input type="file" name="image" accept="image/*" capture="user"  /> -->
+    <!-- <canvas></canvas> -->
+    <!-- var input = document.querySelector('input[type=file]') // see Example 4
+    input.onchange = function(){
+        var file = input.files[0]
+        upload( file )
+        drawOnCanvas( file )   // see Example 6
+        displayAsImage( file ) // see Example 7
+    }
+    function upload( file ) {
+        var form = new FormData(),
+        xhr = new XMLHttpRequest()
+
+        form.append( 'image', file )
+        xhr.open( 'post', 'server.php', true )
+        xhr.send( form )
+    } -->
     <h5>Dashboard</h5>
     <div class="col-sm-12 d-block p-0">
         <div class="divTable">
@@ -16,25 +34,29 @@
         <i class="material-icons float-right" (click)="nextMonth()">arrow_forward_ios</i>
     </div>
     <div class="col-sm-10 h-100 float-left pr-0">
-        <mat-tab-group :selectedIndex="{{getDate-1}}" mat-stretch-tabs>
-            <mat-tab *ngFor="let day of daysArr;let i = index">
+        <mat-tab-group :selectedIndex="{{getDate}}" mat-stretch-tabs>
+            <mat-tab *ngFor="let cde of combineDateEmp ; let i = index">
                 <ng-template mat-tab-label>
                     <div><!-- *ngIf="offDays"-->
-                        <div class="col-sm-12 p-0" (click)="postEOLBSDate(day)" style="height:100%">
-                            <div [ngClass]="{'today':todayCheck(day)}">{{day}}{{offDays}}</div>
-                            <!-- <span class="badge badge-secondary">{{d.noeol}}</span> -->
+                        <div class="col-sm-12 p-0" (click)="getEmpOnLeave(cde)" style="height:100%">
+                            <div [ngClass]="{'today':todayCheck(day)}">{{cde.day}}</div>
+                            <div>&nbsp;<span class="badge badge-secondary" *ngIf="!cde.count==0">{{cde.count}}</span>&nbsp;</div>
                         </div>
                     </div>
                 </ng-template>
                 <app-stat>
-                    <div class="pt-1 pb-2">
+                    <div class="mt-1 mb-2" *ngIf="cde.count==0">
+                        <div class="bg-white rad-box p-5 text-center">No employee on leave today</div>
+                    </div>
+                    <div class="mt-1 mb-2" *ngIf="!cde.count==0" style="height:15vh">
                         <mat-accordion>
-                            <mat-expansion-panel>
+                            <mat-expansion-panel *ngFor="let em of emp; let i = index">
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>
-                                        <mat-chip color="warn" selected="true">Pankaj</mat-chip>
-                                        <mat-chip>Junior Analyst</mat-chip>
-                                        <mat-chip>ask.pankaj@qcin.org</mat-chip>
+                                        <strong style="line-height:16px">
+                                            <small>{{em.name}}</small>
+                                            <small class="d-block text-muted" style="line-height:20px">{{em.email}}</small>
+                                        </strong>
                                     </mat-panel-title>
                                     <mat-panel-description></mat-panel-description>
                                 </mat-expansion-panel-header>
@@ -63,19 +85,19 @@
                 <mat-chip-list>
                     <div class="col-sm-12 p-0">
                         <div class="col-sm-12 p-0">
-                            <div class="float-left col-sm-6"><strong class="text-info d-inline-block">*</strong> Restricted Holidays</div>
-                            <div class="float-left col-sm-6"><strong class="text-muted d-inline-block">*</strong> Compulsory Holidays</div>
+                            <div class="float-left col-sm-6"><strong class="text-info d-inline-block">*</strong> Compulsory Holidays</div>
+                            <div class="float-left col-sm-6"><strong class="text-muted d-inline-block">*</strong> Restricted Holidays</div>
                         </div>
                         <br />
                         <br />
                         <div class="col-sm-6 mt-2 mb-2 float-left" *ngFor="let all of holidays; let i=index;">
-                            <div class="mb-3" *ngIf="all.type=='one'">
+                            <div class="mb-3" *ngIf="all.CompulsoryHoliday">
                                 <span class="p-2 bg-light">{{i+1}}</span>
-                                <strong class="text-info">{{all.Holidays}}<small class="d-block mt-2">{{all.Dates}}</small></strong>
+                                <strong class="text-info">{{all.CompulsoryHoliday}}<small class="d-block mt-2">{{all.Date}}</small></strong>
                             </div>
-                            <div class="mb-3" *ngIf="all.type=='two'">
+                            <div class="mb-3" *ngIf="all.RestrictedHoliday">
                                 <span class="p-2 bg-light">{{i+1}}</span>
-                                <strong class="text-muted">{{all.Holidays}}<small class="d-block mt-2">{{all.Dates}}</small></strong>
+                                <strong class="text-muted">{{all.RestrictedHoliday}}<small class="d-block mt-2">{{all.Date}}</small></strong>
                             </div><!-- 
                             <mat-chip color="primary" selected="true" *ngIf="all.type=='one'">{{all.Dates}}<div>{{all.Holidays}}</div></mat-chip>
                             <mat-chip color="accent" selected="true" *ngIf="all.type=='two'">{{all.Dates}}<div>{{all.Holidays}}</div></mat-chip> -->
@@ -90,7 +112,3 @@
     </nav>
 </div>
 <div class="clearfix mt-5 pt-5"></div>
-<div class="clearfix mt-5 pt-5"></div>
-<div class="col-sm-6" style="display:none">
-    <div class="col-sm-12 rad-box p-0" id="container"></div>
-</div>

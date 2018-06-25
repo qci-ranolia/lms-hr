@@ -7,15 +7,15 @@ import { PieChartConfig } from '../../Models/PieChartConfig'
 import { LmsService } from '../../services/lms.service'
 
 declare var $ : any
-declare var google : any
-declare var Highcharts : any
+// declare var google : any
+// declare var Highcharts : any
 
 @Component({
   selector : 'app-dashboard',
   templateUrl : './dashboard.component.html',
   styleUrls : [ './dashboard.component.scss' ]
 })
-
+// NABCB, NABET, NBQP, NABH, NABL
 export class DashboardComponent implements OnInit {
   title = 'Reusable charts sample'
   getDate : number
@@ -37,38 +37,59 @@ export class DashboardComponent implements OnInit {
   public daysArr
   applications = new Array()
   employee = new Array()
+  emp = new Array()
   items = new Array()
-  restricted : any
-  compulsory : any
-  holidays : any
+  holidays : any = new Array()
+  compulsory : any = []
+  totalDaysOfMonth : any
+  combineDateEmp : any = []
   workingDays : any
+  count: any
   offDays : any = []
   // page loader
   loader : boolean = false
   hide : boolean = false
-
+  
   constructor( public dialog : MatDialog, private lms : LmsService, private httpClient : HttpClient ) {
     var tmp = new Date()
     this.getDate = tmp.getDate()
-    
+    let dd : any = tmp.getDate(), mm : any = tmp.getMonth()+1, yyyy : any = tmp.getFullYear()
+    if( dd < 10 ) dd = '0'+dd
+    if(mm<10) mm='0'+mm
+    this.lms.getEmpOnLeave(dd+'/'+mm+'/'+yyyy)
     this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
-    
     this.lms.emitgetEmployees.subscribe( r => this.employee = Object.values(r) )
     this.lms.emitEOL.subscribe( r => this.applications = r )
+    this.lms.emitEmpOnLeave.subscribe( r => this.emp = r )
     this.lms.emitgetHoliday.subscribe( el => {
-      this.restricted = JSON.parse( el[0].data )
-      this.restricted.map( ans => ans.type = "one" )
-      this.compulsory = JSON.parse( el[1].data )
-      this.compulsory.map( ans => ans.type = "two" )
-      this.holidays = this.restricted.concat(this.compulsory).sort(function(a,b){
-        a = a.Dates.split('/').reverse().join('')
-        b = b.Dates.split('/').reverse().join('')
-        return a > b ? 1 : a < b ? -1 : 0
-      })
+      setTimeout(() => {
+        for ( let i = 0; i < el.length; i++ ){
+          if( i >= ( el.length - 2 )){
+            JSON.parse(el[i].data).map( el => { 
+              // console.log(el)
+              if ( el.CompulsoryHoliday ) this.compulsory.push( el )
+              this.holidays.push( el )
+            })
+          }
+        }
+        this.holidays.sort( function( a , b ){
+          a = a.Date.split('/').reverse().join(''), b = b.Date.split('/').reverse().join('')
+          return a > b ? 1 : a < b ? -1 : 0
+        })
+      }, 350 )      
     })
-      
-    $(function() { 
+    this.lms.emitCount.subscribe(r => {
+      var x = Object.keys(r), y = Object.values(r) // count array
+      let t : any = x, s : any = y
+      for ( let i = 0; i < this.daysArr.length; i++ ){
+        // if date returned not equal to the date in a month on particular index then add holiday & assign '0' to the date key
+        if ( !(x[i] == this.totalDaysOfMonth[i]) ) t.splice( i, 0, this.totalDaysOfMonth[i] ), s.splice( i, 0, 0 )
+        // create new array of the response from the server which includes holidays too
+        this.combineDateEmp.push( { day : this.daysArr[ i ], count : s[ i ] } )
+      }
+    })
+    /* $(function() { 
       var myChart = Highcharts.chart('container',{
         chart : {
           type :'bar'
@@ -90,8 +111,7 @@ export class DashboardComponent implements OnInit {
           { name : 'Akran', data : [0, 0, 2] }
         ]
       })
-    })
-
+    }) */
     /* $.getJSON('http://192.168.15.55:5000/lms/employeeDetails', function (d) {
       console.log(d)
       var myChart = Highcharts.chart('container', {
@@ -131,16 +151,64 @@ export class DashboardComponent implements OnInit {
    /* })*/
   }
   // CSV Dialog 
-  public openUploadDialog( $e ){
+  public openUploadDialog($e){
     $e.stopPropagation()
-    let dialogRef = this.dialog.open( DialogComponent, { width:'50%', height:'50%' })
+    let dialogRef = this.dialog.open( DialogComponent, { width:'50%', height:'50%' } )
   }
+
+  /* imageUpload() {
+    window.onload = function(){   
+        //Check File API support zzzz
+      (<any>$('#files')).live("change", function( event ) {
+        var files = event.target.files // FileList object
+        var output = document.getElementById("result")
+        for( var i = 0; i < files.length; i++ ) {
+          var file = files[i]
+          //Only pics
+          // if(!file.type.match('image'))
+          if( file.type.match('image.*') ){
+            if(this.files[0].size < 2097152){    
+            // continue;
+            var picReader = new FileReader()
+            picReader.addEventListener("load",function(event){
+              var picFile = <FileReader>event.target
+              var div = document.createElement("div")
+              div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" + "title='preview image'>"
+              output.insertBefore(div,null)
+            })
+            //Read the image
+            $('#clear, #result').show()
+            picReader.readAsDataURL(file)
+            } else {
+              alert("Image Size is too big. Minimum size is 2MB.")
+              $(this).val("")
+            }
+          } else {
+          alert("You can only upload image file.")
+          $(this).val("")
+        }
+        }
+      })
+    }} */
+  /* drawOnCanvas( file ){
+    var reader = new FileReader()
+    reader.onload = e => {
+      var dataURL = e.target.result,
+      c = document.querySelector('canvas'), // see Example 4
+      ctx = c.getContext( '2d' ),
+      img = new Image()
+      img.onload = () => {
+        c.width = img.width
+        c.height = img.height
+        ctx.drawImage( img, 0, 0 )
+      }
+      img.src = dataURL
+    }
+    reader.readAsDataURL( file )
+  } */
   public ngOnInit() {
-    // $(window).focus(function() {
-    //   alert("1")
-    // })
     // Google chart 1
-    this.data1 = [
+    /* this.data1 = [
       [ 'Task', 'Hours per Day' ],
       [ 'ZED', 3 ],
       [ 'NBQP', 2 ],
@@ -160,73 +228,109 @@ export class DashboardComponent implements OnInit {
       [ 'NABH', 2 ],
       [ 'NABCB', 7 ]
     ]
-    this.config2 = new PieChartConfig( 'Board Section 2', 0.4 )
-    this.elementId2 = 'myPieChart2'
+    this.config2 = new PieChartConfig('Board Section 2', 0.4)
+    this.elementId2 = 'myPieChart2' */
+    
     // Order does not matter here after console.log( new Date().getTime() )
     this.lms.getHoliday()
     this.lms.getEmployees()
     this.lms.getEOL()
-    // this.restricted = JSON.parse( this.restricted )
+    this.lms.postEOLBSDate( this.count )
+    this.lms.getEmpOnLeave( this.emp )
+    // this.restricted = JSON.parse(this.restricted)
     this.daysArr = this.createCalendar( this.date )
     // this.ngSpinner.hide()
   }
-  postEOLBSDate( day ){
-    this.getMonth = this.date.format( "MM/YYYY" )
-    this.postDate = day
+  getEmpOnLeave( data ){
+    if ( !data.count ) this.emp = []
+    this.getMonth = this.date.format("MM/YYYY")
+    this.postDate = data.day
     let temp = this.postDate+'/'+this.getMonth
-    //this.lms.getHoliday()
+    this.lms.getEmpOnLeave(temp)
   }
-  public todayCheck( day ){
-    if ( !day ){
+  public todayCheck(day){
+    if (!day)
       return false
-    }
-    return moment().format( "L" ) === day.format 
+    return moment().format("L") === day.format 
   }
-  
-  
-  
-  
-  public createCalendar( month ){
-    let f = moment(month).startOf("M"),
-    s = moment(f).endOf('month'),
+  /*
+  ch(){
+    var input = document.querySelector('#erd')
+    input.addEventListener('change', load)
+    function load(){
+      console.log("a")
+      var fr = new FileReader()
+      fr.onload = process
+      fr.readAsArrayBuffer(this.files[0])
+      window.open(URL.createObjectURL(this.files[0]), "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400")
+    }
+    function process(){
+      console.log("b")
+      var dv = new DataView(this.result)
+      var offset = 0, recess = 0
+      var pieces = []
+      var i = 0
+      if (dv.getUint16(offset) == 0xffd8){
+        offset += 2
+        var app1 = dv.getUint16(offset)
+        offset += 2
+        while (offset < dv.byteLength){
+          if (app1 == 0xffe1){  
+            pieces[i] = {recess:recess,offset:offset-2}
+            recess = offset + dv.getUint16(offset)
+            i++
+          }
+          else if (app1 == 0xffda){
+            break
+          }
+          offset += dv.getUint16(offset)
+          var app1 = dv.getUint16(offset)
+          offset += 2
+        }
+        if (pieces.length > 0){
+          var newPieces = []
+          pieces.forEach(function(v){
+            newPieces.push(this.result.slice(v.recess, v.offset))
+          }, this)
+          newPieces.push(this.result.slice(recess))
+          var br = new Blob(newPieces, {type: 'image/jpeg'})
+          window.open(URL.createObjectURL(br), "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=400, height=400")
+        }
+      }    
+    }
+  } */
+
+  public createCalendar(month){
+    let f = moment(month).startOf("M"), s = moment(f).endOf('month'),
     sunday = 0,
-    r = [],
-    c = f.clone(),
-    h = [],
-    z = [],
-    y : number,
-    m : number,
-    temp = [],
-    dates = []    
-    //find sundays in a month
-    while( c.day( 7 + sunday ).isBefore(s)) r.push(c.clone().format("DD/MM/YYYY"))
+    r = [], c = f.clone(),
+    h = [], z = [],
+    y : number, m : number,
+    temp = [], dates = []
+    // find sundays in a month
+    while( c.day( 7 + sunday ).isBefore(s)) r.push( c.clone().format("DD/MM/YYYY") )
     // Calculate leavedays
-    let td : number = s.diff( f, 'days' ) + 1
+    let td : number = s.diff( f, 'days' ) + 1 // what is td ?????
     // let leavedays : number = td - r.length
+
     // Get dates between current month
     // push all dates in an array
-    while( f < s ){
-      temp.push( f.format( 'DD/MM/YYYY' ) )
-      f.add( 1, 'day' )
-    }
-    // exclude working days and sundays from current month 
+    while( f < s ) temp.push( f.format('DD/MM/YYYY') ) && f.add( 1, 'day' )
+    this.totalDaysOfMonth = temp
+    // exclude compulsory days and sundays from current month 
     setTimeout(() => {
       // map CSV holiday and push in an empty array
-      this.compulsory.map( e => h.push( e["Dates"] ) )
+      this.compulsory.map( e => h.push( e["Date"] ) )
       // combine two arrays and sort them accordingly
-      var x = h.concat( r ).sort( function( a, b ){
-        a = a.split('/').reverse().join('')
-        b = b.split('/').reverse().join('')
+      var x = h.concat(r).sort(function(a,b){
+        a = a.split('/').reverse().join(''), b = b.split('/').reverse().join('')
         return a > b ? 1 : a < b ? -1 : 0
       })
       // filter total working days in a given month
-      this.workingDays = temp.filter( k => {
+      this.workingDays = temp.filter(k=>{
         // Find total holidays in "DD" format for styling
-        if( x.indexOf(k) >= 0 ){
-          y = k.split('/').reverse().join('').slice(-2)
-          z.push(y)
-        }
-        return x.indexOf( k ) < 0
+        if( x.indexOf(k) >= 0 ) y = k.split('/').reverse().join('').slice(-2), z.push(y)
+        return x.indexOf(k) < 0
       })
       this.lms.postEOLBSDate(this.workingDays)
       // Add some ~ delay so that .subscribe() method fetch holidays from the api in given time
@@ -248,54 +352,43 @@ export class DashboardComponent implements OnInit {
     // console.log( days )
     return days
   }
-
-  // $('.main h3').attr('id','myd_1')
-  // (function() {
-  //   var fixed = $('.navbar')
-  //   $(window).on('scroll',function() {
-  //     var currentFixedDivPosition = fixed.position().top + fixed.height() + $(window).scrollTop()
-  //     var temp, whichOne
-  //     $('.mains h3').each( function (i,s) {
-  //       var diff = Math.abs( $(s).position().top - currentFixedDivPosition)
-  //       if (temp) {
-  //         if( diff < temp ) {
-  //           temp = diff
-  //           whichOne = s
-  //           var tct = $(whichOne).text()
-  //           $('.left-menus').text(tct)
-  //         }
-  //       } else {
-  //         temp = diff;
-  //         whichOne = s;
-  //         var tcta = $(whichOne).text();
-  //         $('.left-menus').text(tcta);
-  //       }
-  //     })
-  //     $('.mblView > .navbar-nav:visible').css('height','100vh')
-  //   })
-  // })()
-
-
-
-
-
-
-
-
-
-
+  /* $('.main h3').attr('id','myd_1')
+  (function() {
+    var fixed = $('.navbar')
+    $(window).on('scroll',function() {
+      var currentFixedDivPosition = fixed.position().top + fixed.height() + $(window).scrollTop()
+      var temp, whichOne
+      $('.mains h3').each( function (i,s) {
+        var diff = Math.abs( $(s).position().top - currentFixedDivPosition)
+        if (temp) {
+          if( diff < temp ) {
+            temp = diff
+            whichOne = s
+            var tct = $(whichOne).text()
+            $('.left-menus').text(tct)
+          }
+        } else {
+          temp = diff;
+          whichOne = s;
+          var tcta = $(whichOne).text();
+          $('.left-menus').text(tcta);
+        }
+      })
+      $('.mblView > .navbar-nav:visible').css('height','100vh')
+    })
+  })(). */
   public nextMonth(){
-    this.date.add( 1, 'M' )
-    this.cmnProgram()
+    this.date.add( 1, 'M' ) && this.cmnProgram()
   }
+
   public previousMonth() {
-    this.date.subtract( 1, 'M' )
-    this.cmnProgram()
+    this.date.subtract( 1, 'M' ) && this.cmnProgram()
   }
+
   cmnProgram(){
     this.daysArr = this.createCalendar( this.date )
     if ( !this.postDate ) this.getMonth = this.date.format( "DD/MM/YYYY" )
     else this.getMonth = this.date.format( this.postDate+'/'+"MM/YYYY" )
   }
-
 }
+

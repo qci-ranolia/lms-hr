@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common'
 
 export class NewappComponent implements OnInit {
   hide : boolean = true
+  restHide : boolean = true
   date : any
   loader : boolean = false
   toggle : boolean = false
@@ -26,26 +27,29 @@ export class NewappComponent implements OnInit {
     this.lms.emitZeroEOL.subscribe( r => this.hide=false )
     // if pending leave
     this.lms.emitEOL.subscribe( el => {
+      // console.log(el)
       this.cmn = el
       // console.log( new Date().getTime() )
-      this.simplyfyData()
+      this.simplyfiData()
       this.application = this.cmn
       // console.log(this.application)
     })
     // if approved leave
     this.lms.emitApprovedApplication.subscribe( el =>{
+      // console.log(el)
       this.cmn = el
       // console.log( new Date().getTime() )
-      this.simplyfyData()
+      this.simplyfiData()
       this.approvedLeave = this.cmn
-      console.log(this.approvedLeave)
+      // console.log(this.approvedLeave)
     })
     // if cancelled leave
     this.lms.emitCancelledApplication.subscribe( el =>{
+      // console.log(el)
       this.cmn = el
-      this.simplyfyData()
+      this.simplyfiData()
       this.cancelledLeave = this.cmn
-      console.log(this.cancelledLeave)
+      // console.log(this.cancelledLeave)
     })
   }
   ngOnInit(){
@@ -54,24 +58,42 @@ export class NewappComponent implements OnInit {
     this.lms.cancelledLeave()
   }
   // simplyfy Response from all http request
-  simplyfyData(){
-    // console.log( new Date().getTime() )
-    for ( var i = 0; i < this.cmn.length; i++ ){
-      this.cmn[i].info.map( r => {
-        var t = Object.assign( this.cmn[i], r )
-        delete this.cmn[i].info
-      })
+  simplyfiData(){
+    // console.log(this.cmn)
+    console.log(this.cmn.length)
+    console.log(this.cmn)
+    if( !(this.cmn.length > 0) ) this.restHide = false
+    else {
+      this.restHide = true
+      // console.log( new Date().getTime() )
+      for ( var i = 0; i < this.cmn.length; i++ ){
+        this.cmn[i].info.map( r => {
+          var t = Object.assign( this.cmn[i], r )
+          delete this.cmn[i].info
+        })
+        console.log(this.cmn[i].application_id.length)
+        
+        /* for ( var j = 0; j < this.cmn[i].application_id.length; i++ ){
+          console.log(j)
+          // console.group
+          this.cmn[i].application_id.map( r => {
+            console.log(r)
+            // var t = Object.assign( this.cmn[i],r)
+            // delete this.cmn[i].info
+          })
+        } */
+      }
     }
   }
   toggler(){
     this.toggle = !this.toggle
   }
   // accept leave application
-  acceptApp( data : any ) {
+  acceptApp(data) {
     let date = new Date(),
-    latest_date = this.datepipe.transform( date, 'dd/MM/yyyy' )
-    var tmp = { application_id : data, date_reviewed : latest_date }
-    this.lms.leaveForApproval( tmp )
+    latest_date = this.datepipe.transform( date, 'DD/MM/YYYY' )
+    var tmp = { application_id: data, date_reviewed : latest_date }
+    // this.lms.leaveForApproval( tmp )
   }
   // decline leave application
   declineApp( dec_reason, apps ){

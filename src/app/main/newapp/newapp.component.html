@@ -1,156 +1,156 @@
-<div class="col-sm-12 mt-5 pt-5 justify-content-center" *ngIf="!hide">
+<div class="col-sm-12 mt-5 pt-5 justify-content-center" style="display:none">
   <div class="text-center mt-5 pt-5">No application found...</div>
 </div>
-<div class="col-sm-12 p-0" *ngIf="hide">
-  <div class="col-sm-12 p-0">
-    <div class="col-sm-6 float-left">
+<div class="col-sm-12 p-0">
+  <div class="col-sm-12 p-0 justify-content-center">
+    <div class="col-sm-6 float-left" *ngIf="hide">
       <h5>New Applications</h5>
       <div class="nav-pos-search col-sm-3">
         <input class="text-white col-sm-12" placeholder="Search..." [(ngModel)]="term" >
-      </div>  
-    </div>
+      </div>
+      <mat-accordion class="col-sm-12 float-left h78 ovf-y p-0">
+        <mat-expansion-panel class="d-inline-block col-sm-12 p-0 pos-rel" *ngFor="let app of application | reverse | filter : term; let i = index;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <i class="material-icons pos-abs pend">note</i>
+              <strong style="line-height:16px">
+                <small>{{ app.name }}</small>
+                <small class="d-block text-muted" style="line-height:20px">{{app.email}}</small>
+              </strong>
+            </mat-panel-title>
+            <mat-panel-description class="pt-1">{{app.designation}}, {{app.board}}</mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item *ngIf="!toggle">
+              <div class="col-sm-6 p-0 mt-3">
+                <strong class="text-muted">
+                  <small class="d-block">Applied date</small>
+                </strong>
+                <small class="d-block">{{app.date_from}} to {{app.date_to}}</small>
+              </div>
+              <div class="col-sm-6 p-0 mt-3 text-right">
+                <strong class="text-muted">
+                  <small class="d-block">Application ID</small>
+                </strong>
+                <small class="d-block">{{app.application_id}}</small>
+              </div>
+            </mat-list-item>
+            <br *ngIf="!toggle" />  
+            <mat-divider *ngIf="!toggle"></mat-divider>
+            <mat-list-item *ngIf="!toggle">
+              <div class="col-sm-6 p-0 mt-3">
+                <strong class="text-muted">
+                  <small class="d-block">Leave Type</small>
+                </strong>
+                <small class="d-block">{{ app.leave_type }}</small>
+              </div>
+              <div class="col-sm-6 p-0 mt-3 text-right">
+                <strong class="text-muted">
+                  <small class="d-block">Date of application</small>
+                </strong>
+                <small class="d-block">{{ app.date_of_apply }}</small>
+              </div>
+            </mat-list-item>
+            <br *ngIf="!toggle" />  
+            <mat-divider *ngIf="!toggle"></mat-divider>
+            <mat-list-item>
+              <div class="col-sm-12 p-0 mt-3">
+                <strong class="text-muted">
+                  <small class="d-block">Reason </small>
+                </strong>
+                <small class="d-block">{{app.leave_reason}}</small>
+              </div>
+            </mat-list-item>
+            <br />  
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <div class="col-sm-12 p-0 mt-3">
+                <strong class="text-muted">
+                  <small class="d-block">Any Attachment <mat-icon>help_outline</mat-icon></small>
+                </strong>
+                <small class="d-block">Not Found</small>
+              </div>
+            </mat-list-item>
+            <br />
+            <mat-divider></mat-divider>
+            <br />
+            <mat-list-item *ngIf="toggle">
+              <mat-form-field class="col-sm-12 p-0 mt-3">
+                <textarea matInput placeholder="Reason for cancel" [(ngModel)]="decline_reason" name="Decline Reason"></textarea>
+              </mat-form-field>
+            </mat-list-item>
+            <br />
+            <mat-list-item *ngIf="toggle">
+              <button mat-raised-button color="accent" (click)="!toggler()">Go Back</button>&nbsp;&nbsp;&nbsp;
+              <button mat-raised-button (click)="declineApp(decline_reason, app.application_id)">Submit</button>
+            </mat-list-item>
+            <mat-list-item *ngIf="!toggle">
+              <button mat-raised-button color="accent" (click)="toggler()">Cancel</button>&nbsp;&nbsp;&nbsp;
+              <button mat-raised-button (click)="acceptApp(app.application_id)">Accept</button>
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+      </mat-accordion>      
+    </div><!-- *ngIf="restHide"-->
     <div class="col-sm-6 float-left">
       <h5>Rest Applications <small class="text-muted"> ( Rejected and accepted applications shown below )</small></h5>
+      <mat-accordion class="col-sm-12 float-left h78 ovf-y p-0">
+        <mat-expansion-panel class="d-inline-block col-sm-12 p-0 pos-rel" *ngFor="let approve of approvedLeave | reverse | filter : term; let i = index;">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <i class="material-icons pos-abs appr">note</i>
+              <strong style="line-height:16px">
+                <small>{{ approve.name }}</small>
+                <small class="d-block text-muted" style="line-height:20px">{{approve.email}}</small>
+              </strong>
+            </mat-panel-title>
+            <mat-panel-description class="pt-1">{{approve.designation}}, {{approve.board}}</mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item *ngIf="!toggle">
+              <div class="col-sm-6 p-0 mt-3">
+                <strong class="text-muted">
+                  <small class="d-block">Applied date</small>
+                </strong>
+                <small class="d-block">{{approve.date_from}} to {{approve.date_to}}</small>
+              </div>
+              <div class="col-sm-6 p-0 mt-3 text-right">
+                <strong class="text-muted">
+                  <small class="d-block">Application ID</small>
+                </strong>
+                <small class="d-block">{{approve.application_id}}</small>
+              </div>
+            </mat-list-item>
+            <br *ngIf="!toggle" />  
+            <mat-divider *ngIf="!toggle"></mat-divider>
+            <mat-list-item *ngIf="!toggle">
+              <div class="col-sm-6 p-0 mt-3">
+                <strong class="text-muted">
+                  <small class="d-block">Leave Type</small>
+                </strong>
+                <small class="d-block">{{ approve.leave_type }}</small>
+              </div>
+              <div class="col-sm-6 p-0 mt-3 text-right">
+                <strong class="text-muted">
+                  <small class="d-block">Date of application</small>
+                </strong>
+                <small class="d-block">{{ approve.date_of_apply }}</small>
+              </div>
+            </mat-list-item>
+            <br />  
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <div class="col-sm-12 p-0 mt-3">
+                <strong class="text-muted">
+                  <small class="d-block">Reason </small>
+                </strong>
+                <small class="d-block">{{approve.leave_reason}}</small>
+              </div>
+            </mat-list-item>
+            <br />
+          </mat-list>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
   </div>
-  <mat-accordion class="col-sm-6 float-left h78 ovf-y">
-    <mat-expansion-panel class="d-inline-block col-sm-12 p-0 pos-rel" *ngFor="let app of application | reverse | filter : term; let i = index;">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <i class="material-icons pos-abs pend">note</i>
-          <strong style="line-height:16px">
-            <small>{{ app.name }}</small>
-            <small class="d-block text-muted" style="line-height:20px">{{app.email}}</small>
-          </strong>
-        </mat-panel-title>
-        <mat-panel-description class="pt-1">{{app.designation}}, {{app.board}}</mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-list>
-        <mat-list-item *ngIf="!toggle">
-          <div class="col-sm-6 p-0 mt-3">
-            <strong class="text-muted">
-              <small class="d-block">Applied date</small>
-            </strong>
-            <small class="d-block">{{app.date_from}} to {{app.date_to}}</small>
-          </div>
-          <div class="col-sm-6 p-0 mt-3 text-right">
-            <strong class="text-muted">
-              <small class="d-block">Application ID</small>
-            </strong>
-            <small class="d-block">{{app.application_id}}</small>
-          </div>
-        </mat-list-item>
-        <br *ngIf="!toggle" />  
-        <mat-divider *ngIf="!toggle"></mat-divider>
-        <mat-list-item *ngIf="!toggle">
-          <div class="col-sm-6 p-0 mt-3">
-            <strong class="text-muted">
-              <small class="d-block">Leave Type</small>
-            </strong>
-            <small class="d-block">{{ app.leave_type }}</small>
-          </div>
-          <div class="col-sm-6 p-0 mt-3 text-right">
-            <strong class="text-muted">
-              <small class="d-block">Date of application</small>
-            </strong>
-            <small class="d-block">{{ app.date_of_apply }}</small>
-          </div>
-        </mat-list-item>
-        <br *ngIf="!toggle" />  
-        <mat-divider *ngIf="!toggle"></mat-divider>
-        <mat-list-item>
-          <div class="col-sm-12 p-0 mt-3">
-            <strong class="text-muted">
-              <small class="d-block">Reason </small>
-            </strong>
-            <small class="d-block">{{app.leave_reason}}</small>
-          </div>
-        </mat-list-item>
-        <br />  
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <div class="col-sm-12 p-0 mt-3">
-            <strong class="text-muted">
-              <small class="d-block">Any Attachment <mat-icon>help_outline</mat-icon></small>
-            </strong>
-            <small class="d-block">Not Found</small>
-          </div>
-        </mat-list-item>
-        <br />
-        <mat-divider></mat-divider>
-        <br />
-        <mat-list-item *ngIf="toggle">
-          <mat-form-field class="col-sm-12 p-0 mt-3">
-            <textarea matInput placeholder="Reason for cancel" [(ngModel)]="decline_reason" name="Decline Reason"></textarea>
-          </mat-form-field>
-        </mat-list-item>
-        <br />
-        <mat-list-item *ngIf="toggle">
-          <button mat-raised-button color="accent" (click)="!toggler()">Go Back</button>&nbsp;&nbsp;&nbsp;
-          <button mat-raised-button (click)="declineApp( decline_reason, app.application_id )">Submit</button>
-        </mat-list-item>
-        <mat-list-item *ngIf="!toggle">
-          <button mat-raised-button color="accent" (click)="toggler()">Cancel</button>&nbsp;&nbsp;&nbsp;
-          <button mat-raised-button (click)="acceptApp( app.application_id )">Accept</button>
-        </mat-list-item>
-      </mat-list>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <mat-accordion class="col-sm-6 float-left h78 ovf-y">
-    <mat-expansion-panel class="d-inline-block col-sm-12 p-0 pos-rel" *ngFor="let approve of approvedLeave | reverse | filter : term; let i = index;">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <i class="material-icons pos-abs appr">note</i>
-          <strong style="line-height:16px">
-            <small>{{ approve.name }}</small>
-            <small class="d-block text-muted" style="line-height:20px">{{approve.email}}</small>
-          </strong>
-        </mat-panel-title>
-        <mat-panel-description class="pt-1">{{approve.designation}}, {{approve.board}}</mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-list>
-        <mat-list-item *ngIf="!toggle">
-          <div class="col-sm-6 p-0 mt-3">
-            <strong class="text-muted">
-              <small class="d-block">Applied date</small>
-            </strong>
-            <small class="d-block">{{approve.date_from}} to {{approve.date_to}}</small>
-          </div>
-          <div class="col-sm-6 p-0 mt-3 text-right">
-            <strong class="text-muted">
-              <small class="d-block">Application ID</small>
-            </strong>
-            <small class="d-block">{{approve.application_id}}</small>
-          </div>
-        </mat-list-item>
-        <br *ngIf="!toggle" />  
-        <mat-divider *ngIf="!toggle"></mat-divider>
-        <mat-list-item *ngIf="!toggle">
-          <div class="col-sm-6 p-0 mt-3">
-            <strong class="text-muted">
-              <small class="d-block">Leave Type</small>
-            </strong>
-            <small class="d-block">{{ approve.leave_type }}</small>
-          </div>
-          <div class="col-sm-6 p-0 mt-3 text-right">
-            <strong class="text-muted">
-              <small class="d-block">Date of application</small>
-            </strong>
-            <small class="d-block">{{ approve.date_of_apply }}</small>
-          </div>
-        </mat-list-item>
-        <br />  
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <div class="col-sm-12 p-0 mt-3">
-            <strong class="text-muted">
-              <small class="d-block">Reason </small>
-            </strong>
-            <small class="d-block">{{approve.leave_reason}}</small>
-          </div>
-        </mat-list-item>
-        <br />
-      </mat-list>
-    </mat-expansion-panel>
-  </mat-accordion>
 </div>

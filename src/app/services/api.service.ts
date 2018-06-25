@@ -4,6 +4,7 @@ import { HttpErrorResponse, HttpParams, HttpHeaders, HttpClient } from '@angular
 import { Router } from '@angular/router'
 // import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
+
 @Injectable()
 export class ApiService {
   // URL : string = "http://13.127.13.175:5000/"
@@ -11,12 +12,12 @@ export class ApiService {
   token : string // Useful in Authentication
   headers : any // Useful when backend and frontend have different IP's
   opts : any // Find more details about backend configuration
-  constructor( private http : Http, private router : Router, private httpCSV : HttpClient ) {
+  constructor( private http:Http, private router : Router, private httpCSV : HttpClient ) {
     // Private http : Http, private router : Router
     // We will use both imports here. Are we using anywhere in comments only ???
     this.token = localStorage.getItem('token') // If this token available, login using can activate gaurd
-    this.headers =  new Headers() // Default headers
-    this.headers.append('Authorization',this.token) // ADD/Append your authorized token to Default headers
+    this.headers = new Headers() // Default headers
+    this.headers.append( 'Authorization', this.token ) // ADD/Append your authorized token to Default headers
     this.opts = new RequestOptions()
     this.opts.headers = this.headers
   }
@@ -48,11 +49,16 @@ export class ApiService {
   }
   // Post decline leave of employee's
   declineLeave(data:any){
+    console.log(this.opts)
     return this.http.post( this.URL+'lms/declineLeave', data, this.opts ).map( r => r.json() )
   }
   // Post month dates to get employee on leave in a month
   postEOLBSDate(data : any){
     let tmp = { dates:data }
+    return this.http.post( this.URL+'lms/count', tmp , this.opts ).map( r => r.json() )
+  }
+  getEmpOnLeave(data:any){
+    let tmp = { date:data }
     return this.http.post( this.URL+'lms/empOnLeave', tmp , this.opts ).map( r => r.json() )
   }
   // Post( Add New Employee ) requests
@@ -69,7 +75,8 @@ export class ApiService {
   }
   // post employee application for approval
   leaveForApproval( data:any ){
+    console.log(data)
+    console.log(this.opts)
     return this.http.post( this.URL+'lms/approveLeave', data, this.opts ).map( r => r.json() )
   }
-
 }

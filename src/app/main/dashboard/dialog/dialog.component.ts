@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { MatDialogRef } from '@angular/material'
+import { ApiService } from '../../../services/api.service'
 import { forkJoin } from 'rxjs/observable/forkJoin'
 import { LmsService } from '../../../services/lms.service'
 
@@ -19,8 +20,8 @@ export class DialogComponent implements OnInit {
   uploading = false
   uploadSuccessful = false 
 
-  constructor( public dialogRef : MatDialogRef< DialogComponent >, public lms : LmsService ) {
-    this.lms.emitgetHoliday.subscribe( e => e )
+  constructor( public dialogRef : MatDialogRef< DialogComponent >, public lms : LmsService, private api : ApiService ) {
+    this.api.emitgetHoliday.subscribe( e => e )
   }
 
   ngOnInit() { }
@@ -46,7 +47,7 @@ export class DialogComponent implements OnInit {
     // set the component state to "uploading"
     this.uploading = true
     // start the upload and save the progress map
-    this.progress = this.lms.upload(this.files)
+    this.progress = this.api.upload( this.files )
     // convert the progress map into an array
     let allProgressObservables = []
     for ( let key in this.progress ) {
@@ -69,7 +70,7 @@ export class DialogComponent implements OnInit {
       this.uploadSuccessful = true
       // . . . and the component is no longer uploading
       this.uploading = false
-      this.lms.getHoliday()
+      this.api.getHoliday()
     })
   }
 }

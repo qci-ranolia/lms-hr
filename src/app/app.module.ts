@@ -38,7 +38,8 @@ import { DialogComponent } from './main/dashboard/dialog/dialog.component'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { JwtModule } from '@auth0/angular-jwt'
 import { NgPipesModule } from 'ngx-pipes'
-import { Ng2SearchPipeModule } from 'ng2-search-filter'
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ServererrComponent } from './main/servererr/servererr.component'
 
 export function tokenGetter() {
   return localStorage.getItem('access_token')
@@ -56,7 +57,8 @@ export function tokenGetter() {
     AddEmpComponent,
     EditEmpComponent,
     PiechartComponent,
-    DialogComponent
+    DialogComponent,
+    ServererrComponent
   ],
   imports:[
     Ng2SearchPipeModule,

@@ -86,7 +86,7 @@
             </mat-list-item>
             <mat-list-item *ngIf="!toggle">
               <button mat-raised-button color="accent" (click)="toggler()">Cancel</button>&nbsp;&nbsp;&nbsp;
-              <button mat-raised-button (click)="acceptApp(app.application_id)">Accept</button>
+              <button mat-raised-button (click)="acceptApp(app.application_id, app.qci_id)">Accept</button>
             </mat-list-item>
           </mat-list>
         </mat-expansion-panel>

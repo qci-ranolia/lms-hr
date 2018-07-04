@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core'
-import { LmsService } from '../../services/lms.service';
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { LmsService } from '../../services/lms.service'
 declare var $
 
 @Component({
@@ -8,24 +8,24 @@ declare var $
   styleUrls: ['./crud.component.scss']
 })
 
-export class CrudComponent implements OnInit {
+export class CrudComponent implements OnInit, OnDestroy {
   employee = new Array
   loader : boolean = false
 
+  unsubLoader : any
+  unsubGetEmployees : any
   constructor( private lms : LmsService ) {
-    this.lms.emitsload.subscribe( el => this.loader = el )
+    this.unsubLoader = this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
 
-    this.lms.emitgetEmployees.subscribe( r => {
+    this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe( r => {
       this.employee = Object.values( r )
-      // console.log( this.employee )
     })
     setTimeout(() => {
       $(function() {
         let user = $('#table_id').DataTable({
           paging : true,
-          searching : true,/* 
-          pageLength: 1, */
+          searching : true,
           ordering : true,
           scrollY : 335
         })
@@ -39,4 +39,9 @@ export class CrudComponent implements OnInit {
   deleteEmp( qci_id ){
     this.lms.deleteEmp( qci_id )
   }
+  ngOnDestroy() {
+    this.unsubLoader.unsubscribe()
+    this.unsubGetEmployees.unsubscribe()
+  }
+
 }

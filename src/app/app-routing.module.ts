@@ -15,6 +15,8 @@ import { EditEmpComponent } from './main/crud/edit-emp/edit-emp.component';
 import { EolComponent } from './main/eol/eol.component';
 import { NewappComponent } from './main/newapp/newapp.component';
 
+// 404 
+import { ServererrComponent } from './main/servererr/servererr.component'
 // Auth
 import { AuthService } from './services/auth.service';
 const routes: Routes = [
@@ -26,6 +28,7 @@ const routes: Routes = [
     { path:'employee-list/:id', component:EditEmpComponent , canActivate:[AuthService]},
     { path:'employee-section', component:NewappComponent , canActivate:[AuthService]},
     { path:'application-status', component:EolComponent , canActivate:[AuthService]},
+    { path : '404', component : ServererrComponent, canActivate : [ AuthService ] }
   ]},
   { path:'login', component:LoginComponent },
   { path: '**', redirectTo: '/login'}

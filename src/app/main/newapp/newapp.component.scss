@@ -15,12 +15,12 @@ $color : rgba(33, 51, 151, 1);
     }
 }
 .h78.ovf-y small{
-    max-height: 20px;
-    max-width: 100%;
-    text-overflow:ellipsis;
-    display:-webkit-box;
-    -webkit-line-clamp:2;
-    line-height: 20px;
-    -webkit-box-orient:vertical;
-    overflow:hidden
+    max-height : 30px;
+    max-width : 100%;
+    text-overflow : ellipsis;
+    display :-webkit-box;
+    -webkit-line-clamp : 2;
+    line-height : 30px;
+    -webkit-box-orient : vertical;
+    overflow : hidden
 }

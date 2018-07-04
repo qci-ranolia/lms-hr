@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { LmsService } from '../../../services/lms.service';
 
@@ -9,7 +9,7 @@ import { LmsService } from '../../../services/lms.service';
   templateUrl: './edit-emp.component.html',
   styleUrls: ['./edit-emp.component.scss']
 })
-export class EditEmpComponent implements OnInit {
+export class EditEmpComponent implements OnInit, OnDestroy  {
   employee : any = new Object()
   uid : any
   key : any
@@ -18,20 +18,19 @@ export class EditEmpComponent implements OnInit {
   hide : boolean = false
 
   loader : boolean = false
-  
-  constructor( private route:ActivatedRoute, private router:Router, private lms:LmsService ) {
-    
-    this.lms.emitsload.subscribe( el => this.loader = el )
+
+  unsubLoader : any
+  unsubGetEmployees : any
+  constructor( private route:ActivatedRoute, private router:Router, private lms:LmsService ) {  
+    this.unsubLoader = this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
     
     this.uid = this.route.snapshot.paramMap.get('id')
-    this.lms.emitgetEmployees.subscribe( r => {
+    this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe( r => {
       let arr = Object.values(r)
       var item = arr.find( it => it.qci_id == this.uid )
       this.employee = item
       this.employee.password = null
-      // var skey = _.findKey( r, this.employee )
-      // this.key = skey
       if ( this.employee.gender == 'Male' ) {
         this.hide = true
         this.show = false
@@ -42,12 +41,14 @@ export class EditEmpComponent implements OnInit {
       }
     })
   }
-
-  ngOnInit() {
+  ngOnInit(){
     this.lms.getEmployees()
   }
-  
   updateEmployee(){
     this.lms.updateEmployee(this.employee)
   }
+  ngOnDestroy(){
+    this.unsubGetEmployees.unsubscribe()
+  }
+
 }

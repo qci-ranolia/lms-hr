@@ -3,12 +3,11 @@ import { ApiService } from './api.service'
 import { Router } from '@angular/router'
 import { MatSnackBar } from '@angular/material'
 
+
 import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http'
 import { Subject } from 'rxjs/Subject'
 import { Observable } from 'rxjs/Observable'
 
-// const url = 'http://13.127.13.175:5000/'
-const url = 'http://192.168.15.55:5000/'
 
 @Injectable()
 export class LmsService {
@@ -30,38 +29,8 @@ export class LmsService {
   emitCount = new EventEmitter<any>()
   emitEmpOnLeave = new EventEmitter<any>()
   
-  constructor( private api : ApiService, private router : Router, public snackBar : MatSnackBar, private http : HttpClient ){}
+  constructor( private api : ApiService, private router : Router, public snackBar : MatSnackBar, private httpClient: HttpClient ){}
 
-  // CSV Upload
-  public upload( files:Set <File> ):{ [ key:string ]:Observable <number> }{
-    const status = {}
-    files.forEach( file => {
-      const formData : FormData = new FormData()
-      formData.append( 'file' , file , file.name )
-      // console.log(formData)
-      const req = new HttpRequest( 'POST', url+'lms/holiday' , formData, {
-        reportProgress:true
-      })
-      // console.log(req)
-      const progress = new Subject<number>()
-      // console.log(progress)
-      this.http.request( req ).subscribe( event => {
-        if ( event.type === HttpEventType.UploadProgress ) {
-          const percentDone = Math.round( 100 * event.loaded / event.total )
-          // console.log(percentDone)
-          progress.next( percentDone )
-        } else if ( event instanceof HttpResponse ){
-          progress.complete()
-          // console.log(req)
-        }
-      })
-      status[file.name] = {
-        progress:progress.asObservable()
-      }
-    })
-    // console.log(status)
-    return status
-  }
   showLoader() {
     this.loader = true
     this.emitsload.emit( this.loader )
@@ -69,16 +38,16 @@ export class LmsService {
   }
   hideLoader(){
     this.loader = false
-    this.emithload.emit(this.loader)
+    this.emithload.emit( this.loader )
   }
-  snackBars(message:string,action:string){  
+  snackBars( message : string, action : string ){  
     this.snackBar.open( message, action, {
       duration : 2600,
     })
   }
-  isLogin(){
-    if(localStorage.getItem('token')){
-      this.router.navigate(['./'])
+  isLogin() {
+    if( localStorage.getItem('token') ){
+      this.router.navigate([ './' ])
     }
   }
   login( uname : string, pwd : string ){
@@ -90,55 +59,65 @@ export class LmsService {
         localStorage.setItem( 'token' , el.token )
         this.emitLogin.emit()
       } else this.snackBars( el.message , el.success )
-    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" )
+    }, err => this.router.navigate(['/404'])
   )}
-  getEmployees(){
+  getEmployees() {
     this.api.GetEmployeeDetails().subscribe( el => {
       if ( el.success ) this.emitgetEmployees.emit( el.data )
       else this.snackBars( el.message , el.success ) // this.snackBar.open('el.success was not true')
-    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) 
+    }, err => this.router.navigate(['/404']) 
   )}
-  getHoliday(){
-    this.api.getHoliday().subscribe( el => {
+  getHoliday() {
+    this.api.getHoliday()/* .subscribe( el => {
       if ( el.success ){
-         if (el.result.length == 0 ) console.log("d")
+         if ( el.result.length == 0 ) console.log("d")
          else this.emitgetHoliday.emit( el.result )
       }
       else this.snackBars( el.message , el.success )
-    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" ) 
-  )}
-  getEOL(){
-    this.api.getEOL().subscribe( el => {
-      if ( el.success ) {
-        if ( el.data.length > 0 ) this.emitEOL.emit( el.data )
-        else this.emitZeroEOL.emit( el )
+    }, err => this.router.navigate(['/404']) ) */
+}
+  getEOL() {
+    this.api.getEOL()
+}
+  approvedLeave() {
+    this.api.approvedLeave()
+  }
+  cancelledLeave() {
+    this.api.cancelledLeave()
+  }
+  leaveForApproval( application : any ){
+    this.api.leaveForApproval(application)/* .subscribe( el => {
+      console.log(el)
+      if ( el.success ){
+        // this.getEOL()
+        // this.approvedLeave()
+        // this.cancelledLeave()
+        this.emitMyApplication.emit( el )
       } else this.snackBars( el.message , el.success )
-    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" )
+    }, err => this.router.navigate(['/404']) ) */
+  }
+  declineLeave( tmp : any ){
+    this.api.declineLeave(tmp).subscribe( el => {
+      if ( el.success ){
+        // this.getEOL()
+        // this.approvedLeave()
+        // this.cancelledLeave()
+        this.emitMyApplication.emit( el )
+        } else this.snackBars( el.error , el.success )
+    }, err => this.router.navigate(['/404'])
   )}
-  approvedLeave(){
-    this.api.approvedLeave().subscribe( el => {
-      if( el.success ) this.emitApprovedApplication.emit(el.data)
-      else this.snackBars( el.message , el.success ) //stepper.next() //
-    }, err => this.snackBars( "API Error" , "Try Again" )
-  )}
-  cancelledLeave(){
-    this.api.cancelledLeave().subscribe( el => {
-      if(el.success){
-        this.emitCancelledApplication.emit(el.data)
-      } else this.snackBars( el.message , el.success ) //stepper.next() //
-    }, err => this.snackBars( "API Error" , "Try Again" )
-  )}
+
   addEmp( employee : any ) {
     this.api.addEmp( employee ).subscribe( el => {
       if ( el.success ) this.router.navigate(['/employee-list'])
       else this.snackBars( el.message , el.success )
-    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" )
+    }, err => this.router.navigate(['/404'])
   )}
-  getEmpOnLeave( temp : any ){
+  getEmpOnLeave( temp : any ) {
     this.api.getEmpOnLeave(temp).subscribe( el => {
       if ( el.success ) this.emitEmpOnLeave.emit( el.data )
       else this.snackBars( el.message , el.success )
-    }, err => this.snackBars( "API err" , "Contact back-end IT or try one more time" )
+    }, err => this.router.navigate(['/404'])
   )}
   updateEmployee( employee : any ) {
     this.api.updateEmployee( employee ).subscribe( el => {
@@ -146,41 +125,21 @@ export class LmsService {
         this.router.navigate( ['/employee-list'] )
         this.getEmployees()
       } else this.snackBars( el.message , el.success )
-    }, err => this.snackBars( "API err" , "LMS updateEmployee" )
+    }, err => this.router.navigate(['/404'])
   )}
-  deleteEmp(qci_id:any){
-    let tmp = { qci_id:qci_id }
+  deleteEmp( qci_id : any ){
+    let tmp = { qci_id : qci_id }
     this.api.deleteEmp( tmp ).subscribe( el => {
       if ( el.success ) {
         this.getEmployees()
       } else this.snackBars( el.message , el.success )
-    }, err => this.snackBars( "API err" , "LMS deleteEmployee" )
+    }, err => this.router.navigate(['/404'])
   )}
   postEOLBSDate( data : any ){
     this.api.postEOLBSDate( data ).subscribe( el => {
-      if ( el.success ) this.emitCount.emit(el.data)
-      else this.snackBars( el.error , el.success )
-    }, err => this.snackBars( "API err" , "LMS deleteEmployee" )
-  )}
-  leaveForApproval(application:any){
-    this.api.leaveForApproval(application).subscribe( el => {
       console.log(el)
-      if ( el.success ){
-        this.getEOL()
-        this.approvedLeave()
-        this.cancelledLeave()
-        this.emitMyApplication.emit( el )
-      } else this.snackBars( el.message , el.success )
-    }, err => this.snackBars( "API Error" , "Try Again" )
-  )}
-  declineLeave( tmp : any ){
-    this.api.declineLeave(tmp).subscribe( el => {
-      if ( el.success ){
-        this.getEOL()
-        this.approvedLeave()
-        this.cancelledLeave()
-        this.emitMyApplication.emit( el )
-        } else this.snackBars( el.error , el.success )
-    }, err => this.snackBars( "API Error" , "Try Again" )
+      if ( el.success ) this.emitCount.emit( el.data )
+      else this.snackBars( el.error , el.success )
+    }, err => this.router.navigate(['/404'])
   )}
 }

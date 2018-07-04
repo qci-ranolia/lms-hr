@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { LmsService } from '../../../services/lms.service'
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-add-emp',
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-emp.component.scss']
 })
 
-export class AddEmpComponent implements OnInit {
+export class AddEmpComponent implements OnInit, OnDestroy {
   gender : any
   type_of_employee : any
 
@@ -22,27 +22,26 @@ export class AddEmpComponent implements OnInit {
   loader : boolean = false
   form : any
 
+  unsubLoader : any
+
   constructor( private lms: LmsService, private router : Router ) {
     
-    this.lms.emitsload.subscribe( el => this.loader = el )
+    this.unsubLoader = this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
-    
     this.showGender = [
       { value: 'Male' },
       { value: 'Female' }
     ]
-
     this.showEmpTyp = [
       { value: 'Regular' },
       { value: 'Contract' },
       { value: 'Professional' }
     ]
-  
   }
 
   ngOnInit() { }
 
-  getGender(item) {
+  getGender( item ) {
     this.gender = item
     if ( this.gender == 'Male' ) {
       this.hide = true
@@ -54,20 +53,24 @@ export class AddEmpComponent implements OnInit {
     }
   }
 
-  gettoe(item) {
+  gettoe( item ) {
     this.type_of_employee = item
   }
 
-  addEmployee({value, valid}){
-    this.lms.addEmp(this.employee)
+  addEmployee({ value, valid }){
+    this.lms.addEmp( this.employee )
   }
 
-  keyPress(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
-    let inputChar = String.fromCharCode(event.charCode);
-    if (event.keyCode != 8 && !pattern.test(inputChar)) {
-      event.preventDefault();
+  keyPress( event : any ) {
+    const pattern = /[0-9\+\-\ ]/
+    let inputChar = String.fromCharCode( event.charCode )
+    if ( event.keyCode != 8 && !pattern.test( inputChar )) {
+      event.preventDefault()
     }
+  }
+
+  ngOnDestroy() {
+    this.unsubLoader.unsubscribe()
   }
 
 }

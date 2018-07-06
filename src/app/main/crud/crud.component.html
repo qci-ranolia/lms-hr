@@ -11,7 +11,7 @@
                         <th class="wd-7">QCID</th>
                         <th class="wd-16">Employee name</th>
                         <th class="wd-7">Gender</th>
-                        <th class="wd-10">Designation</th>
+                        <th class="wd-15">Designation</th>
                         <th class="wd-7">Board</th>
                         <th class="wd-">Leave details</th>
                         <th class="modify">Modify</th>
@@ -19,20 +19,37 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let emp of employee; let i = index">
-                        <td class="wd-7">{{ emp.qci_id }}</td>
-                        <td class="wd-16"><span :matTooltip="{{ emp.email }}">{{ emp.name }}</span></td>
+                        <td class="wd-7">{{emp.qci_id}}</td>
+                        <td class="wd-16">
+                            <span :matTooltip="{{emp.email}}">{{ emp.name }}</span>
+                        </td>
                         <td class="wd-7">{{ emp.gender }}</td>
-                        <td class="wd-10">{{ emp.designation }}<br /><small>{{ emp.type_of_employee }}</small></td>
+                        <td class="wd-15">{{ emp.designation }}
+                            <br />
+                            <small>{{ emp.type_of_employee }}</small>
+                        </td>
                         <td class="wd-7">{{ emp.board }}</td>
                         <td class="wd-">
                             <mat-chip-list>
-                                <mat-chip class="bg-light rad-box"><span matTooltip="Casual Leave">CL: {{ emp.bal_cl }}</span></mat-chip>
-                                <mat-chip class="bg-light rad-box"><span matTooltip="Sick Leave">SL: {{ emp.bal_sl }}</span></mat-chip>
-                                <mat-chip class="bg-light rad-box"><span matTooltip="Privileged Leave">PL: {{ emp.bal_pl }}</span></mat-chip>
-                                <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Female'"><span matTooltip="Materinity Leave">ML: {{ emp.bal_ml }}</span></mat-chip>
-                                <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Male'"><span matTooltip="Paterinity Leave">PTL: {{ emp.bal_ptl }}</span></mat-chip>
-                                <mat-chip class="bg-light rad-box"><span matTooltip="Extraordinary Leave">EOL: {{ emp.bal_eol }}</span></mat-chip>
-                            </mat-chip-list>                                  
+                                <mat-chip class="bg-light rad-box">
+                                    <span matTooltip="Casual Leave">CL: {{ emp.bal_cl }}</span>
+                                </mat-chip>
+                                <mat-chip class="bg-light rad-box">
+                                    <span matTooltip="Sick Leave">SL: {{ emp.bal_sl }}</span>
+                                </mat-chip>
+                                <mat-chip class="bg-light rad-box">
+                                    <span matTooltip="Privileged Leave">PL: {{ emp.bal_pl }}</span>
+                                </mat-chip>
+                                <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Female'">
+                                    <span matTooltip="Materinity Leave">ML: {{ emp.bal_ml }}</span>
+                                </mat-chip>
+                                <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Male'">
+                                    <span matTooltip="Paterinity Leave">PTL: {{ emp.bal_ptl }}</span>
+                                </mat-chip>
+                                <mat-chip class="bg-light rad-box">
+                                    <span matTooltip="Extraordinary Leave">EOL: {{ emp.bal_eol }}</span>
+                                </mat-chip>
+                            </mat-chip-list>
                         </td>
                         <td class="modify">
                             <button mat-button class="btn btn-info p-1" :routerLink="/employee-list/{{emp.qci_id}}">Edit</button>
@@ -43,4 +60,4 @@
             </table>
         </div>
     </div>
-</div> 
+</div>

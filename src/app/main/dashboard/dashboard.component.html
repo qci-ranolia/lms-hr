@@ -1,28 +1,12 @@
 <div class="col-sm-12">
-    <!-- <input id="files" type="file" accept="image/*" multiple/> -->
-    <!-- <input type="file" name="image" accept="image/*" capture="user"  /> -->
-    <!-- <canvas></canvas> -->
-    <!-- var input = document.querySelector('input[type=file]') // see Example 4
-    input.onchange = function(){
-        var file = input.files[0]
-        upload( file )
-        drawOnCanvas( file )   // see Example 6
-        displayAsImage( file ) // see Example 7
-    }
-    function upload( file ) {
-        var form = new FormData(),
-        xhr = new XMLHttpRequest()
-
-        form.append( 'image', file )
-        xhr.open( 'post', 'server.php', true )
-        xhr.send( form )
-    } -->
     <h5>Dashboard</h5>
     <div class="col-sm-12 d-block p-0">
         <div class="divTable">
             <div class="divTableBody">
                 <div class="divTableRow">
-                    <div class="divTableCell col-sm-12 float-left pl-0 pr-2 mb-3"><pie-chart></pie-chart></div>
+                    <div class="divTableCell col-sm-12 float-left pl-0 pr-0 mb-3">
+                        <pie-chart></pie-chart>
+                    </div>
                 </div>
             </div>
         </div>
@@ -37,10 +21,11 @@
         <mat-tab-group :selectedIndex="{{getDate}}" mat-stretch-tabs>
             <mat-tab *ngFor="let cde of combineDateEmp ; let i = index">
                 <ng-template mat-tab-label>
-                    <div><!-- *ngIf="offDays"-->
+                    <div>
                         <div class="col-sm-12 p-0" (click)="getEmpOnLeave(cde)" style="height:100%">
                             <div [ngClass]="{'today':todayCheck(day)}">{{cde.day}}</div>
-                            <div>&nbsp;<span class="badge badge-secondary" *ngIf="!cde.count==0">{{cde.count}}</span>&nbsp;</div>
+                            <div>&nbsp;
+                                <span class="badge badge-secondary" *ngIf="!cde.count==0">{{cde.count}}</span>&nbsp;</div>
                         </div>
                     </div>
                 </ng-template>
@@ -48,7 +33,7 @@
                     <div class="mt-1 mb-2" *ngIf="cde.count==0">
                         <div class="bg-white rad-box p-5 text-center">No employee on leave today</div>
                     </div>
-                    <div class="mt-1 mb-2" *ngIf="!cde.count==0" style="height:15vh">
+                    <div class="mt-1 mb-2" *ngIf="!cde.count==0">
                         <mat-accordion>
                             <mat-expansion-panel *ngFor="let em of emp; let i = index">
                                 <mat-expansion-panel-header>
@@ -85,22 +70,38 @@
                 <mat-chip-list>
                     <div class="col-sm-12 p-0">
                         <div class="col-sm-12 p-0">
-                            <div class="float-left col-sm-6"><strong class="text-info d-inline-block">*</strong> Compulsory Holidays</div>
-                            <div class="float-left col-sm-6"><strong class="text-muted d-inline-block">*</strong> Restricted Holidays</div>
+                            <div class="float-left col-sm-6">
+                                <strong class="text-info d-inline-block">*</strong> Compulsory Holidays
+                            </div>
+                            <div class="float-left col-sm-6">
+                                <strong class="text-muted d-inline-block">*</strong> Restricted Holidays
+                            </div>
                         </div>
                         <br />
                         <br />
-                        <div class="col-sm-6 mt-2 mb-2 float-left" *ngFor="let all of holidays; let i=index;">
-                            <div class="mb-3" *ngIf="all.CompulsoryHoliday">
-                                <span class="p-2 bg-light">{{i+1}}</span>
-                                <strong class="text-info">{{all.CompulsoryHoliday}}<small class="d-block mt-2">{{all.Date}}</small></strong>
+                        <div class="col-sm-6 pl-2 pr-2 pb-2 float-left" *ngFor="let all of holidays; let i=index;">
+                            <div class="mb-1" *ngIf="all.CompulsoryHoliday">
+                                <span class="p-1 bg-light">{{i+1}}</span>
+                                <strong class="text-info" style="font-size:13px">{{all.CompulsoryHoliday}}
+                                    <small class="mt-2">{{all.Date}}</small>
+                                </strong>
                             </div>
-                            <div class="mb-3" *ngIf="all.RestrictedHoliday">
-                                <span class="p-2 bg-light">{{i+1}}</span>
-                                <strong class="text-muted">{{all.RestrictedHoliday}}<small class="d-block mt-2">{{all.Date}}</small></strong>
-                            </div><!-- 
-                            <mat-chip color="primary" selected="true" *ngIf="all.type=='one'">{{all.Dates}}<div>{{all.Holidays}}</div></mat-chip>
-                            <mat-chip color="accent" selected="true" *ngIf="all.type=='two'">{{all.Dates}}<div>{{all.Holidays}}</div></mat-chip> -->
+                            <div class="mb-1 bg-light text-dark" *ngIf="all.Today">
+                                <span class="p-1 bg-light">{{i+1}}</span>
+                                <strong class="" style="font-size:13px">{{all.Today}}
+                                    <small class="mt-2">{{all.Date}}
+                                        <sup class="text-danger">
+                                            <h6 class="d-inline">*</h6>
+                                        </sup>
+                                    </small>
+                                </strong>
+                            </div>
+                            <div class="mb-1" *ngIf="all.RestrictedHoliday">
+                                <span class="p-1 bg-light">{{i+1}}</span>
+                                <strong class="text-muted" style="font-size: 13px">{{all.RestrictedHoliday}}
+                                    <small class="mt-2">{{all.Date}}</small>
+                                </strong>
+                            </div>
                         </div>
                     </div>
                 </mat-chip-list>

@@ -1,19 +1,22 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { LmsService } from '../../../services/lms.service'
 import { Chart } from 'chart.js'
-import * as _ from "lodash"
+// import * as _ from "lodash"
 @Component({
     selector: 'pie-chart',
     templateUrl: './piechart.component.html'
 })
 export class PiechartComponent implements OnInit, OnDestroy {
     bar: any
+    line: any
     polarArea: any
+
     boards: any = []
     boardEmp: any = []
     gender: any = []
     genderCount: any = []
     unsubGetEmployees: any
+
     constructor(private lms: LmsService) {
         this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(el => {
             // console.log(el)
@@ -77,6 +80,30 @@ export class PiechartComponent implements OnInit, OnDestroy {
             })
             this.polarArea = new Chart('polarArea', {
                 type: 'polarArea',
+                data: {
+                    labels: this.gender,// gender array
+                    datasets: [{
+                        data: this.genderCount,// Number of respective MALE, FEMALE and OTHERS(if any) on the basis of total employee.gender count
+                        backgroundColor: [
+                            'rgba(255, 59, 72, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255,59,72,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'
+                        ], borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            })
+            this.line = new Chart('line', {
+                type: 'line',
                 data: {
                     labels: this.gender,// gender array
                     datasets: [{

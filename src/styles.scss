@@ -23102,7 +23102,8 @@ div.mat-expansion-panel-content:not(.mat-expanded) {
     box-shadow:0px 8px 10px 0px #ccc;
 }
 mat-tab-header {
-    background:#fff
+    background:#fff;
+    height:49px;
 }
 
 .pos-rel{
@@ -23167,6 +23168,7 @@ form .ng-valid .mat-focused .mat-form-field-label, form .ng-valid .mat-form-fiel
 .wd-7 { width: 7% !important }
 .wd-10 { width: 10% !important }
 .wd-12 { width: 12% !important }
+.wd-15 { width: 15% !important }
 .wd-16 { width: 16% !important }
 
 .mat-tooltip {

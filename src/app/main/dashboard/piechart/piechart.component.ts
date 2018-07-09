@@ -102,7 +102,7 @@ export class PiechartComponent implements OnInit, OnDestroy {
                     }
                 }
             })
-            this.line = new Chart('line', {
+            /* this.line = new Chart('line', {
                 type: 'line',
                 data: {
                     labels: this.gender,// gender array
@@ -125,7 +125,7 @@ export class PiechartComponent implements OnInit, OnDestroy {
                         }]
                     }
                 }
-            })
+            }) */
         }, 450)// Delay due to subscribe method
     }
 

@@ -13,6 +13,7 @@ import { ApiService } from '../../services/api.service'
 export class NewappComponent implements OnInit, OnDestroy {
   hide: boolean = true
   restHide: boolean = true
+  spnnr: boolean = false
   dis: any = false
   date: any
   loader: boolean = false
@@ -53,14 +54,19 @@ export class NewappComponent implements OnInit, OnDestroy {
       this.cmn = el
       this.simplyfiData()
       this.cancelledLeave = this.cmn
+      console.log(this.cancelledLeave)
     })
 
     this.unsubAcceptedApplication = this.api.emitMyApplication.subscribe(el => {
-      if (el.message == "Leave Approved!!") {
-        this.dis = false
-        this.api.getEOL()
-        this.api.approvedLeave()
-        this.api.cancelledLeave()
+      this.dis = false
+      this.spnnr = false
+      this.api.getEOL()
+      switch (el.message) {
+        case "Leave Approved!!":
+          this.api.approvedLeave()
+          break
+        case "Leave has been declined.":
+          this.api.cancelledLeave()
       }
     })
   }
@@ -92,6 +98,7 @@ export class NewappComponent implements OnInit, OnDestroy {
   // accept leave application
   acceptApp(app_id, qci_id) {
     this.dis = true
+    this.spnnr = true
     let date = new Date(),
       latest_date = this.datepipe.transform(date, 'dd/MM/yyyy'),
       tmp = { application_id: app_id, qci_id: qci_id, date_reviewed: latest_date }
@@ -99,10 +106,16 @@ export class NewappComponent implements OnInit, OnDestroy {
   }
   // decline leave application
   declineApp(dec_reason, app_ids) {
+    this.dis = true
+    this.spnnr = true
     let date = moment().format("DD/MM/YYYY")
     let tmp = { application_id: app_ids, date_reviewed: date, decline_reason: dec_reason }
-    this.lms.declineLeave(tmp)
-    this.api.leaveForApproval(tmp)
+    if (dec_reason) this.api.declineLeave(tmp)
+    else {
+      this.dis = false
+      this.spnnr = false
+      this.api.noDeclineReason()
+    }
   }
   ngOnDestroy() {
     this.unsubEmployeeOnLeave.unsubscribe()

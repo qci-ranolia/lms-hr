@@ -33,21 +33,24 @@
                     <div class="mt-1 mb-2" *ngIf="cde.count==0">
                         <div class="bg-white rad-box p-5 text-center">No employee on leave today</div>
                     </div>
-                    <div class="mt-1 mb-2" *ngIf="!cde.count==0">
+                    <div class="mt-1 mb-2 h74 ovf-y" *ngIf="!cde.count==0">
                         <mat-accordion>
-                            <mat-expansion-panel *ngFor="let em of emp; let i = index">
+                            <mat-expansion-panel *ngFor="let em of emp; let i = index" [disabled]="isDisabled">
                                 <mat-expansion-panel-header>
                                     <mat-panel-title>
                                         <strong style="line-height:16px">
-                                            <small>{{em.name}}</small>
-                                            <small class="d-block text-muted" style="line-height:20px">{{em.email}}</small>
+                                            <small class="d-block text-muted">{{em.name}}</small>
+                                            <small style="line-height:20px">{{em.email}}</small>
                                         </strong>
                                     </mat-panel-title>
-                                    <mat-panel-description></mat-panel-description>
+                                    <mat-panel-description class="mr-0">
+                                        <small class="col-sm-11 d-block text-muted">{{em.designation}},&nbsp;{{em.board}}</small>
+                                        <h3 class="col-sm-1 material-icons mt-2" :routerLink="/application/{{em.qci_id}}">arrow_forward</h3>
+                                    </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                <mat-chip-list>
-                                    <!-- <p class="mt-4">QCI ID: 1345</p> -->
-                                </mat-chip-list>
+                                <!-- <mat-chip-list>
+                                    <p class="mt-4">QCI ID: 1345</p>
+                                </mat-chip-list> -->
                             </mat-expansion-panel>
                         </mat-accordion>
                     </div>

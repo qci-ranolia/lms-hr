@@ -25,7 +25,7 @@ export class LmsService {
   emitCount = new EventEmitter<any>()
   emitEmpOnLeave = new EventEmitter<any>()
 
-  constructor(private api: ApiService, private router: Router, public snackBar: MatSnackBar, private httpClient: HttpClient) { }
+  constructor(private api: ApiService, private router: Router, public snackBar: MatSnackBar) { } //, private httpClient: HttpClient
 
   showLoader() {
     this.loader = true
@@ -54,25 +54,19 @@ export class LmsService {
       if (el.success) {
         localStorage.setItem('token', el.token)
         this.emitLogin.emit()
-      } else this.snackBars(el.message, el.success)
+      } else console.log(el) //  this.snackBars(el.message, el.success)
     }, err => this.router.navigate(['/404'])
     )
   }
   getEmployees() {
     this.api.GetEmployeeDetails().subscribe(el => {
       if (el.success) this.emitgetEmployees.emit(el.data)
-      else this.snackBars(el.message, el.success) // this.snackBar.open('el.success was not true')
+      else console.log(el) //  this.snackBars(el.message, el.success) // this.snackBar.open('el.success was not true')
     }, err => this.router.navigate(['/404'])
     )
   }
   getHoliday() {
-    this.api.getHoliday()/* .subscribe( el => {
-      if ( el.success ){
-         if ( el.result.length == 0 ) console.log("d")
-         else this.emitgetHoliday.emit( el.result )
-      }
-      else this.snackBars( el.message , el.success )
-    }, err => this.router.navigate(['/404']) ) */
+    this.api.getHoliday()
   }
   getEOL() {
     this.api.getEOL()
@@ -84,49 +78,28 @@ export class LmsService {
     this.api.cancelledLeave()
   }
   leaveForApproval(application: any) {
-    this.api.leaveForApproval(application)/* .subscribe( el => {
-      console.log(el)
-      if ( el.success ){
-        // this.getEOL()
-        // this.approvedLeave()
-        // this.cancelledLeave()
-        this.emitMyApplication.emit( el )
-      } else this.snackBars( el.message , el.success )
-    }, err => this.router.navigate(['/404']) ) */
+    this.api.leaveForApproval(application)
   }
   declineLeave(tmp: any) {
-    this.api.declineLeave(tmp)/* .subscribe(el => {
-      if (el.success) {
-        // this.getEOL()
-        // this.approvedLeave()
-        // this.cancelledLeave()
-        this.emitMyApplication.emit(el)
-      } else this.snackBars(el.error, el.success)
-    }, err => this.router.navigate(['/404'])
-    ) */
+    this.api.declineLeave(tmp)
   }
 
   addEmp(employee: any) {
     this.api.addEmp(employee).subscribe(el => {
       if (el.success) this.router.navigate(['/employee-list'])
-      else this.snackBars(el.message, el.success)
+      else console.log(el) //  this.snackBars(el.message, el.success)
     }, err => this.router.navigate(['/404'])
     )
   }
   getEmpOnLeave(temp: any) {
-    this.api.getEmpOnLeave(temp)/* .subscribe(el => {
-      console.log(el)
-      if (el.success) this.emitEmpOnLeave.emit(el.data)
-      else this.snackBars(el.error, el.success)
-    }, err => this.router.navigate(['/404'])
-    ) */
+    this.api.getEmpOnLeave(temp)
   }
   updateEmployee(employee: any) {
     this.api.updateEmployee(employee).subscribe(el => {
       if (el.success) {
         this.router.navigate(['/employee-list'])
         this.getEmployees()
-      } else this.snackBars(el.message, el.success)
+      } else console.log(el) //  this.snackBars(el.message, el.success)
     }, err => this.router.navigate(['/404'])
     )
   }
@@ -135,14 +108,14 @@ export class LmsService {
     this.api.deleteEmp(tmp).subscribe(el => {
       if (el.success) {
         this.getEmployees()
-      } else this.snackBars(el.message, el.success)
+      } else console.log(el) //  this.snackBars(el.message, el.success)
     }, err => this.router.navigate(['/404'])
     )
   }
   postEOLBSDate(data: any) {
     this.api.postEOLBSDate(data).subscribe(el => {
       if (el.success) this.emitCount.emit(el.data)
-      else this.snackBars(el.error, el.success)
+      else return false /* this.snackBars(el.error, el.success) */
     }, err => this.router.navigate(['/404'])
     )
   }

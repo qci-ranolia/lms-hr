@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material' // remove from lms service after
 @Injectable()
 export class ApiService {
   emitgetEmployees = new EventEmitter<any>() // Emit Employees
+  emitgetEmployee = new EventEmitter<any>() // Emit Employee
   emitLogin = new EventEmitter<any>() // Emit Login
   emitErr = new EventEmitter<any>() // Emit Err , not using right now
   emitEOL = new EventEmitter<any>() // Emit Employee On Leaves
@@ -24,8 +25,11 @@ export class ApiService {
   emitEmpOnLeave = new EventEmitter<any>()
   emitEmpApp = new EventEmitter<any>()
 
-  // URL : string = "http://13.127.13.175:5000/"
-  URL: string = "http://192.168.15.55:5000/"
+  emitMyZero = new EventEmitter<any>()
+  emitMyLeaves = new EventEmitter<any>()
+
+  URL: string = "http://13.127.13.175:5000/"
+  // URL: string = "http://192.168.15.55:5000/"
   token: string // Useful in Authentication
   headers: any // Useful when backend and frontend have different IP's
   opts: any // Find more details about backend configuration
@@ -44,6 +48,10 @@ export class ApiService {
     this.snackBar.open(message, action, {
       duration: 2600,
     })
+  }
+
+  noDeclineReason() {
+    this.snackBars("Note:", "Kindly fill reason to cancel")
   }
   // CSV Upload
   public upload(files: Set<File>): { [key: string]: Observable<number> } {
@@ -79,6 +87,34 @@ export class ApiService {
   GetEmployeeDetails() {
     return this.http.get(this.URL + 'lms/employeeDetails', this.opts).map(r => r.json())
   }
+  // get employee to see leave application history
+  getEmployee(data: any) {
+    return new Promise((resolve) => {
+      this.http.get(this.URL + 'lms/addEmployee/' + data, this.opts)
+        .map(res => res.json())
+        .subscribe(response => {
+          if (response.success) this.emitgetEmployee.emit(response.data)
+          else console.log(response) // this.snackBars(response.message, response.success)
+          resolve(true)
+        }, err => this.router.navigate(['/404']))
+    })
+  }
+  // get employee leaves
+  myLeaves(data: any) {
+    return new Promise((resolve) => {
+      this.http.get(this.URL + 'lms/applyLeave/' + data, this.opts)
+        .map(res => res.json())
+        .subscribe(response => {
+          if (response.success) this.emitMyLeaves.emit(response.data)
+          else {
+            if (response.messages == 'No application available currently') this.emitMyZero.emit(response)
+            else console.log(response) //  this.snackBars("! Success", "Try Again")
+          }
+          resolve(true)
+        }, err => this.router.navigate(['/404']))
+    })
+  }
+
   // Get Employee_on_leave
   getEOL() {
     return new Promise((resolve) => {
@@ -88,7 +124,7 @@ export class ApiService {
           if (response.success) {
             if (response.data.length > 0) this.emitEOL.emit(response.data)
             else this.emitZeroEOL.emit(response)
-          } else this.snackBars(response.message, response.success)
+          } else console.log(response) //  this.snackBars(response.message, response.success)
           resolve(true)
         }, err => this.router.navigate(['/404']))
     })
@@ -104,7 +140,7 @@ export class ApiService {
             if (response.result.length == 0) console.log("d")
             else this.emitgetHoliday.emit(response.result)
           }
-          else this.snackBars(response.message, response.success)
+          else console.log(response) //  this.snackBars(response.message, response.success)
           resolve(true)
         }, err => this.router.navigate(['/404']))
     })
@@ -159,14 +195,12 @@ export class ApiService {
       this.http.post(this.URL + 'lms/declineLeave', data, this.opts)
         .map(res => res.json())
         .subscribe(response => {
-          // console.log(response)
           if (response.success) {
-            // this.emitMyApplication.emit(response)
+            this.emitMyApplication.emit(response)
           } else this.snackBars(response.message, response.success)
           resolve(true)
         }, err => this.router.navigate(['/404']))
     })
-    // return this.http.post(this.URL + 'lms/declineLeave', data, this.opts).map(r => r.json())
   }
   // Post month dates to get employee on leave in a month
   postEOLBSDate(data: any) {
@@ -182,7 +216,7 @@ export class ApiService {
           if (response.success) {
             this.emitEmpOnLeave.emit(response.data)
             this.emitEmpApp.emit(response.app_detail)
-          } else this.snackBars(response.error, response.success)
+          } else console.log(response) //  this.snackBars(response.error, response.success)
           resolve(true)
         }, err => this.router.navigate(['/404']))
     })
@@ -200,5 +234,4 @@ export class ApiService {
   deleteEmp(data: any) {
     return this.http.post(this.URL + 'lms/deleteEmployee', JSON.stringify(data), this.opts).map(r => r.json())
   }
-
 }

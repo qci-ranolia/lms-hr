@@ -1,0 +1,29 @@
+button.btn-theme, button.btn-theme:hover {
+    background : #f44336;
+    color : #fff
+} .mat-button-toggle-checked{
+    background : #fafafa !important
+} .hid {
+    display : none;
+} .ovf-y {
+    overflow : hidden;
+    overflow-y : hidden
+} .ovf-y:hover {
+    overflow-y : auto
+} strong{
+    font-weight : 400;
+    small {
+        font-weight : 600
+    }
+}
+
+.mat-card-avatar {
+    height : 90px !important;
+    width : 90px !important;
+    box-shadow : 1px 1px 1px 1px #ccc inset !important;
+    line-height : 90px;
+    text-align : center
+} 
+.mat-list .mat-list-item .mat-list-item-content{
+    padding:0 16px !important 
+}

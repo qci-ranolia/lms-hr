@@ -1,40 +1,74 @@
-<!-- <div class="col-sm-12 p-0">
-    <div class="col-sm-12 float-left">
-        <h5 class="d-inline-block">Employee's List</h5>
-        <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box">
-            <table id="table_id" class="table table-striped" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th class="wd-7">QCID</th>
-                        <th class="wd-16">Employee name</th>
-                        <th class="wd-7">Email</th>
-                        <th class="wd-7">Gender</th>
-                        <th class="wd-10">Designation</th>
-                        <th class="wd-7">Board</th>
-                        <th class="wd-">Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="wd-7">emp.qci_id</td>
-                        <td class="wd-16">emp.name</td>
-                        <th class="wd-7">emp.email</th>
-                        <td class="wd-7">emp.gender</td>
-                        <td class="wd-10">emp.designation<br /><small>emp.type_of_employee</small></td>
-                        <td class="wd-7">emp.board</td>
-                        <td class="wd-">
-                            <mat-chip-list>
-                                <mat-chip><span matTooltip="Casual Leave">CL: emp.bal_cl</span></mat-chip>
-                                <mat-chip><span matTooltip="Sick Leave">SL: emp.bal_sl</span></mat-chip>
-                                <mat-chip><span matTooltip="Privileged Leave">PL: emp.bal_pl</span></mat-chip>
-                                <mat-chip><span matTooltip="Materinity Leave">ML: emp.bal_ml</span></mat-chip>
-                                <mat-chip><span matTooltip="Paterinity Leave">PTL: emp.bal_ptl</span></mat-chip>
-                                <mat-chip><span matTooltip="Extraordinary Leave">EOL: emp.bal_eol</span></mat-chip>
-                            </mat-chip-list>                                  
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+<div class="col-sm-12 p-0 d-flex justify-content-center">
+    <div class="col-sm-6 float-left p-0" *ngIf="hide">
+        <h5 class="col-sm-12">Application's Status</h5>
+        <div class="col-sm-12 h78 ovf-y">
+            <div class="col-sm-12 p-0 bg-white rad-box">
+                <mat-list>
+                    <mat-list-item *ngFor="let lev of leave; let i = index">
+                        <mat-chip-list>
+                            <mat-chip>{{i+1}}</mat-chip>
+                        </mat-chip-list>
+                        <div class="col-sm-12">
+                            <small class="text-muted d-block">Your leave from {{lev.date_from}} to {{lev.date_to}} is {{ lev.leave_status }} !</small>
+                            <small class="d-block" *ngIf="lev.leave_status == 'Rejected'">Reason: {{ lev.leave_reason }}</small>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </div>
         </div>
     </div>
-</div>-->
+    <div class="col-sm-6 float-left p-0">
+        <h5 class="col-sm-12">Profile Status</h5>
+        <div class="col-sm-12 h78 ovf-y">
+            <div class="col-sm-12 p-0 bg-white rad-box">
+                <mat-card class="example-card" style="box-shadow:none;">
+                    <mat-card-header>
+                        <div mat-card-avatar class="example-header-image">{{employee.qci_id}}</div>
+                        <mat-card-title>{{employee.name}}</mat-card-title>
+                        <mat-card-subtitle>{{employee.email}}&nbsp;(
+                            <strong>{{employee.designation}}</strong>)</mat-card-subtitle>
+                        <mat-card-subtitle>{{employee.type_of_employee}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <strong class="mb-3">Leave Balance:</strong>
+                        <div>
+                            <div class="d-inline-block col-sm-12 p-0">
+                                <div class="mb-2 col-sm-3 float-left p-0">
+                                    <strong class="text-muted">Casual Leave
+                                        <small class="d-block mb-2">{{ employee.bal_cl }}</small>
+                                    </strong>
+                                </div>
+                                <div class="mb-2 col-sm-3 float-left p-0">
+                                    <strong class="text-muted">Sick Leave
+                                        <small class="d-block mb-2">{{ employee.bal_sl }}</small>
+                                    </strong>
+                                </div>
+                                <div class="mb-2 col-sm-3 float-left p-0" *ngIf="employee.gender == 'Female'">
+                                    <strong class="text-muted">Materinity Leave
+                                        <small class="d-block mb-2">{{ employee.bal_ml }}</small>
+                                    </strong>
+                                </div>
+                                <div class="mb-2 col-sm-3 float-left p-0" *ngIf="employee.gender == 'Male'">
+                                    <strong class="text-muted">Paterinity Leave
+                                        <small class="d-block mb-2">{{ employee.bal_ptl }}</small>
+                                    </strong>
+                                </div>
+                                <div class="mb-2 col-sm-3 float-left p-0">
+                                    <strong class="text-muted">Privileged Leave
+                                        <small class="d-block mb-2">{{ employee.bal_pl }}</small>
+                                    </strong>
+                                </div>
+                                <div class="mb-2 col-sm-4 float-left p-0">
+                                    <strong class="text-muted">Extra Ordinary Leave
+                                        <small class="d-block mb-2">{{ employee.bal_eol }}</small>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

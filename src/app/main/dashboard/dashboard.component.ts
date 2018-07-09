@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // page loader
   loader: boolean = false
   hide: boolean = false
+  isDisabled: boolean = true
 
   tDate: any
   month: any
@@ -51,6 +52,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   unsubGetHoliday: any
   unsubCount: any
   unsubEmpApplication: any
+
   constructor(public dialog: MatDialog, private api: ApiService, private lms: LmsService) {//, private httpClient: HttpClient 
     var tmp = new Date()
     this.getDate = tmp.getDate()
@@ -65,6 +67,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this.unsubEmpOnLeaveTwo = this.api.emitEmpOnLeave.subscribe(r => {
       this.emp = r
+      console.log(this.emp)
     })
     this.unsubEmpApplication = this.api.emitEmpApp.subscribe(r => {
       this.empApplications = r
@@ -211,6 +214,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.getMonth = this.date.format(this.postDate + "/" + "MM/YYYY")
     }
   }
+
   ngOnDestroy() {
     this.unsubGetEmployees.unsubscribe()
     this.unsubEmployeesOnLeave.unsubscribe()

@@ -20,23 +20,25 @@ import { ServererrComponent } from './main/servererr/servererr.component'
 // Auth
 import { AuthService } from './services/auth.service';
 const routes: Routes = [
-  { path:'', component:NavComponent, children:[
-    { path:'dashboard', component:DashboardComponent, canActivate:[AuthService] },
-    { path:'', redirectTo:'/dashboard', pathMatch:'full', canActivate:[AuthService] },
-    { path:'employee-list', component:CrudComponent, canActivate:[AuthService] },
-    { path:'add-employee', component:AddEmpComponent , canActivate:[AuthService]},
-    { path:'employee-list/:id', component:EditEmpComponent , canActivate:[AuthService]},
-    { path:'employee-section', component:NewappComponent , canActivate:[AuthService]},
-    { path:'application-status', component:EolComponent , canActivate:[AuthService]},
-    { path : '404', component : ServererrComponent, canActivate : [ AuthService ] }
-  ]},
-  { path:'login', component:LoginComponent },
-  { path: '**', redirectTo: '/login'}
+  {
+    path: '', component: NavComponent, children: [
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthService] },
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full', canActivate: [AuthService] },
+      { path: 'add-employee', component: AddEmpComponent, canActivate: [AuthService] },
+      { path: 'employee-list', component: CrudComponent, canActivate: [AuthService] },
+      { path: 'employee-list/:id', component: EditEmpComponent, canActivate: [AuthService] },
+      { path: 'application', component: NewappComponent, canActivate: [AuthService] },
+      { path: 'application/:id', component: EolComponent, canActivate: [AuthService] },
+      { path: '404', component: ServererrComponent, canActivate: [AuthService] }
+    ]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 
 export class AppRoutingModule { }

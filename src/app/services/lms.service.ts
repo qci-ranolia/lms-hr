@@ -54,14 +54,14 @@ export class LmsService {
       if (el.success) {
         localStorage.setItem('token', el.token)
         this.emitLogin.emit()
-      } else console.log(el) //  this.snackBars(el.message, el.success)
+      } else this.snackBars(el.message, el.success)
     }, err => this.router.navigate(['/404'])
     )
   }
   getEmployees() {
     this.api.GetEmployeeDetails().subscribe(el => {
       if (el.success) this.emitgetEmployees.emit(el.data)
-      else console.log(el) //  this.snackBars(el.message, el.success) // this.snackBar.open('el.success was not true')
+      else this.snackBars(el.message, el.success) // this.snackBar.open('el.success was not true')
     }, err => this.router.navigate(['/404'])
     )
   }
@@ -87,7 +87,7 @@ export class LmsService {
   addEmp(employee: any) {
     this.api.addEmp(employee).subscribe(el => {
       if (el.success) this.router.navigate(['/employee-list'])
-      else console.log(el) //  this.snackBars(el.message, el.success)
+      else this.snackBars(el.message, el.success)
     }, err => this.router.navigate(['/404'])
     )
   }
@@ -99,7 +99,7 @@ export class LmsService {
       if (el.success) {
         this.router.navigate(['/employee-list'])
         this.getEmployees()
-      } else console.log(el) //  this.snackBars(el.message, el.success)
+      } else this.snackBars(el.message, el.success)
     }, err => this.router.navigate(['/404'])
     )
   }
@@ -108,7 +108,7 @@ export class LmsService {
     this.api.deleteEmp(tmp).subscribe(el => {
       if (el.success) {
         this.getEmployees()
-      } else console.log(el) //  this.snackBars(el.message, el.success)
+      } else this.snackBars(el.message, el.success)
     }, err => this.router.navigate(['/404'])
     )
   }

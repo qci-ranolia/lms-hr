@@ -1962,7 +1962,7 @@ var ApiService = /** @class */ (function () {
                 if (response.success)
                     _this.emitgetEmployee.emit(response.data);
                 else
-                    console.log(response); // this.snackBars(response.message, response.success)
+                    _this.snackBars(response.message, response.success);
                 resolve(true);
             }, function (err) { return _this.router.navigate(['/404']); });
         });
@@ -1980,7 +1980,7 @@ var ApiService = /** @class */ (function () {
                     if (response.messages == 'No application available currently')
                         _this.emitMyZero.emit(response);
                     else
-                        console.log(response); //  this.snackBars("! Success", "Try Again")
+                        _this.snackBars("! Success", "Try Again");
                 }
                 resolve(true);
             }, function (err) { return _this.router.navigate(['/404']); });
@@ -2000,7 +2000,7 @@ var ApiService = /** @class */ (function () {
                         _this.emitZeroEOL.emit(response);
                 }
                 else
-                    console.log(response); //  this.snackBars(response.message, response.success)
+                    _this.snackBars(response.message, response.success);
                 resolve(true);
             }, function (err) { return _this.router.navigate(['/404']); });
         });
@@ -2020,7 +2020,7 @@ var ApiService = /** @class */ (function () {
                         _this.emitgetHoliday.emit(response.result);
                 }
                 else
-                    console.log(response); //  this.snackBars(response.message, response.success)
+                    _this.snackBars(response.message, response.success);
                 resolve(true);
             }, function (err) { return _this.router.navigate(['/404']); });
         });
@@ -2111,7 +2111,7 @@ var ApiService = /** @class */ (function () {
                     _this.emitEmpApp.emit(response.app_detail);
                 }
                 else
-                    console.log(response); //  this.snackBars(response.error, response.success)
+                    _this.snackBars(response.error, response.success);
                 resolve(true);
             }, function (err) { return _this.router.navigate(['/404']); });
         });
@@ -2253,7 +2253,7 @@ var LmsService = /** @class */ (function () {
                 _this.emitLogin.emit();
             }
             else
-                console.log(el); //  this.snackBars(el.message, el.success)
+                _this.snackBars(el.message, el.success);
         }, function (err) { return _this.router.navigate(['/404']); });
     };
     LmsService.prototype.getEmployees = function () {
@@ -2262,7 +2262,7 @@ var LmsService = /** @class */ (function () {
             if (el.success)
                 _this.emitgetEmployees.emit(el.data);
             else
-                console.log(el); //  this.snackBars(el.message, el.success) // this.snackBar.open('el.success was not true')
+                _this.snackBars(el.message, el.success); // this.snackBar.open('el.success was not true')
         }, function (err) { return _this.router.navigate(['/404']); });
     };
     LmsService.prototype.getHoliday = function () {
@@ -2289,7 +2289,7 @@ var LmsService = /** @class */ (function () {
             if (el.success)
                 _this.router.navigate(['/employee-list']);
             else
-                console.log(el); //  this.snackBars(el.message, el.success)
+                _this.snackBars(el.message, el.success);
         }, function (err) { return _this.router.navigate(['/404']); });
     };
     LmsService.prototype.getEmpOnLeave = function (temp) {
@@ -2303,7 +2303,7 @@ var LmsService = /** @class */ (function () {
                 _this.getEmployees();
             }
             else
-                console.log(el); //  this.snackBars(el.message, el.success)
+                _this.snackBars(el.message, el.success);
         }, function (err) { return _this.router.navigate(['/404']); });
     };
     LmsService.prototype.deleteEmp = function (qci_id) {
@@ -2314,7 +2314,7 @@ var LmsService = /** @class */ (function () {
                 _this.getEmployees();
             }
             else
-                console.log(el); //  this.snackBars(el.message, el.success)
+                _this.snackBars(el.message, el.success);
         }, function (err) { return _this.router.navigate(['/404']); });
     };
     LmsService.prototype.postEOLBSDate = function (data) {

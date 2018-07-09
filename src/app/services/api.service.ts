@@ -5,7 +5,6 @@ import { Router } from '@angular/router'
 // import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject'
 import { Observable } from 'rxjs/Observable'
-
 import 'rxjs/add/operator/map'
 import { MatSnackBar } from '@angular/material' // remove from lms service after all promise< resolve,reject> successfully implemented here
 
@@ -94,7 +93,7 @@ export class ApiService {
         .map(res => res.json())
         .subscribe(response => {
           if (response.success) this.emitgetEmployee.emit(response.data)
-          else console.log(response) // this.snackBars(response.message, response.success)
+          else this.snackBars(response.message, response.success)
           resolve(true)
         }, err => this.router.navigate(['/404']))
     })
@@ -108,7 +107,7 @@ export class ApiService {
           if (response.success) this.emitMyLeaves.emit(response.data)
           else {
             if (response.messages == 'No application available currently') this.emitMyZero.emit(response)
-            else console.log(response) //  this.snackBars("! Success", "Try Again")
+            else  this.snackBars("! Success", "Try Again")
           }
           resolve(true)
         }, err => this.router.navigate(['/404']))
@@ -124,7 +123,7 @@ export class ApiService {
           if (response.success) {
             if (response.data.length > 0) this.emitEOL.emit(response.data)
             else this.emitZeroEOL.emit(response)
-          } else console.log(response) //  this.snackBars(response.message, response.success)
+          } else  this.snackBars(response.message, response.success)
           resolve(true)
         }, err => this.router.navigate(['/404']))
     })
@@ -140,7 +139,7 @@ export class ApiService {
             if (response.result.length == 0) console.log("d")
             else this.emitgetHoliday.emit(response.result)
           }
-          else console.log(response) //  this.snackBars(response.message, response.success)
+          else  this.snackBars(response.message, response.success)
           resolve(true)
         }, err => this.router.navigate(['/404']))
     })
@@ -216,7 +215,7 @@ export class ApiService {
           if (response.success) {
             this.emitEmpOnLeave.emit(response.data)
             this.emitEmpApp.emit(response.app_detail)
-          } else console.log(response) //  this.snackBars(response.error, response.success)
+          } else  this.snackBars(response.error, response.success)
           resolve(true)
         }, err => this.router.navigate(['/404']))
     })

@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let dd: any = tmp.getDate(), mm: any = tmp.getMonth() + 1, yyyy: any = tmp.getFullYear()
     if (dd < 10) dd = "0" + dd
     if (mm < 10) mm = "0" + mm
-    this.lms.getEmpOnLeave(dd + "/" + mm + "/" + yyyy)
+    this.api.getEmpOnLeave(dd + "/" + mm + "/" + yyyy)
     this.unsubLoader = this.lms.emitsload.subscribe(el => (this.loader = el))
     this.lms.showLoader()
     this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(r => (this.employee = Object.values(r)))
@@ -67,12 +67,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this.unsubEmpOnLeaveTwo = this.api.emitEmpOnLeave.subscribe(r => {
       this.emp = r
-      console.log(this.emp)
     })
     this.unsubEmpApplication = this.api.emitEmpApp.subscribe(r => {
       this.empApplications = r
     })
-
     this.unsubGetHoliday = this.api.emitgetHoliday.subscribe(el => {
       setTimeout(() => {
         for (let i = 0; i < el.length; i++) {
@@ -122,11 +120,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // Order does not matter here)
     this.api.getHoliday()
     this.lms.getEmployees()
-    this.lms.getEOL()
+    this.api.getEOL()
     // for count => getEmpOnLeave(data){}
-    this.lms.postEOLBSDate(this.count)
+    // this.lms.postEOLBSDate(this.count)
     // for count => getEmpOnLeave(data){}
-    this.api.getEmpOnLeave(this.emp)
+    // this.api.getEmpOnLeave(this.emp)
     // this.restricted = JSON.parse(this.restricted)
     this.daysArr = this.createCalendar(this.date)
     // this.ngSpinner.hide()
@@ -186,14 +184,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .map(n => {
         return moment(f).add(n, "d").format("DD")
       })
-    // setTimeout is set to get 'z' value after some delay and find all off days in a given month
-    /* setTimeout(() => {
-      days.map(n => {
-        if (z.indexOf(n) >= 0) this.offDays.push(n)
-      })
-      // console.log( this.offDays )
-    }, 400) */
-    // console.log( days )
     return days
   }
   public nextMonth() {
@@ -214,7 +204,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.getMonth = this.date.format(this.postDate + "/" + "MM/YYYY")
     }
   }
-
   ngOnDestroy() {
     this.unsubGetEmployees.unsubscribe()
     this.unsubEmployeesOnLeave.unsubscribe()

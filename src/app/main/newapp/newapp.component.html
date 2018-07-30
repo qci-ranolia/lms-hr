@@ -13,8 +13,8 @@
           <mat-expansion-panel-header>
             <mat-panel-title>
               <div class="triangle"></div>
-              <strong style="line-height:16px">
-                <small>{{ app.name }}</small>
+              <strong style="line-height:16px" *ngIf="!edit">
+                <small>{{app.name}}</small>
                 <small class="d-block text-muted" style="line-height:20px">{{app.email}}</small>
               </strong>
             </mat-panel-title>
@@ -92,22 +92,21 @@
               <button mat-raised-button (click)="acceptApp(app.application_id, app.qci_id)" [disabled]=dis>Accept</button>
               <mat-spinner class="pos-abs" *ngIf="spnnr" [diameter]="25"></mat-spinner>
             </mat-list-item>
+            <i class="fa fa-pencil-square-o pos-abs pl-3 pr-3 pt-2 pb-2" (click)="editApp()" aria-hidden="true"></i>
           </mat-list>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
     <!-- *ngIf="restHide"-->
     <div class="col-sm-6 pr-0">
-      <h5>Rest Applications
-        <small class="text-muted"> ( Rejected and accepted applications shown below )</small>
-      </h5>
+      <h5>Rest Applications<small class="text-muted">(Rejected and accepted applications shown below)</small></h5>
       <mat-accordion class="col-sm-12 float-left h78 ovf-y p-0">
-        <mat-expansion-panel class="d-inline-block col-sm-12 p-0 pos-rel" *ngFor="let approve of approvedLeave | reverse | filter : term; let i = index;">
+        <mat-expansion-panel class="d-inline-block col-sm-12 p-0 pos-rel" *ngFor="let approve of approvedLeave | reverse | filter : term; let i = index;" [class.active]="clicked === res" (click)="clicked = res">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <div class="triangle"></div>
               <strong style="line-height:16px">
-                <small>{{ approve.name }}</small>
+                <small>{{approve.name}}</small>
                 <small class="d-block text-muted" style="line-height:20px">{{approve.email}}</small>
               </strong>
             </mat-panel-title>
@@ -214,5 +213,108 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
+  </div>
+  <div class="col-sm-12 float-left na">
+    <mat-tab-group (selectedTabChange)="whichApplication($event)">
+      <mat-tab label="New Applications">
+        <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box">
+          <table id="table_new" class="table table-striped" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th class="wd-12">Application ID</th>
+                <th class="wd-16">Employee name</th>
+                <th class="wd-15">Designation</th>
+                <th class="wd-15">Leave Type</th>
+                <th class="wd-16">Date Applied</th>
+                <th class="wd-16">Application Date</th>
+                <th class="modify">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let app of application | reverse | filter : term; let i = index;">
+                <td class="wd-7"><a href="javascript:void(0)" class="text-primary" (click)="appInfo(app.application_id)"><u>{{app.application_id | slice:0:12 }}</u></a></td>
+                <td class="wd-16"><span :matTooltip="{{app.email}}">{{app.name}}</span></td>
+                <td class="wd-15"><span :matTooltip="{{app.board}}">{{app.designation}}</span></td>
+                <td class="wd-15"><span :matTooltip="{{app.leave_reason}}">{{app.leave_type}}</span></td>
+                <td class="wd-16">{{app.date_from}}-{{app.date_to}}</td>
+                <td class="wd-16">{{app.date_of_apply}}</td>
+                <td class="modify">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(app.application_id)"></i>
+                  <i class="fa fa-check" aria-hidden="true" (click)="appAccept(app.application_id)"></i>
+                  <i class="fa fa-times" aria-hidden="true" (click)="appCancel(app.application_id)"></i>
+                  <mat-icon class="mat-icon material-icons pos-rel" role="img" aria-hidden="true">more_vert</mat-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-tab>
+      <mat-tab label="Approved Applications">
+        <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box">
+          <table id="table_approve" class="table table-striped" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th class="wd-12">Application ID</th>
+                <th class="wd-16">Employee name</th>
+                <th class="wd-15">Designation</th>
+                <th class="wd-15">Leave Type</th>
+                <th class="wd-16">Date Applied</th>
+                <th class="wd-16">Application Date</th>
+                <th class="modify">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let approve of approvedLeave | reverse | filter : term; let i = index;">
+                <td class="wd-7"><a href="javascript:void(0)" class="text-primary" (click)="appInfo(approve.application_id)"><u>{{approve.application_id | slice:0:12 }}</u></a></td>
+                <td class="wd-16"><span :matTooltip="{{approve.email}}">{{approve.name}}</span></td>
+                <td class="wd-15"><span :matTooltip="{{approve.board}}">{{approve.designation}}</span></td>
+                <td class="wd-15"><span :matTooltip="{{approve.leave_reason}}">{{approve.leave_type}}</span></td>
+                <td class="wd-16">{{approve.date_from}}-{{approve.date_to}}</td>
+                <td class="wd-16">{{approve.date_of_apply}}</td>
+                <td class="modify">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(approve.application_id)"></i>
+                  <i class="fa fa-check" aria-hidden="true" (click)="appAccept(approve.application_id)"></i>
+                  <i class="fa fa-times" aria-hidden="true" (click)="appCancel(approve.application_id)"></i>
+                  <mat-icon class="mat-icon material-icons pos-rel" role="img" aria-hidden="true">more_vert</mat-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-tab>
+      <mat-tab label="Cancelled Applications">
+        <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box">
+          <table id="table_cancel" class="table table-striped" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th class="wd-12">Application ID</th>
+                <th class="wd-16">Employee name</th>
+                <th class="wd-15">Designation</th>
+                <th class="wd-15">Leave Type</th>
+                <th class="wd-16">Date Applied</th>
+                <th class="wd-16">Application Date</th>
+                <th class="modify">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cancel of cancelledLeave | reverse | filter : term; let i = index;">
+                <td class="wd-7"><a href="javascript:void(0)" class="text-primary" (click)="appInfo(cancel.application_id)"><u>{{cancel.application_id | slice:0:12 }}</u></a></td>
+                <td class="wd-16"><span :matTooltip="{{cancel.email}}">{{cancel.name}}</span></td>
+                <td class="wd-15"><span :matTooltip="{{cancel.board}}">{{cancel.designation}}</span></td>
+                <td class="wd-15"><span :matTooltip="{{cancel.leave_reason}}">{{cancel.leave_type}}</span></td>
+                <td class="wd-16">{{cancel.date_from}}-{{cancel.date_to}}</td>
+                <td class="wd-16">{{cancel.date_of_apply}}</td>
+                <td class="modify">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(cancel.application_id)"></i>
+                  <i class="fa fa-check" aria-hidden="true" (click)="appAccept(cancel.application_id)"></i>
+                  <i class="fa fa-times" aria-hidden="true" (click)="appCancel(cancel.application_id)"></i>
+                  <mat-icon class="mat-icon material-icons pos-rel" role="img" aria-hidden="true">more_vert</mat-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>

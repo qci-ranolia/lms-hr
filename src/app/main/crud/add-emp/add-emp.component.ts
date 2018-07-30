@@ -1,31 +1,24 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { LmsService } from '../../../services/lms.service'
-import { Router } from '@angular/router'
+import { ApiService } from '../../../services/api.service'
 
 @Component({
   selector: 'app-add-emp',
   templateUrl: './add-emp.component.html',
   styleUrls: ['./add-emp.component.scss']
 })
-
 export class AddEmpComponent implements OnInit, OnDestroy {
   gender : any
   type_of_employee : any
-
   showEmpTyp : any
   showGender : any
-  
   show : boolean = false
   hide : boolean = false
-  
   employee : any = new Object()
   loader : boolean = false
   form : any
-
   unsubLoader : any
-
-  constructor( private lms: LmsService, private router : Router ) {
-    
+  constructor( private api: ApiService, private lms: LmsService ){
     this.unsubLoader = this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
     this.showGender = [
@@ -38,9 +31,7 @@ export class AddEmpComponent implements OnInit, OnDestroy {
       { value: 'Professional' }
     ]
   }
-
   ngOnInit() { }
-
   getGender( item ) {
     this.gender = item
     if ( this.gender == 'Male' ) {
@@ -52,15 +43,12 @@ export class AddEmpComponent implements OnInit, OnDestroy {
       this.hide = false
     }
   }
-
   gettoe( item ) {
     this.type_of_employee = item
   }
-
-  addEmployee({ value, valid }){
-    this.lms.addEmp( this.employee )
+  addEmployee(){
+    this.api.addEmp(this.employee)
   }
-
   keyPress( event : any ) {
     const pattern = /[0-9\+\-\ ]/
     let inputChar = String.fromCharCode( event.charCode )
@@ -68,9 +56,7 @@ export class AddEmpComponent implements OnInit, OnDestroy {
       event.preventDefault()
     }
   }
-
   ngOnDestroy() {
     this.unsubLoader.unsubscribe()
   }
-
 }

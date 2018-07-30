@@ -1,0 +1,93 @@
+<div *ngIf="dialogData.event=='info'">
+    <mat-list class="pt-0">
+        <mat-list-item class="mb-3">
+            <div class="col-sm-6">
+                <strong class="text-muted"><small class="d-block">Name( QCI ID )</small></strong>
+                <small class="d-block">{{dialogData.name}}( {{dialogData.qci_id}} )</small>
+            </div>
+            <div class="col-sm-6">
+                <strong class="text-muted"><small class="d-block">Application ID</small></strong>
+                <small class="d-block">{{dialogData.application_id}}</small>
+            </div>
+        </mat-list-item>
+        <mat-list-item class="mb-3">
+            <div class="col-sm-6">
+                <strong class="text-muted"><small class="d-block">Email</small></strong>
+                <small class="d-block">{{dialogData.email}}</small>
+            </div>
+        </mat-list-item>
+        <mat-list-item class="mb-3">
+            <div class="col-sm-12">
+                <strong class="text-muted"><small class="d-block pb-2">Balance Leaves</small></strong>
+                <mat-chip-list>
+                    <mat-chip class="bg-light rad-box pt-1 pb-1">
+                        <span matTooltip="Casual Leave">CL: {{ dialogData.bal_cl }}</span>
+                    </mat-chip>
+                    <mat-chip class="bg-light rad-box pt-1 pb-1">
+                        <span matTooltip="Sick Leave">SL: {{ dialogData.bal_sl }}</span>
+                    </mat-chip>
+                    <mat-chip class="bg-light rad-box pt-1 pb-1">
+                        <span matTooltip="Privileged Leave">PL: {{ dialogData.bal_pl }}</span>
+                    </mat-chip>
+                    <mat-chip class="bg-light rad-box pt-1 pb-1" *ngIf="dialogData.gender == 'Female'">
+                        <span matTooltip="Materinity Leave">ML: {{ dialogData.bal_ml }}</span>
+                    </mat-chip>
+                    <mat-chip class="bg-light rad-box pt-1 pb-1" *ngIf="dialogData.gender == 'Male'">
+                        <span matTooltip="Paterinity Leave">PTL: {{ dialogData.bal_ptl }}</span>
+                    </mat-chip>
+                    <mat-chip class="bg-light rad-box pt-1 pb-1">
+                        <span matTooltip="Extraordinary Leave">EOL: {{ dialogData.bal_eol }}</span>
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+        </mat-list-item>
+    </mat-list>
+    <mat-divider></mat-divider>
+    <mat-list class="pt-0">
+        <mat-list-item class="mb-3">
+            <div class="col-sm-4 bg-light">
+                <strong class="text-muted"><small class="d-block">Leave reason</small></strong>
+            </div>
+            <div class="col-sm-8 snpdl">
+                <small class="d-block" :matTooltip="{{dialogData.leave_reason}}">{{dialogData.leave_reason}}</small>
+            </div>
+        </mat-list-item>
+    </mat-list>
+    <mat-divider></mat-divider>
+    <mat-list class="pt-0">
+        <mat-list-item class="pos-rel">
+            <button mat-raised-button color="accent" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button (click)="acceptApp(dialogData.application_id, dialogData.qci_id)">Accept</button><!-- [disabled]=dis-->&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button (click)="edit(this.dialogData.event='edit')">Edit</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button (click)="declineApp(decline_reason, dialogData.application_id)">Decline</button>
+            <mat-progress-bar class="clearfix pos-abs" mode="indeterminate" *ngIf="proBar"></mat-progress-bar>
+        </mat-list-item>
+    </mat-list>
+</div>
+<div *ngIf="dialogData.event=='edit'">
+    <mat-list class="pt-0">
+        <mat-list-item class="pos-rel">
+            <button mat-raised-button color="accent" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button (click)="modify()">Modify</button>
+            <mat-progress-bar class="clearfix pos-abs" mode="indeterminate" *ngIf="proBar"></mat-progress-bar>
+        </mat-list-item>
+    </mat-list>
+</div>
+<div *ngIf="dialogData.event=='accept'">
+    <mat-list class="pt-0">
+        <mat-list-item class="pos-rel">
+            <button mat-raised-button color="accent" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button (click)="acceptApp(dialogData.application_id, dialogData.qci_id)">Accept</button>
+            <mat-progress-bar class="clearfix pos-abs" mode="indeterminate" *ngIf="proBar"></mat-progress-bar>
+        </mat-list-item>
+    </mat-list>
+</div>
+<div *ngIf="dialogData.event=='decline'">
+    <mat-list class="pt-0">
+        <mat-list-item class="pos-rel">
+            <button mat-raised-button color="accent" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button (click)="declineApp(decline_reason, dialogData.application_id)">Decline</button>
+            <mat-progress-bar class="clearfix pos-abs" mode="indeterminate" *ngIf="proBar"></mat-progress-bar>
+        </mat-list-item>
+    </mat-list>
+</div>

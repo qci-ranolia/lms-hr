@@ -21,6 +21,7 @@ export class DialogComponent implements OnInit {
   uploadSuccessful = false 
 
   constructor( public dialogRef : MatDialogRef< DialogComponent >, public lms : LmsService, private api : ApiService ) {
+    console.log(dialogRef)
     this.api.emitgetHoliday.subscribe( e => e )
   }
 

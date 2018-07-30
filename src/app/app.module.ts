@@ -35,11 +35,12 @@ import { PiechartComponent } from './main/dashboard/piechart/piechart.component'
 import { DialogComponent } from './main/dashboard/dialog/dialog.component'
 // import { NgxChartsModule } from '@swimlane/ngx-charts'
 
-import { FlexLayoutModule } from '@angular/flex-layout'
+// import { FlexLayoutModule } from '@angular/flex-layout'
 import { JwtModule } from '@auth0/angular-jwt'
 import { NgPipesModule } from 'ngx-pipes'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { ServererrComponent } from './main/servererr/servererr.component'
+import { ServererrComponent } from './main/servererr/servererr.component';
+import { AppinfoComponent } from './main/newapp/appinfo/appinfo.component'
 
 export function tokenGetter() {
   return localStorage.getItem('access_token')
@@ -58,7 +59,8 @@ export function tokenGetter() {
     EditEmpComponent,
     PiechartComponent,
     DialogComponent,
-    ServererrComponent
+    ServererrComponent,
+    AppinfoComponent
   ],
   imports:[
     Ng2SearchPipeModule,
@@ -104,10 +106,13 @@ export function tokenGetter() {
     ],
   providers: [ LmsService, ApiService, AuthService,DatePipe],
   exports: [
-    DashboardComponent
+    DashboardComponent,
+    DialogComponent,
+    AppinfoComponent
   ],
   entryComponents: [
-    DialogComponent
+    DialogComponent,
+    AppinfoComponent
   ],
   bootstrap: [
     AppComponent

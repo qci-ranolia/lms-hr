@@ -1,5 +1,4 @@
 $color : rgba(33, 51, 151, 1);
-
 .nav-pos-search {
     position:fixed;
     z-index:1030;
@@ -25,23 +24,73 @@ $color : rgba(33, 51, 151, 1);
     overflow : hidden
 }
 .triangle::after{
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
+    content:"";
+    position:absolute;
+    width:0;
+    height:0;
     top:47px;
     left:0px;
-    box-sizing: border-box;
-    border: 1.05em solid black;
-    border-color: transparent transparent #fff #fff;
-    transform-origin: 0 0;
-    transform: rotate(-135deg);
+    box-sizing:border-box;
+    border:1.05em solid black;
+    border-color:transparent transparent #fff #fff;
+    transform-origin:0 0;
+    transform:rotate(-135deg);
     box-shadow:0px 0px 2px 0 rgba(100, 100, 100, 0.1)
-  }
-
-  .mat-progress-spinner {
-    width: 25px !important;
-    height: 25px!important;
-    top: 0;
-    left: -10% !important;
 }
+.mat-progress-spinner {
+    width:25px !important;
+    height:25px!important;
+    top:0;
+    left:-10% !important;
+}
+mat-list-item + .fa {display:none;cursor:pointer;}
+.mat-expanded:hover .fa.pos-abs {
+    transition:all 300ms ease-in 300ms;
+    top:inherit;
+    left:inherit;
+    bottom:24px;
+    border:1px solid #ccc;
+    right:26px;
+    box-shadow:3px 3px 5px 0px #f4f4f4;
+    display:inline-block;
+    border-radius:3px
+} .mat-expanded:hover .fa.pos-abs:active {
+    box-shadow:3px 3px 5px 0px #f4f4f4 inset;
+} .mat-tab-body.mat-tab-body-active {
+    right:0 !important;
+    max-width:100% !important
+} .mat-tab-labels .mat-tab-label-content{ line-height:49px; }
+table tr td .fa {
+    margin:0px 3px;
+    padding:4px 5px 2px;
+    font-size:13px;
+    position:relative;
+    top:-3px;
+    border-radius:20px;
+    transition: all 150ms ease 25ms;
+    opacity:0;    
+    line-height:16px;
+    cursor:pointer;
+    border:1px solid #c4c4c4;
+    color:#0c7cd5;
+}
+a.text-primary:focus, a.text-primary:hover, a.text-primary { color:#0c7cd5 !important }
+
+.table > tbody > tr > td {
+    padding:7px 8px 5px;
+}
+.table > tbody > tr:hover .fa {
+    transition: all 150ms ease 25ms;
+    opacity:1;
+} table tr td .fa:active{
+    box-shadow:1px 1px 5px 2px #ccc inset
+} .material-icons{
+    top:3px;
+    display:none;
+}/* 
+body.modal-open .modal.show{
+    transition: all 210ms ease-in-out 25ms
+}
+body .modal {
+    transition: all 210ms ease-in-out 25ms
+} */

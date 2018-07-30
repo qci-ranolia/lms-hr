@@ -3,12 +3,10 @@ import { ApiService } from './api.service'
 import { Router } from '@angular/router'
 import { MatSnackBar } from '@angular/material'
 
-import { HttpClient } from '@angular/common/http'
-
 @Injectable()
 export class LmsService {
-  loader: boolean = false
-  count: any
+  loader : boolean = false
+  count : any
 
   emitsload = new EventEmitter<any>()
   emithload = new EventEmitter<any>()
@@ -25,12 +23,11 @@ export class LmsService {
   emitCount = new EventEmitter<any>()
   emitEmpOnLeave = new EventEmitter<any>()
 
-  constructor(private api: ApiService, private router: Router, public snackBar: MatSnackBar) { } //, private httpClient: HttpClient
-
+  constructor(private api: ApiService, private router: Router, public snackBar: MatSnackBar) { }
   showLoader() {
     this.loader = true
     this.emitsload.emit(this.loader)
-    setTimeout(() => this.hideLoader(), 1000)
+    setTimeout(() => this.hideLoader(), 1000 )
   }
   hideLoader() {
     this.loader = false
@@ -41,81 +38,21 @@ export class LmsService {
       duration: 2600,
     })
   }
-  isLogin() {
-    if (localStorage.getItem('token')) {
-      this.router.navigate(['./'])
-    }
-  }
-  login(uname: string, pwd: string) {
-    let tmp: any
-    tmp = { email: uname, password: pwd }
-    let temp = JSON.stringify(tmp)
-    this.api.Login(temp).subscribe(el => {
-      if (el.success) {
-        localStorage.setItem('token', el.token)
-        this.emitLogin.emit()
-      } else this.snackBars(el.message, el.success)
-    }, err => this.router.navigate(['/404'])
-    )
-  }
-  getEmployees() {
+  getEmployees(){
     this.api.GetEmployeeDetails().subscribe(el => {
       if (el.success) this.emitgetEmployees.emit(el.data)
       else this.snackBars(el.message, el.success) // this.snackBar.open('el.success was not true')
     }, err => this.router.navigate(['/404'])
     )
   }
-  getHoliday() {
-    this.api.getHoliday()
-  }
-  getEOL() {
-    this.api.getEOL()
-  }
-  approvedLeave() {
-    this.api.approvedLeave()
-  }
-  cancelledLeave() {
-    this.api.cancelledLeave()
-  }
-  leaveForApproval(application: any) {
-    this.api.leaveForApproval(application)
-  }
-  declineLeave(tmp: any) {
-    this.api.declineLeave(tmp)
-  }
-
-  addEmp(employee: any) {
-    this.api.addEmp(employee).subscribe(el => {
-      if (el.success) this.router.navigate(['/employee-list'])
-      else this.snackBars(el.message, el.success)
-    }, err => this.router.navigate(['/404'])
-    )
-  }
-  getEmpOnLeave(temp: any) {
-    this.api.getEmpOnLeave(temp)
-  }
-  updateEmployee(employee: any) {
-    this.api.updateEmployee(employee).subscribe(el => {
-      if (el.success) {
-        this.router.navigate(['/employee-list'])
-        this.getEmployees()
-      } else this.snackBars(el.message, el.success)
-    }, err => this.router.navigate(['/404'])
-    )
-  }
   deleteEmp(qci_id: any) {
     let tmp = { qci_id: qci_id }
-    this.api.deleteEmp(tmp).subscribe(el => {
-      if (el.success) {
-        this.getEmployees()
-      } else this.snackBars(el.message, el.success)
-    }, err => this.router.navigate(['/404'])
-    )
+    this.api.deleteEmp(tmp)
   }
   postEOLBSDate(data: any) {
     this.api.postEOLBSDate(data).subscribe(el => {
       if (el.success) this.emitCount.emit(el.data)
-      else return false /* this.snackBars(el.error, el.success) */
+      else return false
     }, err => this.router.navigate(['/404'])
     )
   }

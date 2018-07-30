@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'// , Router, Params 
 import { LmsService } from '../../../services/lms.service'
+import { ApiService } from '../../../services/api.service'
 // import * as _ from "lodash"
 
 @Component({
@@ -21,7 +22,7 @@ export class EditEmpComponent implements OnInit, OnDestroy {
   unsubLoader: any
   unsubGetEmployees: any
 
-  constructor(private route: ActivatedRoute, private lms: LmsService) { // private router:Router,
+  constructor(private route: ActivatedRoute, private lms: LmsService, private api: ApiService ) { // private router:Router,
     this.unsubLoader = this.lms.emitsload.subscribe(el => this.loader = el)
     this.lms.showLoader()
 
@@ -45,10 +46,9 @@ export class EditEmpComponent implements OnInit, OnDestroy {
     this.lms.getEmployees()
   }
   updateEmployee() {
-    this.lms.updateEmployee(this.employee)
+    this.api.updateEmployee(this.employee)
   }
   ngOnDestroy() {
     this.unsubGetEmployees.unsubscribe()
   }
-
 }

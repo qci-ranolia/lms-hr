@@ -361,7 +361,7 @@ var AppRoutingModule = /** @class */ (function () {
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"whole\" *ngIf=\"loader\">\n    <div class=\"d-flex justify-content-center mt-5 pt-5\">\n        <div class=\"d-flex flex-column mt-5 pt-5\">\n            <div class=\"mt-5 pt-5\">\n                <!-- <h3 style=\"position:relative;left:-22px\"><strong>CTRL+SHIFT+I</strong></h3> -->\n                <mat-spinner mode=\"indeterminate\"></mat-spinner>\n            </div>\n        </div>\n    </div>\n</div>\n<router-outlet></router-outlet>"
+module.exports = "<div class=\"whole\" *ngIf=\"loader\">\n    <div class=\"d-flex justify-content-center mt-5 pt-5\">\n        <div class=\"d-flex flex-column mt-5 pt-5\">\n            <div class=\"mt-5 pt-5\">\n                <mat-spinner mode=\"indeterminate\"></mat-spinner>\n            </div>\n        </div>\n    </div>\n</div>\n<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -456,6 +456,7 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27_ngx_pipes__ = __webpack_require__("./node_modules/ngx-pipes/ngx-pipes.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_ng2_search_filter__ = __webpack_require__("./node_modules/ng2-search-filter/ng2-search-filter.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__main_servererr_servererr_component__ = __webpack_require__("./src/app/main/servererr/servererr.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__main_newapp_appinfo_appinfo_component__ = __webpack_require__("./src/app/main/newapp/appinfo/appinfo.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -488,6 +489,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+// import { NgxChartsModule } from '@swimlane/ngx-charts'
+// import { FlexLayoutModule } from '@angular/flex-layout'
+
 
 
 
@@ -513,7 +517,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_17__main_crud_edit_emp_edit_emp_component__["a" /* EditEmpComponent */],
                 __WEBPACK_IMPORTED_MODULE_24__main_dashboard_piechart_piechart_component__["a" /* PiechartComponent */],
                 __WEBPACK_IMPORTED_MODULE_25__main_dashboard_dialog_dialog_component__["a" /* DialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_29__main_servererr_servererr_component__["a" /* ServererrComponent */]
+                __WEBPACK_IMPORTED_MODULE_29__main_servererr_servererr_component__["a" /* ServererrComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__main_newapp_appinfo_appinfo_component__["a" /* AppinfoComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_28_ng2_search_filter__["a" /* Ng2SearchPipeModule */],
@@ -526,25 +531,25 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_4__angular_http__["c" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_13__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["a" /* MatAutocompleteModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["b" /* MatButtonModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["c" /* MatButtonToggleModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["d" /* MatCardModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["e" /* MatCheckboxModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["f" /* MatChipsModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["g" /* MatDatepickerModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["i" /* MatDialogModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["k" /* MatExpansionModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["l" /* MatGridListModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["m" /* MatIconModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["n" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["o" /* MatListModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["p" /* MatMenuModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["q" /* MatNativeDateModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["r" /* MatPaginatorModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["s" /* MatProgressBarModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["t" /* MatProgressSpinnerModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["u" /* MatRadioModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["v" /* MatRippleModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["w" /* MatSelectModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["x" /* MatSidenavModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["z" /* MatSliderModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["y" /* MatSlideToggleModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["B" /* MatSnackBarModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["C" /* MatSortModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["D" /* MatTableModule */],
-                __WEBPACK_IMPORTED_MODULE_22__angular_material__["E" /* MatTabsModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["F" /* MatToolbarModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["G" /* MatTooltipModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["b" /* MatAutocompleteModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["c" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["d" /* MatButtonToggleModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["e" /* MatCardModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["f" /* MatCheckboxModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["g" /* MatChipsModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["h" /* MatDatepickerModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["j" /* MatDialogModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["l" /* MatExpansionModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["m" /* MatGridListModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["n" /* MatIconModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["o" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["p" /* MatListModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["q" /* MatMenuModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["r" /* MatNativeDateModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["s" /* MatPaginatorModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["t" /* MatProgressBarModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["u" /* MatProgressSpinnerModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["v" /* MatRadioModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["w" /* MatRippleModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["x" /* MatSelectModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["y" /* MatSidenavModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["A" /* MatSliderModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["z" /* MatSlideToggleModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["C" /* MatSnackBarModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["D" /* MatSortModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["E" /* MatTableModule */],
+                __WEBPACK_IMPORTED_MODULE_22__angular_material__["F" /* MatTabsModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["G" /* MatToolbarModule */], __WEBPACK_IMPORTED_MODULE_22__angular_material__["H" /* MatTooltipModule */],
                 __WEBPACK_IMPORTED_MODULE_23_ng4_spinner__["a" /* Ng4SpinnerModule */],
                 __WEBPACK_IMPORTED_MODULE_6__angular_router__["c" /* RouterModule */].forRoot([
                     { path: 'login', component: __WEBPACK_IMPORTED_MODULE_14__login_login_component__["a" /* LoginComponent */] }
@@ -559,10 +564,13 @@ var AppModule = /** @class */ (function () {
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_19__services_lms_service__["a" /* LmsService */], __WEBPACK_IMPORTED_MODULE_18__services_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_20__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_21__angular_common__["d" /* DatePipe */]],
             exports: [
-                __WEBPACK_IMPORTED_MODULE_9__main_dashboard_dashboard_component__["a" /* DashboardComponent */]
+                __WEBPACK_IMPORTED_MODULE_9__main_dashboard_dashboard_component__["a" /* DashboardComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__main_dashboard_dialog_dialog_component__["a" /* DialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__main_newapp_appinfo_appinfo_component__["a" /* AppinfoComponent */]
             ],
             entryComponents: [
-                __WEBPACK_IMPORTED_MODULE_25__main_dashboard_dialog_dialog_component__["a" /* DialogComponent */]
+                __WEBPACK_IMPORTED_MODULE_25__main_dashboard_dialog_dialog_component__["a" /* DialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__main_newapp_appinfo_appinfo_component__["a" /* AppinfoComponent */]
             ],
             bootstrap: [
                 __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]
@@ -597,7 +605,7 @@ module.exports = ".bg-white {\n  -webkit-box-shadow: 0px 11px 20px -10px #aaa;\n
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_lms_service__ = __webpack_require__("./src/app/services/lms.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_service__ = __webpack_require__("./src/app/services/api.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -611,17 +619,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(lms, router) {
+    function LoginComponent(api, router) {
         var _this = this;
-        this.lms = lms;
+        this.api = api;
         this.router = router;
-        this.lms.isLogin();
-        this.lms.emitLogin.subscribe(function (res) { return _this.router.navigate(['/']); });
+        this.api.isLogin();
+        this.unsubLogin = this.api.emitLogin.subscribe(function (res) { return _this.router.navigate(['/']); });
     }
     LoginComponent.prototype.ngOnInit = function () { };
     LoginComponent.prototype.isLogin = function () {
-        this.lms.login(this.uname, this.pwd);
-        localStorage.setItem('userName', this.uname);
+        this.api.login(this.uname, this.pwd);
+    };
+    LoginComponent.prototype.ngOnDestroy = function () {
+        this.unsubLogin.unsubscribe();
     };
     LoginComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -629,7 +639,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/login/login.component.html"),
             styles: [__webpack_require__("./src/app/login/login.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_lms_service__["a" /* LmsService */], __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -659,7 +669,7 @@ module.exports = ""
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddEmpComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_lms_service__ = __webpack_require__("./src/app/services/lms.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_service__ = __webpack_require__("./src/app/services/api.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -673,10 +683,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var AddEmpComponent = /** @class */ (function () {
-    function AddEmpComponent(lms, router) {
+    function AddEmpComponent(api, lms) {
         var _this = this;
+        this.api = api;
         this.lms = lms;
-        this.router = router;
         this.show = false;
         this.hide = false;
         this.employee = new Object();
@@ -708,9 +718,8 @@ var AddEmpComponent = /** @class */ (function () {
     AddEmpComponent.prototype.gettoe = function (item) {
         this.type_of_employee = item;
     };
-    AddEmpComponent.prototype.addEmployee = function (_a) {
-        var value = _a.value, valid = _a.valid;
-        this.lms.addEmp(this.employee);
+    AddEmpComponent.prototype.addEmployee = function () {
+        this.api.addEmp(this.employee);
     };
     AddEmpComponent.prototype.keyPress = function (event) {
         var pattern = /[0-9\+\-\ ]/;
@@ -728,7 +737,7 @@ var AddEmpComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/main/crud/add-emp/add-emp.component.html"),
             styles: [__webpack_require__("./src/app/main/crud/add-emp/add-emp.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_lms_service__["a" /* LmsService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_1__services_lms_service__["a" /* LmsService */]])
     ], AddEmpComponent);
     return AddEmpComponent;
 }());
@@ -758,6 +767,7 @@ module.exports = ""
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CrudComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_lms_service__ = __webpack_require__("./src/app/services/lms.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_service__ = __webpack_require__("./src/app/services/api.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -769,10 +779,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var CrudComponent = /** @class */ (function () {
-    function CrudComponent(lms) {
+    function CrudComponent(lms, api) {
         var _this = this;
         this.lms = lms;
+        this.api = api;
         this.employee = new Array;
         this.loader = false;
         this.unsubLoader = this.lms.emitsload.subscribe(function (el) { return _this.loader = el; });
@@ -795,7 +807,7 @@ var CrudComponent = /** @class */ (function () {
         this.lms.getEmployees();
     };
     CrudComponent.prototype.deleteEmp = function (qci_id) {
-        this.lms.deleteEmp(qci_id);
+        this.api.deleteEmp(qci_id);
     };
     CrudComponent.prototype.ngOnDestroy = function () {
         this.unsubLoader.unsubscribe();
@@ -807,7 +819,7 @@ var CrudComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/main/crud/crud.component.html"),
             styles: [__webpack_require__("./src/app/main/crud/crud.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_lms_service__["a" /* LmsService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_lms_service__["a" /* LmsService */], __WEBPACK_IMPORTED_MODULE_2__services_api_service__["a" /* ApiService */]])
     ], CrudComponent);
     return CrudComponent;
 }());
@@ -838,6 +850,7 @@ module.exports = ""
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_lms_service__ = __webpack_require__("./src/app/services/lms.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_api_service__ = __webpack_require__("./src/app/services/api.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -850,12 +863,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
  // , Router, Params 
 
+
 // import * as _ from "lodash"
 var EditEmpComponent = /** @class */ (function () {
-    function EditEmpComponent(route, lms) {
+    function EditEmpComponent(route, lms, api) {
         var _this = this;
         this.route = route;
         this.lms = lms;
+        this.api = api;
         this.employee = new Object();
         this.show = false;
         this.hide = false;
@@ -882,7 +897,7 @@ var EditEmpComponent = /** @class */ (function () {
         this.lms.getEmployees();
     };
     EditEmpComponent.prototype.updateEmployee = function () {
-        this.lms.updateEmployee(this.employee);
+        this.api.updateEmployee(this.employee);
     };
     EditEmpComponent.prototype.ngOnDestroy = function () {
         this.unsubGetEmployees.unsubscribe();
@@ -893,7 +908,7 @@ var EditEmpComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/main/crud/edit-emp/edit-emp.component.html"),
             styles: [__webpack_require__("./src/app/main/crud/edit-emp/edit-emp.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */], __WEBPACK_IMPORTED_MODULE_2__services_lms_service__["a" /* LmsService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */], __WEBPACK_IMPORTED_MODULE_2__services_lms_service__["a" /* LmsService */], __WEBPACK_IMPORTED_MODULE_3__services_api_service__["a" /* ApiService */]])
     ], EditEmpComponent);
     return EditEmpComponent;
 }());
@@ -973,14 +988,13 @@ var DashboardComponent = /** @class */ (function () {
             dd = "0" + dd;
         if (mm < 10)
             mm = "0" + mm;
-        this.lms.getEmpOnLeave(dd + "/" + mm + "/" + yyyy);
+        this.api.getEmpOnLeave(dd + "/" + mm + "/" + yyyy);
         this.unsubLoader = this.lms.emitsload.subscribe(function (el) { return (_this.loader = el); });
         this.lms.showLoader();
         this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(function (r) { return (_this.employee = Object.values(r)); });
         this.unsubEmployeesOnLeave = this.lms.emitEOL.subscribe(function (r) { return (_this.applications = r); });
         this.unsubEmpOnLeaveTwo = this.api.emitEmpOnLeave.subscribe(function (r) {
             _this.emp = r;
-            console.log(_this.emp);
         });
         this.unsubEmpApplication = this.api.emitEmpApp.subscribe(function (r) {
             _this.empApplications = r;
@@ -1039,11 +1053,11 @@ var DashboardComponent = /** @class */ (function () {
         // Order does not matter here)
         this.api.getHoliday();
         this.lms.getEmployees();
-        this.lms.getEOL();
+        this.api.getEOL();
         // for count => getEmpOnLeave(data){}
-        this.lms.postEOLBSDate(this.count);
+        // this.lms.postEOLBSDate(this.count)
         // for count => getEmpOnLeave(data){}
-        this.api.getEmpOnLeave(this.emp);
+        // this.api.getEmpOnLeave(this.emp)
         // this.restricted = JSON.parse(this.restricted)
         this.daysArr = this.createCalendar(this.date);
         // this.ngSpinner.hide()
@@ -1103,14 +1117,6 @@ var DashboardComponent = /** @class */ (function () {
             .map(function (n) {
             return __WEBPACK_IMPORTED_MODULE_2_moment__(f).add(n, "d").format("DD");
         });
-        // setTimeout is set to get 'z' value after some delay and find all off days in a given month
-        /* setTimeout(() => {
-          days.map(n => {
-            if (z.indexOf(n) >= 0) this.offDays.push(n)
-          })
-          // console.log( this.offDays )
-        }, 400) */
-        // console.log( days )
         return days;
     };
     DashboardComponent.prototype.nextMonth = function () {
@@ -1148,7 +1154,7 @@ var DashboardComponent = /** @class */ (function () {
         })
         // NABCB, NABET, NBQP, NABH, NABL
         ,
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_material__["h" /* MatDialog */], __WEBPACK_IMPORTED_MODULE_5__services_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_4__services_lms_service__["a" /* LmsService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_material__["i" /* MatDialog */], __WEBPACK_IMPORTED_MODULE_5__services_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_4__services_lms_service__["a" /* LmsService */]])
     ], DashboardComponent);
     return DashboardComponent;
 }());
@@ -1206,6 +1212,7 @@ var DialogComponent = /** @class */ (function () {
         this.showCancelButton = true;
         this.uploading = false;
         this.uploadSuccessful = false;
+        console.log(dialogRef);
         this.api.emitgetHoliday.subscribe(function (e) { return e; });
     }
     DialogComponent.prototype.ngOnInit = function () { };
@@ -1265,7 +1272,7 @@ var DialogComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/main/dashboard/dialog/dialog.component.html"),
             styles: [__webpack_require__("./src/app/main/dashboard/dialog/dialog.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_material__["j" /* MatDialogRef */], __WEBPACK_IMPORTED_MODULE_4__services_lms_service__["a" /* LmsService */], __WEBPACK_IMPORTED_MODULE_2__services_api_service__["a" /* ApiService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MatDialogRef */], __WEBPACK_IMPORTED_MODULE_4__services_lms_service__["a" /* LmsService */], __WEBPACK_IMPORTED_MODULE_2__services_api_service__["a" /* ApiService */]])
     ], DialogComponent);
     return DialogComponent;
 }());
@@ -1589,17 +1596,130 @@ var NavComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/main/newapp/appinfo/appinfo.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"dialogData.event=='info'\">\n    <mat-list class=\"pt-0\">\n        <mat-list-item class=\"mb-3\">\n            <div class=\"col-sm-6\">\n                <strong class=\"text-muted\"><small class=\"d-block\">Name( QCI ID )</small></strong>\n                <small class=\"d-block\">{{dialogData.name}}( {{dialogData.qci_id}} )</small>\n            </div>\n            <div class=\"col-sm-6\">\n                <strong class=\"text-muted\"><small class=\"d-block\">Application ID</small></strong>\n                <small class=\"d-block\">{{dialogData.application_id}}</small>\n            </div>\n        </mat-list-item>\n        <mat-list-item class=\"mb-3\">\n            <div class=\"col-sm-6\">\n                <strong class=\"text-muted\"><small class=\"d-block\">Email</small></strong>\n                <small class=\"d-block\">{{dialogData.email}}</small>\n            </div>\n        </mat-list-item>\n        <mat-list-item class=\"mb-3\">\n            <div class=\"col-sm-12\">\n                <strong class=\"text-muted\"><small class=\"d-block pb-2\">Balance Leaves</small></strong>\n                <mat-chip-list>\n                    <mat-chip class=\"bg-light rad-box pt-1 pb-1\">\n                        <span matTooltip=\"Casual Leave\">CL: {{ dialogData.bal_cl }}</span>\n                    </mat-chip>\n                    <mat-chip class=\"bg-light rad-box pt-1 pb-1\">\n                        <span matTooltip=\"Sick Leave\">SL: {{ dialogData.bal_sl }}</span>\n                    </mat-chip>\n                    <mat-chip class=\"bg-light rad-box pt-1 pb-1\">\n                        <span matTooltip=\"Privileged Leave\">PL: {{ dialogData.bal_pl }}</span>\n                    </mat-chip>\n                    <mat-chip class=\"bg-light rad-box pt-1 pb-1\" *ngIf=\"dialogData.gender == 'Female'\">\n                        <span matTooltip=\"Materinity Leave\">ML: {{ dialogData.bal_ml }}</span>\n                    </mat-chip>\n                    <mat-chip class=\"bg-light rad-box pt-1 pb-1\" *ngIf=\"dialogData.gender == 'Male'\">\n                        <span matTooltip=\"Paterinity Leave\">PTL: {{ dialogData.bal_ptl }}</span>\n                    </mat-chip>\n                    <mat-chip class=\"bg-light rad-box pt-1 pb-1\">\n                        <span matTooltip=\"Extraordinary Leave\">EOL: {{ dialogData.bal_eol }}</span>\n                    </mat-chip>\n                </mat-chip-list>\n            </div>\n        </mat-list-item>\n    </mat-list>\n    <mat-divider></mat-divider>\n    <mat-list class=\"pt-0\">\n        <mat-list-item class=\"mb-3\">\n            <div class=\"col-sm-4 bg-light\">\n                <strong class=\"text-muted\"><small class=\"d-block\">Leave reason</small></strong>\n            </div>\n            <div class=\"col-sm-8 snpdl\">\n                <small class=\"d-block\" :matTooltip=\"{{dialogData.leave_reason}}\">{{dialogData.leave_reason}}</small>\n            </div>\n        </mat-list-item>\n    </mat-list>\n    <mat-divider></mat-divider>\n    <mat-list class=\"pt-0\">\n        <mat-list-item class=\"pos-rel\">\n            <button mat-raised-button color=\"accent\" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;\n            <button mat-raised-button (click)=\"acceptApp(dialogData.application_id, dialogData.qci_id)\">Accept</button><!-- [disabled]=dis-->&nbsp;&nbsp;&nbsp;\n            <button mat-raised-button (click)=\"edit(this.dialogData.event='edit')\">Edit</button>&nbsp;&nbsp;&nbsp;\n            <button mat-raised-button (click)=\"declineApp(decline_reason, dialogData.application_id)\">Decline</button>\n            <mat-progress-bar class=\"clearfix pos-abs\" mode=\"indeterminate\" *ngIf=\"proBar\"></mat-progress-bar>\n        </mat-list-item>\n    </mat-list>\n</div>\n<div *ngIf=\"dialogData.event=='edit'\">\n    <mat-list class=\"pt-0\">\n        <mat-list-item class=\"pos-rel\">\n            <button mat-raised-button color=\"accent\" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;\n            <button mat-raised-button (click)=\"modify()\">Modify</button>\n            <mat-progress-bar class=\"clearfix pos-abs\" mode=\"indeterminate\" *ngIf=\"proBar\"></mat-progress-bar>\n        </mat-list-item>\n    </mat-list>\n</div>\n<div *ngIf=\"dialogData.event=='accept'\">\n    <mat-list class=\"pt-0\">\n        <mat-list-item class=\"pos-rel\">\n            <button mat-raised-button color=\"accent\" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;\n            <button mat-raised-button (click)=\"acceptApp(dialogData.application_id, dialogData.qci_id)\">Accept</button>\n            <mat-progress-bar class=\"clearfix pos-abs\" mode=\"indeterminate\" *ngIf=\"proBar\"></mat-progress-bar>\n        </mat-list-item>\n    </mat-list>\n</div>\n<div *ngIf=\"dialogData.event=='decline'\">\n    <mat-list class=\"pt-0\">\n        <mat-list-item class=\"pos-rel\">\n            <button mat-raised-button color=\"accent\" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;\n            <button mat-raised-button (click)=\"declineApp(decline_reason, dialogData.application_id)\">Decline</button>\n            <mat-progress-bar class=\"clearfix pos-abs\" mode=\"indeterminate\" *ngIf=\"proBar\"></mat-progress-bar>\n        </mat-list-item>\n    </mat-list>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/main/newapp/appinfo/appinfo.component.scss":
+/***/ (function(module, exports) {
+
+module.exports = "/* .mat-progress-spinner {\n    width:25px !important;\n    height:25px!important;\n    top:0;\n    left:-10% !important;\n} */\n.mat-dialog-container {\n  padding: 0; }\n.mat-progress-bar {\n  clear: both;\n  width: 100% !important;\n  height: 5px !important;\n  top: 0;\n  left: 0% !important; }\n.mat-list .mat-list-item .mat-list-item-content {\n  height: 32px; }\n.snpdl {\n  max-height: 48px;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  line-height: 16px;\n  -webkit-box-orient: vertical;\n  overflow: hidden;\n  word-spacing: 3px; }\n"
+
+/***/ }),
+
+/***/ "./src/app/main/newapp/appinfo/appinfo.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppinfoComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_service__ = __webpack_require__("./src/app/services/api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_lms_service__ = __webpack_require__("./src/app/services/lms.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__("./node_modules/moment/moment.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+
+
+
+
+
+// import { EventEmitter } from 'events';
+var AppinfoComponent = /** @class */ (function () {
+    function AppinfoComponent(data, datepipe, dialogRef, lms, api) {
+        this.data = data;
+        this.datepipe = datepipe;
+        this.dialogRef = dialogRef;
+        this.lms = lms;
+        this.api = api;
+        this.proBar = false;
+        this.event = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+    }
+    AppinfoComponent.prototype.ngOnInit = function () {
+        this.dialogData = this.data;
+        console.log(this.dialogData);
+    };
+    AppinfoComponent.prototype.edit = function () {
+        // this.event.emit(this.dialogData)
+        // this.proBar = !this.proBar
+        // setTimeout(() => this.proBar = false, 1500 )
+        // this.event.subscribe(el=> {
+        //   el.event = "edit"
+        //   this.dialogData = el
+        // })
+    };
+    AppinfoComponent.prototype.modify = function () {
+        // let c = "edit" 
+        // this.event.emit(c)
+    };
+    // accept leave application
+    AppinfoComponent.prototype.acceptApp = function (app_id, qci_id) {
+        // this.dis = true
+        // this.spnnr = true
+        var date = new Date(), latest_date = this.datepipe.transform(date, 'dd/MM/yyyy'), tmp = { application_id: app_id, qci_id: qci_id, date_reviewed: latest_date };
+        this.api.leaveForApproval(tmp);
+    };
+    // decline leave application
+    AppinfoComponent.prototype.declineApp = function (dec_reason, app_ids) {
+        // this.dis = true
+        // this.spnnr = true
+        var date = __WEBPACK_IMPORTED_MODULE_4_moment__().format("DD/MM/YYYY");
+        var tmp = { application_id: app_ids, date_reviewed: date, decline_reason: dec_reason };
+        if (dec_reason)
+            this.api.declineLeave(tmp);
+        else {
+            // this.dis = false
+            // this.spnnr = false
+            this.api.noDeclineReason();
+        }
+    };
+    AppinfoComponent.prototype.ngOnDestroy = function () {
+        // unsubscribe
+    };
+    AppinfoComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-appinfo',
+            template: __webpack_require__("./src/app/main/newapp/appinfo/appinfo.component.html"),
+            styles: [__webpack_require__("./src/app/main/newapp/appinfo/appinfo.component.scss")]
+        }),
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [Object, __WEBPACK_IMPORTED_MODULE_5__angular_common__["d" /* DatePipe */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["k" /* MatDialogRef */], __WEBPACK_IMPORTED_MODULE_3__services_lms_service__["a" /* LmsService */], __WEBPACK_IMPORTED_MODULE_2__services_api_service__["a" /* ApiService */]])
+    ], AppinfoComponent);
+    return AppinfoComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/main/newapp/newapp.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-sm-12 mt-5 pt-5 justify-content-center\" style=\"display:none\">\n  <div class=\"text-center mt-5 pt-5\">No application found...</div>\n</div>\n<div class=\"col-sm-12 p-0\">\n  <div class=\"col-sm-12 row justify-content-center pr-0\">\n    <div class=\"nav-pos-search col-sm-3\">\n      <input class=\"text-white col-sm-12\" placeholder=\"Search...\" [(ngModel)]=\"term\">\n    </div>\n    <div class=\"col-sm-6\" *ngIf=\"hide\">\n      <h5>New Applications</h5>\n      <mat-accordion class=\"col-sm-12 float-left h78 ovf-y p-0\">\n        <mat-expansion-panel class=\"d-inline-block col-sm-12 p-0 pos-rel\" *ngFor=\"let app of application | reverse | filter : term; let i = index;\">\n          <mat-expansion-panel-header>\n            <mat-panel-title>\n              <div class=\"triangle\"></div>\n              <strong style=\"line-height:16px\">\n                <small>{{ app.name }}</small>\n                <small class=\"d-block text-muted\" style=\"line-height:20px\">{{app.email}}</small>\n              </strong>\n            </mat-panel-title>\n            <mat-panel-description class=\"pt-1\">{{app.designation}}, {{app.board}}</mat-panel-description>\n          </mat-expansion-panel-header>\n          <mat-list>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Applied date</small>\n                </strong>\n                <small class=\"d-block\">{{app.date_from}} to {{app.date_to}}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Application ID</small>\n                </strong>\n                <small class=\"d-block\">{{app.application_id}}</small>\n              </div>\n            </mat-list-item>\n            <br *ngIf=\"!toggle\" />\n            <mat-divider *ngIf=\"!toggle\"></mat-divider>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Leave Type</small>\n                </strong>\n                <small class=\"d-block\">{{ app.leave_type }}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Date of application</small>\n                </strong>\n                <small class=\"d-block\">{{ app.date_of_apply }}</small>\n              </div>\n            </mat-list-item>\n            <br *ngIf=\"!toggle\" />\n            <mat-divider *ngIf=\"!toggle\"></mat-divider>\n            <mat-list-item>\n              <div class=\"col-sm-12 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Reason </small>\n                </strong>\n                <small class=\"d-block\">{{app.leave_reason}}</small>\n              </div>\n            </mat-list-item>\n            <br />\n            <mat-divider></mat-divider>\n            <mat-list-item>\n              <div class=\"col-sm-12 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Any Attachment\n                    <mat-icon>help_outline</mat-icon>\n                  </small>\n                </strong>\n                <small class=\"d-block\">Not Found</small>\n              </div>\n            </mat-list-item>\n            <br />\n            <mat-divider></mat-divider>\n            <br />\n            <mat-list-item *ngIf=\"toggle\">\n              <mat-form-field class=\"col-sm-12 p-0 mt-3\">\n                <textarea matInput placeholder=\"Reason for cancel\" [(ngModel)]=\"decline_reason\" name=\"Decline Reason\"></textarea>\n              </mat-form-field>\n            </mat-list-item>\n            <br />\n            <mat-list-item class=\"pos-rel\" *ngIf=\"toggle\">\n              <button mat-raised-button color=\"accent\" (click)=\"!toggler()\">Go Back</button>&nbsp;&nbsp;&nbsp;\n              <button mat-raised-button (click)=\"declineApp(decline_reason, app.application_id)\" [disabled]=dis>Submit</button>\n              <mat-spinner class=\"pos-abs\" *ngIf=\"spnnr\" [diameter]=\"25\"></mat-spinner>\n            </mat-list-item>\n            <mat-list-item class=\"pos-rel\" *ngIf=\"!toggle\">\n              <button mat-raised-button color=\"accent\" (click)=\"toggler()\">Cancel</button>&nbsp;&nbsp;&nbsp;\n              <button mat-raised-button (click)=\"acceptApp(app.application_id, app.qci_id)\" [disabled]=dis>Accept</button>\n              <mat-spinner class=\"pos-abs\" *ngIf=\"spnnr\" [diameter]=\"25\"></mat-spinner>\n            </mat-list-item>\n          </mat-list>\n        </mat-expansion-panel>\n      </mat-accordion>\n    </div>\n    <!-- *ngIf=\"restHide\"-->\n    <div class=\"col-sm-6 pr-0\">\n      <h5>Rest Applications\n        <small class=\"text-muted\"> ( Rejected and accepted applications shown below )</small>\n      </h5>\n      <mat-accordion class=\"col-sm-12 float-left h78 ovf-y p-0\">\n        <mat-expansion-panel class=\"d-inline-block col-sm-12 p-0 pos-rel\" *ngFor=\"let approve of approvedLeave | reverse | filter : term; let i = index;\">\n          <mat-expansion-panel-header>\n            <mat-panel-title>\n              <div class=\"triangle\"></div>\n              <strong style=\"line-height:16px\">\n                <small>{{ approve.name }}</small>\n                <small class=\"d-block text-muted\" style=\"line-height:20px\">{{approve.email}}</small>\n              </strong>\n            </mat-panel-title>\n            <mat-panel-description class=\"pt-1\">{{approve.designation}}, {{approve.board}}</mat-panel-description>\n          </mat-expansion-panel-header>\n          <mat-list>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Applied date</small>\n                </strong>\n                <small class=\"d-block\">{{approve.date_from}} to {{approve.date_to}}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Application ID</small>\n                </strong>\n                <small class=\"d-block\">{{approve.application_id}}</small>\n              </div>\n            </mat-list-item>\n            <br *ngIf=\"!toggle\" />\n            <mat-divider *ngIf=\"!toggle\"></mat-divider>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Leave Type</small>\n                </strong>\n                <small class=\"d-block\">{{ approve.leave_type }}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Date of application</small>\n                </strong>\n                <small class=\"d-block\">{{ approve.date_of_apply }}</small>\n              </div>\n            </mat-list-item>\n            <br />\n            <mat-divider></mat-divider>\n            <mat-list-item>\n              <div class=\"col-sm-12 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Reason </small>\n                </strong>\n                <small class=\"d-block\">{{approve.leave_reason}}</small>\n              </div>\n            </mat-list-item>\n            <br />\n          </mat-list>\n        </mat-expansion-panel>\n        <mat-expansion-panel class=\"d-inline-block col-sm-12 p-0 pos-rel\" *ngFor=\"let cancel of cancelledLeave | reverse | filter : term; let i = index;\">\n          <mat-expansion-panel-header>\n            <mat-panel-title>\n              <div class=\"triangle\"></div>\n              <strong style=\"line-height:16px\">\n                <small>{{ cancel.name }}</small>\n                <small class=\"d-block text-muted\" style=\"line-height:20px\">{{cancel.email}}</small>\n              </strong>\n            </mat-panel-title>\n            <mat-panel-description class=\"pt-1\">{{cancel.designation}}, {{cancel.board}}</mat-panel-description>\n          </mat-expansion-panel-header>\n          <mat-list>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Applied date</small>\n                </strong>\n                <small class=\"d-block\">{{cancel.date_from}} to {{cancel.date_to}}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Application ID</small>\n                </strong>\n                <small class=\"d-block\">{{cancel.application_id}}</small>\n              </div>\n            </mat-list-item>\n            <br *ngIf=\"!toggle\" />\n            <mat-divider *ngIf=\"!toggle\"></mat-divider>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Leave Type</small>\n                </strong>\n                <small class=\"d-block\">{{ cancel.leave_type }}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Date of application</small>\n                </strong>\n                <small class=\"d-block\">{{ cancel.date_of_apply }}</small>\n              </div>\n            </mat-list-item>\n            <br />\n            <mat-divider></mat-divider>\n            <mat-list-item>\n              <div class=\"col-sm-12 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Reason </small>\n                </strong>\n                <small class=\"d-block\">{{cancel.leave_reason}}</small>\n              </div>\n            </mat-list-item>\n            <br />\n          </mat-list>\n        </mat-expansion-panel>\n      </mat-accordion>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"col-sm-12 mt-5 pt-5 justify-content-center\" style=\"display:none\">\n  <div class=\"text-center mt-5 pt-5\">No application found...</div>\n</div>\n<div class=\"col-sm-12 p-0\">\n  <div class=\"col-sm-12 row justify-content-center pr-0\">\n    <div class=\"nav-pos-search col-sm-3\">\n      <input class=\"text-white col-sm-12\" placeholder=\"Search...\" [(ngModel)]=\"term\">\n    </div>\n    <div class=\"col-sm-6\" *ngIf=\"hide\">\n      <h5>New Applications</h5>\n      <mat-accordion class=\"col-sm-12 float-left h78 ovf-y p-0\">\n        <mat-expansion-panel class=\"d-inline-block col-sm-12 p-0 pos-rel\" *ngFor=\"let app of application | reverse | filter : term; let i = index;\">\n          <mat-expansion-panel-header>\n            <mat-panel-title>\n              <div class=\"triangle\"></div>\n              <strong style=\"line-height:16px\" *ngIf=\"!edit\">\n                <small>{{app.name}}</small>\n                <small class=\"d-block text-muted\" style=\"line-height:20px\">{{app.email}}</small>\n              </strong>\n            </mat-panel-title>\n            <mat-panel-description class=\"pt-1\">{{app.designation}}, {{app.board}}</mat-panel-description>\n          </mat-expansion-panel-header>\n          <mat-list>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Applied date</small>\n                </strong>\n                <small class=\"d-block\">{{app.date_from}} to {{app.date_to}}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Application ID</small>\n                </strong>\n                <small class=\"d-block\">{{app.application_id}}</small>\n              </div>\n            </mat-list-item>\n            <br *ngIf=\"!toggle\" />\n            <mat-divider *ngIf=\"!toggle\"></mat-divider>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Leave Type</small>\n                </strong>\n                <small class=\"d-block\">{{ app.leave_type }}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Date of application</small>\n                </strong>\n                <small class=\"d-block\">{{ app.date_of_apply }}</small>\n              </div>\n            </mat-list-item>\n            <br *ngIf=\"!toggle\" />\n            <mat-divider *ngIf=\"!toggle\"></mat-divider>\n            <mat-list-item>\n              <div class=\"col-sm-12 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Reason </small>\n                </strong>\n                <small class=\"d-block\">{{app.leave_reason}}</small>\n              </div>\n            </mat-list-item>\n            <br />\n            <mat-divider></mat-divider>\n            <mat-list-item>\n              <div class=\"col-sm-12 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Any Attachment\n                    <mat-icon>help_outline</mat-icon>\n                  </small>\n                </strong>\n                <small class=\"d-block\">Not Found</small>\n              </div>\n            </mat-list-item>\n            <br />\n            <mat-divider></mat-divider>\n            <br />\n            <mat-list-item *ngIf=\"toggle\">\n              <mat-form-field class=\"col-sm-12 p-0 mt-3\">\n                <textarea matInput placeholder=\"Reason for cancel\" [(ngModel)]=\"decline_reason\" name=\"Decline Reason\"></textarea>\n              </mat-form-field>\n            </mat-list-item>\n            <br />\n            <mat-list-item class=\"pos-rel\" *ngIf=\"toggle\">\n              <button mat-raised-button color=\"accent\" (click)=\"!toggler()\">Go Back</button>&nbsp;&nbsp;&nbsp;\n              <button mat-raised-button (click)=\"declineApp(decline_reason, app.application_id)\" [disabled]=dis>Submit</button>\n              <mat-spinner class=\"pos-abs\" *ngIf=\"spnnr\" [diameter]=\"25\"></mat-spinner>\n            </mat-list-item>\n            <mat-list-item class=\"pos-rel\" *ngIf=\"!toggle\">\n              <button mat-raised-button color=\"accent\" (click)=\"toggler()\">Cancel</button>&nbsp;&nbsp;&nbsp;\n              <button mat-raised-button (click)=\"acceptApp(app.application_id, app.qci_id)\" [disabled]=dis>Accept</button>\n              <mat-spinner class=\"pos-abs\" *ngIf=\"spnnr\" [diameter]=\"25\"></mat-spinner>\n            </mat-list-item>\n            <i class=\"fa fa-pencil-square-o pos-abs pl-3 pr-3 pt-2 pb-2\" (click)=\"editApp()\" aria-hidden=\"true\"></i>\n          </mat-list>\n        </mat-expansion-panel>\n      </mat-accordion>\n    </div>\n    <!-- *ngIf=\"restHide\"-->\n    <div class=\"col-sm-6 pr-0\">\n      <h5>Rest Applications<small class=\"text-muted\">(Rejected and accepted applications shown below)</small></h5>\n      <mat-accordion class=\"col-sm-12 float-left h78 ovf-y p-0\">\n        <mat-expansion-panel class=\"d-inline-block col-sm-12 p-0 pos-rel\" *ngFor=\"let approve of approvedLeave | reverse | filter : term; let i = index;\" [class.active]=\"clicked === res\" (click)=\"clicked = res\">\n          <mat-expansion-panel-header>\n            <mat-panel-title>\n              <div class=\"triangle\"></div>\n              <strong style=\"line-height:16px\">\n                <small>{{approve.name}}</small>\n                <small class=\"d-block text-muted\" style=\"line-height:20px\">{{approve.email}}</small>\n              </strong>\n            </mat-panel-title>\n            <mat-panel-description class=\"pt-1\">{{approve.designation}}, {{approve.board}}</mat-panel-description>\n          </mat-expansion-panel-header>\n          <mat-list>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Applied date</small>\n                </strong>\n                <small class=\"d-block\">{{approve.date_from}} to {{approve.date_to}}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Application ID</small>\n                </strong>\n                <small class=\"d-block\">{{approve.application_id}}</small>\n              </div>\n            </mat-list-item>\n            <br *ngIf=\"!toggle\" />\n            <mat-divider *ngIf=\"!toggle\"></mat-divider>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Leave Type</small>\n                </strong>\n                <small class=\"d-block\">{{ approve.leave_type }}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Date of application</small>\n                </strong>\n                <small class=\"d-block\">{{ approve.date_of_apply }}</small>\n              </div>\n            </mat-list-item>\n            <br />\n            <mat-divider></mat-divider>\n            <mat-list-item>\n              <div class=\"col-sm-12 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Reason </small>\n                </strong>\n                <small class=\"d-block\">{{approve.leave_reason}}</small>\n              </div>\n            </mat-list-item>\n            <br />\n          </mat-list>\n        </mat-expansion-panel>\n        <mat-expansion-panel class=\"d-inline-block col-sm-12 p-0 pos-rel\" *ngFor=\"let cancel of cancelledLeave | reverse | filter : term; let i = index;\">\n          <mat-expansion-panel-header>\n            <mat-panel-title>\n              <div class=\"triangle\"></div>\n              <strong style=\"line-height:16px\">\n                <small>{{ cancel.name }}</small>\n                <small class=\"d-block text-muted\" style=\"line-height:20px\">{{cancel.email}}</small>\n              </strong>\n            </mat-panel-title>\n            <mat-panel-description class=\"pt-1\">{{cancel.designation}}, {{cancel.board}}</mat-panel-description>\n          </mat-expansion-panel-header>\n          <mat-list>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Applied date</small>\n                </strong>\n                <small class=\"d-block\">{{cancel.date_from}} to {{cancel.date_to}}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Application ID</small>\n                </strong>\n                <small class=\"d-block\">{{cancel.application_id}}</small>\n              </div>\n            </mat-list-item>\n            <br *ngIf=\"!toggle\" />\n            <mat-divider *ngIf=\"!toggle\"></mat-divider>\n            <mat-list-item *ngIf=\"!toggle\">\n              <div class=\"col-sm-6 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Leave Type</small>\n                </strong>\n                <small class=\"d-block\">{{ cancel.leave_type }}</small>\n              </div>\n              <div class=\"col-sm-6 p-0 mt-3 text-right\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Date of application</small>\n                </strong>\n                <small class=\"d-block\">{{ cancel.date_of_apply }}</small>\n              </div>\n            </mat-list-item>\n            <br />\n            <mat-divider></mat-divider>\n            <mat-list-item>\n              <div class=\"col-sm-12 p-0 mt-3\">\n                <strong class=\"text-muted\">\n                  <small class=\"d-block\">Reason </small>\n                </strong>\n                <small class=\"d-block\">{{cancel.leave_reason}}</small>\n              </div>\n            </mat-list-item>\n            <br />\n          </mat-list>\n        </mat-expansion-panel>\n      </mat-accordion>\n    </div>\n  </div>\n  <div class=\"col-sm-12 float-left na\">\n    <mat-tab-group (selectedTabChange)=\"whichApplication($event)\">\n      <mat-tab label=\"New Applications\">\n        <div class=\"col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box\">\n          <table id=\"table_new\" class=\"table table-striped\" cellspacing=\"0\" width=\"100%\">\n            <thead>\n              <tr>\n                <th class=\"wd-12\">Application ID</th>\n                <th class=\"wd-16\">Employee name</th>\n                <th class=\"wd-15\">Designation</th>\n                <th class=\"wd-15\">Leave Type</th>\n                <th class=\"wd-16\">Date Applied</th>\n                <th class=\"wd-16\">Application Date</th>\n                <th class=\"modify\">Actions</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let app of application | reverse | filter : term; let i = index;\">\n                <td class=\"wd-7\"><a href=\"javascript:void(0)\" class=\"text-primary\" (click)=\"appInfo(app.application_id)\"><u>{{app.application_id | slice:0:12 }}</u></a></td>\n                <td class=\"wd-16\"><span :matTooltip=\"{{app.email}}\">{{app.name}}</span></td>\n                <td class=\"wd-15\"><span :matTooltip=\"{{app.board}}\">{{app.designation}}</span></td>\n                <td class=\"wd-15\"><span :matTooltip=\"{{app.leave_reason}}\">{{app.leave_type}}</span></td>\n                <td class=\"wd-16\">{{app.date_from}}-{{app.date_to}}</td>\n                <td class=\"wd-16\">{{app.date_of_apply}}</td>\n                <td class=\"modify\">\n                  <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\" (click)=\"appEdit(app.application_id)\"></i>\n                  <i class=\"fa fa-check\" aria-hidden=\"true\" (click)=\"appAccept(app.application_id)\"></i>\n                  <i class=\"fa fa-times\" aria-hidden=\"true\" (click)=\"appCancel(app.application_id)\"></i>\n                  <mat-icon class=\"mat-icon material-icons pos-rel\" role=\"img\" aria-hidden=\"true\">more_vert</mat-icon>\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </mat-tab>\n      <mat-tab label=\"Approved Applications\">\n        <div class=\"col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box\">\n          <table id=\"table_approve\" class=\"table table-striped\" cellspacing=\"0\" width=\"100%\">\n            <thead>\n              <tr>\n                <th class=\"wd-12\">Application ID</th>\n                <th class=\"wd-16\">Employee name</th>\n                <th class=\"wd-15\">Designation</th>\n                <th class=\"wd-15\">Leave Type</th>\n                <th class=\"wd-16\">Date Applied</th>\n                <th class=\"wd-16\">Application Date</th>\n                <th class=\"modify\">Actions</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let approve of approvedLeave | reverse | filter : term; let i = index;\">\n                <td class=\"wd-7\"><a href=\"javascript:void(0)\" class=\"text-primary\" (click)=\"appInfo(approve.application_id)\"><u>{{approve.application_id | slice:0:12 }}</u></a></td>\n                <td class=\"wd-16\"><span :matTooltip=\"{{approve.email}}\">{{approve.name}}</span></td>\n                <td class=\"wd-15\"><span :matTooltip=\"{{approve.board}}\">{{approve.designation}}</span></td>\n                <td class=\"wd-15\"><span :matTooltip=\"{{approve.leave_reason}}\">{{approve.leave_type}}</span></td>\n                <td class=\"wd-16\">{{approve.date_from}}-{{approve.date_to}}</td>\n                <td class=\"wd-16\">{{approve.date_of_apply}}</td>\n                <td class=\"modify\">\n                  <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\" (click)=\"appEdit(approve.application_id)\"></i>\n                  <i class=\"fa fa-check\" aria-hidden=\"true\" (click)=\"appAccept(approve.application_id)\"></i>\n                  <i class=\"fa fa-times\" aria-hidden=\"true\" (click)=\"appCancel(approve.application_id)\"></i>\n                  <mat-icon class=\"mat-icon material-icons pos-rel\" role=\"img\" aria-hidden=\"true\">more_vert</mat-icon>\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </mat-tab>\n      <mat-tab label=\"Cancelled Applications\">\n        <div class=\"col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box\">\n          <table id=\"table_cancel\" class=\"table table-striped\" cellspacing=\"0\" width=\"100%\">\n            <thead>\n              <tr>\n                <th class=\"wd-12\">Application ID</th>\n                <th class=\"wd-16\">Employee name</th>\n                <th class=\"wd-15\">Designation</th>\n                <th class=\"wd-15\">Leave Type</th>\n                <th class=\"wd-16\">Date Applied</th>\n                <th class=\"wd-16\">Application Date</th>\n                <th class=\"modify\">Actions</th>\n              </tr>\n            </thead>\n            <tbody>\n              <tr *ngFor=\"let cancel of cancelledLeave | reverse | filter : term; let i = index;\">\n                <td class=\"wd-7\"><a href=\"javascript:void(0)\" class=\"text-primary\" (click)=\"appInfo(cancel.application_id)\"><u>{{cancel.application_id | slice:0:12 }}</u></a></td>\n                <td class=\"wd-16\"><span :matTooltip=\"{{cancel.email}}\">{{cancel.name}}</span></td>\n                <td class=\"wd-15\"><span :matTooltip=\"{{cancel.board}}\">{{cancel.designation}}</span></td>\n                <td class=\"wd-15\"><span :matTooltip=\"{{cancel.leave_reason}}\">{{cancel.leave_type}}</span></td>\n                <td class=\"wd-16\">{{cancel.date_from}}-{{cancel.date_to}}</td>\n                <td class=\"wd-16\">{{cancel.date_of_apply}}</td>\n                <td class=\"modify\">\n                  <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\" (click)=\"appEdit(cancel.application_id)\"></i>\n                  <i class=\"fa fa-check\" aria-hidden=\"true\" (click)=\"appAccept(cancel.application_id)\"></i>\n                  <i class=\"fa fa-times\" aria-hidden=\"true\" (click)=\"appCancel(cancel.application_id)\"></i>\n                  <mat-icon class=\"mat-icon material-icons pos-rel\" role=\"img\" aria-hidden=\"true\">more_vert</mat-icon>\n                </td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n      </mat-tab>\n    </mat-tab-group>\n  </div>\n</div>"
 
 /***/ }),
 
 /***/ "./src/app/main/newapp/newapp.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = ".nav-pos-search {\n  position: fixed;\n  z-index: 1030;\n  top: 1.3%;\n  right: 0;\n  left: 0;\n  margin: 0 auto; }\n  .nav-pos-search input {\n    background: #2b3da1;\n    border: 1px solid #213397;\n    border-radius: 2px;\n    -webkit-box-shadow: 1px 1px 1px #213397 inset;\n            box-shadow: 1px 1px 1px #213397 inset; }\n  .h78.ovf-y small {\n  max-height: 30px;\n  max-width: 100%;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 2;\n  line-height: 30px;\n  -webkit-box-orient: vertical;\n  overflow: hidden; }\n  .triangle::after {\n  content: \"\";\n  position: absolute;\n  width: 0;\n  height: 0;\n  top: 47px;\n  left: 0px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  border: 1.05em solid black;\n  border-color: transparent transparent #fff #fff;\n  -webkit-transform-origin: 0 0;\n          transform-origin: 0 0;\n  -webkit-transform: rotate(-135deg);\n          transform: rotate(-135deg);\n  -webkit-box-shadow: 0px 0px 2px 0 rgba(100, 100, 100, 0.1);\n          box-shadow: 0px 0px 2px 0 rgba(100, 100, 100, 0.1); }\n  .mat-progress-spinner {\n  width: 25px !important;\n  height: 25px !important;\n  top: 0;\n  left: -10% !important; }\n"
+module.exports = ".nav-pos-search {\n  position: fixed;\n  z-index: 1030;\n  top: 1.3%;\n  right: 0;\n  left: 0;\n  margin: 0 auto; }\n  .nav-pos-search input {\n    background: #2b3da1;\n    border: 1px solid #213397;\n    border-radius: 2px;\n    -webkit-box-shadow: 1px 1px 1px #213397 inset;\n            box-shadow: 1px 1px 1px #213397 inset; }\n  .h78.ovf-y small {\n  max-height: 30px;\n  max-width: 100%;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 2;\n  line-height: 30px;\n  -webkit-box-orient: vertical;\n  overflow: hidden; }\n  .triangle::after {\n  content: \"\";\n  position: absolute;\n  width: 0;\n  height: 0;\n  top: 47px;\n  left: 0px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  border: 1.05em solid black;\n  border-color: transparent transparent #fff #fff;\n  -webkit-transform-origin: 0 0;\n          transform-origin: 0 0;\n  -webkit-transform: rotate(-135deg);\n          transform: rotate(-135deg);\n  -webkit-box-shadow: 0px 0px 2px 0 rgba(100, 100, 100, 0.1);\n          box-shadow: 0px 0px 2px 0 rgba(100, 100, 100, 0.1); }\n  .mat-progress-spinner {\n  width: 25px !important;\n  height: 25px !important;\n  top: 0;\n  left: -10% !important; }\n  mat-list-item + .fa {\n  display: none;\n  cursor: pointer; }\n  .mat-expanded:hover .fa.pos-abs {\n  -webkit-transition: all 300ms ease-in 300ms;\n  transition: all 300ms ease-in 300ms;\n  top: inherit;\n  left: inherit;\n  bottom: 24px;\n  border: 1px solid #ccc;\n  right: 26px;\n  -webkit-box-shadow: 3px 3px 5px 0px #f4f4f4;\n          box-shadow: 3px 3px 5px 0px #f4f4f4;\n  display: inline-block;\n  border-radius: 3px; }\n  .mat-expanded:hover .fa.pos-abs:active {\n  -webkit-box-shadow: 3px 3px 5px 0px #f4f4f4 inset;\n          box-shadow: 3px 3px 5px 0px #f4f4f4 inset; }\n  .mat-tab-body.mat-tab-body-active {\n  right: 0 !important;\n  max-width: 100% !important; }\n  .mat-tab-labels .mat-tab-label-content {\n  line-height: 49px; }\n  table tr td .fa {\n  margin: 0px 3px;\n  padding: 4px 5px 2px;\n  font-size: 13px;\n  position: relative;\n  top: -3px;\n  border-radius: 20px;\n  -webkit-transition: all 150ms ease 25ms;\n  transition: all 150ms ease 25ms;\n  opacity: 0;\n  line-height: 16px;\n  cursor: pointer;\n  border: 1px solid #c4c4c4;\n  color: #0c7cd5; }\n  a.text-primary:focus, a.text-primary:hover, a.text-primary {\n  color: #0c7cd5 !important; }\n  .table > tbody > tr > td {\n  padding: 7px 8px 5px; }\n  .table > tbody > tr:hover .fa {\n  -webkit-transition: all 150ms ease 25ms;\n  transition: all 150ms ease 25ms;\n  opacity: 1; }\n  table tr td .fa:active {\n  -webkit-box-shadow: 1px 1px 5px 2px #ccc inset;\n          box-shadow: 1px 1px 5px 2px #ccc inset; }\n  .material-icons {\n  top: 3px;\n  display: none; }\n  /* \nbody.modal-open .modal.show{\n    transition: all 210ms ease-in-out 25ms\n}\nbody .modal {\n    transition: all 210ms ease-in-out 25ms\n} */\n"
 
 /***/ }),
 
@@ -1610,10 +1730,12 @@ module.exports = ".nav-pos-search {\n  position: fixed;\n  z-index: 1030;\n  top
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewappComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_lms_service__ = __webpack_require__("./src/app/services/lms.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__("./node_modules/moment/moment.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_api_service__ = __webpack_require__("./src/app/services/api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_service__ = __webpack_require__("./src/app/services/api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__("./node_modules/moment/moment.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__appinfo_appinfo_component__ = __webpack_require__("./src/app/main/newapp/appinfo/appinfo.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_material__ = __webpack_require__("./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1626,44 +1748,59 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import * as _ from "lodash"
+
+
 
 
 var NewappComponent = /** @class */ (function () {
-    function NewappComponent(api, lms, datepipe) {
+    function NewappComponent(api, lms, datepipe, dialog) {
         var _this = this;
         this.api = api;
         this.lms = lms;
         this.datepipe = datepipe;
+        this.dialog = dialog;
         this.hide = true;
         this.restHide = true;
         this.spnnr = false;
         this.dis = false;
         this.loader = false;
         this.toggle = false;
+        this.edit = false;
+        this.cmn = new Array();
         this.application = new Array();
+        this.applicationData = new Array();
         this.unsubLoader = this.lms.emitsload.subscribe(function (el) { return _this.loader = el; });
         this.lms.showLoader();
+        setTimeout(function () {
+            $(function () {
+                this.table = $('#table_new').DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    scrollY: 335
+                });
+            });
+        }, 800);
         // if zero employee on leave
         this.unsubZeroEOL = this.api.emitZeroEOL.subscribe(function (r) { return _this.hide = false; });
         // if pending leave
         this.unsubEmployeeOnLeave = this.api.emitEOL.subscribe(function (el) {
-            _this.cmn = el;
+            _this.cmn.push(el);
             _this.simplyfiData();
-            _this.application = _this.cmn;
+            _this.application = _this.cmn[_this.cmn.length - 1];
+            _this.case = _this.application;
         });
         // if approved leave
         this.unsubApprovedLeave = this.api.emitApprovedApplication.subscribe(function (el) {
-            _this.cmn = el;
+            _this.cmn.push(el);
             _this.simplyfiData();
-            _this.approvedLeave = _this.cmn;
+            _this.approvedLeave = _this.cmn[_this.cmn.length - 1];
         });
         // if cancelled leave
         this.unsubCancelledLeave = this.api.emitCancelledApplication.subscribe(function (el) {
-            _this.cmn = el;
+            _this.cmn.push(el);
             _this.simplyfiData();
-            _this.cancelledLeave = _this.cmn;
-            console.log(_this.cancelledLeave);
+            _this.cancelledLeave = _this.cmn[_this.cmn.length - 1];
         });
         this.unsubAcceptedApplication = this.api.emitMyApplication.subscribe(function (el) {
             _this.dis = false;
@@ -1690,14 +1827,77 @@ var NewappComponent = /** @class */ (function () {
             this.restHide = false;
         else {
             this.restHide = true;
-            for (var i = 0; i < this.cmn.length; i++) {
-                this.cmn[i].info.map(function (r) {
-                    delete _this.cmn[i].info[0].application_id;
-                    var t = Object.assign(_this.cmn[i], r);
-                    delete _this.cmn[i].info;
+            var i = this.cmn.length - 1;
+            for (var j = 0; j < this.cmn[i].length; j++) {
+                this.cmn[i][j].info.map(function (r) {
+                    delete _this.cmn[i][j].info[0].application_id;
+                    var t = Object.assign(_this.cmn[i][j], r);
+                    delete _this.cmn[i][j].info;
                 });
             }
         }
+    };
+    NewappComponent.prototype.whichApplication = function ($event) {
+        switch ($event.index) {
+            case 0:
+                $('#table_approve').DataTable().destroy();
+                $('#table_cancel').DataTable().destroy();
+                this.table = $('#table_new').DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    scrollY: 335
+                });
+                this.case = this.application;
+                break;
+            case 1:
+                $('#table_new').DataTable().destroy();
+                $('#table_cancel').DataTable().destroy();
+                this.table = $('#table_approve').DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    scrollY: 335
+                });
+                this.case = this.approvedLeave;
+                break;
+            case 2:
+                $('#table_new').DataTable().destroy();
+                $('#table_approve').DataTable().destroy();
+                this.table = $('#table_cancel').DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    scrollY: 335
+                });
+                this.case = this.cancelledLeave;
+        }
+    };
+    // commen dialog for all the application related queries
+    NewappComponent.prototype.openApplicationModal = function (application_id, event) {
+        var item = this.case.find(function (it) { return it.application_id == application_id; }); // linear search
+        item.event = event;
+        this.dialog.open(__WEBPACK_IMPORTED_MODULE_5__appinfo_appinfo_component__["a" /* AppinfoComponent */], {
+            width: "60%",
+            height: "80%",
+            data: item
+        });
+    };
+    NewappComponent.prototype.appInfo = function (application_id) {
+        var event = 'info';
+        this.openApplicationModal(application_id, event);
+    };
+    NewappComponent.prototype.appAccept = function (application_id) {
+        var event = 'accept';
+        this.openApplicationModal(application_id, event);
+    };
+    NewappComponent.prototype.appEdit = function (application_id) {
+        var event = 'edit';
+        this.openApplicationModal(application_id, event);
+    };
+    NewappComponent.prototype.appCancel = function (application_id) {
+        var event = 'decline';
+        this.openApplicationModal(application_id, event);
     };
     NewappComponent.prototype.toggler = function () {
         this.toggle = !this.toggle;
@@ -1713,7 +1913,7 @@ var NewappComponent = /** @class */ (function () {
     NewappComponent.prototype.declineApp = function (dec_reason, app_ids) {
         this.dis = true;
         this.spnnr = true;
-        var date = __WEBPACK_IMPORTED_MODULE_2_moment__().format("DD/MM/YYYY");
+        var date = __WEBPACK_IMPORTED_MODULE_3_moment__().format("DD/MM/YYYY");
         var tmp = { application_id: app_ids, date_reviewed: date, decline_reason: dec_reason };
         if (dec_reason)
             this.api.declineLeave(tmp);
@@ -1723,6 +1923,37 @@ var NewappComponent = /** @class */ (function () {
             this.api.noDeclineReason();
         }
     };
+    // Conjugate gradient
+    // d<sub>(i+1) = g<sub>(i+1) + d<sub>i*Y<sub>i, i = 0,1
+    // editApp(){
+    //   this.edit = !this.edit
+    //   console.warn( " In Progress... " )
+    //   // const interpolationSearch = (array, key) => {
+    //   //   // if array is empty
+    //   //   if (!array.length){
+    //   //     return -1
+    //   //   }
+    //   //   let low = 0
+    //   //   let high = array.length - 1
+    //   //   while ( low <= high && key >= array[low] && x <= array[high] ){
+    //   //     // calculate position with
+    //   //     let pos = low + Math.floor(((high - low) * (key - array[low])) / (array[high] - array[low]))
+    //   //     // if all elements are same then we'll have divide by 0 or 0/0
+    //   //     // which may cause NaN
+    //   //     pos = Number.isNaN(pos) ? low : pos
+    //   //     if (array[pos] === key){
+    //   //       return pos
+    //   //     }
+    //   //     if (array[pos] > key){
+    //   //       high = pos - 1
+    //   //     } else {
+    //   //       low = pos + 1
+    //   //     }
+    //   //   }
+    //   //   // not found
+    //   //   return -1
+    //   // }
+    // }
     NewappComponent.prototype.ngOnDestroy = function () {
         this.unsubEmployeeOnLeave.unsubscribe();
         this.unsubCancelledLeave.unsubscribe();
@@ -1735,7 +1966,7 @@ var NewappComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/main/newapp/newapp.component.html"),
             styles: [__webpack_require__("./src/app/main/newapp/newapp.component.scss")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__services_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_1__services_lms_service__["a" /* LmsService */], __WEBPACK_IMPORTED_MODULE_3__angular_common__["d" /* DatePipe */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_1__services_lms_service__["a" /* LmsService */], __WEBPACK_IMPORTED_MODULE_4__angular_common__["d" /* DatePipe */], __WEBPACK_IMPORTED_MODULE_6__angular_material__["i" /* MatDialog */]])
     ], NewappComponent);
     return NewappComponent;
 }());
@@ -1874,7 +2105,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs'
 
 
  // remove from lms service after all promise< resolve,reject> successfully implemented here
@@ -1902,6 +2133,7 @@ var ApiService = /** @class */ (function () {
         this.URL = "http://13.127.13.175:5000/";
         // Private http : Http, private router : Router
         // We will use both imports here. Are we using anywhere in comments only ???
+        this.uid = localStorage.getItem('userName');
         this.token = localStorage.getItem('token'); // If this token available, login using can activate gaurd
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */](); // Default headers
         this.headers.append('Authorization', this.token); // ADD/Append your authorized token to Default headers
@@ -1910,7 +2142,33 @@ var ApiService = /** @class */ (function () {
     }
     ApiService.prototype.snackBars = function (message, action) {
         this.snackBar.open(message, action, {
-            duration: 2600,
+            duration: 12600,
+        });
+    };
+    ApiService.prototype.isLogin = function () {
+        if (localStorage.getItem('token')) {
+            this.router.navigate(['./']);
+        }
+    };
+    ApiService.prototype.login = function (uname, pwd) {
+        var _this = this;
+        var tmp;
+        tmp = { email: uname, password: pwd };
+        var data = JSON.stringify(tmp);
+        return new Promise(function (resolve) {
+            _this.http.post(_this.URL + 'lms/loginEmp', data)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (response) {
+                if (response.success) {
+                    localStorage.setItem('token', response.token);
+                    localStorage.setItem('userName', uname);
+                    _this.uid = uname;
+                    _this.emitLogin.emit();
+                }
+                else
+                    _this.snackBars(response.message, response.success);
+                resolve(true);
+            }, function (err) { return _this.router.navigate(['/404']); });
         });
     };
     ApiService.prototype.noDeclineReason = function () {
@@ -1941,10 +2199,6 @@ var ApiService = /** @class */ (function () {
             status[file.name] = { progress: progress.asObservable() };
         });
         return status;
-    };
-    // Login Section
-    ApiService.prototype.Login = function (data) {
-        return this.http.post(this.URL + 'lms/loginAdmin', data).map(function (r) { return r.json(); });
     };
     // Get Requests
     // HINT : Are we checking the response is a success or not ???
@@ -2004,7 +2258,6 @@ var ApiService = /** @class */ (function () {
                 resolve(true);
             }, function (err) { return _this.router.navigate(['/404']); });
         });
-        // return this.http.get( this.URL+'lms/input', this.opts ).map( r => r.json() )
     };
     // Get QCI Calendar
     ApiService.prototype.getHoliday = function () {
@@ -2024,7 +2277,6 @@ var ApiService = /** @class */ (function () {
                 resolve(true);
             }, function (err) { return _this.router.navigate(['/404']); });
         });
-        // return this.http.get( this.URL+'lms/holiday', this.opts ).map( r => r.json() )
     };
     // Get approved employee list on leaves
     ApiService.prototype.approvedLeave = function () {
@@ -2040,7 +2292,6 @@ var ApiService = /** @class */ (function () {
                 resolve(true);
             }, function (err) { return _this.router.navigate(['/404']); });
         });
-        // return this.http.get( this.URL+'lms/output1', this.opts ).map( r => r.json() )
     };
     // Get cancelled/rejected leave of employee's
     ApiService.prototype.cancelledLeave = function () {
@@ -2056,7 +2307,6 @@ var ApiService = /** @class */ (function () {
                 resolve(true);
             }, function (err) { return _this.router.navigate(['/404']); });
         });
-        // return this.http.get( this.URL+'lms/output2', this.opts ).map( r => r.json() )
     };
     // post employee application for approval
     // acceptApp( app_id, qci_id ){}
@@ -2068,7 +2318,6 @@ var ApiService = /** @class */ (function () {
                 .subscribe(function (response) {
                 if (response.success) {
                     _this.emitMyApplication.emit(response);
-                    //console.log(data)
                     // does not refresh after response
                 }
                 else
@@ -2076,7 +2325,6 @@ var ApiService = /** @class */ (function () {
                 resolve(true);
             }, function (err) { return _this.router.navigate(['/404']); });
         });
-        // return this.http.post( this.URL+'lms/approveLeave', data, this.opts ).map( r => r.json() )
     };
     // Post decline leave of employee's
     ApiService.prototype.declineLeave = function (data) {
@@ -2115,23 +2363,58 @@ var ApiService = /** @class */ (function () {
                 resolve(true);
             }, function (err) { return _this.router.navigate(['/404']); });
         });
-        // return this.http.post(this.URL + 'lms/empOnLeave', tmp, this.opts).map(r => r.json())
     };
     // Post( Add New Employee ) requests
     ApiService.prototype.addEmp = function (data) {
-        return this.http.post(this.URL + 'lms/addEmployee', data, this.opts).map(function (r) { return r.json(); });
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.post(_this.URL + 'lms/addEmployee', data, _this.opts)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (response) {
+                if (response.success)
+                    _this.router.navigate(['/employee-list']);
+                else
+                    _this.snackBars(response.message, response.success);
+                resolve(true);
+            }, function (err) { return _this.router.navigate(['/404']); });
+        });
     };
     // Post( Update Existing Employee ) requests
     ApiService.prototype.updateEmployee = function (data) {
-        return this.http.post(this.URL + 'lms/editEmployeeDetails', data, this.opts).map(function (r) { return r.json(); });
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.post(_this.URL + 'lms/editEmployeeDetails', data, _this.opts)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (response) {
+                if (response.success) {
+                    _this.router.navigate(['/employee-list']);
+                    _this.GetEmployeeDetails();
+                }
+                else
+                    _this.snackBars(response.message, response.success);
+                resolve(true);
+            }, function (err) { return _this.router.navigate(['/404']); });
+        });
     };
     // Post ( Delete Existing Employee ) requests
     ApiService.prototype.deleteEmp = function (data) {
-        return this.http.post(this.URL + 'lms/deleteEmployee', JSON.stringify(data), this.opts).map(function (r) { return r.json(); });
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.post(_this.URL + 'lms/deleteEmployee', JSON.stringify(data), _this.opts)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (response) {
+                if (response.success) {
+                    _this.GetEmployeeDetails();
+                }
+                else
+                    _this.snackBars(response.message, response.success);
+                resolve(true);
+            }, function (err) { return _this.router.navigate(['/404']); });
+        });
     };
     ApiService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__angular_material__["A" /* MatSnackBar */], __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__angular_material__["B" /* MatSnackBar */], __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClient */]])
     ], ApiService);
     return ApiService;
 }());
@@ -2221,7 +2504,7 @@ var LmsService = /** @class */ (function () {
         this.emitCancelledApplication = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         this.emitCount = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         this.emitEmpOnLeave = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-    } //, private httpClient: HttpClient
+    }
     LmsService.prototype.showLoader = function () {
         var _this = this;
         this.loader = true;
@@ -2237,25 +2520,6 @@ var LmsService = /** @class */ (function () {
             duration: 2600,
         });
     };
-    LmsService.prototype.isLogin = function () {
-        if (localStorage.getItem('token')) {
-            this.router.navigate(['./']);
-        }
-    };
-    LmsService.prototype.login = function (uname, pwd) {
-        var _this = this;
-        var tmp;
-        tmp = { email: uname, password: pwd };
-        var temp = JSON.stringify(tmp);
-        this.api.Login(temp).subscribe(function (el) {
-            if (el.success) {
-                localStorage.setItem('token', el.token);
-                _this.emitLogin.emit();
-            }
-            else
-                _this.snackBars(el.message, el.success);
-        }, function (err) { return _this.router.navigate(['/404']); });
-    };
     LmsService.prototype.getEmployees = function () {
         var _this = this;
         this.api.GetEmployeeDetails().subscribe(function (el) {
@@ -2265,57 +2529,9 @@ var LmsService = /** @class */ (function () {
                 _this.snackBars(el.message, el.success); // this.snackBar.open('el.success was not true')
         }, function (err) { return _this.router.navigate(['/404']); });
     };
-    LmsService.prototype.getHoliday = function () {
-        this.api.getHoliday();
-    };
-    LmsService.prototype.getEOL = function () {
-        this.api.getEOL();
-    };
-    LmsService.prototype.approvedLeave = function () {
-        this.api.approvedLeave();
-    };
-    LmsService.prototype.cancelledLeave = function () {
-        this.api.cancelledLeave();
-    };
-    LmsService.prototype.leaveForApproval = function (application) {
-        this.api.leaveForApproval(application);
-    };
-    LmsService.prototype.declineLeave = function (tmp) {
-        this.api.declineLeave(tmp);
-    };
-    LmsService.prototype.addEmp = function (employee) {
-        var _this = this;
-        this.api.addEmp(employee).subscribe(function (el) {
-            if (el.success)
-                _this.router.navigate(['/employee-list']);
-            else
-                _this.snackBars(el.message, el.success);
-        }, function (err) { return _this.router.navigate(['/404']); });
-    };
-    LmsService.prototype.getEmpOnLeave = function (temp) {
-        this.api.getEmpOnLeave(temp);
-    };
-    LmsService.prototype.updateEmployee = function (employee) {
-        var _this = this;
-        this.api.updateEmployee(employee).subscribe(function (el) {
-            if (el.success) {
-                _this.router.navigate(['/employee-list']);
-                _this.getEmployees();
-            }
-            else
-                _this.snackBars(el.message, el.success);
-        }, function (err) { return _this.router.navigate(['/404']); });
-    };
     LmsService.prototype.deleteEmp = function (qci_id) {
-        var _this = this;
         var tmp = { qci_id: qci_id };
-        this.api.deleteEmp(tmp).subscribe(function (el) {
-            if (el.success) {
-                _this.getEmployees();
-            }
-            else
-                _this.snackBars(el.message, el.success);
-        }, function (err) { return _this.router.navigate(['/404']); });
+        this.api.deleteEmp(tmp);
     };
     LmsService.prototype.postEOLBSDate = function (data) {
         var _this = this;
@@ -2323,12 +2539,12 @@ var LmsService = /** @class */ (function () {
             if (el.success)
                 _this.emitCount.emit(el.data);
             else
-                return false; /* this.snackBars(el.error, el.success) */
+                return false;
         }, function (err) { return _this.router.navigate(['/404']); });
     };
     LmsService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_3__angular_material__["A" /* MatSnackBar */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_3__angular_material__["B" /* MatSnackBar */]])
     ], LmsService);
     return LmsService;
 }());

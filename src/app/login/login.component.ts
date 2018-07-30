@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
-import { AuthService } from '../services/auth.service'
-import { LmsService } from '../services/lms.service'
+import { ApiService } from '../services/api.service'
 
 @Component({
   selector: 'app-login',
@@ -9,19 +8,22 @@ import { LmsService } from '../services/lms.service'
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit {
-  uname : any
-  pwd : any
+export class LoginComponent implements OnInit, OnDestroy {
+  uname: any
+  pwd: any
+  unsubLogin: any
 
-  constructor( private lms: LmsService, private router: Router) {
-    this.lms.isLogin();
-    this.lms.emitLogin.subscribe( (res) => this.router.navigate(['/']) )
+  constructor(private api: ApiService, private router: Router) {
+    this.api.isLogin()
+    this.unsubLogin = this.api.emitLogin.subscribe((res) => this.router.navigate(['/']))
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  isLogin(){
-    this.lms.login(this.uname, this.pwd )
-    localStorage.setItem('userName', this.uname )
+  isLogin() {
+    this.api.login(this.uname, this.pwd)
+  }
+  ngOnDestroy() {
+    this.unsubLogin.unsubscribe()
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { LmsService } from '../../services/lms.service'
-declare var $
+import { ApiService } from '../../services/api.service'
 
+declare var $
 @Component({
   selector: 'app-crud',
   templateUrl: './crud.component.html',
@@ -14,7 +15,7 @@ export class CrudComponent implements OnInit, OnDestroy {
 
   unsubLoader : any
   unsubGetEmployees : any
-  constructor( private lms : LmsService ) {
+  constructor( private lms : LmsService, private api : ApiService ) {
     this.unsubLoader = this.lms.emitsload.subscribe( el => this.loader = el )
     this.lms.showLoader()
 
@@ -37,7 +38,7 @@ export class CrudComponent implements OnInit, OnDestroy {
     this.lms.getEmployees()
   }
   deleteEmp( qci_id ){
-    this.lms.deleteEmp( qci_id )
+    this.api.deleteEmp( qci_id )
   }
   ngOnDestroy() {
     this.unsubLoader.unsubscribe()

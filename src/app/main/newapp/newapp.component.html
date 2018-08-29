@@ -2,7 +2,7 @@
   <div class="text-center mt-5 pt-5">No application found...</div>
 </div>
 <div class="col-sm-12 p-0">
-  <div class="col-sm-12 row justify-content-center pr-0">
+  <div class="col-sm-12 row justify-content-center pr-0" style="display:none">
     <div class="nav-pos-search col-sm-3">
       <input class="text-white col-sm-12" placeholder="Search..." [(ngModel)]="term">
     </div>
@@ -99,9 +99,12 @@
     </div>
     <!-- *ngIf="restHide"-->
     <div class="col-sm-6 pr-0">
-      <h5>Rest Applications<small class="text-muted">(Rejected and accepted applications shown below)</small></h5>
+      <h5>Rest Applications
+        <small class="text-muted">(Rejected and accepted applications shown below)</small>
+      </h5>
       <mat-accordion class="col-sm-12 float-left h78 ovf-y p-0">
-        <mat-expansion-panel class="d-inline-block col-sm-12 p-0 pos-rel" *ngFor="let approve of approvedLeave | reverse | filter : term; let i = index;" [class.active]="clicked === res" (click)="clicked = res">
+        <mat-expansion-panel class="d-inline-block col-sm-12 p-0 pos-rel" *ngFor="let approve of approvedLeave | reverse | filter : term; let i = index;"
+          [class.active]="clicked === res" (click)="clicked = res">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <div class="triangle"></div>
@@ -232,16 +235,41 @@
             </thead>
             <tbody>
               <tr *ngFor="let app of application | reverse | filter : term; let i = index;">
-                <td class="wd-7"><a href="javascript:void(0)" class="text-primary" (click)="appInfo(app.application_id)"><u>{{app.application_id | slice:0:12 }}</u></a></td>
-                <td class="wd-16"><span :matTooltip="{{app.email}}">{{app.name}}</span></td>
-                <td class="wd-15"><span :matTooltip="{{app.board}}">{{app.designation}}</span></td>
-                <td class="wd-15"><span :matTooltip="{{app.leave_reason}}">{{app.leave_type}}</span></td>
+                <td class="wd-7">
+                  <a href="javascript:void(0)" class="text-primary" (click)="appInfo(app.application_id, app.qci_id)">
+                    <u>{{app.application_id | slice:0:12 }}</u>
+                  </a>
+                </td>
+                <td class="wd-16">
+                  <span :matTooltip="{{app.email}}">{{app.name}}</span>
+                </td>
+                <td class="wd-15">
+                  <span :matTooltip="{{app.board}}">{{app.designation}}</span>
+                </td>
+                <td class="wd-15" *ngIf="app.leave_type == 'ptl'">
+                  <span :matTooltip="{{app.leave_reason}}">Paterinity Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="app.leave_type == 'cl'">
+                  <span :matTooltip="{{app.leave_reason}}">Casual Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="app.leave_type == 'pl'">
+                  <span :matTooltip="{{app.leave_reason}}">Privileged Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="app.leave_type == 'sl'">
+                  <span :matTooltip="{{app.leave_reason}}">Sick Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="app.leave_type == 'eol'">
+                  <span :matTooltip="{{app.leave_reason}}">Extra Ordinary Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="app.leave_type == 'ml'">
+                  <span :matTooltip="{{app.leave_reason}}">Materinity Leave</span>
+                </td>
                 <td class="wd-16">{{app.date_from}}-{{app.date_to}}</td>
                 <td class="wd-16">{{app.date_of_apply}}</td>
                 <td class="modify">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(app.application_id)"></i>
-                  <i class="fa fa-check" aria-hidden="true" (click)="appAccept(app.application_id)"></i>
-                  <i class="fa fa-times" aria-hidden="true" (click)="appCancel(app.application_id)"></i>
+                  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(app.application_id, app.qci_id)"></i>
+                  <i class="fa fa-check" aria-hidden="true" (click)="appAccept(app.application_id, app.qci_id)"></i>
+                  <i class="fa fa-times" aria-hidden="true" (click)="appCancel(app.application_id, app.qci_id)"></i>
                   <mat-icon class="mat-icon material-icons pos-rel" role="img" aria-hidden="true">more_vert</mat-icon>
                 </td>
               </tr>
@@ -265,17 +293,43 @@
             </thead>
             <tbody>
               <tr *ngFor="let approve of approvedLeave | reverse | filter : term; let i = index;">
-                <td class="wd-7"><a href="javascript:void(0)" class="text-primary" (click)="appInfo(approve.application_id)"><u>{{approve.application_id | slice:0:12 }}</u></a></td>
-                <td class="wd-16"><span :matTooltip="{{approve.email}}">{{approve.name}}</span></td>
-                <td class="wd-15"><span :matTooltip="{{approve.board}}">{{approve.designation}}</span></td>
-                <td class="wd-15"><span :matTooltip="{{approve.leave_reason}}">{{approve.leave_type}}</span></td>
+                <td class="wd-7">
+                  <a href="javascript:void(0)" class="text-primary" (click)="appInfo(approve.application_id, approve.qci_id)">
+                    <u>{{approve.application_id | slice:0:12 }}</u>
+                  </a>
+                </td>
+                <td class="wd-16">
+                  <span :matTooltip="{{approve.email}}">{{approve.name}}</span>
+                </td>
+                <td class="wd-15">
+                  <span :matTooltip="{{approve.board}}">{{approve.designation}}</span>
+                </td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'ptl'">
+                  <span :matTooltip="{{approve.leave_reason}}">Paterinity Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'cl'">
+                  <span :matTooltip="{{approve.leave_reason}}">Casual Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'pl'">
+                  <span :matTooltip="{{approve.leave_reason}}">Privileged Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'sl'">
+                  <span :matTooltip="{{approve.leave_reason}}">Sick Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'eol'">
+                  <span :matTooltip="{{approve.leave_reason}}">Extra Ordinary Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'ml'">
+                  <span :matTooltip="{{approve.leave_reason}}">Materinity Leave</span>
+                </td>
                 <td class="wd-16">{{approve.date_from}}-{{approve.date_to}}</td>
                 <td class="wd-16">{{approve.date_of_apply}}</td>
                 <td class="modify">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(approve.application_id)"></i>
-                  <i class="fa fa-check" aria-hidden="true" (click)="appAccept(approve.application_id)"></i>
-                  <i class="fa fa-times" aria-hidden="true" (click)="appCancel(approve.application_id)"></i>
-                  <mat-icon class="mat-icon material-icons pos-rel" role="img" aria-hidden="true">more_vert</mat-icon>
+                  <small>No Actions</small>
+                  <!-- <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(approve.application_id, approve.qci_id)"></i>
+                  <i class="fa fa-check" aria-hidden="true" (click)="appAccept(approve.application_id, approve.qci_id)"></i>
+                  <i class="fa fa-times" aria-hidden="true" (click)="appCancel(approve.application_id, approve.qci_id)"></i>
+                  <mat-icon class="mat-icon material-icons pos-rel" role="img" aria-hidden="true">more_vert</mat-icon> -->
                 </td>
               </tr>
             </tbody>
@@ -298,17 +352,43 @@
             </thead>
             <tbody>
               <tr *ngFor="let cancel of cancelledLeave | reverse | filter : term; let i = index;">
-                <td class="wd-7"><a href="javascript:void(0)" class="text-primary" (click)="appInfo(cancel.application_id)"><u>{{cancel.application_id | slice:0:12 }}</u></a></td>
-                <td class="wd-16"><span :matTooltip="{{cancel.email}}">{{cancel.name}}</span></td>
-                <td class="wd-15"><span :matTooltip="{{cancel.board}}">{{cancel.designation}}</span></td>
-                <td class="wd-15"><span :matTooltip="{{cancel.leave_reason}}">{{cancel.leave_type}}</span></td>
+                <td class="wd-7">
+                  <a href="javascript:void(0)" class="text-primary" (click)="appInfo(cancel.application_id, cancel.qci_id)">
+                    <u>{{cancel.application_id | slice:0:12 }}</u>
+                  </a>
+                </td>
+                <td class="wd-16">
+                  <span :matTooltip="{{cancel.email}}">{{cancel.name}}</span>
+                </td>
+                <td class="wd-15">
+                  <span :matTooltip="{{cancel.board}}">{{cancel.designation}}</span>
+                </td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'ptl'">
+                  <span :matTooltip="{{cancel.leave_reason}}">Paterinity Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'cl'">
+                  <span :matTooltip="{{cancel.leave_reason}}">Casual Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'pl'">
+                  <span :matTooltip="{{cancel.leave_reason}}">Privileged Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'sl'">
+                  <span :matTooltip="{{cancel.leave_reason}}">Sick Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'eol'">
+                  <span :matTooltip="{{cancel.leave_reason}}">Extra Ordinary Leave</span>
+                </td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'ml'">
+                  <span :matTooltip="{{cancel.leave_reason}}">Materinity Leave</span>
+                </td>
                 <td class="wd-16">{{cancel.date_from}}-{{cancel.date_to}}</td>
                 <td class="wd-16">{{cancel.date_of_apply}}</td>
                 <td class="modify">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(cancel.application_id)"></i>
-                  <i class="fa fa-check" aria-hidden="true" (click)="appAccept(cancel.application_id)"></i>
-                  <i class="fa fa-times" aria-hidden="true" (click)="appCancel(cancel.application_id)"></i>
-                  <mat-icon class="mat-icon material-icons pos-rel" role="img" aria-hidden="true">more_vert</mat-icon>
+                  <small>No Actions</small>
+                  <!-- <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(cancel.application_id, cancel.qci_id)"></i>
+                  <i class="fa fa-check" aria-hidden="true" (click)="appAccept(cancel.application_id, cancel.qci_id)"></i>
+                  <i class="fa fa-times" aria-hidden="true" (click)="appCancel(cancel.application_id, cancel.qci_id)"></i>
+                  <mat-icon class="mat-icon material-icons pos-rel" role="img" aria-hidden="true">more_vert</mat-icon> -->
                 </td>
               </tr>
             </tbody>

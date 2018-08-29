@@ -27,6 +27,9 @@ export class ApiService {
     emitMyZero = new EventEmitter<any>()
     emitMyLeaves = new EventEmitter<any>()
 
+    // abc@qcin.org
+    // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
+
     URL: string = "http://13.127.13.175:5000/"
     // URL: string = "http://192.168.15.55:5000/"
 
@@ -35,6 +38,7 @@ export class ApiService {
     opts: any // Find more details about backend configuration
     uid: any
     setiD: any
+
     constructor(public snackBar: MatSnackBar, private http: Http, private router: Router, private httpClient: HttpClient) {
         // Private http : Http, private router : Router
         // We will use both imports here. Are we using anywhere in comments only ???
@@ -60,35 +64,50 @@ export class ApiService {
         tmp = { email: uname, password: pwd }
         let data = JSON.stringify(tmp)
         return new Promise((resolve) => {
-            this.http.post(this.URL + 'lms/loginEmp', data)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) {
-                    localStorage.setItem('token', response.token)
-                    localStorage.setItem('userName', uname)
-                    this.uid = uname
-                    this.emitLogin.emit()
-                } else this.snackBars(response.message, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+            this.http.post(this.URL + 'lms/loginAdmin', data)
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) {
+                        localStorage.setItem('token', response.token)
+                        localStorage.setItem('userName', uname)
+                        this.uid = uname
+                        this.emitLogin.emit()
+                    } else this.snackBars(response.message, response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     noDeclineReason() {
         this.snackBars("Note:", "Kindly fill reason to cancel")
     }
     // CSV Upload
-    public upload( files : Set< File > ) : { [ key : string ] : Observable<number> } {
+    public upload(files: Set<File>): { [key: string]: Observable<number> } {
         // create a const to capture/record status of file
         const status = {}
         // for each files
         files.forEach(file => {
-            const formData : FormData = new FormData()
+            const formData: FormData = new FormData()
             formData.append('file', file, file.name)
+            /* return new Promise((resolve) => {
+                const req = this.http.post(this.URL + 'lms/holiday', formData, this.opts)
+                    .map( res => res.json())
+                    .subscribe( response => {
+                        console.log( req )
+                        console.log( response )
+                        if ( response.success ) {
+                            //this.emitMyApplication.emit(response)
+                            // does not refresh after response
+                        } else this.snackBars(response.message, response.success)
+                        resolve(true)
+                    }, err => this.router.navigate(['/404']))
+            }) */
             const req = new HttpRequest('POST', this.URL + 'lms/holiday', formData, {
                 reportProgress: true
             })
             const progress = new Subject<number>()
             this.httpClient.request(req).subscribe(event => {
+                console.log(event)
                 if (event.type === HttpEventType.UploadProgress) {
                     const percentDone = Math.round(100 * event.loaded / event.total)
                     progress.next(percentDone)
@@ -104,86 +123,94 @@ export class ApiService {
     // HINT : Are we checking the response is a success or not ???
     // Get Employee
     GetEmployeeDetails() {
+        // console.log(this.opts)
+        // console.log(this.headers)
         return this.http.get(this.URL + 'lms/employeeDetails', this.opts).map(r => r.json())
     }
     // get employee to see leave application history
     getEmployee(data: any) {
         return new Promise((resolve) => {
             this.http.get(this.URL + 'lms/addEmployee/' + data, this.opts)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) this.emitgetEmployee.emit(response.data)
-                else this.snackBars(response.message, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) this.emitgetEmployee.emit(response.data)
+                    else this.snackBars(response.message, response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     // get employee leaves
     myLeaves(data: any) {
         return new Promise((resolve) => {
             this.http.get(this.URL + 'lms/applyLeave/' + data, this.opts)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) this.emitMyLeaves.emit(response.data)
-                else {
-                    if (response.messages == 'No application available currently') this.emitMyZero.emit(response)
-                    else this.snackBars("! Success", "Try Again")
-                }
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) this.emitMyLeaves.emit(response.data)
+                    else {
+                        if (response.messages == 'No application available currently') this.emitMyZero.emit(response)
+                        else this.snackBars("! Success", "Try Again")
+                    }
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     // Get Employee_on_leave
     getEOL() {
         return new Promise((resolve) => {
             this.http.get(this.URL + 'lms/input', this.opts)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) {
-                    if (response.data.length > 0) this.emitEOL.emit(response.data)
-                    else this.emitZeroEOL.emit(response)
-                } else this.snackBars(response.message, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) {
+                        if (response.data.length > 0) this.emitEOL.emit(response.data)
+                        else this.emitZeroEOL.emit(response)
+                    } else this.snackBars(response.message, response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     // Get QCI Calendar
     getHoliday() {
         return new Promise((resolve) => {
             this.http.get(this.URL + 'lms/holiday', this.opts)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) {
-                    if (response.result.length == 0) console.log("d")
-                    else this.emitgetHoliday.emit(response.result)
-                }
-                else this.snackBars(response.message, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) {
+                        if (response.result.length == 0) console.log("No holiday file uploaded yet !")
+                        else this.emitgetHoliday.emit(response.result)
+                    }
+                    else this.snackBars("response.message", response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     // Get approved employee list on leaves
     approvedLeave() {
         return new Promise((resolve) => {
             this.http.get(this.URL + 'lms/output1', this.opts)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) this.emitApprovedApplication.emit(response.data)
-                else this.snackBars(response.message, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) this.emitApprovedApplication.emit(response.data)
+                    else this.snackBars(response.message, response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     // Get cancelled/rejected leave of employee's
     cancelledLeave() {
         return new Promise((resolve) => {
             this.http.get(this.URL + 'lms/output2', this.opts)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) this.emitCancelledApplication.emit(response.data)
-                else this.snackBars(response.message, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) this.emitCancelledApplication.emit(response.data)
+                    else this.snackBars(response.message, response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     // post employee application for approval
@@ -191,27 +218,44 @@ export class ApiService {
     leaveForApproval(data: any) {
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/approveLeave', data, this.opts)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) {
-                    this.emitMyApplication.emit(response)
-                    // does not refresh after response
-                } else this.snackBars(response.message, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) {
+                        this.emitMyApplication.emit(response)
+                        // does not refresh after response
+                    } else this.snackBars(response.message, response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
+        })
+    }
+    // leaveModified( ){}
+    leaveModified(data: any) {
+        return new Promise((resolve) => {
+            this.http.post(this.URL + 'lms/api', data, this.opts)
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) {
+                        this.emitMyApplication.emit(response)
+                        // does not refresh after response
+                    } else this.snackBars(response.message, response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     // Post decline leave of employee's
     declineLeave(data: any) {
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/declineLeave', data, this.opts)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) {
-                    this.emitMyApplication.emit(response)
-                } else this.snackBars(response.message, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) {
+                        this.emitMyApplication.emit(response)
+                    } else this.snackBars(response.message, response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     // Post month dates to get employee on leave in a month
@@ -223,53 +267,57 @@ export class ApiService {
         let tmp = { date: data }
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/empOnLeave', tmp, this.opts)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) {
-                    this.emitEmpOnLeave.emit(response.data)
-                    this.emitEmpApp.emit(response.app_detail)
-                } else this.snackBars(response.error, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) {
+                        this.emitEmpOnLeave.emit(response.data)
+                        this.emitEmpApp.emit(response.app_detail)
+                    } else this.snackBars(response.error, response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     // Post( Add New Employee ) requests
-    addEmp( data : any ) {
-        return new Promise(( resolve ) => {
-            this.http.post( this.URL + 'lms/addEmployee', data, this.opts )
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) this.router.navigate(['/employee-list'])
-                else this.snackBars(response.message, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+    addEmp(data: any) {
+        return new Promise((resolve) => {
+            this.http.post(this.URL + 'lms/addEmployee', data, this.opts)
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) this.router.navigate(['/employee-list'])
+                    else this.snackBars(response.message, response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     // Post( Update Existing Employee ) requests
     updateEmployee(data: any) {
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/editEmployeeDetails', data, this.opts)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) {
-                    this.router.navigate(['/employee-list'])
-                    this.GetEmployeeDetails()
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) {
+                        this.GetEmployeeDetails()
+                        this.router.navigate(['/employee-list'])
                     } else this.snackBars(response.message, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
     // Post ( Delete Existing Employee ) requests
     deleteEmp(data: any) {
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/deleteEmployee', JSON.stringify(data), this.opts)
-            .map(res => res.json())
-            .subscribe(response => {
-                if (response.success) {
-                    this.GetEmployeeDetails()
-                } else this.snackBars(response.message, response.success)
-                resolve(true)
-            }, err => this.router.navigate(['/404']))
+                .map(res => res.json())
+                .subscribe(response => {
+                    /*console.log(response)*/
+                    if (response.success) {
+                        this.snackBars("Alert:", "Employee deleted Successfully!")
+                    } else this.snackBars("Alert:", "Employee not deleted")
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
         })
     }
 }

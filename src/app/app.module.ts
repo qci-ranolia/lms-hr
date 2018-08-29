@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { HttpModule, Http } from '@angular/http'
+import { HttpModule } from '@angular/http'
 import { HttpClientModule } from '@angular/common/http'
 import { RouterModule } from '@angular/router'
 
@@ -23,20 +23,19 @@ import { LmsService } from './services/lms.service'
 import { AuthService } from './services/auth.service'
 import { DatePipe } from '@angular/common'
 
-import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
+import {
+  MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
   MatChipsModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule,
   MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule,
   MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule,
   MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
-  MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material'
+  MatTabsModule, MatToolbarModule, MatTooltipModule
+} from '@angular/material'
 
 import { Ng4SpinnerModule } from 'ng4-spinner'
 import { PiechartComponent } from './main/dashboard/piechart/piechart.component'
 import { DialogComponent } from './main/dashboard/dialog/dialog.component'
-// import { NgxChartsModule } from '@swimlane/ngx-charts'
 
-// import { FlexLayoutModule } from '@angular/flex-layout'
-import { JwtModule } from '@auth0/angular-jwt'
 import { NgPipesModule } from 'ngx-pipes'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ServererrComponent } from './main/servererr/servererr.component';
@@ -46,7 +45,7 @@ export function tokenGetter() {
   return localStorage.getItem('access_token')
 }
 @NgModule({
-  declarations:[
+  declarations: [
     AppComponent,
     NavComponent,
     DashboardComponent,
@@ -62,14 +61,13 @@ export function tokenGetter() {
     ServererrComponent,
     AppinfoComponent
   ],
-  imports:[
+  imports: [
     Ng2SearchPipeModule,
     NgPipesModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    // NgxChartsModule,
     HttpModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -95,16 +93,9 @@ export function tokenGetter() {
     Ng4SpinnerModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent }
-    ]),
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: [/.*/, 'string'],
-        blacklistedRoutes: [/.*/, 'string']
-      }
-    })
-    ],
-  providers: [ LmsService, ApiService, AuthService,DatePipe],
+    ])
+  ],
+  providers: [LmsService, ApiService, AuthService, DatePipe],
   exports: [
     DashboardComponent,
     DialogComponent,
@@ -119,4 +110,4 @@ export function tokenGetter() {
   ]
 })
 
-export class AppModule {}
+export class AppModule { }

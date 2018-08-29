@@ -5,8 +5,8 @@ import { MatSnackBar } from '@angular/material'
 
 @Injectable()
 export class LmsService {
-  loader : boolean = false
-  count : any
+  loader: boolean = false
+  count: any
 
   emitsload = new EventEmitter<any>()
   emithload = new EventEmitter<any>()
@@ -27,7 +27,7 @@ export class LmsService {
   showLoader() {
     this.loader = true
     this.emitsload.emit(this.loader)
-    setTimeout(() => this.hideLoader(), 1000 )
+    setTimeout(() => this.hideLoader(), 1000)
   }
   hideLoader() {
     this.loader = false
@@ -38,7 +38,7 @@ export class LmsService {
       duration: 2600,
     })
   }
-  getEmployees(){
+  getEmployees() {
     this.api.GetEmployeeDetails().subscribe(el => {
       if (el.success) this.emitgetEmployees.emit(el.data)
       else this.snackBars(el.message, el.success) // this.snackBar.open('el.success was not true')
@@ -51,6 +51,7 @@ export class LmsService {
   }
   postEOLBSDate(data: any) {
     this.api.postEOLBSDate(data).subscribe(el => {
+      // console.log(el)
       if (el.success) this.emitCount.emit(el.data)
       else return false
     }, err => this.router.navigate(['/404'])

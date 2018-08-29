@@ -56,10 +56,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(public dialog: MatDialog, private api: ApiService, private lms: LmsService) {//, private httpClient: HttpClient 
     var tmp = new Date()
     this.getDate = tmp.getDate()
+    
     let dd: any = tmp.getDate(), mm: any = tmp.getMonth() + 1, yyyy: any = tmp.getFullYear()
     if (dd < 10) dd = "0" + dd
     if (mm < 10) mm = "0" + mm
+    
     this.api.getEmpOnLeave(dd + "/" + mm + "/" + yyyy)
+
     this.unsubLoader = this.lms.emitsload.subscribe(el => (this.loader = el))
     this.lms.showLoader()
     this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(r => (this.employee = Object.values(r)))
@@ -95,6 +98,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         })
       }, 350)
     })
+    
     this.unsubCount = this.lms.emitCount.subscribe(r => {
       var x = Object.keys(r), y = Object.values(r) // count array
       let t: any = x, s: any = y
@@ -107,6 +111,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       }
     })
+  
   }
   // CSV Dialog
   public openUploadDialog($e) {
@@ -136,6 +141,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let temp = this.postDate + "/" + this.getMonth
     this.api.getEmpOnLeave(temp)
   }
+
   public todayCheck(day) {
     if (!day) return false
     return moment().format("L") === day.format
@@ -187,10 +193,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     return days
   }
   public nextMonth() {
+    console.log(this.date)
     this.date.add(1, "M")
     this.cmnProgram()
   }
   public previousMonth() {
+    console.log(this.date)
     this.date.subtract(1, "M")
     this.cmnProgram()
   }
@@ -213,3 +221,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.unsubEmpApplication.unsubscribe()
   }
 }
+
+

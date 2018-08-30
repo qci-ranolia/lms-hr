@@ -2,7 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { LmsService } from '../../services/lms.service'
 import { ApiService } from '../../services/api.service'
 declare var $
+import { RoleComponent } from "./role/role.component"
+import { MatTabChangeEvent, MatDialog } from '@angular/material'
 
+declare var $
+export interface DialogData {
+  animal: 'panda' | 'unicorn' | 'lion';
+}
 @Component({
   selector: 'app-crud',
   templateUrl: './crud.component.html',
@@ -15,7 +21,7 @@ export class CrudComponent implements OnInit, OnDestroy {
   unsubLoader: any
   unsubGetEmployees: any
 
-  constructor(private lms: LmsService, private api: ApiService) {
+  constructor(private lms: LmsService, private api: ApiService, public dialog: MatDialog) {
     this.unsubLoader = this.lms.emitsload.subscribe(el => this.loader = el)
     this.lms.showLoader()
 
@@ -40,6 +46,24 @@ export class CrudComponent implements OnInit, OnDestroy {
     var tmp = { qci_id: qci_id }
     this.api.deleteEmp(tmp)
     this.lms.getEmployees()
+  }
+  // public openApplicationModal() {
+  //   //var item = this.case.find(it => it.application_id == application_id) // linear search
+  //   //item.event = event
+  //   this.dialog.open( RoleComponent, {
+  //     width: "60%",
+  //     height: "75%",
+  //     //data: item
+  //   })
+  // }
+  assignRole(){
+    console.log("s")
+    this.dialog.open( RoleComponent, {
+      width: "60%",
+      height: "75%",
+      //data: item
+    })
+    // this.openApplicationModal()
   }
   ngOnDestroy() {
     this.unsubLoader.unsubscribe()

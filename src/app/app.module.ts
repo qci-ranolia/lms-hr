@@ -39,7 +39,8 @@ import { DialogComponent } from './main/dashboard/dialog/dialog.component'
 import { NgPipesModule } from 'ngx-pipes'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ServererrComponent } from './main/servererr/servererr.component';
-import { AppinfoComponent } from './main/newapp/appinfo/appinfo.component'
+import { AppinfoComponent } from './main/newapp/appinfo/appinfo.component';
+import { RoleComponent } from './main/crud/role/role.component'
 
 export function tokenGetter() {
   return localStorage.getItem('access_token')
@@ -59,7 +60,8 @@ export function tokenGetter() {
     PiechartComponent,
     DialogComponent,
     ServererrComponent,
-    AppinfoComponent
+    AppinfoComponent,
+    RoleComponent
   ],
   imports: [
     Ng2SearchPipeModule,
@@ -103,7 +105,8 @@ export function tokenGetter() {
   ],
   entryComponents: [
     DialogComponent,
-    AppinfoComponent
+    AppinfoComponent,
+    RoleComponent
   ],
   bootstrap: [
     AppComponent

@@ -24,6 +24,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   nxtMnth: any
   prvMnth: any
 
+  Mnth:any
+  Year:any
+
   public daysArr
   applications = new Array()
   employee = new Array()
@@ -57,21 +60,32 @@ export class DashboardComponent implements OnInit, OnDestroy {
     var tmp = new Date()
     this.getDate = tmp.getDate()
     
-    let dd: any = tmp.getDate(), mm: any = tmp.getMonth() + 1, yyyy: any = tmp.getFullYear()
+    let dd: any = tmp.getDate(),
+    mm: any = tmp.getMonth() + 1,
+    yyyy: any = tmp.getFullYear()
     if (dd < 10) dd = "0" + dd
     if (mm < 10) mm = "0" + mm
     
     this.api.getEmpOnLeave(dd + "/" + mm + "/" + yyyy)
-
+    
     this.unsubLoader = this.lms.emitsload.subscribe(el => (this.loader = el))
     this.lms.showLoader()
-    this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(r => (this.employee = Object.values(r)))
-    this.unsubEmployeesOnLeave = this.lms.emitEOL.subscribe(r => (this.applications = r))
-
+    
+    this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(r => {
+      this.employee = Object.values(r)
+    })
+    
+    this.unsubEmployeesOnLeave = this.lms.emitEOL.subscribe(r => {
+      this.applications = r
+    })
+    
     this.unsubEmpOnLeaveTwo = this.api.emitEmpOnLeave.subscribe(r => {
+      // console.log(r)
       this.emp = r
     })
+    
     this.unsubEmpApplication = this.api.emitEmpApp.subscribe(r => {
+      // console.log(r)
       this.empApplications = r
     })
     this.unsubGetHoliday = this.api.emitgetHoliday.subscribe(el => {
@@ -87,7 +101,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         let d = this.tDate,
           m = this.month
         if (d < 10) this.tDate = "0" + d
-        else this.date = d
+        else this.tDate = d
         if (m < 10) m++ && (this.month = "0" + m)
         else m++ && (this.month = m)
         var today = String(this.tDate + "/" + this.month + "/" + this.year)
@@ -99,7 +113,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }, 350)
     })
     
-    this.unsubCount = this.lms.emitCount.subscribe(r => {
+    this.unsubCount = this.lms.emitCount.subscribe( r => {
       var x = Object.keys(r), y = Object.values(r) // count array
       let t: any = x, s: any = y
       if (!(this.combineDateEmp.length >= 1)) {
@@ -111,7 +125,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       }
     })
-  
   }
   // CSV Dialog
   public openUploadDialog($e) {
@@ -134,7 +147,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.daysArr = this.createCalendar(this.date)
     // this.ngSpinner.hide()
   }
-  getEmpOnLeave(data) {
+  getEmpOnLeave(data){
     if (!data.count) this.emp = []
     this.getMonth = this.date.format("MM/YYYY")
     this.postDate = data.day
@@ -148,6 +161,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   public createCalendar(month) {
+    // this.Mnth = this.date.format('MMMM')
+    // this.Year = this.date.format('YYYY')
     this.combineDateEmp = []
     this.daysArr = this.combineDateEmp
     let f = moment(month).startOf("M"), s = moment(f).endOf("month"),
@@ -192,26 +207,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
       })
     return days
   }
-  public nextMonth() {
-    console.log(this.date)
+  public nextMonth(){
     this.date.add(1, "M")
     this.cmnProgram()
   }
-  public previousMonth() {
-    console.log(this.date)
+  public previousMonth(){
     this.date.subtract(1, "M")
     this.cmnProgram()
   }
-  cmnProgram() {
+  cmnProgram(){
     this.daysArr = this.createCalendar(this.date)
-    if (!this.postDate) {
-      // next month
-      this.getMonth = this.date.format("DD/MM/YYYY")
-    } else {
-      // previous month
-      this.getMonth = this.date.format(this.postDate + "/" + "MM/YYYY")
-    }
+    if (!this.postDate) this.getMonth = this.date.format("DD/MM/YYYY") // Next Month
+    else this.getMonth = this.date.format(this.postDate + "/" + "MM/YYYY") // Prev Month
   }
+
   ngOnDestroy() {
     this.unsubGetEmployees.unsubscribe()
     this.unsubEmployeesOnLeave.unsubscribe()
@@ -221,5 +230,3 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.unsubEmpApplication.unsubscribe()
   }
 }
-
-

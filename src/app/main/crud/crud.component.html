@@ -2,7 +2,8 @@
     <div class="col-sm-12 float-left">
         <h5 class="d-inline-block">Employee's List</h5>
         <div class="d-inline-block float-right">
-            <button mat-button class="btn btn-primary p-2 mat-button mt-0 mb-3" [routerLink]="['/add-employee']">Add Employee</button>
+            <button mat-button class="btn p-2 mat-button mt-0 mb-3" [routerLink]="['/add-employee']">Add Employee</button>
+            <button mat-button class="btn btn-primary p-2 mat-button mt-0 mb-3" (click)="assignRole()">Add Role</button><!-- [routerLink]="['/add-employee']"-->
         </div>
         <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box">
             <table id="table_id" class="table table-striped" cellspacing="0" width="100%">
@@ -10,9 +11,8 @@
                     <tr>
                         <th class="wd-7">QCID</th>
                         <th class="wd-16">Employee name</th>
-                        <th class="wd-7">Gender</th>
                         <th class="wd-15">Designation</th>
-                        <th class="wd-7">Board</th>
+                        <th class="wd-12">Reporting Mngr.</th>
                         <th class="wd-">Leave details</th>
                         <th class="modify">Modify</th>
                     </tr>
@@ -21,14 +21,14 @@
                     <tr *ngFor="let emp of employee; let i = index">
                         <td class="wd-7">{{emp.qci_id}}</td>
                         <td class="wd-16">
-                            <span :matTooltip="{{emp.email}}">{{ emp.name }}</span>
+                            <span :matTooltip="{{emp.email}}">{{ emp.name }}<small><br />{{emp.gender}}</small></span>
                         </td>
-                        <td class="wd-7">{{ emp.gender }}</td>
                         <td class="wd-15">{{ emp.designation }}
                             <br />
                             <small>{{ emp.type_of_employee }}</small>
+                            <small class="text-primary">( {{emp.board}} )</small>
                         </td>
-                        <td class="wd-7">{{ emp.board }}</td>
+                        <td class="wd-12">Yes</td>
                         <td class="wd-">
                             <mat-chip-list>
                                 <mat-chip class="bg-light rad-box">

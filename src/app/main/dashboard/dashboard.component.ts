@@ -24,8 +24,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   nxtMnth: any
   prvMnth: any
 
-  Mnth:any
-  Year:any
+  Mnth: any
+  Year: any
 
   public daysArr
   applications = new Array()
@@ -59,35 +59,36 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(public dialog: MatDialog, private api: ApiService, private lms: LmsService) {//, private httpClient: HttpClient 
     var tmp = new Date()
     this.getDate = tmp.getDate()
-    
+
     let dd: any = tmp.getDate(),
-    mm: any = tmp.getMonth() + 1,
-    yyyy: any = tmp.getFullYear()
+      mm: any = tmp.getMonth() + 1,
+      yyyy: any = tmp.getFullYear()
     if (dd < 10) dd = "0" + dd
     if (mm < 10) mm = "0" + mm
-    
+
     this.api.getEmpOnLeave(dd + "/" + mm + "/" + yyyy)
-    
+
     this.unsubLoader = this.lms.emitsload.subscribe(el => (this.loader = el))
     this.lms.showLoader()
-    
+
     this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(r => {
       this.employee = Object.values(r)
     })
-    
+
     this.unsubEmployeesOnLeave = this.lms.emitEOL.subscribe(r => {
       this.applications = r
     })
-    
+
     this.unsubEmpOnLeaveTwo = this.api.emitEmpOnLeave.subscribe(r => {
       // console.log(r)
       this.emp = r
     })
-    
+
     this.unsubEmpApplication = this.api.emitEmpApp.subscribe(r => {
       // console.log(r)
       this.empApplications = r
     })
+
     this.unsubGetHoliday = this.api.emitgetHoliday.subscribe(el => {
       setTimeout(() => {
         for (let i = 0; i < el.length; i++) {
@@ -112,8 +113,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         })
       }, 350)
     })
-    
-    this.unsubCount = this.lms.emitCount.subscribe( r => {
+
+    this.unsubCount = this.api.emitCount.subscribe(r => {
       var x = Object.keys(r), y = Object.values(r) // count array
       let t: any = x, s: any = y
       if (!(this.combineDateEmp.length >= 1)) {
@@ -147,7 +148,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.daysArr = this.createCalendar(this.date)
     // this.ngSpinner.hide()
   }
-  getEmpOnLeave(data){
+  getEmpOnLeave(data) {
     if (!data.count) this.emp = []
     this.getMonth = this.date.format("MM/YYYY")
     this.postDate = data.day
@@ -184,9 +185,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       // map CSV holiday and push in an empty array
       this.compulsory.map(e => h.push(e["Date"]))
-      // combine two arrays and sort them accordingly
+      // Combine two arrays and sort them accordingly
       var x = h.concat(r).sort((a, b) => {
-        (a = a.split("/").reverse().join("")), (b = b.split("/").reverse().join(""))
+        a = a.split("/").reverse().join(""), b = b.split("/").reverse().join("")
         return a > b ? 1 : a < b ? -1 : 0
       })
       // filter total working days in a given month
@@ -195,9 +196,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (x.indexOf(k) >= 0) (y = k.split("/").reverse().join("").slice(-2)), z.push(y)
         return x.indexOf(k) < 0
       })
-      this.lms.postEOLBSDate(this.workingDays)
+      this.api.postEOLBSDate(this.workingDays)
       // Add some ~ delay so that .subscribe() method fetch holidays from the api in given time
-      // To add exact delays find epoch values of constructor, NGONINT & subscribe method
+      // To add exact delays find epoch values of constructor, NGONINT & subscribe method and may be more xaces be considered
     }, 400)
     // Create a calendar for whole month which includes sundays & holidays
     let days = Array.apply(null, { length: month.daysInMonth() })
@@ -205,17 +206,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .map(n => {
         return moment(f).add(n, "d").format("DD")
       })
+    // console.log(days)
     return days
   }
-  public nextMonth(){
+
+  public nextMonth() {
     this.date.add(1, "M")
     this.cmnProgram()
   }
-  public previousMonth(){
+
+  public previousMonth() {
     this.date.subtract(1, "M")
     this.cmnProgram()
   }
-  cmnProgram(){
+
+  cmnProgram() {
     this.daysArr = this.createCalendar(this.date)
     if (!this.postDate) this.getMonth = this.date.format("DD/MM/YYYY") // Next Month
     else this.getMonth = this.date.format(this.postDate + "/" + "MM/YYYY") // Prev Month
@@ -229,4 +234,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.unsubCount.unsubscribe()
     this.unsubEmpApplication.unsubscribe()
   }
+
 }

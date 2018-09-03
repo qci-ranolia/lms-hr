@@ -50,11 +50,11 @@ export class LmsService {
     this.api.deleteEmp(tmp)
   }
   postEOLBSDate(data: any) {
-    this.api.postEOLBSDate(data).subscribe(el => {
+    this.api.postEOLBSDate(data)/* .subscribe(el => {
       // console.log(el)
       if (el.success) this.emitCount.emit(el.data)
       else return false
     }, err => this.router.navigate(['/404'])
-    )
+    ) */
   }
 }

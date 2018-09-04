@@ -41,6 +41,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ServererrComponent } from './main/servererr/servererr.component';
 import { AppinfoComponent } from './main/newapp/appinfo/appinfo.component';
 import { RoleComponent } from './main/crud/role/role.component'
+import { routes } from './app-routing.module';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token')
@@ -93,10 +94,7 @@ export function tokenGetter() {
     MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
     MatTabsModule, MatToolbarModule, MatTooltipModule,
     Ng4SpinnerModule,
-    RouterModule.forRoot([
-      { path: 'login', component: LoginComponent }
-    ])
-  ],
+    RouterModule.forRoot(routes, { useHash: true })],
   providers: [LmsService, ApiService, AuthService, DatePipe],
   exports: [
     DashboardComponent,

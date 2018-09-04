@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { LmsService } from '../../../services/lms.service'
 import { ApiService } from '../../../services/api.service'
+import { MatDatepickerInputEvent } from "@angular/material/datepicker"
 
 @Component({
   selector: 'app-add-emp',
@@ -46,15 +47,26 @@ export class AddEmpComponent implements OnInit, OnDestroy {
   gettoe(item) {
     this.type_of_employee = item
   }
+
   addEmployee() {
     this.api.addEmp(this.employee)
   }
+
   keyPress(event: any) {
     const pattern = /[0-9\+\-\ ]/
     let inputChar = String.fromCharCode(event.charCode)
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
       event.preventDefault()
     }
+  }
+
+  firstDateEvent(event: MatDatepickerInputEvent<Date>) {
+    let date = event.value.getDate() // Get date
+    let month = event.value.getMonth() // Now get month
+    let year = event.value.getFullYear() // Now get year
+    console.log(date)
+    console.log(month)
+    console.log(year)
   }
   ngOnDestroy() {
     this.unsubLoader.unsubscribe()

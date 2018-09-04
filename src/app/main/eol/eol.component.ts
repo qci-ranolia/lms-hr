@@ -15,7 +15,7 @@ export class EolComponent implements OnInit, OnDestroy {
   loader: boolean = false
 
   hide: boolean = true
-  employee = new Array()
+  employee: any
   leave = new Array()
   myLeaveStatus: any
 

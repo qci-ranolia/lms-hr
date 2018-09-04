@@ -5,7 +5,7 @@
       <form class="example-form" #userForm="ngForm">
         <mat-form-field class="example-full-width col-sm-2 float-left mb-2">
           <input matInput placeholder="Qci ID" [(ngModel)]="employee.qci_id" [ngClass]="{'is-invalid':qciId.errors && qciId.touched}"
-            #qciId="ngModel" required minlength="2" maxlength="7" name="qciId" />
+            #qciId="ngModel" required minlength="2" maxlength="14" name="qciId" />
         </mat-form-field>
         <mat-form-field class="example-full-width col-sm-5 float-left mb-2">
           <input matInput placeholder="Employee Name" [(ngModel)]="employee.name" [ngClass]="{'is-invalid':name.errors && name.touched}"
@@ -15,7 +15,6 @@
           <input matInput placeholder="Email" [(ngModel)]="employee.email" [ngClass]="{'is-invalid':email.errors && email.touched}"
             name="email" #email="ngModel" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" />
         </mat-form-field>
-
         <mat-form-field class="example-full-width col-sm-4 float-left mb-2">
           <input matInput placeholder="Designation" [(ngModel)]="employee.designation" [ngClass]="{'is-invalid':designation.errors && designation.touched}"
             #designation="ngModel" required minlength="2" maxlength="48" pattern="[a-zA-Z][a-zA-Z ]+" name="designation" />
@@ -30,66 +29,21 @@
             <mat-option *ngFor="let typ of showEmpTyp" [value]="typ.value">{{typ.value}}</mat-option>
           </mat-select>
         </mat-form-field>
-
         <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
           <mat-select placeholder="Select Gender" [(ngModel)]="employee.gender" (change)="getGender(employee.gender)"
             name="gender">
             <mat-option *ngFor="let gndr of showGender" [value]="gndr.value">{{gndr.value}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <!-- <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
-                    <input matInput placeholder="Casual Leave" [(ngModel)]="employee.bal_cl" [ngClass]="{'is-invalid':balCl.errors && balCl.touched}"
-                    #balCl="ngModel"
-                    required
-                    minlength="1"
-                    maxlength="2"
-                    name="balCl" 
-                    (keypress)="keyPress($event)"
-                    />
-                </mat-form-field>
-                <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
-                    <input matInput placeholder="Sick Leave" [(ngModel)]="employee.bal_sl" [ngClass]="{'is-invalid':balSl.errors && balSl.touched}"
-                    #balSl="ngModel"
-                    required
-                    minlength="1"
-                    maxlength="2"
-                    name="balSl" 
-                    (keypress)="keyPress($event)"
-                    />
-                </mat-form-field>
-                <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
-                    <input matInput placeholder="Privileged Leave" [(ngModel)]="employee.bal_pl" [ngClass]="{'is-invalid':balPl.errors && balPl.touched}"
-                    #balPl="ngModel"
-                    required
-                    minlength="1"
-                    maxlength="2"
-                    name="balPl"
-                    (keypress)="keyPress($event)"
-                    />
-                </mat-form-field>
-
-                <mat-form-field class="example-full-width col-sm-6 float-left mb-2">
-                    <input matInput placeholder="Extra Ordinary Leave" [(ngModel)]="employee.bal_eol" [ngClass]="{'is-invalid':balEol.errors && balEol.touched}"
-                    #balEol="ngModel"
-                    required
-                    minlength="1"
-                    maxlength="2"
-                    name="balEol" 
-                    (keypress)="keyPress($event)"
-                    />
-                </mat-form-field>
-                <mat-form-field class="example-full-width col-sm-6 float-left mb-2" *ngIf="show">
-                    <input matInput placeholder="Maternity Leave" [(ngModel)]="employee.bal_ml" [ngClass]="{'is-invalid':balMl.errors && balMl.touched}"
-                    #balMl="ngModel"
-                    required
-                    minlength="1"
-                    maxlength="3" 
-                    name="balMl"
-                    (keypress)="keyPress($event)"
-                    />
-                </mat-form-field>-->
         <mat-form-field class="example-full-width col-sm-6 float-left mb-2">
-          <input matInput placeholder="Reporting Manager" [(ngModel)]="employee.reporting_manager" required name="Reporting Manager" />
+          <input matInput placeholder="Reporting Manager" [(ngModel)]="employee.reporting_manager" [ngClass]="{'is-invalid':reportingManager.errors && reportingManager.touched}"
+            #reportingManager="ngModel" required minlength="2" maxlength="14" name="reportingManager" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
+          <input matInput placeholder="Date of Joining" [ngModelOptions]="{standalone: true}" [matDatepicker]="firstDate"
+            [(ngModel)]="employee.date_of_joining" (dateInput)="firstDateEvent($event)"><!-- [min]="minDate" [matDatepickerFilter]="disableSunDay" (dateInput)="firstDateEvent($event)" formControlName="check1"-->
+          <mat-datepicker-toggle matSuffix [for]="firstDate"></mat-datepicker-toggle>
+          <mat-datepicker #firstDate></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="example-full-width col-sm-8 float-left mb-2">
           <input matInput placeholder="Password" [type]="sp.checked ? 'text' : 'password'" [(ngModel)]="employee.password"

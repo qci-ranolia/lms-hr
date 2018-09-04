@@ -25,27 +25,27 @@
           <input matInput placeholder="Gender" [(ngModel)]="employee.gender" name="gender" />
         </mat-form-field>
         <!-- <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
-                    <input matInput placeholder="Casual Leave" [(ngModel)]="employee.bal_cl" name="bal_Cl" />
-                </mat-form-field>
-                <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
-                    <input matInput placeholder="Sick Leave" [(ngModel)]="employee.bal_sl" name="bal_Sl" />
-                </mat-form-field>
-                <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
-                    <input matInput placeholder="Privileged Leave" [(ngModel)]="employee.bal_pl" name="bal_Pl" />
-                </mat-form-field>
-                <mat-form-field class="example-full-width col-sm-6 float-left mb-2">
-                    <input matInput placeholder="Extra Ordinary Leave" [(ngModel)]="employee.bal_eol" name="bal_Eol" />
-                </mat-form-field>
-                <mat-form-field class="example-full-width col-sm-6 float-left mb-2" *ngIf="show">
-                    <input matInput placeholder="Maternity Leave" [(ngModel)]="employee.bal_ml" name="bal_Ml" />
-                </mat-form-field>
-                <mat-form-field class="example-full-width col-sm-6 float-left mb-2" *ngIf="hide">
-                    <input matInput placeholder="Paterinity Leave" [(ngModel)]="employee.bal_ptl" name="bal_Ptl" />
-                </mat-form-field> -->
-        <mat-form-field class="example-full-width col-sm-8 float-left mb-2">
+                <input matInput placeholder="Casual Leave" [(ngModel)]="employee.bal_cl" name="bal_Cl" />
+              </mat-form-field>
+              <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
+                <input matInput placeholder="Sick Leave" [(ngModel)]="employee.bal_sl" name="bal_Sl" />
+              </mat-form-field>
+              <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
+                <input matInput placeholder="Privileged Leave" [(ngModel)]="employee.bal_pl" name="bal_Pl" />
+              </mat-form-field>
+              <mat-form-field class="example-full-width col-sm-6 float-left mb-2">
+                <input matInput placeholder="Extra Ordinary Leave" [(ngModel)]="employee.bal_eol" name="bal_Eol" />
+              </mat-form-field>
+              <mat-form-field class="example-full-width col-sm-6 float-left mb-2" *ngIf="show">
+                <input matInput placeholder="Maternity Leave" [(ngModel)]="employee.bal_ml" name="bal_Ml" />
+              </mat-form-field>
+              <mat-form-field class="example-full-width col-sm-6 float-left mb-2" *ngIf="hide">
+                <input matInput placeholder="Paterinity Leave" [(ngModel)]="employee.bal_ptl" name="bal_Ptl" />
+              </mat-form-field> -->
+        <!-- <mat-form-field class="example-full-width col-sm-8 float-left mb-2">
           <input matInput placeholder="New Password" [type]="sp.checked?'text':'password'" [(ngModel)]="employee.password"
             name="password" />
-        </mat-form-field>
+        </mat-form-field> -->
         <mat-checkbox class="example-full-width col-sm-4 float-left mt-3" #sp color="primary">Show password</mat-checkbox>
         <div class="clearfix"></div>
         <button mat-button class="ml-3 mt-3 btn btn-primary p-2" (click)="updateEmployee()">Update Employee</button>

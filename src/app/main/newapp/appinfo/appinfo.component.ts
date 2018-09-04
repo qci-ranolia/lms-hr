@@ -220,45 +220,43 @@ export class AppinfoComponent implements OnInit, OnDestroy {
         }
     }
   }
-  edit() { }
-  todecline() { }
 
   modify() {
     var temp = localStorage.getItem("userName"),
       tmp: any
     tmp = {
-      qci_id: temp,
-      date_of_apply: this.today,
+      // qci_id: temp,
+      // date_of_apply: this.today,
       days: this.leavedays,
       date_from: this.fDate,
       date_to: this.sDate,
       leave_reason: this.reason_for_change,
       leave_type: this.leave_type
+
+      //  leave_type : type of leave
+      //  date_from : leave start date
+      //  date_to : leave end date
+      //  leave_reason : reason for editing leave
+      //  days : number of leave days
+      //  application_days : leave balance
+      //  previous_leave_days : number of previous leave days
+      //  previous_leave_type : type pf previous leave
+      //  previous_start_date : previous leave start date
+      //  previous_end_date : previous leave end date
     }
-    // this.api.leaveModified(tmp)
+    this.api.leaveModified(tmp)
   }
   // accept leave application
   acceptApp(app_id, qci_id) {
-    // this.dis = true
-    // this.spnnr = true
     let date = new Date(),
       latest_date = this.datepipe.transform(date, 'dd/MM/yyyy'),
       tmp = { application_id: app_id, qci_id: qci_id, date_reviewed: latest_date }
-    // this.api.leaveForApproval(tmp)
+    this.api.leaveForApproval(tmp)
   }
   // decline leave application
   declineApp(dec_reason, app_ids) {
-    // this.dis = true
-    // this.spnnr = true
     let date = moment().format("DD/MM/YYYY")
     let tmp = { application_id: app_ids, date_reviewed: date, decline_reason: dec_reason }
-    console.log(tmp)
-    // if (dec_reason) this.api.declineLeave(tmp)
-    // else {
-    //   // this.dis = false
-    //   // this.spnnr = false
-    //   this.api.noDeclineReason()
-    // }
   }
   ngOnDestroy() {
     localStorage.removeItem('qci_id')

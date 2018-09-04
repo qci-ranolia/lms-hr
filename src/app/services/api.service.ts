@@ -66,6 +66,7 @@ export class ApiService {
             this.http.post(this.URL + 'lms/loginAdmin', data)
                 .map(res => res.json())
                 .subscribe(response => {
+                    console.log(response)
                     if (response.success) {
                         localStorage.setItem('token', response.token)
                         localStorage.setItem('userName', uname)
@@ -255,7 +256,7 @@ export class ApiService {
                     if (response.success) {
                         this.emitEmpOnLeave.emit(response.data)
                         this.emitEmpApp.emit(response.app_detail)
-                    } else this.snackBars(response.error, response.success)
+                    } else this.snackBars("response.error", "response.success")
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -266,8 +267,9 @@ export class ApiService {
             this.http.post(this.URL + 'lms/addEmployee', data, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
+                    console.log(response)
                     if (response.success) this.router.navigate(['/employee-list'])
-                    else this.snackBars(response.message, response.success)
+                    else this.snackBars("response.message", "response.success")
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -281,7 +283,7 @@ export class ApiService {
                     if (response.success) {
                         this.GetEmployeeDetails()
                         this.router.navigate(['/employee-list'])
-                    } else this.snackBars(response.message, response.success)
+                    } else this.snackBars("response.message", "response.success")
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })

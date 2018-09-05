@@ -40,8 +40,7 @@
             #reportingManager="ngModel" required minlength="2" maxlength="14" name="reportingManager" />
         </mat-form-field>
         <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
-          <input matInput placeholder="Date of Joining" [ngModelOptions]="{standalone: true}" [matDatepicker]="firstDate"
-            [(ngModel)]="employee.date_of_joining" (dateInput)="firstDateEvent($event)"><!-- [min]="minDate" [matDatepickerFilter]="disableSunDay" (dateInput)="firstDateEvent($event)" formControlName="check1"-->
+          <input matInput placeholder="Date of Joining" [matDatepicker]="firstDate" (dateInput)="firstDateEvent($event)"><!-- [min]="minDate" [matDatepickerFilter]="disableSunDay" (dateInput)="firstDateEvent($event)" formControlName="check1"-->
           <mat-datepicker-toggle matSuffix [for]="firstDate"></mat-datepicker-toggle>
           <mat-datepicker #firstDate></mat-datepicker>
         </mat-form-field>

@@ -61,12 +61,16 @@ export class AddEmpComponent implements OnInit, OnDestroy {
   }
 
   firstDateEvent(event: MatDatepickerInputEvent<Date>) {
-    let date = event.value.getDate() // Get date
-    let month = event.value.getMonth() // Now get month
-    let year = event.value.getFullYear() // Now get year
-    console.log(date)
-    console.log(month)
-    console.log(year)
+    var date = event.value.getDate(),
+      month = event.value.getMonth(),
+      year = event.value.getFullYear(),
+      d: number = date,
+      m: number = month
+    if (d < 10) (date = 0 + d)
+    else (date = d)
+    if (m < 10) m++ && (month = 0 + m)
+    else m++ && (month = m)
+    this.employee["date_of_joining"] = String(date + "/" + month + "/" + year)
   }
   ngOnDestroy() {
     this.unsubLoader.unsubscribe()

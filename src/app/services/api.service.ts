@@ -280,6 +280,7 @@ export class ApiService {
             this.http.post(this.URL + 'lms/editEmployeeDetails', data, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
+                    console.log(response)
                     if (response.success) {
                         this.GetEmployeeDetails()
                         this.router.navigate(['/employee-list'])

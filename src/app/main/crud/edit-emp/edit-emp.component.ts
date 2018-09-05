@@ -22,7 +22,7 @@ export class EditEmpComponent implements OnInit, OnDestroy {
   unsubLoader: any
   unsubGetEmployees: any
 
-  constructor(private route: ActivatedRoute, private lms: LmsService, private api: ApiService ) { // private router:Router,
+  constructor(private route: ActivatedRoute, private lms: LmsService, private api: ApiService) { // private router:Router,
     this.unsubLoader = this.lms.emitsload.subscribe(el => this.loader = el)
     this.lms.showLoader()
 
@@ -31,7 +31,8 @@ export class EditEmpComponent implements OnInit, OnDestroy {
       let arr = Object.values(r)
       var item = arr.find(it => it.qci_id == this.uid)
       this.employee = item
-      this.employee.password = null
+      console.log(this.employee)
+      // this.employee.password = null
       if (this.employee.gender == 'Male') {
         this.hide = true
         this.show = false

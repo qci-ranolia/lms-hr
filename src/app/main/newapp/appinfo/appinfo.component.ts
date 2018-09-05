@@ -238,6 +238,8 @@ export class AppinfoComponent implements OnInit, OnDestroy {
       //  date_to : leave end date
       //  leave_reason : reason for editing leave
       //  days : number of leave days
+
+      // new keys to be created
       //  application_days : leave balance
       //  previous_leave_days : number of previous leave days
       //  previous_leave_type : type pf previous leave

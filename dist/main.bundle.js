@@ -759,7 +759,7 @@ var AddEmpComponent = /** @class */ (function () {
 /***/ "./src/app/main/crud/crud.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-sm-12 p-0\">\n  <div class=\"col-sm-12 float-left\">\n    <h5 class=\"d-inline-block\">Employee's List</h5>\n    <div class=\"d-inline-block float-right\">\n      <button mat-button class=\"btn p-2 mat-button mt-0 mb-3\" [routerLink]=\"['/add-employee']\">Add Employee</button>\n      <button mat-button class=\"btn btn-primary p-2 mat-button mt-0 mb-3\" (click)=\"assignRole()\">Add Role</button><!-- [routerLink]=\"['/add-employee']\"-->\n    </div>\n    <div class=\"col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box\">\n      <table id=\"table_id\" class=\"table table-striped\" cellspacing=\"0\" width=\"100%\">\n        <thead>\n          <tr>\n            <th class=\"wd-7\">QCID</th>\n            <th class=\"wd-16\">Employee name</th>\n            <th class=\"wd-15\">Designation</th>\n            <!-- <th class=\"wd-12\">Reporting Mngr.</th> -->\n            <th class=\"wd-\">Leave details</th>\n            <th class=\"modify\">Modify</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let emp of employee; let i = index\">\n            <td class=\"wd-7\">{{emp.qci_id}}</td>\n            <td class=\"wd-16\">\n              <span :matTooltip=\"{{emp.email}}\">{{ emp.name }}<small><br />{{emp.gender}}</small></span>\n            </td>\n            <td class=\"wd-15\">{{ emp.designation }}\n              <br />\n              <small>{{ emp.type_of_employee }}</small>\n              <small class=\"text-primary\">( {{emp.board}} )</small>\n            </td>\n            <!-- <td class=\"wd-12\">Yes</td> -->\n            <td class=\"wd-\">\n              <mat-chip-list>\n                <mat-chip class=\"bg-light rad-box\">\n                  <span matTooltip=\"Casual Leave\">CL: <strong>{{ emp.bal_cl }}</strong>/{{ totalLeave.total_cl }}</span>\n                </mat-chip>\n                <mat-chip class=\"bg-light rad-box\">\n                  <span matTooltip=\"Sick Leave\">SL: <strong>{{ emp.bal_sl }}</strong>/{{ totalLeave.total_sl }}</span>\n                </mat-chip>\n                <mat-chip class=\"bg-light rad-box\">\n                  <span matTooltip=\"Privileged Leave\">PL: <strong>{{ emp.bal_pl }}</strong>/{{ totalLeave.total_pl }}</span>\n                </mat-chip>\n                <mat-chip class=\"bg-light rad-box\" *ngIf=\"emp.gender == 'Female'\">\n                  <span matTooltip=\"Materinity Leave\">ML: <strong>{{ emp.bal_ml }}</strong>/{{ totalLeave.total_ml }}</span>\n                </mat-chip>\n                <mat-chip class=\"bg-light rad-box\" *ngIf=\"emp.gender == 'Male'\">\n                  <span matTooltip=\"Paterinity Leave\">PTL: <strong>{{ emp.bal_ptl }}</strong>/{{ totalLeave.total_ptl\n                    }}</span>\n                </mat-chip>\n                <!-- <mat-chip class=\"bg-light rad-box\">\n                                    <span matTooltip=\"Extraordinary Leave\">EOL: {{ emp.bal_eol }}</span>\n                                </mat-chip> -->\n              </mat-chip-list>\n            </td>\n            <td class=\"modify\">\n              <button mat-button class=\"btn btn-info p-1\" :routerLink=\"/employee-list/{{emp.qci_id}}\">Edit</button>\n              <button mat-button class=\"ml-2 btn btn-danger p-1\" (click)=\"deleteEmp(emp.qci_id)\">Delete</button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"col-sm-12 p-0\">\n  <div class=\"col-sm-12 float-left\">\n    <h5 class=\"d-inline-block\">Employee's List</h5>\n    <div class=\"d-inline-block float-right\">\n      <button mat-button class=\"btn p-2 mat-button mt-0 mb-3\" [routerLink]=\"['/add-employee']\">Add Employee</button>\n      <button mat-button class=\"btn btn-primary p-2 mat-button mt-0 mb-3\" (click)=\"assignRole()\">Add Role</button><!-- [routerLink]=\"['/add-employee']\"-->\n    </div>\n    <div class=\"col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box\">\n      <table id=\"table_id\" class=\"table table-striped\" cellspacing=\"0\" width=\"100%\">\n        <thead>\n          <tr>\n            <th class=\"wd-7\">QCID</th>\n            <th class=\"wd-16\">Employee name</th>\n            <th class=\"wd-15\">Designation</th>\n            <!-- <th class=\"wd-12\">Reporting Mngr.</th> -->\n            <th class=\"wd-\">Leave details</th>\n            <th class=\"modify\">Modify</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let emp of employee; let i = index\">\n            <td class=\"wd-7\">{{emp.qci_id}}</td>\n            <td class=\"wd-16\">\n              <span :matTooltip=\"{{emp.email}}\">{{ emp.name }}<small><br />{{emp.gender}}</small></span>\n            </td>\n            <td class=\"wd-15\">{{ emp.designation }}\n              <br />\n              <small>{{ emp.type_of_employee }}</small>\n              <small class=\"text-primary\">( {{emp.board}} )</small>\n            </td>\n            <!-- <td class=\"wd-12\">Yes</td> -->\n            <td class=\"wd-\">\n              <mat-chip-list>\n                <mat-chip class=\"bg-light rad-box\">\n                  <span matTooltip=\"Casual Leave\">CL: <strong>{{ emp.bal_cl }}</strong>/{{ emp.total_cl }}</span>\n                </mat-chip>\n                <mat-chip class=\"bg-light rad-box\">\n                  <span matTooltip=\"Sick Leave\">SL: <strong>{{ emp.bal_sl }}</strong>/{{ emp.total_sl }}</span>\n                </mat-chip>\n                <mat-chip class=\"bg-light rad-box\">\n                  <span matTooltip=\"Privileged Leave\">PL: <strong>{{ emp.bal_pl }}</strong>/{{ emp.total_pl }}</span>\n                </mat-chip>\n                <mat-chip class=\"bg-light rad-box\" *ngIf=\"emp.gender == 'Female'\">\n                  <span matTooltip=\"Materinity Leave\">ML: <strong>{{ emp.bal_ml }}</strong>/{{ emp.total_ml }}</span>\n                </mat-chip>\n                <mat-chip class=\"bg-light rad-box\" *ngIf=\"emp.gender == 'Male'\">\n                  <span matTooltip=\"Paterinity Leave\">PTL: <strong>{{ emp.bal_ptl }}</strong>/{{ emp.total_ptl\n                    }}</span>\n                </mat-chip>\n                <!-- <mat-chip class=\"bg-light rad-box\">\n                                    <span matTooltip=\"Extraordinary Leave\">EOL: {{ emp.bal_eol }}</span>\n                                </mat-chip> -->\n              </mat-chip-list>\n            </td>\n            <td class=\"modify\">\n              <button mat-button class=\"btn btn-info p-1\" :routerLink=\"/employee-list/{{emp.qci_id}}\">Edit</button>\n              <button mat-button class=\"ml-2 btn btn-danger p-1\" (click)=\"deleteEmp(emp.qci_id)\">Delete</button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -810,6 +810,7 @@ var CrudComponent = /** @class */ (function () {
             _this.employee = Object.values(r);
         });
         this.unsubTotalLeaves = this.api.emitTotalLeave.subscribe(function (r) {
+            console.log(r[0]);
             _this.totalLeave = r[0];
         });
         setTimeout(function () {
@@ -1126,7 +1127,7 @@ var DashboardComponent = /** @class */ (function () {
                     (a = a.Date.split("/").reverse().join("")), (b = b.Date.split("/").reverse().join(""));
                     return a > b ? 1 : a < b ? -1 : 0;
                 });
-            }, 350);
+            }, 320);
         });
         this.unsubCount = this.api.emitCount.subscribe(function (r) {
             var x = Object.keys(r), y = Object.values(r); // count array
@@ -1213,7 +1214,7 @@ var DashboardComponent = /** @class */ (function () {
             _this.api.postEOLBSDate(_this.workingDays);
             // Add some ~ delay so that .subscribe() method fetch holidays from the api in given time
             // To add exact delays find epoch values of constructor, NGONINT & subscribe method and may be more xaces be considered
-        }, 400);
+        }, 380);
         // Create a calendar for whole month which includes sundays & holidays
         var days = Array.apply(null, { length: month.daysInMonth() })
             .map(Number.call, Number)
@@ -2721,10 +2722,12 @@ var ApiService = /** @class */ (function () {
     };
     ApiService.prototype.tleave = function () {
         var _this = this;
+        console.log(this.opts);
         return new Promise(function (resolve) {
             _this.http.get(_this.URL + 'lms/tleave', _this.opts)
                 .map(function (res) { return res.json(); })
                 .subscribe(function (response) {
+                console.log(response);
                 if (response.success)
                     _this.emitTotalLeave.emit(response.result);
                 else
@@ -2881,6 +2884,7 @@ var LmsService = /** @class */ (function () {
     LmsService.prototype.getEmployees = function () {
         var _this = this;
         this.api.GetEmployeeDetails().subscribe(function (el) {
+            console.log(el);
             if (el.success)
                 _this.emitgetEmployees.emit(el.data);
             else

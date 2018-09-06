@@ -109,7 +109,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           (a = a.Date.split("/").reverse().join("")), (b = b.Date.split("/").reverse().join(""))
           return a > b ? 1 : a < b ? -1 : 0
         })
-      }, 350)
+      }, 320)
     })
 
     this.unsubCount = this.api.emitCount.subscribe(r => {
@@ -197,7 +197,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.api.postEOLBSDate(this.workingDays)
       // Add some ~ delay so that .subscribe() method fetch holidays from the api in given time
       // To add exact delays find epoch values of constructor, NGONINT & subscribe method and may be more xaces be considered
-    }, 400)
+    }, 380)
     // Create a calendar for whole month which includes sundays & holidays
     let days = Array.apply(null, { length: month.daysInMonth() })
       .map(Number.call, Number)
@@ -207,23 +207,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // console.log(days)
     return days
   }
-
   public nextMonth() {
     this.date.add(1, "M")
     this.cmnProgram()
   }
-
   public previousMonth() {
     this.date.subtract(1, "M")
     this.cmnProgram()
   }
-
   cmnProgram() {
     this.daysArr = this.createCalendar(this.date)
     if (!this.postDate) this.getMonth = this.date.format("DD/MM/YYYY") // Next Month
     else this.getMonth = this.date.format(this.postDate + "/" + "MM/YYYY") // Prev Month
   }
-
   ngOnDestroy() {
     this.unsubGetEmployees.unsubscribe()
     this.unsubEmployeesOnLeave.unsubscribe()
@@ -232,5 +228,4 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.unsubCount.unsubscribe()
     this.unsubEmpApplication.unsubscribe()
   }
-
 }

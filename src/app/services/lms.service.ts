@@ -40,6 +40,7 @@ export class LmsService {
   }
   getEmployees() {
     this.api.GetEmployeeDetails().subscribe(el => {
+      console.log(el)
       if (el.success) this.emitgetEmployees.emit(el.data)
       else this.snackBars(el.message, el.success) // this.snackBar.open('el.success was not true')
     }, err => this.router.navigate(['/404'])

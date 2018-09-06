@@ -32,6 +32,7 @@ export class CrudComponent implements OnInit, OnDestroy {
       this.employee = Object.values(r)
     })
     this.unsubTotalLeaves = this.api.emitTotalLeave.subscribe(r => {
+      console.log(r[0])
       this.totalLeave = r[0]
     })
     setTimeout(() => {

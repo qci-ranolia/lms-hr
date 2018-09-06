@@ -32,19 +32,19 @@
             <td class="wd-">
               <mat-chip-list>
                 <mat-chip class="bg-light rad-box">
-                  <span matTooltip="Casual Leave">CL: <strong>{{ emp.bal_cl }}</strong>/{{ totalLeave.total_cl }}</span>
+                  <span matTooltip="Casual Leave">CL: <strong>{{ emp.bal_cl }}</strong>/{{ emp.total_cl }}</span>
                 </mat-chip>
                 <mat-chip class="bg-light rad-box">
-                  <span matTooltip="Sick Leave">SL: <strong>{{ emp.bal_sl }}</strong>/{{ totalLeave.total_sl }}</span>
+                  <span matTooltip="Sick Leave">SL: <strong>{{ emp.bal_sl }}</strong>/{{ emp.total_sl }}</span>
                 </mat-chip>
                 <mat-chip class="bg-light rad-box">
-                  <span matTooltip="Privileged Leave">PL: <strong>{{ emp.bal_pl }}</strong>/{{ totalLeave.total_pl }}</span>
+                  <span matTooltip="Privileged Leave">PL: <strong>{{ emp.bal_pl }}</strong>/{{ emp.total_pl }}</span>
                 </mat-chip>
                 <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Female'">
-                  <span matTooltip="Materinity Leave">ML: <strong>{{ emp.bal_ml }}</strong>/{{ totalLeave.total_ml }}</span>
+                  <span matTooltip="Materinity Leave">ML: <strong>{{ emp.bal_ml }}</strong>/{{ emp.total_ml }}</span>
                 </mat-chip>
                 <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Male'">
-                  <span matTooltip="Paterinity Leave">PTL: <strong>{{ emp.bal_ptl }}</strong>/{{ totalLeave.total_ptl
+                  <span matTooltip="Paterinity Leave">PTL: <strong>{{ emp.bal_ptl }}</strong>/{{ emp.total_ptl
                     }}</span>
                 </mat-chip>
                 <!-- <mat-chip class="bg-light rad-box">

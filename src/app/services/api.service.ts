@@ -276,10 +276,12 @@ export class ApiService {
         })
     }
     tleave() {
+        console.log(this.opts)
         return new Promise((resolve) => {
             this.http.get(this.URL + 'lms/tleave', this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
+                    console.log(response)
                     if (response.success) this.emitTotalLeave.emit(response.result)
                     else this.snackBars("response.message", "response.success")
                     resolve(true)

@@ -2437,8 +2437,7 @@ var ApiService = /** @class */ (function () {
         this.emitTotalLeave = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         // abc@qcin.org
         // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
-        // URL: string = "http://13.127.13.175:5000/"
-        this.URL = "http://192.168.15.55:5000/";
+        this.URL = "http://13.127.13.175:5000/";
         // Private http : Http, private router : Router
         // We will use both imports here. Are we using anywhere in comments only ???
         this.uid = localStorage.getItem('userName');

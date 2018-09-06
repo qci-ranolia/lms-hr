@@ -25,7 +25,7 @@ export class ApiService {
 
     emitMyZero = new EventEmitter<any>()
     emitMyLeaves = new EventEmitter<any>()
-
+    emitTotalLeave = new EventEmitter<any>()
     // abc@qcin.org
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
 
@@ -226,6 +226,7 @@ export class ApiService {
             this.http.post(this.URL + 'lms/declineLeave', data, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
+                    console.log(response)
                     if (response.success) {
                         this.emitMyApplication.emit(response)
                     } else this.snackBars(response.message, response.success)
@@ -274,8 +275,20 @@ export class ApiService {
                 }, err => this.router.navigate(['/404']))
         })
     }
+    tleave() {
+        return new Promise((resolve) => {
+            this.http.get(this.URL + 'lms/tleave', this.opts)
+                .map(res => res.json())
+                .subscribe(response => {
+                    if (response.success) this.emitTotalLeave.emit(response.result)
+                    else this.snackBars("response.message", "response.success")
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
+        })
+    }
     // Post( Update Existing Employee ) requests
     updateEmployee(data: any) {
+        console.log(data)
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/editEmployeeDetails', data, this.opts)
                 .map(res => res.json())

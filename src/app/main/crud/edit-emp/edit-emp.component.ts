@@ -47,6 +47,13 @@ export class EditEmpComponent implements OnInit, OnDestroy {
     this.lms.getEmployees()
   }
   updateEmployee() {
+    delete this.employee['d_o_j']
+    delete this.employee['manager_email']
+    delete this.employee['total_cl']
+    delete this.employee['total_ml']
+    delete this.employee['total_pl']
+    delete this.employee['total_ptl']
+    delete this.employee['total_sl']
     this.api.updateEmployee(this.employee)
   }
   ngOnDestroy() {

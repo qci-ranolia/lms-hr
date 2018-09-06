@@ -49,6 +49,9 @@ export class AppinfoComponent implements OnInit, OnDestroy {
   leave = new Array()
   dis: any = false
 
+  totalLeave = new Array
+  unsubTotalLeaves: any
+
   snackBars(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 3900,
@@ -99,6 +102,10 @@ export class AppinfoComponent implements OnInit, OnDestroy {
       }
     })
     /*From employee ends*/
+
+    this.unsubTotalLeaves = this.api.emitTotalLeave.subscribe(r => {
+      this.totalLeave = r[0]
+    })
   }
 
   ngOnInit() {
@@ -106,7 +113,7 @@ export class AppinfoComponent implements OnInit, OnDestroy {
     this.qci_id = localStorage.getItem('qci_id')
     this.api.myLeaves(this.qci_id)
     this.api.getEmployee(this.qci_id)
-
+    this.api.tleave()
     /*from employee starts*/
     this.api.getHoliday()
     this.firstFormGroup = this._formBuilder.group({
@@ -259,6 +266,7 @@ export class AppinfoComponent implements OnInit, OnDestroy {
   declineApp(dec_reason, app_ids) {
     let date = moment().format("DD/MM/YYYY")
     let tmp = { application_id: app_ids, date_reviewed: date, decline_reason: dec_reason }
+    this.api.declineLeave(tmp)
   }
   ngOnDestroy() {
     localStorage.removeItem('qci_id')

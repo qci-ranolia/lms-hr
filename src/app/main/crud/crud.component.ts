@@ -16,17 +16,23 @@ export interface DialogData {
 })
 export class CrudComponent implements OnInit, OnDestroy {
   employee = new Array
+  totalLeave = new Array
   loader: boolean = false
 
   unsubLoader: any
   unsubGetEmployees: any
+  unsubTotalLeaves: any
 
   constructor(private lms: LmsService, private api: ApiService, public dialog: MatDialog) {
     this.unsubLoader = this.lms.emitsload.subscribe(el => this.loader = el)
     this.lms.showLoader()
 
     this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(r => {
+      console.log(r)
       this.employee = Object.values(r)
+    })
+    this.unsubTotalLeaves = this.api.emitTotalLeave.subscribe(r => {
+      this.totalLeave = r[0]
     })
     setTimeout(() => {
       $(function () {
@@ -41,6 +47,7 @@ export class CrudComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.lms.getEmployees()
+    this.api.tleave()
   }
   deleteEmp(qci_id) {
     var tmp = { qci_id: qci_id }
@@ -56,9 +63,9 @@ export class CrudComponent implements OnInit, OnDestroy {
   //     //data: item
   //   })
   // }
-  assignRole(){
+  assignRole() {
     console.log("s")
-    this.dialog.open( RoleComponent, {
+    this.dialog.open(RoleComponent, {
       width: "60%",
       height: "75%",
       //data: item

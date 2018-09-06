@@ -19,6 +19,10 @@ export class AddEmpComponent implements OnInit, OnDestroy {
   loader: boolean = false
   form: any
   unsubLoader: any
+
+  date: any
+  month: any
+  year: any
   constructor(private api: ApiService, private lms: LmsService) {
     this.unsubLoader = this.lms.emitsload.subscribe(el => this.loader = el)
     this.lms.showLoader()
@@ -61,16 +65,17 @@ export class AddEmpComponent implements OnInit, OnDestroy {
   }
 
   firstDateEvent(event: MatDatepickerInputEvent<Date>) {
-    var date = event.value.getDate(),
-      month = event.value.getMonth(),
-      year = event.value.getFullYear(),
-      d: number = date,
-      m: number = month
-    if (d < 10) (date = 0 + d)
-    else (date = d)
-    if (m < 10) m++ && (month = 0 + m)
-    else m++ && (month = m)
-    this.employee["date_of_joining"] = String(date + "/" + month + "/" + year)
+    this.date = event.value.getDate()
+    this.month = event.value.getMonth()
+    this.year = event.value.getFullYear()
+    var d: number = this.date,
+      m: number = this.month
+    if (d < 10) (this.date = '0' + d)
+    else (this.date = d)
+    if (m < 10) m++ && (this.month = '0' + m)
+    else m++ && (this.month = m)
+    this.employee["date_of_joining"] = String(this.date + "/" + this.month + "/" + this.year)
+    console.log(this.employee["date_of_joining"])
   }
   ngOnDestroy() {
     this.unsubLoader.unsubscribe()

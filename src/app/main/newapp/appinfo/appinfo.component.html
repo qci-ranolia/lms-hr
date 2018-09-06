@@ -42,9 +42,9 @@
         <mat-chip class="bg-light rad-box pt-1 pb-1" *ngIf="dialogData.gender == 'Male'">
           <span matTooltip="Paterinity Leave">PTL: {{dialogData.bal_ptl}}</span>
         </mat-chip>
-        <mat-chip class="bg-light rad-box pt-1 pb-1">
+        <!-- <mat-chip class="bg-light rad-box pt-1 pb-1">
           <span matTooltip="Extraordinary Leave">EOL: {{dialogData.bal_eol}}</span>
-        </mat-chip>
+        </mat-chip> -->
       </mat-chip-list>
     </div>
   </mat-list-item>
@@ -90,7 +90,8 @@
       <div class="col-sm-12">
         <form [formGroup]="secondFormGroup" class="mt-4">
           <mat-form-field>
-            <textarea matInput placeholder="Reason for a change..." formControlName="check3" [(ngModel)]="reason_for_change" name="leave_reason"></textarea>
+            <textarea matInput placeholder="Reason for a change..." formControlName="check3" [(ngModel)]="reason_for_change"
+              name="leave_reason"></textarea>
             <!--this[dialogData.leave_reason]-->
           </mat-form-field>
         </form>
@@ -108,8 +109,8 @@
     </div>
     <div class="col-sm-6 col-md-4 float-left pt-2">
       <mat-form-field>
-        <input matInput [min]="minDate2" [matDatepickerFilter]="disableSunDay" [matDatepicker]="secondDate" :placeholder="{{dialogData.date_to}}"
-          (dateInput)="secondDateEvent($event)" :disabled="{{isFirstDateSelected}}">
+        <input matInput [min]="minDate2" [matDatepickerFilter]="disableSunDay" [matDatepicker]="secondDate"
+          :placeholder="{{dialogData.date_to}}" (dateInput)="secondDateEvent($event)" :disabled="{{isFirstDateSelected}}">
         <mat-datepicker-toggle matSuffix [for]="secondDate"></mat-datepicker-toggle>
         <mat-datepicker #secondDate></mat-datepicker>
       </mat-form-field>
@@ -121,9 +122,9 @@
           <mat-option value="cl">Casual leave
             <strong class="d-inline">({{dialogData.bal_cl}})</strong>
           </mat-option>
-          <mat-option value="eol">Extra Ordinary leave
+          <!-- <mat-option value="eol">Extra Ordinary leave
             <strong class="d-inline">({{dialogData.bal_eol}})</strong>
-          </mat-option>
+          </mat-option> -->
           <mat-option value="ml" *ngIf="dialogData.bal_ml">Materinity leave
             <strong class="d-inline">({{dialogData.bal_ml}})</strong>
           </mat-option>

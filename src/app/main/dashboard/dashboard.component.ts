@@ -80,12 +80,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     })
 
     this.unsubEmpOnLeaveTwo = this.api.emitEmpOnLeave.subscribe(r => {
-      // console.log(r)
       this.emp = r
     })
 
     this.unsubEmpApplication = this.api.emitEmpApp.subscribe(r => {
-      // console.log(r)
       this.empApplications = r
     })
 

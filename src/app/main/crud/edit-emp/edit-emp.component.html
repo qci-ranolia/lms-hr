@@ -24,19 +24,10 @@
         <mat-form-field class="example-full-width col-sm-3 float-left mb-2">
           <input matInput placeholder="Gender" [(ngModel)]="employee.gender" name="gender" />
         </mat-form-field>
-        <!-- qci_id : QCI ID of new enrolled employee
-        name : name of employee
-        email : new email Id of employee
-        board : new Board of employee working in
-        designation :new Designation of employee
-        type_of_employee : Type of employee, whether regular,professional or contract
-        gender : Gender of employee
-        bal_cl : Balance casual leave of employee
-        bal_sl : Balance sick leave of employee
-        bal_pl : Balance privilege leave of mployee
-        bal_ml : Balance maternity leave only for female employee
-        bal_ptl : Balance paternity leave only for male employee
-        reporting_manager -->
+        <mat-form-field class="example-full-width col-sm-6 float-left mb-2">
+          <input matInput placeholder="Reporting Manager" [(ngModel)]="employee.reporting_manager" name="reportingManager" />
+        </mat-form-field>
+        <br />
         <button mat-button class="ml-3 mt-3 btn btn-primary p-2" (click)="updateEmployee()">Update Employee</button>
       </form>
     </div>

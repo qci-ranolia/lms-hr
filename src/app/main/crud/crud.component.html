@@ -12,7 +12,7 @@
             <th class="wd-7">QCID</th>
             <th class="wd-16">Employee name</th>
             <th class="wd-15">Designation</th>
-            <th class="wd-12">Reporting Mngr.</th>
+            <!-- <th class="wd-12">Reporting Mngr.</th> -->
             <th class="wd-">Leave details</th>
             <th class="modify">Modify</th>
           </tr>
@@ -28,23 +28,24 @@
               <small>{{ emp.type_of_employee }}</small>
               <small class="text-primary">( {{emp.board}} )</small>
             </td>
-            <td class="wd-12">Yes</td>
+            <!-- <td class="wd-12">Yes</td> -->
             <td class="wd-">
               <mat-chip-list>
                 <mat-chip class="bg-light rad-box">
-                  <span matTooltip="Casual Leave">CL: {{ emp.bal_cl }}</span>
+                  <span matTooltip="Casual Leave">CL: <strong>{{ emp.bal_cl }}</strong>/{{ totalLeave.total_cl }}</span>
                 </mat-chip>
                 <mat-chip class="bg-light rad-box">
-                  <span matTooltip="Sick Leave">SL: {{ emp.bal_sl }}</span>
+                  <span matTooltip="Sick Leave">SL: <strong>{{ emp.bal_sl }}</strong>/{{ totalLeave.total_sl }}</span>
                 </mat-chip>
                 <mat-chip class="bg-light rad-box">
-                  <span matTooltip="Privileged Leave">PL: {{ emp.bal_pl }}</span>
+                  <span matTooltip="Privileged Leave">PL: <strong>{{ emp.bal_pl }}</strong>/{{ totalLeave.total_pl }}</span>
                 </mat-chip>
                 <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Female'">
-                  <span matTooltip="Materinity Leave">ML: {{ emp.bal_ml }}</span>
+                  <span matTooltip="Materinity Leave">ML: <strong>{{ emp.bal_ml }}</strong>/{{ totalLeave.total_ml }}</span>
                 </mat-chip>
                 <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Male'">
-                  <span matTooltip="Paterinity Leave">PTL: {{ emp.bal_ptl }}</span>
+                  <span matTooltip="Paterinity Leave">PTL: <strong>{{ emp.bal_ptl }}</strong>/{{ totalLeave.total_ptl
+                    }}</span>
                 </mat-chip>
                 <!-- <mat-chip class="bg-light rad-box">
                                     <span matTooltip="Extraordinary Leave">EOL: {{ emp.bal_eol }}</span>

@@ -28,11 +28,10 @@ export class CrudComponent implements OnInit, OnDestroy {
     this.lms.showLoader()
 
     this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(r => {
-      console.log(r)
       this.employee = Object.values(r)
     })
     this.unsubTotalLeaves = this.api.emitTotalLeave.subscribe(r => {
-      console.log(r[0])
+      // console.log(r[0])
       this.totalLeave = r[0]
     })
     setTimeout(() => {
@@ -65,7 +64,6 @@ export class CrudComponent implements OnInit, OnDestroy {
   //   })
   // }
   assignRole() {
-    console.log("s")
     this.dialog.open(RoleComponent, {
       width: "60%",
       height: "75%",

@@ -226,7 +226,6 @@ export class ApiService {
             this.http.post(this.URL + 'lms/declineLeave', data, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         this.emitMyApplication.emit(response)
                     } else this.snackBars(response.message, response.success)
@@ -268,7 +267,6 @@ export class ApiService {
             this.http.post(this.URL + 'lms/addEmployee', data, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) this.router.navigate(['/employee-list'])
                     else this.snackBars("response.message", "response.success")
                     resolve(true)
@@ -276,12 +274,10 @@ export class ApiService {
         })
     }
     tleave() {
-        console.log(this.opts)
         return new Promise((resolve) => {
             this.http.get(this.URL + 'lms/tleave', this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) this.emitTotalLeave.emit(response.result)
                     else this.snackBars("response.message", "response.success")
                     resolve(true)
@@ -295,7 +291,6 @@ export class ApiService {
             this.http.post(this.URL + 'lms/editEmployeeDetails', data, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         this.GetEmployeeDetails()
                         this.router.navigate(['/employee-list'])
@@ -311,7 +306,6 @@ export class ApiService {
             this.http.post(this.URL + 'lms/deleteEmployee', JSON.stringify(data), this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         this.snackBars("Alert:", "Employee deleted Successfully!")
                     } else this.snackBars("Alert:", "Employee not deleted")

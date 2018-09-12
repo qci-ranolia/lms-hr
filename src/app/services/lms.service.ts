@@ -40,7 +40,6 @@ export class LmsService {
   }
   getEmployees() {
     this.api.GetEmployeeDetails().subscribe(el => {
-      console.log(el)
       if (el.success) this.emitgetEmployees.emit(el.data)
       else this.snackBars(el.message, el.success) // this.snackBar.open('el.success was not true')
     }, err => this.router.navigate(['/404'])
@@ -51,11 +50,6 @@ export class LmsService {
     this.api.deleteEmp(tmp)
   }
   postEOLBSDate(data: any) {
-    this.api.postEOLBSDate(data)/* .subscribe(el => {
-      // console.log(el)
-      if (el.success) this.emitCount.emit(el.data)
-      else return false
-    }, err => this.router.navigate(['/404'])
-    ) */
+    this.api.postEOLBSDate(data)
   }
 }

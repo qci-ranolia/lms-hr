@@ -8,11 +8,13 @@ import { MatTabChangeEvent, MatDialog } from '@angular/material'
 
 declare var $
 export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
+  animal: 'accept' | 'cancel' | 'reject'
 }
 
 @Component({
-  selector: 'app-newapp', templateUrl: './newapp.component.html', styleUrls: ['./newapp.component.scss']
+  selector: 'app-newapp',
+  templateUrl: './newapp.component.html',
+  styleUrls: ['./newapp.component.scss']
 })
 
 export class NewappComponent implements OnInit, OnDestroy {

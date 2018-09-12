@@ -34,6 +34,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   empApplications = new Array()
   items = new Array()
   holidays: any = new Array()
+
+  Contract = new Array
+  Regular = new Array
+  Professional = new Array
+
   compulsory: any = []
   totalDaysOfMonth: any
   combineDateEmp: any = []
@@ -73,6 +78,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(r => {
       this.employee = Object.values(r)
+      for (let i = 0; i < r.length; i++) {
+        switch (r[i].type_of_employee) {
+          case "Contract":
+            this.Contract.push(r[i])
+            break
+          case "Professional":
+            this.Professional.push(r[i])
+            break
+          case "Regular":
+            this.Regular.push(r[i])
+        }
+      }
     })
 
     this.unsubEmployeesOnLeave = this.lms.emitEOL.subscribe(r => {
@@ -138,13 +155,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.api.getHoliday()
     this.lms.getEmployees()
     this.api.getEOL()
-    // for count => getEmpOnLeave(data){}
-    // this.lms.postEOLBSDate(this.count)
-    // for count => getEmpOnLeave(data){}
-    // this.api.getEmpOnLeave(this.emp)
-    // this.restricted = JSON.parse(this.restricted)
     this.daysArr = this.createCalendar(this.date)
-    // this.ngSpinner.hide()
   }
   getEmpOnLeave(data) {
     if (!data.count) this.emp = []
@@ -153,23 +164,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     let temp = this.postDate + "/" + this.getMonth
     this.api.getEmpOnLeave(temp)
   }
-
   public todayCheck(day) {
     if (!day) return false
     return moment().format("L") === day.format
   }
-
   public createCalendar(month) {
-    // this.Mnth = this.date.format('MMMM')
-    // this.Year = this.date.format('YYYY')
     this.combineDateEmp = []
     this.daysArr = this.combineDateEmp
     let f = moment(month).startOf("M"), s = moment(f).endOf("month"),
       sunday = 0,
       r = [], c = f.clone(), h = [], z = [],
-      y: number, m: number,
-      temp = [], dates = []
-    // find sundays in a month
+      y: number,// m : number,
+      temp = []// , dates = []
+    // Find sundays in a month
     while (c.day(7 + sunday).isBefore(s)) r.push(c.clone().format("DD/MM/YYYY"))
     // Calculate leavedays
     let td: number = s.diff(f, "days") + 1 // What is td( totalDays ) ?????
@@ -177,7 +184,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // Get dates between current month
     // push all dates in an array
-    while (f < s) temp.push(f.format("DD/MM/YYYY")) && f.add(1, "day")
+    while (f < s) {
+      temp.push(f.format("DD/MM/YYYY"))
+      f.add(1, "day")
+    }// Calendar date consoling next month due to this while loop
+    f = moment(month).startOf('M')
     this.totalDaysOfMonth = temp
     // exclude compulsory days and sundays from current month
     setTimeout(() => {
@@ -204,7 +215,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .map(n => {
         return moment(f).add(n, "d").format("DD")
       })
-    // console.log(days)
     return days
   }
   public nextMonth() {

@@ -33,7 +33,8 @@
           <div class="mt-1 mb-2" *ngIf="cde.count==0">
             <div class="bg-white rad-box p-5 text-center">No employee on leave today</div>
           </div>
-          <div class="mt-1 mb-2 h74 ovf-y" *ngIf="!cde.count==0">
+          <div class="mt-1 mb-2 h74 ovf-y" *ngIf="!cde.count==0" style="height:50vh;">
+
             <mat-accordion>
               <mat-expansion-panel *ngFor="let em of emp; let i = index" [disabled]="isDisabled">
                 <mat-expansion-panel-header>
@@ -58,14 +59,14 @@
 </div>
 <div class="col-sm-12">
   <div class="col-sm-6 pos-abs pt-1 pb-2">
-    <mat-accordion>
+    <div class="col-sm-12 bg-white rad-box">dskdbhsbdsd<br /></div>
+    <!-- <mat-accordion>
       <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title class="mb-2 mt-2">
             <button mat-raised-button (click)="openUploadDialog($event)">Upload</button>
             <span class="pt-2 pl-3 text-muted">Upload CSV file for updating holiday's</span>
           </mat-panel-title>
-          <!-- <mat-panel-description class="pt-2"></mat-panel-description> -->
         </mat-expansion-panel-header>
         <mat-chip-list>
           <div class="col-sm-12 p-0">
@@ -106,7 +107,7 @@
           </div>
         </mat-chip-list>
       </mat-expansion-panel>
-    </mat-accordion>
+    </mat-accordion> -->
   </div>
   <!-- <nav mat-tab-nav-bar>
     <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{ link.label }}</a>

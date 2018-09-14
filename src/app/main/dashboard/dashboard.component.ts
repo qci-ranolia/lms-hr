@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core"
 import { MatDialog } from "@angular/material"
 import * as moment from "moment"
 import { DialogComponent } from "./dialog/dialog.component"
+import { CsvComponent } from "./csv/csv.component"
 import { LmsService } from "../../services/lms.service"
 import { ApiService } from "../../services/api.service"
 // declare var $: any
@@ -91,19 +92,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       }
     })
-
     this.unsubEmployeesOnLeave = this.lms.emitEOL.subscribe(r => {
       this.applications = r
     })
-
     this.unsubEmpOnLeaveTwo = this.api.emitEmpOnLeave.subscribe(r => {
       this.emp = r
     })
-
     this.unsubEmpApplication = this.api.emitEmpApp.subscribe(r => {
       this.empApplications = r
     })
-
     this.unsubGetHoliday = this.api.emitgetHoliday.subscribe(el => {
       setTimeout(() => {
         for (let i = 0; i < el.length; i++) {
@@ -127,8 +124,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
           return a > b ? 1 : a < b ? -1 : 0
         })
       }, 320)
+      localStorage.setItem('holidays', this.holidays)
     })
-
     this.unsubCount = this.api.emitCount.subscribe(r => {
       var x = Object.keys(r), y = Object.values(r) // count array
       let t: any = x, s: any = y
@@ -146,6 +143,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public openUploadDialog($e) {
     $e.stopPropagation()
     let dialogRef = this.dialog.open(DialogComponent, { width: "50%", height: "50%" })
+  }
+  public openCSV($e) {
+    $e.stopPropagation()
+    let dialogRef = this.dialog.open(CsvComponent, { width: "50%", height: "85%" })
   }
   public ngOnInit() {
     this.tDate = this.minDate.getDate() // Get date

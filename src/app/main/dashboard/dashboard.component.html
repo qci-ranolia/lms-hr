@@ -59,7 +59,13 @@
 </div>
 <div class="col-sm-12">
   <div class="col-sm-6 pos-abs pt-1 pb-2">
-    <div class="col-sm-12 bg-white rad-box">dskdbhsbdsd<br /></div>
+    <div class="col-sm-12 bg-white rad-box pt-4 pb-3">
+      <button mat-raised-button (click)="openUploadDialog($event)">Upload Holiday's CSV</button>
+      <button mat-raised-button class="float-right" (click)="openCSV($event)">See Holidays</button>
+      <br />
+      <br />
+      <mat-divider></mat-divider>
+    </div>
     <!-- <mat-accordion>
       <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>

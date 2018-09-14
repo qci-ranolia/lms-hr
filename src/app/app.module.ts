@@ -42,6 +42,7 @@ import { ServererrComponent } from './main/servererr/servererr.component';
 import { AppinfoComponent } from './main/newapp/appinfo/appinfo.component';
 import { RoleComponent } from './main/crud/role/role.component'
 import { routes } from './app-routing.module';
+import { CsvComponent } from './main/dashboard/csv/csv.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token')
@@ -62,7 +63,8 @@ export function tokenGetter() {
     DialogComponent,
     ServererrComponent,
     AppinfoComponent,
-    RoleComponent
+    RoleComponent,
+    CsvComponent
   ],
   imports: [
     Ng2SearchPipeModule,
@@ -103,6 +105,7 @@ export function tokenGetter() {
   ],
   entryComponents: [
     DialogComponent,
+    CsvComponent,
     AppinfoComponent,
     RoleComponent
   ],

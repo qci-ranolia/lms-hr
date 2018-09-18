@@ -3,9 +3,11 @@ import { LmsService } from '../../services/lms.service'
 import { ApiService } from '../../services/api.service'
 declare var $
 import { RoleComponent } from "./role/role.component"
-import { MatTabChangeEvent, MatDialog } from '@angular/material'
+import { MatDialog } from '@angular/material'
+import { EmpcsvComponent } from "./empcsv/empcsv.component"
 
 declare var $
+
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';
 }
@@ -53,6 +55,10 @@ export class CrudComponent implements OnInit, OnDestroy {
     var tmp = { qci_id: qci_id }
     this.api.deleteEmp(tmp)
     this.lms.getEmployees()
+  }
+  public openUploadDialog($e) {
+    $e.stopPropagation()
+    let dialogRef = this.dialog.open(EmpcsvComponent, { width: "50%", height: "50%" })
   }
   // public openApplicationModal() {
   //   //var item = this.case.find(it => it.application_id == application_id) // linear search

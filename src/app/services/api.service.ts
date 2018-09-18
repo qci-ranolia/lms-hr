@@ -66,7 +66,7 @@ export class ApiService {
             this.http.post(this.URL + 'lms/loginAdmin', data)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
+                    // console.log(response)
                     if (response.success) {
                         localStorage.setItem('token', response.token)
                         localStorage.setItem('userName', uname)
@@ -86,6 +86,31 @@ export class ApiService {
         const status = {}
         // for each files
         files.forEach(file => {
+            const formData: FormData = new FormData()
+            formData.append('file', file, file.name)
+            const req = new HttpRequest('POST', this.URL + 'lms/holiday', formData, {
+                reportProgress: true
+            })
+            const progress = new Subject<number>()
+            this.httpClient.request(req).subscribe(event => {
+                console.log(event)
+                if (event.type === HttpEventType.UploadProgress) {
+                    const percentDone = Math.round(100 * event.loaded / event.total)
+                    progress.next(percentDone)
+                } else if (event instanceof HttpResponse) {
+                    progress.complete()
+                }
+            })
+            status[file.name] = { progress: progress.asObservable() }
+        })
+        return status
+    }
+    public uploadEmployee(files: Set<File>): { [key: string]: Observable<number> } {
+        // create a const to capture/record status of file
+        const status = {}
+        // for each files
+        files.forEach(file => {
+            // console.log(file)
             const formData: FormData = new FormData()
             formData.append('file', file, file.name)
             const req = new HttpRequest('POST', this.URL + 'lms/holiday', formData, {
@@ -286,7 +311,7 @@ export class ApiService {
     }
     // Post( Update Existing Employee ) requests
     updateEmployee(data: any) {
-        console.log(data)
+        // console.log(data)
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/editEmployeeDetails', data, this.opts)
                 .map(res => res.json())
@@ -301,7 +326,7 @@ export class ApiService {
     }
     // Post ( Delete Existing Employee ) requests
     deleteEmp(data: any) {
-        console.log(data)
+        // console.log(data)
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/deleteEmployee', JSON.stringify(data), this.opts)
                 .map(res => res.json())

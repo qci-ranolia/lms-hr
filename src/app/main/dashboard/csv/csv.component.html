@@ -1,3 +1,36 @@
-<p>
-  csv works!
-</p>
+<div class="col-sm-12 p-0">
+  <div class="col-sm-12 p-0">
+    <div class="float-left col-sm-6">
+      <strong class="text-info d-inline-block">*</strong> Compulsory Holidays
+    </div>
+    <div class="float-left col-sm-6">
+      <strong class="text-muted d-inline-block">*</strong> Restricted Holidays
+    </div>
+  </div>
+  <br />
+  <br />
+  <div class="col-sm-6 pl-2 pr-2 pb-2 float-left" *ngFor="let all of holidays; let i=index;">
+    <div class="mb-1" *ngIf="all.CompulsoryHoliday">
+      <span class="p-1 bg-light">{{i+1}}</span>
+      <strong class="text-info" style="font-size:13px">{{all.CompulsoryHoliday}}
+        <small class="mt-2">{{all.Date}}</small>
+      </strong>
+    </div>
+    <div class="mb-1 bg-light text-dark" *ngIf="all.Today">
+      <span class="p-1 bg-light">{{i+1}}</span>
+      <strong class="" style="font-size:13px">{{all.Today}}
+        <small class="mt-2">{{all.Date}}
+          <sup class="text-danger">
+            <h6 class="d-inline">*</h6>
+          </sup>
+        </small>
+      </strong>
+    </div>
+    <div class="mb-1" *ngIf="all.RestrictedHoliday">
+      <span class="p-1 bg-light">{{i+1}}</span>
+      <strong class="text-muted" style="font-size: 13px">{{all.RestrictedHoliday}}
+        <small class="mt-2">{{all.Date}}</small>
+      </strong>
+    </div>
+  </div>
+</div>

@@ -32,7 +32,6 @@ import {
   MatTabsModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material'
 
-import { Ng4SpinnerModule } from 'ng4-spinner'
 import { PiechartComponent } from './main/dashboard/piechart/piechart.component'
 import { DialogComponent } from './main/dashboard/dialog/dialog.component'
 
@@ -43,6 +42,7 @@ import { AppinfoComponent } from './main/newapp/appinfo/appinfo.component';
 import { RoleComponent } from './main/crud/role/role.component'
 import { routes } from './app-routing.module';
 import { CsvComponent } from './main/dashboard/csv/csv.component';
+import { EmpcsvComponent } from './main/crud/empcsv/empcsv.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token')
@@ -64,7 +64,8 @@ export function tokenGetter() {
     ServererrComponent,
     AppinfoComponent,
     RoleComponent,
-    CsvComponent
+    CsvComponent,
+    EmpcsvComponent
   ],
   imports: [
     Ng2SearchPipeModule,
@@ -95,7 +96,6 @@ export function tokenGetter() {
     MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
     MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
     MatTabsModule, MatToolbarModule, MatTooltipModule,
-    Ng4SpinnerModule,
     RouterModule.forRoot(routes, { useHash: true })],
   providers: [LmsService, ApiService, AuthService, DatePipe],
   exports: [
@@ -107,6 +107,7 @@ export function tokenGetter() {
     DialogComponent,
     CsvComponent,
     AppinfoComponent,
+    EmpcsvComponent,
     RoleComponent
   ],
   bootstrap: [

@@ -4,6 +4,8 @@
     <div class="d-inline-block float-right">
       <button mat-button class="btn p-2 mat-button mt-0 mb-3" [routerLink]="['/add-employee']">Add Employee</button>
       <button mat-button class="btn btn-primary p-2 mat-button mt-0 mb-3" (click)="assignRole()">Add Role</button><!-- [routerLink]="['/add-employee']"-->
+      <button mat-raised-button class="btn btn-primary p-2 mat-button mt-0 mb-3" (click)="openUploadDialog($event)">Upload
+        employee excel</button>
     </div>
     <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box">
       <table id="table_id" class="table table-striped" cellspacing="0" width="100%">

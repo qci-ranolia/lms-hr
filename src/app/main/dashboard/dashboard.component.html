@@ -34,7 +34,6 @@
             <div class="bg-white rad-box p-5 text-center">No employee on leave today</div>
           </div>
           <div class="mt-1 mb-2 h74 ovf-y" *ngIf="!cde.count==0" style="height:50vh;">
-
             <mat-accordion>
               <mat-expansion-panel *ngFor="let em of emp; let i = index" [disabled]="isDisabled">
                 <mat-expansion-panel-header>

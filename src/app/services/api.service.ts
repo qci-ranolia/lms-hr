@@ -22,6 +22,7 @@ export class ApiService {
     emitCount = new EventEmitter<any>()
     emitEmpOnLeave = new EventEmitter<any>()
     emitEmpApp = new EventEmitter<any>()
+    emitgetEmpCSV = new EventEmitter<any>()
 
     emitMyZero = new EventEmitter<any>()
     emitMyLeaves = new EventEmitter<any>()
@@ -29,8 +30,8 @@ export class ApiService {
     // abc@qcin.org
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
 
-    URL: string = "http://13.127.13.175:5000/"
-    // URL: string = "http://192.168.15.55:5000/"
+    // URL:string = "http://13.127.13.175:5000/"
+    URL:string = "http://192.168.15.55:5000/"
 
     token: string // Useful in Authentication
     headers: any // Useful when backend and frontend have different IP's
@@ -110,10 +111,9 @@ export class ApiService {
         const status = {}
         // for each files
         files.forEach(file => {
-            // console.log(file)
             const formData: FormData = new FormData()
             formData.append('file', file, file.name)
-            const req = new HttpRequest('POST', this.URL + 'lms/holiday', formData, {
+            const req = new HttpRequest('POST', this.URL + 'lms/addPEmp', formData, {
                 reportProgress: true
             })
             const progress = new Subject<number>()
@@ -135,6 +135,22 @@ export class ApiService {
     // Get Employee
     GetEmployeeDetails() {
         return this.http.get(this.URL + 'lms/employeeDetails', this.opts).map(r => r.json())
+    }
+    // Get QCI Employee from CSV
+    getEmployeeCSV() {
+        return new Promise((resolve) => {
+            this.http.get(this.URL + 'lms/addPEmp', this.opts)
+                .map(res => res.json())
+                .subscribe(response => {
+                    // console.log(response)
+                    if (response.success) {
+                        if (response.message.length == 0) console.log("No employee file uploaded yet!")
+                        else this.emitgetEmpCSV.emit(response.message)
+                    }
+                    else this.snackBars("response.message", response.success)
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
+        })
     }
     // get employee to see leave application history
     getEmployee(data: any) {

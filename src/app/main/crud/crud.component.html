@@ -3,60 +3,75 @@
     <h5 class="d-inline-block">Employee's List</h5>
     <div class="d-inline-block float-right">
       <button mat-button class="btn p-2 mat-button mt-0 mb-3" [routerLink]="['/add-employee']">Add Employee</button>
-      <button mat-button class="btn btn-primary p-2 mat-button mt-0 mb-3" (click)="assignRole()">Add Role</button><!-- [routerLink]="['/add-employee']"-->
-      <button mat-raised-button class="btn btn-primary p-2 mat-button mt-0 mb-3" (click)="openUploadDialog($event)">Upload
-        employee excel</button>
+      <!-- <button mat-button class="btn btn-primary p-2 mat-button mt-0 mb-3" (click)="assignRole()">Add Role</button> --><!-- [routerLink]="['/add-employee']"-->
+      <button mat-raised-button class="btn btn-primary p-2 mat-button mt-0 mb-3" (click)="openUploadDialog($event)">Upload employee excel</button>
     </div>
     <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box">
       <table id="table_id" class="table table-striped" cellspacing="0" width="100%">
         <thead>
           <tr>
-            <th class="wd-7">QCID</th>
-            <th class="wd-16">Employee name</th>
-            <th class="wd-15">Designation</th>
+            <th class="wd-6">QCID</th>
+            <th class="wd-14">Employee's Info</th>
+            <th class="wd-14">Reporting Manager</th>
             <!-- <th class="wd-12">Reporting Mngr.</th> -->
-            <th class="wd-">Leave details</th>
+            
+            <th class="bs" :matTooltip="">TOL</th>
+            <th class="bs" :matTooltip="">OB</th>
+            <th class="bs" :matTooltip="">CA</th>
+            <th class="bs" :matTooltip="">TL</th>
+
+            <th class="ss" :matTooltip="January">J</th>
+            <th class="ss" :matTooltip="February">F</th>
+            <th class="ss" :matTooltip="March">M</th>
+            <th class="ss" :matTooltip="April">A</th>
+
+            <th class="ss" :matTooltip="May">M</th>
+            <th class="ss" :matTooltip="June">J</th>
+            <th class="ss" :matTooltip="July">J</th>
+            <th class="ss" :matTooltip="August">A</th>
+
+            <th class="ss" :matTooltip="September">S</th>
+            <th class="ss" :matTooltip="October">O</th>
+            <th class="ss" :matTooltip="November">N</th>
+            <th class="ss" :matTooltip="December">D</th>
+
+            <th class="bs" :matTooltip="">AL</th>
+            <th class="bs" :matTooltip="">CB</th>
             <th class="modify">Modify</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let emp of employee; let i = index">
-            <td class="wd-7">{{emp.qci_id}}</td>
-            <td class="wd-16">
-              <span :matTooltip="{{emp.email}}">{{ emp.name }}<small><br />{{emp.gender}}</small></span>
+          <tr *ngFor="let emp of emplCSV; let i = index">
+            <td class="wd-6">{{emp["ID code"]}}</td>
+            <td class="wd-14">
+              <strong :matTooltip="{{emp['Email-ID']}}">{{emp["Officials"]}}</strong><br />
+              <small>{{emp["Nature of Appointment"]}}</small><small class="text-primary">( {{emp["QCI/Board"]}} )</small>
             </td>
-            <td class="wd-15">{{ emp.designation }}
-              <br />
-              <small>{{ emp.type_of_employee }}</small>
-              <small class="text-primary">( {{emp.board}} )</small>
+            <td class="wd-14">
+              <small>{{emp["Reporting Officer"]}}</small>
+              <small>{{emp["RO-Email-ID"]}}</small>
             </td>
-            <!-- <td class="wd-12">Yes</td> -->
-            <td class="wd-">
-              <mat-chip-list>
-                <mat-chip class="bg-light rad-box">
-                  <span matTooltip="Casual Leave">CL: <strong>{{ emp.bal_cl }}</strong>/{{ emp.total_cl }}</span>
-                </mat-chip>
-                <mat-chip class="bg-light rad-box">
-                  <span matTooltip="Sick Leave">SL: <strong>{{ emp.bal_sl }}</strong>/{{ emp.total_sl }}</span>
-                </mat-chip>
-                <mat-chip class="bg-light rad-box">
-                  <span matTooltip="Privileged Leave">PL: <strong>{{ emp.bal_pl }}</strong>/{{ emp.total_pl }}</span>
-                </mat-chip>
-                <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Female'">
-                  <span matTooltip="Materinity Leave">ML: <strong>{{ emp.bal_ml }}</strong>/{{ emp.total_ml }}</span>
-                </mat-chip>
-                <mat-chip class="bg-light rad-box" *ngIf="emp.gender == 'Male'">
-                  <span matTooltip="Paterinity Leave">PTL: <strong>{{ emp.bal_ptl }}</strong>/{{ emp.total_ptl
-                    }}</span>
-                </mat-chip>
-                <!-- <mat-chip class="bg-light rad-box">
-                                    <span matTooltip="Extraordinary Leave">EOL: {{ emp.bal_eol }}</span>
-                                </mat-chip> -->
-              </mat-chip-list>
-            </td>
+            <td class="bs">CL<br />SL<br />PL<br /></td>
+            <td class="bs">9<br />45<br />71<br /></td>
+            <td class="bs">0<br />20<br />30<br /></td>
+            <td class="bs">9<br />65<br />101<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="ss">1<br />1<br />1<br /></td>
+            <td class="bs">1<br />1<br />1<br /></td>
+            <td class="bs">1<br />1<br />1<br /></td>
             <td class="modify">
-              <button mat-button class="btn btn-info p-1" :routerLink="/employee-list/{{emp.qci_id}}">Edit</button>
-              <button mat-button class="ml-2 btn btn-danger p-1" (click)="deleteEmp(emp.qci_id)">Delete</button>
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i><!-- :routerLink="/employee-list/{{emp.qci_id}}"-->
+              <i class="fa fa-times" aria-hidden="true"></i><!--(click)="deleteEmp(emp.qci_id)"-->
             </td>
           </tr>
         </tbody>

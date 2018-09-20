@@ -2227,7 +2227,7 @@ section {
 
 body {
   margin: 0;
-  font-size: 1rem;
+  font-size:0.9rem;
   text-align: left
 }
 
@@ -20757,9 +20757,9 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   vertical-align: middle
 }
 
-.table thead tr th {
-  font-size: 1.063rem;
-  font-weight: 500;
+.table thead tr th{
+  font-size:0.9rem;
+  font-weight:500;
 }
 
 .table .th-description {
@@ -23252,30 +23252,25 @@ form .ng-valid .mat-input-underline .mat-input-ripple {
   height: 1px
 }
 
-.wd-7 {
+.wd-6 {
+  width: 6% !important
+} .wd-7 {
   width: 7% !important
-}
-
-.wd-10 {
+} .wd-10 {
   width: 10% !important
-}
-
-.wd-12 {
+} .wd-12 {
   width: 12% !important
-}
-
-.wd-15 {
+} .wd-14 {
+  width: 14% !important
+} .wd-15 {
   width: 15% !important
-}
-
-.wd-16 {
+} .wd-16 {
   width: 16% !important
 }
 
 .mat-tooltip {
   font-size: 13px !important;
 }
-
 .dataTables_wrapper .dataTables_paginate .paginate_button,
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
   border: 1px solid #c2c2c2;

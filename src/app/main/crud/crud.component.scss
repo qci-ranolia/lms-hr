@@ -1,0 +1,23 @@
+table tr td .fa {
+    margin:0px 3px;
+    padding:4px 5px 2px;
+    font-size:13px;
+    position:relative;
+    top:-3px;
+    border-radius:20px;
+    transition: all 150ms ease 25ms;
+    opacity:1;    
+    line-height:16px;
+    cursor:pointer;
+    border:1px solid #c4c4c4;
+    color:#0c7cd5;
+}
+.table>tbody>tr>td {
+    padding: 0 8px;
+    box-sizing:border-box;
+    border-right:1px solid #eee;
+    border-left:1px solid #fff;
+}
+.table>thead>tr>th.modify {
+    width:7% !important
+}

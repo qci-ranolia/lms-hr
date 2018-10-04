@@ -31,7 +31,7 @@ export class ApiService {
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
 
     // URL:string = "http://13.127.13.175:5000/"
-    URL:string = "http://192.168.15.55:5000/"
+    URL: string = "http://192.168.15.55:5000/"
 
     token: string // Useful in Authentication
     headers: any // Useful when backend and frontend have different IP's
@@ -94,7 +94,8 @@ export class ApiService {
             })
             const progress = new Subject<number>()
             this.httpClient.request(req).subscribe(event => {
-                console.log(event)
+                // console.log(req)
+                // console.log(event)
                 if (event.type === HttpEventType.UploadProgress) {
                     const percentDone = Math.round(100 * event.loaded / event.total)
                     progress.next(percentDone)
@@ -102,6 +103,7 @@ export class ApiService {
                     progress.complete()
                 }
             })
+            console.log(status)
             status[file.name] = { progress: progress.asObservable() }
         })
         return status
@@ -116,9 +118,10 @@ export class ApiService {
             const req = new HttpRequest('POST', this.URL + 'lms/addPEmp', formData, {
                 reportProgress: true
             })
+            // console.log("sss")
             const progress = new Subject<number>()
             this.httpClient.request(req).subscribe(event => {
-                console.log(event)
+                // console.log(event)
                 if (event.type === HttpEventType.UploadProgress) {
                     const percentDone = Math.round(100 * event.loaded / event.total)
                     progress.next(percentDone)
@@ -152,6 +155,16 @@ export class ApiService {
                 }, err => this.router.navigate(['/404']))
         })
     }
+    // testCSV() {
+    //     return new Promise((resolve) => {
+    //         this.http.get('../../assets/frontEndCSV.json')
+    //         .map(res => res)
+    //         .subscribe(response => {
+    //             console.log(response)
+    //             resolve(true)
+    //         }, err => this.router.navigate(['/404']))
+    //     })
+    // }
     // get employee to see leave application history
     getEmployee(data: any) {
         return new Promise((resolve) => {

@@ -28,19 +28,20 @@ export class EditEmpComponent implements OnInit, OnDestroy {
 
     this.uid = this.route.snapshot.paramMap.get('id')
     this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(r => {
+      console.log(r)
       let arr = Object.values(r)
-      var item = arr.find(it => it.qci_id == this.uid)
-      this.employee = item
-      console.log(this.employee)
+      // var item = arr.find(it => it.qci_id == this.uid)
+      // this.employee = item
+      // console.log(this.employee)
       // this.employee.password = null
-      if (this.employee.gender == 'Male') {
-        this.hide = true
-        this.show = false
-      }
-      else if (this.employee.gender == 'Female') {
-        this.show = true
-        this.hide = false
-      }
+      // if (this.employee.gender == 'Male') {
+      //   this.hide = true
+      //   this.show = false
+      // }
+      // else if (this.employee.gender == 'Female') {
+      //   this.show = true
+      //   this.hide = false
+      // }
     })
   }
   ngOnInit() {

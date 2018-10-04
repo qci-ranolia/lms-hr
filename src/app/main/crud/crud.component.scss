@@ -11,13 +11,22 @@ table tr td .fa {
     cursor:pointer;
     border:1px solid #c4c4c4;
     color:#0c7cd5;
-}
-.table>tbody>tr>td {
-    padding: 0 8px;
+} .table > tbody > tr {
+    border: none  
+} .table > tbody > tr > td {
+    padding:8px;
     box-sizing:border-box;
-    border-right:1px solid #eee;
-    border-left:1px solid #fff;
-}
-.table>thead>tr>th.modify {
-    width:7% !important
+} .table > thead > tr > th.modify {
+    width:4% !important;
+} table.tableInside > thead > tr > th.ss, .tableInside table > tbody > tr > td.ss {
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 0;
+    width: 5.5%;
+    text-align: center;
+    font-size: 0.85rem;
+    border-top: none;
+    border-bottom: none;
+} table.dataTable thead .sorting{
+    background-image: none
 }

@@ -19,9 +19,7 @@ export class CsvComponent implements OnInit {
 
   constructor(private api: ApiService) {
     var holidays = localStorage.getItem('holidays')
-
-
-
+ 
     this.unsubGetHoliday = this.api.emitgetHoliday.subscribe(el => {
       setTimeout(() => {
         for (let i = 0; i < el.length; i++) {
@@ -48,7 +46,6 @@ export class CsvComponent implements OnInit {
       localStorage.setItem('holidays', this.holidays)
     })
   }
-
   ngOnInit() {
     this.tDate = this.minDate.getDate() // Get date
     this.month = this.minDate.getMonth() // Now get month
@@ -56,5 +53,4 @@ export class CsvComponent implements OnInit {
     // Order does not matter here)
     this.api.getHoliday()
   }
-
 }

@@ -2,77 +2,98 @@
   <div class="col-sm-12 float-left">
     <h5 class="d-inline-block">Employee's List</h5>
     <div class="d-inline-block float-right">
-      <button mat-button class="btn p-2 mat-button mt-0 mb-3" [routerLink]="['/add-employee']">Add Employee</button>
-      <!-- <button mat-button class="btn btn-primary p-2 mat-button mt-0 mb-3" (click)="assignRole()">Add Role</button> --><!-- [routerLink]="['/add-employee']"-->
+      <!-- <button mat-button class="btn p-2 mat-button mt-0 mb-3" [routerLink]="['/add-employee']">Add Employee</button> -->
+      <!-- <button mat-button class="btn btn-primary p-2 mat-button mt-0 mb-3" (click)="assignRole()">Add Role</button> -->
+      <!-- [routerLink]="['/add-employee']"-->
       <button mat-raised-button class="btn btn-primary p-2 mat-button mt-0 mb-3" (click)="openUploadDialog($event)">Upload employee excel</button>
     </div>
     <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box">
       <table id="table_id" class="table table-striped" cellspacing="0" width="100%">
         <thead>
           <tr>
-            <th class="wd-6">QCID</th>
+            <th class="wd-7">QCID</th>
             <th class="wd-14">Employee's Info</th>
             <th class="wd-14">Reporting Manager</th>
-            <!-- <th class="wd-12">Reporting Mngr.</th> -->
             
-            <th class="bs" :matTooltip="">TOL</th>
-            <th class="bs" :matTooltip="">OB</th>
-            <th class="bs" :matTooltip="">CA</th>
-            <th class="bs" :matTooltip="">TL</th>
-
-            <th class="ss" :matTooltip="January">J</th>
-            <th class="ss" :matTooltip="February">F</th>
-            <th class="ss" :matTooltip="March">M</th>
-            <th class="ss" :matTooltip="April">A</th>
-
-            <th class="ss" :matTooltip="May">M</th>
-            <th class="ss" :matTooltip="June">J</th>
-            <th class="ss" :matTooltip="July">J</th>
-            <th class="ss" :matTooltip="August">A</th>
-
-            <th class="ss" :matTooltip="September">S</th>
-            <th class="ss" :matTooltip="October">O</th>
-            <th class="ss" :matTooltip="November">N</th>
-            <th class="ss" :matTooltip="December">D</th>
-
-            <th class="bs" :matTooltip="">AL</th>
-            <th class="bs" :matTooltip="">CB</th>
-            <th class="modify">Modify</th>
+            <th class="tableInside wd-59 pb-0">
+              <table class="col-sm-12 tableInside">
+                <tr class="bg-white">
+                  <th class="ss bs" :matTooltip="Type Of Leave">TOL</th>
+                  <th class="ss bs" :matTooltip="Opening Balance">OB</th>
+                  <th class="ss bs" :matTooltip="Credit in advance for the year">CA</th>
+                  <th class="ss bs" :matTooltip="Total Leave">TL</th>
+      
+                  <th class="ss" :matTooltip="January">Jan</th>
+                  <th class="ss" :matTooltip="February">Feb</th>
+                  <th class="ss" :matTooltip="March">Mar</th>
+                  <th class="ss" :matTooltip="April">Apr</th>
+                  <th class="ss" :matTooltip="May">May</th>
+                  <th class="ss" :matTooltip="June">Jun</th>
+                  <th class="ss" :matTooltip="July">Jul</th>
+                  <th class="ss" :matTooltip="August">Aug</th>
+                  <th class="ss" :matTooltip="September">Sep</th>
+                  <th class="ss" :matTooltip="October">Oct</th>
+                  <th class="ss" :matTooltip="November">Nov</th>
+                  <th class="ss" :matTooltip="December">Dec</th>
+      
+                  <th class="ss bs" :matTooltip="Availed Leave">AL</th>
+                  <th class="ss bs" :matTooltip="Closing Balance">CB</th>
+                <tr>
+              </table>
+            </th>
+            <!-- <th class="modify">Modify</th> -->
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let emp of emplCSV; let i = index">
-            <td class="wd-6">{{emp["ID code"]}}</td>
+            <!--
+              Date_of_joining
+              Email_ID
+              Gender
+              ID_Code
+              Nature_of_appointment
+              Officials
+              QCI/board
+              RO_mail
+              RO
+            -->
+            <td class="wd-7">{{emp.ID_code}}</td>
             <td class="wd-14">
-              <strong :matTooltip="{{emp['Email-ID']}}">{{emp["Officials"]}}</strong><br />
-              <small>{{emp["Nature of Appointment"]}}</small><small class="text-primary">( {{emp["QCI/Board"]}} )</small>
+              <strong :matTooltip="{{emp['Email_ID']}}">{{emp["Officials"]}}</strong><br />
+              <small>{{emp.Nature_of_Appointment}}</small><small class="text-primary">( {{emp["QCI/Board"]}} )</small>
             </td>
-            <td class="wd-14">
-              <small>{{emp["Reporting Officer"]}}</small>
-              <small>{{emp["RO-Email-ID"]}}</small>
+            <td class="wd-14">{{emp.Reporting_Officer}}</td>
+
+            <td class="tableInside wd-59">
+              <table class="col-sm-12">
+                <tr *ngFor="let type of emp._type; let j = index">
+                  <td class="ss bs">{{type.leave_type}}</td>
+                  <td class="ss bs">{{type["Opening_bal(1jan18)"]}}</td>
+                  <td class="ss bs">{{type.Credit_in_advance_for_the_year}}</td>
+                  <td class="ss bs">{{type.total_leave}}</td>
+
+                  <td class="ss">{{type.Jan}}</td>
+                  <td class="ss">{{type.Feb}}</td>
+                  <td class="ss">{{type.Mar}}</td>
+                  <td class="ss">{{type.Apr}}</td>
+                  <td class="ss">{{type.May}}</td>
+                  <td class="ss">{{type.Jun}}</td>
+                  <td class="ss">{{type.Jul}}</td>
+                  <td class="ss">{{type.Aug}}</td>
+                  <td class="ss">{{type.Sep}}</td>
+                  <td class="ss">{{type.Oct}}</td>
+                  <td class="ss">{{type.Nov}}</td>
+                  <td class="ss">{{type.Dec}}</td>
+
+                  <td class="ss bs">{{type.Apr}}</td>
+                  <td class="ss bs">{{type.bal_leave}}</td>
+                </tr>
+              </table>
             </td>
-            <td class="bs">CL<br />SL<br />PL<br /></td>
-            <td class="bs">9<br />45<br />71<br /></td>
-            <td class="bs">0<br />20<br />30<br /></td>
-            <td class="bs">9<br />65<br />101<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="ss">1<br />1<br />1<br /></td>
-            <td class="bs">1<br />1<br />1<br /></td>
-            <td class="bs">1<br />1<br />1<br /></td>
-            <td class="modify">
-              <i class="fa fa-pencil-square-o" aria-hidden="true"></i><!-- :routerLink="/employee-list/{{emp.qci_id}}"-->
-              <i class="fa fa-times" aria-hidden="true"></i><!--(click)="deleteEmp(emp.qci_id)"-->
-            </td>
+            <!-- <td class="modify">
+              <i class="fa fa-pencil-square-o" aria-hidden="true" :routerLink="/employee-list/{{emp.ID_code}}"></i>
+              <i class="fa fa-times" aria-hidden="true" (click)="deleteEmp(emp.ID_code)"></i>
+            </td> -->
           </tr>
         </tbody>
       </table>

@@ -842,7 +842,7 @@ var CrudComponent = /** @class */ (function () {
     }
     CrudComponent.prototype.ngOnInit = function () {
         this.lms.getEmployees();
-        this.api.tleave();
+        // this.api.tleave()
         this.api.getEmployeeCSV();
         // this.api.testCSV()
     };
@@ -2073,7 +2073,7 @@ var AppinfoComponent = /** @class */ (function () {
         this.qci_id = localStorage.getItem('qci_id');
         this.api.myLeaves(this.qci_id);
         this.api.getEmployee(this.qci_id);
-        this.api.tleave();
+        // this.api.tleave()
         /*from employee starts*/
         this.api.getHoliday();
         this.firstFormGroup = this._formBuilder.group({
@@ -2680,7 +2680,8 @@ var ApiService = /** @class */ (function () {
         this.emitTotalLeave = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         // abc@qcin.org
         // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
-        this.URL = "http://13.127.13.175:5000/";
+        // URL:string = "http://13.127.13.175:5000/"
+        this.URL = "http://192.168.15.55:5000/";
         // Private http : Http, private router : Router
         // We will use both imports here. Are we using anywhere in comments only ???
         this.uid = localStorage.getItem('userName');
@@ -3019,20 +3020,17 @@ var ApiService = /** @class */ (function () {
             }, function (err) { return _this.router.navigate(['/404']); });
         });
     };
-    ApiService.prototype.tleave = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.http.get(_this.URL + 'lms/tleave', _this.opts)
-                .map(function (res) { return res.json(); })
-                .subscribe(function (response) {
-                if (response.success)
-                    _this.emitTotalLeave.emit(response.result);
-                else
-                    _this.snackBars("response.message", "response.success");
-                resolve(true);
-            }, function (err) { return _this.router.navigate(['/404']); });
-        });
-    };
+    /* tleave() {
+        return new Promise((resolve) => {
+            this.http.get(this.URL + 'lms/tleave', this.opts)
+                .map(res => res.json())
+                .subscribe(response => {
+                    if (response.success) this.emitTotalLeave.emit(response.result)
+                    else this.snackBars("response.message", "response.success")
+                    resolve(true)
+                }, err => this.router.navigate(['/404']))
+        })
+    } */
     // Post( Update Existing Employee ) requests
     ApiService.prototype.updateEmployee = function (data) {
         var _this = this;

@@ -65,7 +65,7 @@ export class CrudComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.lms.getEmployees()
-    this.api.tleave()
+    // this.api.tleave()
     this.api.getEmployeeCSV()
     // this.api.testCSV()
   }

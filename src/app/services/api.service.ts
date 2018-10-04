@@ -30,8 +30,8 @@ export class ApiService {
     // abc@qcin.org
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
 
-    URL:string = "http://13.127.13.175:5000/"
-    // URL: string = "http://192.168.15.55:5000/"
+    // URL:string = "http://13.127.13.175:5000/"
+    URL: string = "http://192.168.15.55:5000/"
 
     token: string // Useful in Authentication
     headers: any // Useful when backend and frontend have different IP's
@@ -327,7 +327,7 @@ export class ApiService {
                 }, err => this.router.navigate(['/404']))
         })
     }
-    tleave() {
+    /* tleave() {
         return new Promise((resolve) => {
             this.http.get(this.URL + 'lms/tleave', this.opts)
                 .map(res => res.json())
@@ -337,7 +337,7 @@ export class ApiService {
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
-    }
+    } */
     // Post( Update Existing Employee ) requests
     updateEmployee(data: any) {
         // console.log(data)

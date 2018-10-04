@@ -113,7 +113,7 @@ export class AppinfoComponent implements OnInit, OnDestroy {
     this.qci_id = localStorage.getItem('qci_id')
     this.api.myLeaves(this.qci_id)
     this.api.getEmployee(this.qci_id)
-    this.api.tleave()
+    // this.api.tleave()
     /*from employee starts*/
     this.api.getHoliday()
     this.firstFormGroup = this._formBuilder.group({

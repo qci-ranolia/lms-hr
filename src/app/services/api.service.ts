@@ -60,6 +60,7 @@ export class ApiService {
         }
     }
     login(uname: string, pwd: string) {
+        localStorage.setItem('userName', uname)
         let tmp: any
         tmp = { email: uname, password: pwd }
         let data = JSON.stringify(tmp)
@@ -70,7 +71,6 @@ export class ApiService {
                     console.log(response)
                     if (response.success) {
                         localStorage.setItem('token', response.token)
-                        localStorage.setItem('userName', uname)
                         this.uid = uname
                         this.emitLogin.emit()
                     } else this.snackBars(response.message, response.success)
@@ -165,8 +165,8 @@ export class ApiService {
     //         }, err => this.router.navigate(['/404']))
     //     })
     // }
-    // get employee to see leave application history
 
+    // get employee to see leave application history
     getEmployee(data: any) {
         return new Promise((resolve) => {
             this.http.get(this.URL + 'lms/addEmployee/' + data, this.opts)

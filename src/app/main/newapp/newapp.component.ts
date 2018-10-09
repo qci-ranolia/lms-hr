@@ -61,6 +61,7 @@ export class NewappComponent implements OnInit, OnDestroy {
     this.unsubZeroEOL = this.api.emitZeroEOL.subscribe(r => this.hide = false)
     // if pending leave
     this.unsubEmployeeOnLeave = this.api.emitEOL.subscribe(el => {
+      console.log(el)
       this.cmn.push(el)
       this.simplyfiData()
       this.application = this.cmn[this.cmn.length - 1]
@@ -68,17 +69,20 @@ export class NewappComponent implements OnInit, OnDestroy {
     })
     // if approved leave
     this.unsubApprovedLeave = this.api.emitApprovedApplication.subscribe(el => {
+      console.log(el)
       this.cmn.push(el)
       this.simplyfiData()
       this.approvedLeave = this.cmn[this.cmn.length - 1]
     })
     // if cancelled leave
     this.unsubCancelledLeave = this.api.emitCancelledApplication.subscribe(el => {
+      console.log(el)
       this.cmn.push(el)
       this.simplyfiData()
       this.cancelledLeave = this.cmn[this.cmn.length - 1]
     })
     this.unsubAcceptedApplication = this.api.emitMyApplication.subscribe(el => {
+      console.log(el)
       // this.dis = false
       // this.spnnr = false
       this.api.getEOL()

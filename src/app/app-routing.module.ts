@@ -20,7 +20,7 @@ export const routes: Routes = [
   {
     path: '', component: NavComponent, children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: '', redirectTo: '/employee-list', pathMatch: 'full', canActivate: [AuthService] },
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full', canActivate: [AuthService] },
       { path: 'add-employee', component: AddEmpComponent, canActivate: [AuthService] },
       { path: 'employee-list', component: CrudComponent, canActivate: [AuthService] },
       { path: 'employee-list/:id', component: EditEmpComponent, canActivate: [AuthService] },

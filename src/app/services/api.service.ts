@@ -30,7 +30,7 @@ export class ApiService {
     // abc@qcin.org
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
 
-    URL:string = "http://13.127.13.175:5000/"
+    URL: string = "http://13.127.13.175:5000/"
     // URL: string = "http://192.168.15.55:5000/"
 
     token: string // Useful in Authentication
@@ -67,7 +67,7 @@ export class ApiService {
             this.http.post(this.URL + 'lms/loginAdmin', data)
                 .map(res => res.json())
                 .subscribe(response => {
-                    // console.log(response)
+                    console.log(response)
                     if (response.success) {
                         localStorage.setItem('token', response.token)
                         localStorage.setItem('userName', uname)
@@ -121,7 +121,7 @@ export class ApiService {
             // console.log("sss")
             const progress = new Subject<number>()
             this.httpClient.request(req).subscribe(event => {
-                // console.log(event)
+                console.log(event)
                 if (event.type === HttpEventType.UploadProgress) {
                     const percentDone = Math.round(100 * event.loaded / event.total)
                     progress.next(percentDone)
@@ -150,7 +150,7 @@ export class ApiService {
                         if (response.message.length == 0) console.log("No employee file uploaded yet!")
                         else this.emitgetEmpCSV.emit(response.message)
                     }
-                    else this.snackBars("response.message", response.success)
+                    else this.snackBars("Add Emp Get", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -166,13 +166,14 @@ export class ApiService {
     //     })
     // }
     // get employee to see leave application history
+
     getEmployee(data: any) {
         return new Promise((resolve) => {
             this.http.get(this.URL + 'lms/addEmployee/' + data, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
                     if (response.success) this.emitgetEmployee.emit(response.data)
-                    else this.snackBars("response.message", response.success)
+                    else this.snackBars("Add Employee", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -186,7 +187,7 @@ export class ApiService {
                     if (response.success) this.emitMyLeaves.emit(response.data)
                     else {
                         if (response.messages == 'No application available currently') this.emitMyZero.emit(response)
-                        else this.snackBars("! Success", "Try Again")
+                        else this.snackBars("Apply Leave", "Try Again")
                     }
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
@@ -201,7 +202,7 @@ export class ApiService {
                     if (response.success) {
                         if (response.data.length > 0) this.emitEOL.emit(response.data)
                         else this.emitZeroEOL.emit(response)
-                    } else this.snackBars("response.message", response.success)
+                    } else this.snackBars("Input", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -216,7 +217,7 @@ export class ApiService {
                         if (response.result.length == 0) console.log("No holiday file uploaded yet !")
                         else this.emitgetHoliday.emit(response.result)
                     }
-                    else this.snackBars("response.message", response.success)
+                    else this.snackBars("Holiday", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -228,7 +229,7 @@ export class ApiService {
                 .map(res => res.json())
                 .subscribe(response => {
                     if (response.success) this.emitApprovedApplication.emit(response.data)
-                    else this.snackBars(response.message, response.success)
+                    else this.snackBars("Output1", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -240,7 +241,7 @@ export class ApiService {
                 .map(res => res.json())
                 .subscribe(response => {
                     if (response.success) this.emitCancelledApplication.emit(response.data)
-                    else this.snackBars(response.message, response.success)
+                    else this.snackBars("Output2", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -255,7 +256,7 @@ export class ApiService {
                     if (response.success) {
                         this.emitMyApplication.emit(response)
                         // does not refresh after response
-                    } else this.snackBars(response.message, response.success)
+                    } else this.snackBars("Approve Leave", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -269,7 +270,7 @@ export class ApiService {
                     if (response.success) {
                         this.emitMyApplication.emit(response)
                         // does not refresh after response
-                    } else this.snackBars(response.message, response.success)
+                    } else this.snackBars("Api", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -282,7 +283,7 @@ export class ApiService {
                 .subscribe(response => {
                     if (response.success) {
                         this.emitMyApplication.emit(response)
-                    } else this.snackBars(response.message, response.success)
+                    } else this.snackBars("Decline Leave", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -310,7 +311,7 @@ export class ApiService {
                     if (response.success) {
                         this.emitEmpOnLeave.emit(response.data)
                         this.emitEmpApp.emit(response.app_detail)
-                    } else this.snackBars("response.error", "response.success")
+                    } else this.snackBars("EmpOn Leave", "response.success")
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -322,7 +323,7 @@ export class ApiService {
                 .map(res => res.json())
                 .subscribe(response => {
                     if (response.success) this.router.navigate(['/employee-list'])
-                    else this.snackBars("response.message", "response.success")
+                    else this.snackBars("Add Employee", "response.success")
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -340,7 +341,6 @@ export class ApiService {
     } */
     // Post( Update Existing Employee ) requests
     updateEmployee(data: any) {
-        // console.log(data)
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/editEmployeeDetails', data, this.opts)
                 .map(res => res.json())
@@ -348,14 +348,13 @@ export class ApiService {
                     if (response.success) {
                         this.GetEmployeeDetails()
                         this.router.navigate(['/employee-list'])
-                    } else this.snackBars("response.message", "response.success")
+                    } else this.snackBars("Edit Employee Details", "response.success")
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
     }
     // Post ( Delete Existing Employee ) requests
     deleteEmp(data: any) {
-        // console.log(data)
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/deleteEmployee', JSON.stringify(data), this.opts)
                 .map(res => res.json())

@@ -115,16 +115,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
           m = this.month
         if (d < 10) this.tDate = "0" + d
         else this.tDate = d
-        if (m < 10) m++ && (this.month = "0" + m)
+        console.log(m)
+        if (m < 9) m++ && (this.month = "0" + m)
         else m++ && (this.month = m)
         var today = String(this.tDate + "/" + this.month + "/" + this.year)
         this.holidays.push({ Today: "Today", Date: today })
+        // console.log(today)
         this.holidays.sort((a, b) => {
           (a = a.Date.split("/").reverse().join("")), (b = b.Date.split("/").reverse().join(""))
           return a > b ? 1 : a < b ? -1 : 0
         })
       }, 320)
-      localStorage.setItem('holidays', this.holidays)
     })
     this.unsubCount = this.api.emitCount.subscribe(r => {
       var x = Object.keys(r), y = Object.values(r) // count array

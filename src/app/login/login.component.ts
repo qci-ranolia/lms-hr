@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() { }
 
   isLogin() {
+    localStorage.setItem('userName', this.uname)
     this.api.login(this.uname, this.pwd)
   }
   ngOnDestroy() {

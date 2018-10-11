@@ -39,11 +39,11 @@ export class LmsService {
     })
   }
   getEmployees() {
-    this.api.GetEmployeeDetails().subscribe(el => {
+    this.api.GetEmployeeDetails()/* .subscribe(el => {
       if (el.success) this.emitgetEmployees.emit(el.data)
       else this.snackBars(el.message, el.success) // this.snackBar.open('el.success was not true')
     }, err => this.router.navigate(['/404'])
-    )
+     )*/
   }
   deleteEmp(qci_id: any) {
     let tmp = { qci_id: qci_id }

@@ -4,7 +4,7 @@
       <strong class="text-muted">
         <small class="d-block">Name( QCI ID )</small>
       </strong>
-      <small class="d-block">{{dialogData.name}}( {{dialogData.qci_id}} )</small>
+      <small class="d-block">{{dialogData.Officials}}( {{dialogData.ID_code}} )</small>
     </div>
     <div class="col-sm-6">
       <strong class="text-muted">
@@ -18,35 +18,35 @@
       <strong class="text-muted">
         <small class="d-block">Email</small>
       </strong>
-      <small class="d-block">{{dialogData.email}}</small>
+      <small class="d-block">{{dialogData.Email_ID}}</small>
     </div>
   </mat-list-item>
   <mat-list-item class="mb-3" *ngIf="dialogData.leave_status == 'Pending'">
     <div class="col-sm-12">
       <strong class="text-muted">
-        <small class="d-block pb-2">Balance Leaves</small>
+        <small class="d-block pb-2">Leave Type</small>
       </strong>
       <mat-chip-list>
-        <mat-chip class="bg-light rad-box pt-1 pb-1">
-          <span matTooltip="Casual Leave">CL: {{dialogData.bal_cl}}</span>
+        <mat-chip class="bg-light rad-box pt-1 pb-1" *ngIf="dialogData.leave_type == 'CL'">
+          <span matTooltip="Casual Leave">CL: {{dialogData.leave_type}}</span>
         </mat-chip>
-        <mat-chip class="bg-light rad-box pt-1 pb-1">
-          <span matTooltip="Sick Leave">SL: {{dialogData.bal_sl}}</span>
+        <mat-chip class="bg-light rad-box pt-1 pb-1" *ngIf="dialogData.leave_type == 'SL'">
+          <span matTooltip="Sick Leave">SL: {{dialogData.leave_type}}</span>
         </mat-chip>
-        <mat-chip class="bg-light rad-box pt-1 pb-1">
-          <span matTooltip="Privileged Leave">PL: {{dialogData.bal_pl}}</span>
+        <mat-chip class="bg-light rad-box pt-1 pb-1" *ngIf="dialogData.leave_type == 'PL'">
+          <span matTooltip="Privileged Leave">PL: {{dialogData.leave_type}}</span>
         </mat-chip>
         <mat-chip class="bg-light rad-box pt-1 pb-1" *ngIf="dialogData.gender == 'Female'">
-          <span matTooltip="Materinity Leave">ML: {{dialogData.bal_ml}}</span>
+          <span matTooltip="Materinity Leave">ML: {{dialogData.leave_type}}</span>
         </mat-chip>
         <mat-chip class="bg-light rad-box pt-1 pb-1" *ngIf="dialogData.gender == 'Male'">
-          <span matTooltip="Paterinity Leave">PTL: {{dialogData.bal_ptl}}</span>
+          <span matTooltip="Paterinity Leave">PTL: {{dialogData.leave_type}}</span>
         </mat-chip>
-        <!-- <mat-chip class="bg-light rad-box pt-1 pb-1">
-          <span matTooltip="Extraordinary Leave">EOL: {{dialogData.bal_eol}}</span>
-        </mat-chip> -->
+        <mat-chip class="bg-light rad-box pt-1 pb-1">
+          <span matTooltip="Extraordinary Leave">EOL: {{dialogData.leave_type}}</span>
+        </mat-chip>
       </mat-chip-list>
-    </div>
+    </div> -->
   </mat-list-item>
 </mat-list>
 <mat-divider></mat-divider>

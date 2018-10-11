@@ -11,7 +11,7 @@
               <tr>
                 <th class="wd-12">Application ID</th>
                 <th class="wd-16">Employee name</th>
-                <th class="wd-15">Designation</th>
+                <th class="wd-15">QCI/Board</th>
                 <th class="wd-15">Leave Type</th>
                 <th class="wd-16">Date Applied</th>
                 <th class="wd-16">Application Date</th>
@@ -21,17 +21,17 @@
             <tbody>
               <tr *ngFor="let app of application | reverse | filter : term; let i = index;">
                 <td class="wd-7">
-                  <a href="javascript:void(0)" class="text-primary" (click)="appInfo(app.application_id, app.qci_id)">
+                  <a href="javascript:void(0)" class="text-primary" (click)="appInfo(app.application_id, app.ID_code)">
                     <u>{{app.application_id | slice:0:12 }}</u>
                   </a>
                 </td>
                 <td class="wd-16">
-                  <span :matTooltip="{{app.email}}">{{app.name}}</span>
+                  <span :matTooltip="{{app.email}}">{{app.Officials}}</span>
                 </td>
                 <td class="wd-15">
-                  <span :matTooltip="{{app.board}}">{{app.designation}}</span>
+                  <span :matTooltip="{{app['QCI/Board']}}">{{app['QCI/Board']}}</span>
                 </td>
-                <td>&nbsp;</td>
+                <td>{{app.leave_type}}</td>
                 <!-- 
                 <td class="wd-15" *ngIf="app.leave_type == 'ptl'">
                   <span :matTooltip="{{app.leave_reason}}">Paterinity Leave</span>
@@ -71,7 +71,7 @@
               <tr>
                 <th class="wd-12">Application ID</th>
                 <th class="wd-16">Employee name</th>
-                <th class="wd-15">Designation</th>
+                <th class="wd-15">QCI/Board</th>
                 <th class="wd-15">Leave Type</th>
                 <th class="wd-16">Date Applied</th>
                 <th class="wd-16">Application Date</th>
@@ -86,12 +86,13 @@
                   </a>
                 </td>
                 <td class="wd-16">
-                  <span :matTooltip="{{approve.email}}">{{approve.name}}</span>
+                  <span :matTooltip="{{approve.email}}">{{approve.Officials}}</span>
                 </td>
                 <td class="wd-15">
-                  <span :matTooltip="{{approve.board}}">{{approve.designation}}</span>
+                  <span :matTooltip="{{approve['QCI/Board']}}">{{approve['QCI/Board']}}</span>
                 </td>
-                <td class="wd-15" *ngIf="approve.leave_type == 'ptl'">
+                <td class="wd-15">{{approve.leave_type}}</td>
+                <!-- <td class="wd-15" *ngIf="approve.leave_type == 'ptl'">
                   <span :matTooltip="{{approve.leave_reason}}">Paterinity Leave</span>
                 </td>
                 <td class="wd-15" *ngIf="approve.leave_type == 'cl'">
@@ -108,7 +109,7 @@
                 </td>
                 <td class="wd-15" *ngIf="approve.leave_type == 'ml'">
                   <span :matTooltip="{{approve.leave_reason}}">Materinity Leave</span>
-                </td>
+                </td> -->
                 <td class="wd-16">{{approve.date_from}}-{{approve.date_to}}</td>
                 <td class="wd-16">{{approve.date_of_apply}}</td>
                 <td class="modify">
@@ -130,7 +131,7 @@
               <tr>
                 <th class="wd-12">Application ID</th>
                 <th class="wd-16">Employee name</th>
-                <th class="wd-15">Designation</th>
+                <th class="wd-15">QCI/Board</th>
                 <th class="wd-15">Leave Type</th>
                 <th class="wd-16">Date Applied</th>
                 <th class="wd-16">Application Date</th>
@@ -148,8 +149,10 @@
                   <span :matTooltip="{{cancel.email}}">{{cancel.name}}</span>
                 </td>
                 <td class="wd-15">
-                  <span :matTooltip="{{cancel.board}}">{{cancel.designation}}</span>
+                  <span :matTooltip="{{cancel['QCI/Board']}}">{{cancel['QCI/Board']}}</span>
                 </td>
+                <td class="wd-15">{{cancel['leave_type']}}</td>
+                <!-- 
                 <td class="wd-15" *ngIf="cancel.leave_type == 'ptl'">
                   <span :matTooltip="{{cancel.leave_reason}}">Paterinity Leave</span>
                 </td>
@@ -167,7 +170,7 @@
                 </td>
                 <td class="wd-15" *ngIf="cancel.leave_type == 'ml'">
                   <span :matTooltip="{{cancel.leave_reason}}">Materinity Leave</span>
-                </td>
+                </td> -->
                 <td class="wd-16">{{cancel.date_from}}-{{cancel.date_to}}</td>
                 <td class="wd-16">{{cancel.date_of_apply}}</td>
                 <td class="modify">

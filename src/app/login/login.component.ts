@@ -8,7 +8,8 @@ import { ApiService } from '../services/api.service'
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnDestroy {
+
   uname: any
   pwd: any
   unsubLogin: any
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.unsubLogin = this.api.emitLogin.subscribe((res) => this.router.navigate(['/']))
   }
 
-  ngOnInit() { }
+  /* ngOnInit() { } */
 
   isLogin() {
     localStorage.setItem('userName', this.uname)

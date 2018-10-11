@@ -24,6 +24,7 @@ export class LmsService {
   emitEmpOnLeave = new EventEmitter<any>()
 
   constructor(private api: ApiService, private router: Router, public snackBar: MatSnackBar) { }
+
   showLoader() {
     this.loader = true
     this.emitsload.emit(this.loader)
@@ -39,11 +40,11 @@ export class LmsService {
     })
   }
   getEmployees() {
-    this.api.GetEmployeeDetails()/* .subscribe(el => {
+    this.api.GetEmployeeDetails().subscribe(el => {
       if (el.success) this.emitgetEmployees.emit(el.data)
-      else this.snackBars(el.message, el.success) // this.snackBar.open('el.success was not true')
+      else this.snackBars('Employee Details', 'Try again!')
     }, err => this.router.navigate(['/404'])
-     )*/
+    )
   }
   deleteEmp(qci_id: any) {
     let tmp = { qci_id: qci_id }

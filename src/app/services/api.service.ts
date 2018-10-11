@@ -31,7 +31,7 @@ export class ApiService {
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
 
     URL: string = "http://13.127.13.175:5000/"
-    // URL: string = "http://192.168.15.55:5000/"
+    // URL: string = "http://192.168.15.79:5000/"
 
     token: string // Useful in Authentication
     headers: any // Useful when backend and frontend have different IP's
@@ -56,12 +56,14 @@ export class ApiService {
     }
     isLogin() {
         if (localStorage.getItem('token')) {
-            this.router.navigate(['./'])
+            setTimeout(() => {
+                this.router.navigate(['./'])
+            }, 500)
         }
     }
     login(uname: string, pwd: string) {
-        let tmp: any
-        tmp = { email: uname, password: pwd }
+        this.uid = uname
+        let tmp: any = { email: uname, password: pwd }
         let data = JSON.stringify(tmp)
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/loginAdmin', data)
@@ -70,7 +72,6 @@ export class ApiService {
                     console.log(response)
                     if (response.success) {
                         localStorage.setItem('token', response.token)
-                        this.uid = uname
                         this.emitLogin.emit()
                     } else this.snackBars(response.message, response.success)
                     resolve(true)
@@ -116,7 +117,6 @@ export class ApiService {
             })
             const progress = new Subject<number>()
             this.httpClient.request(req).subscribe(event => {
-                console.log(event)
                 if (event.type === HttpEventType.UploadProgress) {
                     const percentDone = Math.round(100 * event.loaded / event.total)
                     progress.next(percentDone)
@@ -131,8 +131,8 @@ export class ApiService {
     // Get Requests
     // HINT : Are we checking the response is a success or not ???
     // Get Employee
-    GetEmployeeDetails() {/* 
-        return this.http.get(this.URL + 'lms/employeeDetails', this.opts).map(r => r.json()) */
+    GetEmployeeDetails() {
+        return this.http.get(this.URL + 'lms/employeeDetails', this.opts).map(r => r.json())
     }
     // Get QCI Employee from CSV
     getEmployeeCSV() {
@@ -182,6 +182,7 @@ export class ApiService {
             this.http.get(this.URL + 'lms/input', this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
+                    console.log(response)
                     if (response.success) {
                         if (response.data.length > 0) this.emitEOL.emit(response.data)
                         else this.emitZeroEOL.emit(response)

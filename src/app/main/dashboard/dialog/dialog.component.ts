@@ -52,7 +52,7 @@ export class DialogComponent implements OnInit {
     // set the component state to "uploading"
     this.uploading = true
     // start the upload and save the progress map
-    //this.progress = this.api.upload(this.files)
+    this.progress = this.api.upload(this.files)
     // convert the progress map into an array
     let allProgressObservables = []
     for (let key in this.progress) {

@@ -23,6 +23,7 @@ export class AddEmpComponent implements OnInit, OnDestroy {
   date: any
   month: any
   year: any
+
   constructor(private api: ApiService, private lms: LmsService) {
     this.unsubLoader = this.lms.emitsload.subscribe(el => this.loader = el)
     this.lms.showLoader()
@@ -72,10 +73,10 @@ export class AddEmpComponent implements OnInit, OnDestroy {
       m: number = this.month
     if (d < 10) (this.date = '0' + d)
     else (this.date = d)
-    if (m < 10) m++ && (this.month = '0' + m)
+    if (m < 9) m++ && (this.month = '0' + m)
     else m++ && (this.month = m)
     this.employee["date_of_joining"] = String(this.date + "/" + this.month + "/" + this.year)
-    console.log(this.employee["date_of_joining"])
+    // console.log(this.employee["date_of_joining"])
   }
   ngOnDestroy() {
     this.unsubLoader.unsubscribe()

@@ -28,7 +28,7 @@ export class EditEmpComponent implements OnInit, OnDestroy {
 
     this.uid = this.route.snapshot.paramMap.get('id')
     this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(r => {
-      console.log(r)
+      // console.log(r)
       let arr = Object.values(r)
       // var item = arr.find(it => it.qci_id == this.uid)
       // this.employee = item

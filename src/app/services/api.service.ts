@@ -56,14 +56,12 @@ export class ApiService {
     }
     isLogin() {
         if (localStorage.getItem('token')) {
-            setTimeout(() => {
-                this.router.navigate(['./'])
-            }, 500)
+            this.router.navigate(['./'])
         }
     }
     login(uname: string, pwd: string) {
         this.uid = uname
-        let tmp: any = { email: uname, password: pwd }
+        let tmp: any = { admin_email: uname, password: pwd }
         let data = JSON.stringify(tmp)
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/loginAdmin', data)
@@ -72,7 +70,9 @@ export class ApiService {
                     console.log(response)
                     if (response.success) {
                         localStorage.setItem('token', response.token)
-                        this.emitLogin.emit()
+                        setTimeout(() => {
+                            this.emitLogin.emit()
+                        }, 100)
                     } else this.snackBars(response.message, response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
@@ -112,7 +112,7 @@ export class ApiService {
         files.forEach(file => {
             const formData: FormData = new FormData()
             formData.append('file', file, file.name)
-            const req = new HttpRequest('POST', this.URL + 'lms/upload', formData, {//lms/addPEmp
+            const req = new HttpRequest('POST', this.URL + 'lms/addEmp', formData, {// lms/upload
                 reportProgress: true
             })
             const progress = new Subject<number>()
@@ -137,7 +137,7 @@ export class ApiService {
     // Get QCI Employee from CSV
     getEmployeeCSV() {
         return new Promise((resolve) => {
-            this.http.get(this.URL + 'lms/upload', this.opts)
+            this.http.get(this.URL + 'lms/addEmp', this.opts)// lms/upload
                 .map(res => res.json())
                 .subscribe(response => {
                     if (response.success) {

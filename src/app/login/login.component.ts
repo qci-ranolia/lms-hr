@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { ApiService } from '../services/api.service'
 
@@ -8,7 +8,7 @@ import { ApiService } from '../services/api.service'
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnDestroy {
+export class LoginComponent {
 
   uname: any
   pwd: any
@@ -19,13 +19,9 @@ export class LoginComponent implements OnDestroy {
     this.unsubLogin = this.api.emitLogin.subscribe((res) => this.router.navigate(['/']))
   }
 
-  /* ngOnInit() { } */
-
   isLogin() {
     localStorage.setItem('userName', this.uname)
     this.api.login(this.uname, this.pwd)
   }
-  ngOnDestroy() {
-    //this.unsubLogin.unsubscribe()
-  }
+  
 }

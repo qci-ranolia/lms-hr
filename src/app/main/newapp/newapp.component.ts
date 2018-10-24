@@ -43,6 +43,7 @@ export class NewappComponent implements OnInit, OnDestroy {
   application_id: any
   case: any
   applicationData: any = new Array()
+  proBar:boolean = false
 
   constructor(private api: ApiService, private lms: LmsService, public datepipe: DatePipe, public dialog: MatDialog) {
     this.unsubLoader = this.lms.emitsload.subscribe(el => this.loader = el)
@@ -60,29 +61,25 @@ export class NewappComponent implements OnInit, OnDestroy {
     // if zero employee on leave
     this.unsubZeroEOL = this.api.emitZeroEOL.subscribe(r => this.hide = false)
     // if pending leave
-    this.unsubEmployeeOnLeave = this.api.emitEOL.subscribe(el => {
-      // console.log(el)
+    this.unsubEmployeeOnLeave = this.api.emitEOL.subscribe( el => {
       this.cmn.push(el)
       this.simplyfiData()
       this.application = this.cmn[this.cmn.length - 1]
       this.case = this.application
     })
     // if approved leave
-    this.unsubApprovedLeave = this.api.emitApprovedApplication.subscribe(el => {
-      // console.log(el)
+    this.unsubApprovedLeave = this.api.emitApprovedApplication.subscribe( el => {
       this.cmn.push(el)
       this.simplyfiData()
       this.approvedLeave = this.cmn[this.cmn.length - 1]
     })
     // if cancelled leave
-    this.unsubCancelledLeave = this.api.emitCancelledApplication.subscribe(el => {
-      // console.log(el)
+    this.unsubCancelledLeave = this.api.emitCancelledApplication.subscribe( el => {
       this.cmn.push(el)
       this.simplyfiData()
       this.cancelledLeave = this.cmn[this.cmn.length - 1]
     })
-    this.unsubAcceptedApplication = this.api.emitMyApplication.subscribe(el => {
-      // console.log(el)
+    this.unsubAcceptedApplication = this.api.emitMyApplication.subscribe( el => {
       // this.dis = false
       // this.spnnr = false
       this.api.getEOL()
@@ -162,19 +159,19 @@ export class NewappComponent implements OnInit, OnDestroy {
     })
   }
   appInfo(application_id, qci_id) {
-    localStorage.setItem('qci_id', qci_id)
+    localStorage.setItem('ID_code', qci_id)
     let event = 'info'
     this.openApplicationModal(application_id, event)
   } appAccept(application_id, qci_id) {
-    localStorage.setItem('qci_id', qci_id)
+    localStorage.setItem('ID_code', qci_id)
     let event = 'accept'
     this.openApplicationModal(application_id, event)
   } appEdit(application_id, qci_id) {
-    localStorage.setItem('qci_id', qci_id)
+    localStorage.setItem('ID_code', qci_id)
     let event = 'edit'
     this.openApplicationModal(application_id, event)
   } appCancel(application_id, qci_id) {
-    localStorage.setItem('qci_id', qci_id)
+    localStorage.setItem('ID_code', qci_id)
     let event = 'decline'
     this.openApplicationModal(application_id, event)
   }
@@ -189,6 +186,7 @@ export class NewappComponent implements OnInit, OnDestroy {
       latest_date = this.datepipe.transform(date, 'dd/MM/yyyy'),
       tmp = { application_id: app_id, qci_id: qci_id, date_reviewed: latest_date }
     this.api.leaveForApproval(tmp)
+    this.api.getEOL()
   }
   // decline leave application
   declineApp(dec_reason, app_ids) {
@@ -201,6 +199,7 @@ export class NewappComponent implements OnInit, OnDestroy {
       this.dis = false
       this.spnnr = false
       this.api.noDeclineReason()
+      this.api.getEOL()
     }
   }
   // Conjugate gradient

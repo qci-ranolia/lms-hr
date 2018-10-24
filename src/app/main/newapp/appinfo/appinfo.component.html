@@ -21,12 +21,13 @@
       <small class="d-block">{{dialogData.Email_ID}}</small>
     </div>
   </mat-list-item>
-  <mat-list-item class="mb-3" *ngIf="dialogData.leave_status == 'Pending'">
+  <mat-progress-bar class="clearfix pos-abs" mode="indeterminate" *ngIf="proBar"></mat-progress-bar>
+  <!-- <mat-list-item class="mb-3" *ngIf="dialogData.leave_status == 'Pending'">
     <div class="col-sm-12">
       <strong class="text-muted">
         <small class="d-block pb-2">Leave Type</small>
-      </strong>
-      <mat-chip-list>
+      </strong> -->
+      <!-- <mat-chip-list>
         <mat-chip class="bg-light rad-box pt-1 pb-1" *ngIf="dialogData.leave_type == 'CL'">
           <span matTooltip="Casual Leave">CL: {{dialogData.leave_type}}</span>
         </mat-chip>
@@ -46,8 +47,8 @@
           <span matTooltip="Extraordinary Leave">EOL: {{dialogData.leave_type}}</span>
         </mat-chip>
       </mat-chip-list>
-    </div> -->
-  </mat-list-item>
+    </div>
+  </mat-list-item>-->
 </mat-list>
 <mat-divider></mat-divider>
 <mat-list class="pt-0" *ngIf="!(dialogData.event == 'edit' || dialogData.event == 'decline')">
@@ -77,10 +78,9 @@
   <mat-list class="pt-0" *ngIf="dialogData.leave_status == 'Pending'">
     <mat-list-item class="pos-rel pt-4">
       <button mat-raised-button color="accent" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;
-      <button mat-raised-button (click)="acceptApp(dialogData.application_id, dialogData.qci_id)">Accept</button>&nbsp;&nbsp;&nbsp;
+      <button mat-raised-button (click)="acceptApp(dialogData.application_id, dialogData.ID_code)">Accept</button>&nbsp;&nbsp;&nbsp;
       <button mat-raised-button (click)="edit(this.dialogData.event='edit')">Edit</button>&nbsp;&nbsp;&nbsp;
       <button mat-raised-button (click)="todecline(this.dialogData.event='decline')">Decline</button>
-      <mat-progress-bar class="clearfix pos-abs" mode="indeterminate" *ngIf="proBar"></mat-progress-bar>
     </mat-list-item>
   </mat-list>
 </div>
@@ -128,13 +128,20 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div class="clearfix pt-4"></div>
+    <div class="clearfix pt-1"></div>
+    <div class="col-sm-6 col-md-4 float-left pt-3">
+      <mat-form-field>
+        <input matInput placeholder="Total Applied Dates" :value="{{leavedays}}" disabled>
+      </mat-form-field>
+    </div>
   </form>
   <mat-divider></mat-divider>
   <mat-list class="pt-0">
     <mat-list-item class="pos-rel pt-2">
       <button mat-raised-button color="accent" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;
       <button mat-raised-button (click)="modify(dialogData)" [disabled]=dis>Modify</button>
-      <!-- <mat-progress-bar class="clearfix pos-abs" mode="indeterminate" *ngIf="proBar"></mat-progress-bar> -->
+      <mat-progress-bar class="clearfix pos-abs" mode="indeterminate" *ngIf="proBar"></mat-progress-bar>
     </mat-list-item>
   </mat-list>
 </div>
@@ -142,8 +149,7 @@
   <mat-list class="pt-0" *ngIf="dialogData.leave_status == 'Pending'">
     <mat-list-item class="pos-rel pt-4">
       <button mat-raised-button color="accent" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;
-      <button mat-raised-button (click)="acceptApp(dialogData.application_id, dialogData.qci_id)">Accept</button>
-      <!-- <mat-progress-bar class="clearfix pos-abs" mode="indeterminate" *ngIf="proBar"></mat-progress-bar> -->
+      <button mat-raised-button (click)="acceptApp(dialogData.application_id, dialogData.ID_code)">Accept</button>
     </mat-list-item>
   </mat-list>
 </div>
@@ -158,7 +164,6 @@
     <mat-list-item class="pos-rel pt-4">
       <button mat-raised-button color="accent" mat-dialog-close>Close</button>&nbsp;&nbsp;&nbsp;
       <button mat-raised-button (click)="declineApp(decline_reason, dialogData.application_id)">Decline</button>
-      <!-- <mat-progress-bar class="clearfix pos-abs" mode="indeterminate" *ngIf="proBar"></mat-progress-bar> -->
     </mat-list-item>
   </mat-list>
 </div>

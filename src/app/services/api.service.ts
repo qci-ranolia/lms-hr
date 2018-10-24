@@ -61,13 +61,12 @@ export class ApiService {
     }
     login(uname: string, pwd: string) {
         this.uid = uname
-        let tmp: any = { admin_email: uname, password: pwd }
+        let tmp: any = { email:uname, password:pwd }
         let data = JSON.stringify(tmp)
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/loginAdmin', data)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         localStorage.setItem('token', response.token)
                         setTimeout(() => {
@@ -111,8 +110,8 @@ export class ApiService {
         // for each files
         files.forEach(file => {
             const formData: FormData = new FormData()
-            formData.append('file', file, file.name)
-            const req = new HttpRequest('POST', this.URL + 'lms/addEmp', formData, {// lms/upload
+            formData.append( 'file', file, file.name )
+            const req = new HttpRequest('POST', this.URL + 'lms/addPEmp', formData, {// lms/upload
                 reportProgress: true
             })
             const progress = new Subject<number>()
@@ -137,7 +136,7 @@ export class ApiService {
     // Get QCI Employee from CSV
     getEmployeeCSV() {
         return new Promise((resolve) => {
-            this.http.get(this.URL + 'lms/addEmp', this.opts)// lms/upload
+            this.http.get(this.URL + 'lms/addPEmp', this.opts)// lms/upload
                 .map(res => res.json())
                 .subscribe(response => {
                     if (response.success) {
@@ -182,7 +181,6 @@ export class ApiService {
             this.http.get(this.URL + 'lms/input', this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         if (response.data.length > 0) this.emitEOL.emit(response.data)
                         else this.emitZeroEOL.emit(response)
@@ -239,6 +237,7 @@ export class ApiService {
                 .subscribe(response => {
                     if (response.success) {
                         this.emitMyApplication.emit(response)
+                        this.snackBars("Application approved", "Successfully")
                         // does not refresh after response
                     } else this.snackBars("Approve Leave", response.success)
                     resolve(true)
@@ -253,6 +252,7 @@ export class ApiService {
                 .subscribe(response => {
                     if (response.success) {
                         this.emitMyApplication.emit(response)
+                        this.snackBars("Application modified", "Successfully")
                         // does not refresh after response
                     } else this.snackBars("Api", response.success)
                     resolve(true)
@@ -267,6 +267,7 @@ export class ApiService {
                 .subscribe(response => {
                     if (response.success) {
                         this.emitMyApplication.emit(response)
+                        this.snackBars("Application declined", "Successfully")
                     } else this.snackBars("Decline Leave", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))

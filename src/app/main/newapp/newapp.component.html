@@ -54,9 +54,9 @@
                 <td class="wd-16">{{app.date_from}}-{{app.date_to}}</td>
                 <td class="wd-16">{{app.date_of_apply}}</td>
                 <td class="modify">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(app.application_id, app.qci_id)"></i>
-                  <i class="fa fa-check" aria-hidden="true" (click)="appAccept(app.application_id, app.qci_id)"></i>
-                  <i class="fa fa-times" aria-hidden="true" (click)="appCancel(app.application_id, app.qci_id)"></i>
+                  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(app.application_id, app.ID_code)"></i>
+                  <i class="fa fa-check" aria-hidden="true" (click)="appAccept(app.application_id, app.ID_code)"></i>
+                  <i class="fa fa-times" aria-hidden="true" (click)="appCancel(app.application_id, app.ID_code)"></i>
                   <mat-icon class="mat-icon material-icons pos-rel" role="img" aria-hidden="true">more_vert</mat-icon>
                 </td>
               </tr>
@@ -81,7 +81,7 @@
             <tbody>
               <tr *ngFor="let approve of approvedLeave | reverse | filter : term; let i = index;">
                 <td class="wd-7">
-                  <a href="javascript:void(0)" class="text-primary" (click)="appInfo(approve.application_id, approve.qci_id)">
+                  <a href="javascript:void(0)" class="text-primary" (click)="appInfo(approve.application_id, approve.ID_code)">
                     <u>{{approve.application_id | slice:0:12 }}</u>
                   </a>
                 </td>
@@ -141,12 +141,12 @@
             <tbody>
               <tr *ngFor="let cancel of cancelledLeave | reverse | filter : term; let i = index;">
                 <td class="wd-7">
-                  <a href="javascript:void(0)" class="text-primary" (click)="appInfo(cancel.application_id, cancel.qci_id)">
+                  <a href="javascript:void(0)" class="text-primary" (click)="appInfo(cancel.application_id, cancel.ID_code)">
                     <u>{{cancel.application_id | slice:0:12 }}</u>
                   </a>
                 </td>
                 <td class="wd-16">
-                  <span :matTooltip="{{cancel.email}}">{{cancel.name}}</span>
+                  <span :matTooltip="{{cancel.email}}">{{cancel.Officials}}</span>
                 </td>
                 <td class="wd-15">
                   <span :matTooltip="{{cancel['QCI/Board']}}">{{cancel['QCI/Board']}}</span>

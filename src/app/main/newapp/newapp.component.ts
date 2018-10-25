@@ -153,9 +153,9 @@ export class NewappComponent implements OnInit, OnDestroy {
     var item = this.case.find(it => it.application_id == application_id) // linear search
     item.event = event
     this.dialog.open(AppinfoComponent, {
-      width: "60%",
-      height: "75%",
-      data: item
+      width:"60%",
+      height:"75%",
+      data:item
     })
   }
   appInfo(application_id, qci_id) {

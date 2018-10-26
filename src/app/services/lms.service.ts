@@ -48,9 +48,9 @@ export class LmsService {
   }
   deleteEmp(qci_id: any) {
     let tmp = { qci_id: qci_id }
-    this.api.deleteEmp(tmp)
+    /* this.api.deleteEmp(tmp) */
   }
   postEOLBSDate(data: any) {
-    this.api.postEOLBSDate(data)
+    // this.api.postEOLBSDate(data)
   }
 }

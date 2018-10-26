@@ -55,7 +55,7 @@ export class EditEmpComponent implements OnInit, OnDestroy {
     delete this.employee['total_pl']
     delete this.employee['total_ptl']
     delete this.employee['total_sl']
-    this.api.updateEmployee(this.employee)
+    /* this.api.updateEmployee(this.employee) */
   }
   ngOnDestroy() {
     this.unsubGetEmployees.unsubscribe()

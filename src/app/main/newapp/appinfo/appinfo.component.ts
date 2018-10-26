@@ -291,7 +291,7 @@ export class AppinfoComponent implements OnInit, OnDestroy {
       leave_type: this.leave_type
     }
     this.proBar = true
-    this.api.leaveModified(tmp)
+    /* this.api.leaveModified(tmp) */
     setTimeout(() => {
       this.proBar = false
     }, 2000)

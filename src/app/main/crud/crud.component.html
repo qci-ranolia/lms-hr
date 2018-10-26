@@ -15,8 +15,8 @@
             <th class="wd-14">Employee's Info</th>
             <th class="wd-14">Reporting Manager</th>
             
-            <th class="tableInside wd-59 pb-0">
-              <table class="col-sm-12 tableInside">
+            <th class="tableInside wd-59 pb-0">1
+              <!-- <table class="col-sm-12 tableInside">
                 <tr class="bg-white">
                   <th class="ss bs" :matTooltip="Type Of Leave">TOL</th>
                   <th class="ss bs" :matTooltip="Opening Balance">OB</th>
@@ -39,7 +39,7 @@
                   <th class="ss bs" :matTooltip="Availed Leave">AL</th>
                   <th class="ss bs" :matTooltip="Closing Balance">CB</th>
                 <tr>
-              </table>
+              </table> -->
             </th>
             <!-- <th class="modify">Modify</th> -->
           </tr>
@@ -57,15 +57,16 @@
               RO_mail
               RO
             -->
-            <td class="wd-7">{{emp.ID_code}}</td>
+            <td class="wd-7">{{emp.qci_id}}</td>
             <td class="wd-14">
-              <strong :matTooltip="{{emp['Email_ID']}}">{{emp["Officials"]}}</strong><br />
-              <small>{{emp.Nature_of_Appointment}}</small><small class="text-primary">( {{emp["QCI/Board"]}} )</small>
+              <strong :matTooltip="{{emp['email_id']}}">{{emp["name"]}}</strong><br />
+              <small>{{emp.appointment_type}}</small><small class="text-primary">( {{emp["board"]}} )</small>
             </td>
-            <td class="wd-14">{{emp.Reporting_Officer}}</td>
+            <td class="wd-14" :matTooltip="{{emp['ro_email_id']}}">{{emp.reporting_officer}}</td>
 
-            <td class="tableInside wd-59">
-              <table class="col-sm-12">
+            
+            <td class="tableInside wd-59" *ngFor="let cc of emp['cl']">{{cc.bal}}</td>
+              <!-- <table class="col-sm-12">
                 <tr *ngFor="let type of emp._type; let j = index">
                   <td class="ss bs">{{type.leave_type}}</td>
                   <td class="ss bs">{{type["Opening_bal(1jan18)"]}}</td>
@@ -88,8 +89,8 @@
                   <td class="ss bs">{{type.Apr}}</td>
                   <td class="ss bs">{{type.bal_leave}}</td>
                 </tr>
-              </table>
-            </td>
+              </table> 
+            </td> -->
             <!-- <td class="modify">
               <i class="fa fa-pencil-square-o" aria-hidden="true" :routerLink="/employee-list/{{emp.ID_code}}"></i>
               <i class="fa fa-times" aria-hidden="true" (click)="deleteEmp(emp.ID_code)"></i>

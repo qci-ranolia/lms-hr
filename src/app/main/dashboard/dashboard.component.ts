@@ -11,6 +11,7 @@ import { ApiService } from "../../services/api.service"
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.scss"]
 })
+
 // NABCB, NABET, NBQP, NABH, NABL
 export class DashboardComponent implements OnInit, OnDestroy {
   unsubLoader: any
@@ -72,7 +73,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (dd < 10) dd = "0" + dd
     if (mm < 10) mm = "0" + mm
 
-    this.api.getEmpOnLeave(dd + "/" + mm + "/" + yyyy)
+    /* this.api.getEmpOnLeave(dd + "/" + mm + "/" + yyyy) */
 
     this.unsubLoader = this.lms.emitsload.subscribe(el => (this.loader = el))
     this.lms.showLoader()
@@ -157,13 +158,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.api.getEOL()
     this.daysArr = this.createCalendar(this.date)
   }
-  getEmpOnLeave(data) {
+  /* getEmpOnLeave(data) {
     if (!data.count) this.emp = []
     this.getMonth = this.date.format("MM/YYYY")
     this.postDate = data.day
     let temp = this.postDate + "/" + this.getMonth
     this.api.getEmpOnLeave(temp)
-  }
+  } */
   public todayCheck(day) {
     if (!day) return false
     return moment().format("L") === day.format
@@ -205,7 +206,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (x.indexOf(k) >= 0) (y = k.split("/").reverse().join("").slice(-2)), z.push(y)
         return x.indexOf(k) < 0
       })
-      this.api.postEOLBSDate(this.workingDays)
+      // this.api.postEOLBSDate(this.workingDays) // lms/count
+      
       // Add some ~ delay so that .subscribe() method fetch holidays from the api in given time
       // To add exact delays find epoch values of constructor, NGONINT & subscribe method and may be more xaces be considered
     }, 380)

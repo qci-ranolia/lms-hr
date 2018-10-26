@@ -45,16 +45,16 @@ export class NewappComponent implements OnInit, OnDestroy {
   applicationData: any = new Array()
   proBar:boolean = false
 
-  constructor(private api: ApiService, private lms: LmsService, public datepipe: DatePipe, public dialog: MatDialog) {
+  constructor( private api: ApiService, private lms: LmsService, public datepipe: DatePipe, public dialog: MatDialog ){
     this.unsubLoader = this.lms.emitsload.subscribe(el => this.loader = el)
     this.lms.showLoader()
     setTimeout(() => {
       $(function () {
         this.table = $('#table_new').DataTable({
-          paging: true,
-          searching: true,
-          ordering: true,
-          scrollY: 335
+          paging:true,
+          searching:true,
+          ordering:true,
+          scrollY:335
         })
       })
     }, 800)
@@ -92,11 +92,13 @@ export class NewappComponent implements OnInit, OnDestroy {
       }
     })
   }
+
   ngOnInit() {
     this.api.getEOL()
     this.api.approvedLeave()
     this.api.cancelledLeave()
   }
+
   // simplyfy Response from all http request
   simplyfiData() {
     if (!(this.cmn.length > 0)) this.restHide = false
@@ -112,6 +114,7 @@ export class NewappComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   whichApplication($event: MatTabChangeEvent) {
     switch ($event.index) {
       case 0:
@@ -158,6 +161,7 @@ export class NewappComponent implements OnInit, OnDestroy {
       data:item
     })
   }
+
   appInfo(application_id, qci_id) {
     localStorage.setItem('ID_code', qci_id)
     let event = 'info'
@@ -175,6 +179,7 @@ export class NewappComponent implements OnInit, OnDestroy {
     let event = 'decline'
     this.openApplicationModal(application_id, event)
   }
+
   toggler() {
     this.toggle = !this.toggle
   }
@@ -188,6 +193,7 @@ export class NewappComponent implements OnInit, OnDestroy {
     this.api.leaveForApproval(tmp)
     this.api.getEOL()
   }
+
   // decline leave application
   declineApp(dec_reason, app_ids) {
     this.dis = true

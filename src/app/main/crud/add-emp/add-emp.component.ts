@@ -53,9 +53,9 @@ export class AddEmpComponent implements OnInit, OnDestroy {
     this.type_of_employee = item
   }
 
-  addEmployee() {
+  /* addEmployee() {
     this.api.addEmp(this.employee)
-  }
+  } */
 
   keyPress(event: any) {
     const pattern = /[0-9\+\-\ ]/

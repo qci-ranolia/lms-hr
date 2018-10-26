@@ -16,8 +16,8 @@ export interface DialogData {
   templateUrl: './crud.component.html',
   styleUrls: ['./crud.component.scss']
 })
-
 export class CrudComponent implements OnInit, OnDestroy {
+  
   employee = new Array
   emplCSV = new Array
   employeeCSV = new Array // new array made by me due to lack of experts
@@ -32,7 +32,11 @@ export class CrudComponent implements OnInit, OnDestroy {
 
   jack: any
 
-  constructor(private lms: LmsService, private api: ApiService, public dialog: MatDialog) {
+  /* toArray(cl:object){
+    return Object.keys(cl).map(key => console.log(key))
+  } */
+
+  constructor(private lms:LmsService, private api:ApiService, public dialog:MatDialog){
 
     this.unsubLoader = this.lms.emitsload.subscribe(el => this.loader = el)
     this.lms.showLoader()
@@ -54,12 +58,7 @@ export class CrudComponent implements OnInit, OnDestroy {
       })
     }, 800)
     this.unsubGetEmpCSV = this.api.emitgetEmpCSV.subscribe(e => {
-      for (let i = 1; i < e.length; i++) {
-        if ( e[i - 1].Officials == e[i].Officials ) {
-          // console.log(e[i - 1].Officials)
-          // console.warn(e[i].Officials)
-        }
-      }
+      console.log(e)
       this.emplCSV = e
     })
   }
@@ -71,7 +70,7 @@ export class CrudComponent implements OnInit, OnDestroy {
   }
   deleteEmp(qci_id) {
     var tmp = { qci_id: qci_id }
-    this.api.deleteEmp(tmp)
+    /* this.api.deleteEmp(tmp) */
     this.lms.getEmployees()
   }
   public openUploadDialog($e) {

@@ -31,7 +31,8 @@ export class ApiService {
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
 
     // URL: string = "http://13.127.13.175:5000/"
-    URL: string = "http://192.168.15.79:5000/"
+    URL: string = "http://192.168.15.219:5000/"
+    // URL: string = "../../assets/data.json"
 
     token: string // Useful in Authentication
     headers: any // Useful when backend and frontend have different IP's
@@ -67,7 +68,6 @@ export class ApiService {
             this.http.post(this.URL + 'lms/loginAdmin', data)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         localStorage.setItem('token', response.token)
                         setTimeout(() => {
@@ -94,7 +94,6 @@ export class ApiService {
             })
             const progress = new Subject<number>()
             this.httpClient.request(req).subscribe(event => {
-                console.log(event)
                 if (event.type === HttpEventType.UploadProgress) {
                     const percentDone = Math.round(100 * event.loaded / event.total)
                     progress.next(percentDone)
@@ -118,7 +117,6 @@ export class ApiService {
             })
             const progress = new Subject<number>()
             this.httpClient.request(req).subscribe(event => {
-                console.log(event)
                 if (event.type === HttpEventType.UploadProgress) {
                     const percentDone = Math.round(100 * event.loaded / event.total)
                     progress.next(percentDone)
@@ -157,7 +155,6 @@ export class ApiService {
             this.http.get(this.URL + 'lms/addEmployee/' + data, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) this.emitgetEmployee.emit(response.data)
                     else this.snackBars("Add Employee", response.success)
                     resolve(true)
@@ -170,7 +167,6 @@ export class ApiService {
             this.http.get(this.URL + 'lms/applyLeave/' + data, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) this.emitMyLeaves.emit(response.data)
                     else {
                         if (response.messages == 'No application available currently') this.emitMyZero.emit(response)
@@ -186,7 +182,6 @@ export class ApiService {
             this.http.get(this.URL + 'lms/input', this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         if (response.data.length > 0) this.emitEOL.emit(response.data)
                         else this.emitZeroEOL.emit(response)
@@ -201,7 +196,6 @@ export class ApiService {
             this.http.get(this.URL + 'lms/holiday', this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         if (response.result.length == 0) console.log("No holiday file uploaded yet !")
                         else this.emitgetHoliday.emit(response.result)
@@ -217,7 +211,6 @@ export class ApiService {
             this.http.get(this.URL + 'lms/output1', this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) this.emitApprovedApplication.emit(response.data)
                     else this.snackBars("Output1", response.success)
                     resolve(true)
@@ -230,7 +223,6 @@ export class ApiService {
             this.http.get(this.URL + 'lms/output2', this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) this.emitCancelledApplication.emit(response.data)
                     else this.snackBars("Output2", response.success)
                     resolve(true)
@@ -244,7 +236,6 @@ export class ApiService {
             this.http.post(this.URL + 'lms/approveLeave', data, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         this.emitMyApplication.emit(response)
                         this.snackBars("Application approved", "Successfully")
@@ -254,7 +245,7 @@ export class ApiService {
                 }, err => this.router.navigate(['/404']))
         })
     }
-    // leaveModified( ){}
+    // leaveModified( ){}x
     // Is not completed from front-end && back-end
     /* leaveModified(data: any) {
         return new Promise((resolve) => {
@@ -277,7 +268,6 @@ export class ApiService {
             this.http.post(this.URL + 'lms/declineLeave', data, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         this.emitMyApplication.emit(response)
                         this.snackBars("Application declined", "Successfully")
@@ -301,13 +291,12 @@ export class ApiService {
                 }, err => this.router.navigate(['/404']))
         })
     } */
-    getEmpOnLeave(data: any) {
+    getEmpOnLeave(data:any) {
         let tmp = { date: data }
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/empOnLeave', tmp, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         this.emitEmpOnLeave.emit(response.data)
                         this.emitEmpApp.emit(response.app_detail)

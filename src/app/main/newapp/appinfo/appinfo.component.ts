@@ -106,14 +106,13 @@ export class AppinfoComponent implements OnInit, OnDestroy {
     })
     /*From employee ends*/
     this.unsubTotalLeaves = this.api.emitTotalLeave.subscribe(r => {
-      console.log(r)
       this.totalLeave = r[0]
     })
   }
 
   ngOnInit() {
     this.dialogData = this.data
-    this.qci_id = localStorage.getItem('ID_code')
+    this.qci_id = localStorage.getItem('qci_id')
     this.api.myLeaves(this.qci_id)
     // this.api.getEmployee(this.qci_id)
     // this.api.tleave()

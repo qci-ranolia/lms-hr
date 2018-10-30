@@ -30,17 +30,12 @@ export class CrudComponent implements OnInit, OnDestroy {
   unsubTotalLeaves: any
   unsubGetEmpCSV: any
 
-  jack: any
-
-  /* toArray(cl:object){
-    return Object.keys(cl).map(key => console.log(key))
-  } */
+  employeeLeave = []
+  temp1 = []
 
   constructor(private lms:LmsService, private api:ApiService, public dialog:MatDialog){
-
     this.unsubLoader = this.lms.emitsload.subscribe(el => this.loader = el)
     this.lms.showLoader()
-
     this.unsubGetEmployees = this.lms.emitgetEmployees.subscribe(r => {
       this.employee = Object.values(r)
     })
@@ -48,7 +43,7 @@ export class CrudComponent implements OnInit, OnDestroy {
       this.totalLeave = r[0]
     })
     setTimeout(() => {
-      $(function () {
+      $( function () {
         let user = $('#table_id').DataTable({
           paging: true,
           searching: true,
@@ -57,9 +52,21 @@ export class CrudComponent implements OnInit, OnDestroy {
         })
       })
     }, 800)
-    this.unsubGetEmpCSV = this.api.emitgetEmpCSV.subscribe(e => {
-      console.log(e)
+    this.unsubGetEmpCSV = this.api.emitgetEmpCSV.subscribe( e => {
       this.emplCSV = e
+      let i: any, j: any, k: any
+      for ( i = 0; i < this.emplCSV.length; i++ ) {
+        for ( j = 1; j <= 12; j++ ) {
+          k = j
+          if ( j < 10 ) {
+            j = '0' + j
+          }
+          this.temp1.push(this.emplCSV[i][j])
+          j = k
+        }
+        this.employeeLeave.push(this.temp1)
+        this.temp1 = []
+      }
     })
   }
   ngOnInit() {

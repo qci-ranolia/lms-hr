@@ -100,7 +100,8 @@ export class NewappComponent implements OnInit, OnDestroy {
   }
 
   // simplyfy Response from all http request
-  simplyfiData() {
+  simplyfiData(){
+    // console.log(this.cmn)
     if (!(this.cmn.length > 0)) this.restHide = false
     else {
       this.restHide = true
@@ -163,19 +164,19 @@ export class NewappComponent implements OnInit, OnDestroy {
   }
 
   appInfo(application_id, qci_id) {
-    localStorage.setItem('ID_code', qci_id)
+    localStorage.setItem('qci_id', qci_id)
     let event = 'info'
     this.openApplicationModal(application_id, event)
   } appAccept(application_id, qci_id) {
-    localStorage.setItem('ID_code', qci_id)
+    localStorage.setItem('qci_id', qci_id)
     let event = 'accept'
     this.openApplicationModal(application_id, event)
   } appEdit(application_id, qci_id) {
-    localStorage.setItem('ID_code', qci_id)
+    localStorage.setItem('qci_id', qci_id)
     let event = 'edit'
     this.openApplicationModal(application_id, event)
   } appCancel(application_id, qci_id) {
-    localStorage.setItem('ID_code', qci_id)
+    localStorage.setItem('qci_id', qci_id)
     let event = 'decline'
     this.openApplicationModal(application_id, event)
   }
@@ -208,6 +209,7 @@ export class NewappComponent implements OnInit, OnDestroy {
       this.api.getEOL()
     }
   }
+  
   // Conjugate gradient
   // d<sub>(i+1) = g<sub>(i+1) + d<sub>i*Y<sub>i, i = 0,1
 

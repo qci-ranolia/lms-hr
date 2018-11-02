@@ -92,11 +92,20 @@
       <mat-form-field>
         <mat-select placeholder="Select leave type" formControlName="check2" [(ngModel)]="leave_type" (change)="ifLeavesAreLess(leave_type)"
           name="leave" [(value)]="selected" :disabled="{{isFirstDateSelected}}">
-          <mat-option *ngFor="let type of employee._type" :value="{{type.leave_type}}">
-            <span *ngIf="type.leave_type == 'CL'">Casual Leave</span>
-            <span *ngIf="type.leave_type == 'SL'">Sick Leave</span>
-            <span *ngIf="type.leave_type == 'PL'">Privileged Leave</span>
-            <strong class="d-inline">({{type.bal_leave}})</strong>
+          <mat-option *ngIf="employee.cl" :value="cl">
+            <span>Casual Leave ({{employee.cl.bal}})</span>
+          </mat-option>
+          <mat-option *ngIf="employee.sl" :value="sl">
+            <span>Sick Leave ({{employee.sl.bal}})</span>
+          </mat-option>
+          <mat-option *ngIf="employee.pl" :value="pl">
+            <span>Privileged Leave ({{employee.pl.bal}})</span>
+          </mat-option>
+          <mat-option *ngIf="employee.ml && employee.ml.bal !== 0" :value="ml">
+            <span>Maternity Leave ({{employee.ml.bal}})</span>
+          </mat-option>
+          <mat-option *ngIf="employee.ptl && employee.ptl.bal !== 0" :value="ptl">
+            <span>Paternity Leave ({{employee.ptl.bal}})</span>
           </mat-option>
         </mat-select>
       </mat-form-field>

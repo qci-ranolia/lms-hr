@@ -1,17 +1,40 @@
-<div class="d-flex justify-content-center mt-5">
-    <div class="col-sm-4 pt-2 pb-2 mt-5">
-        <h5 class="text-center">HR Login</h5>
-        <div class="col-sm-12 bg-white pl-5 pt-5 pr-5 pb-5 d-inline-block rad-box">
+<div class="d-flex justify-content-center mt-5 pt-5">
+  <div class="col-sm-4 p-0 bg-white h52 ovf-y mt-5 log">
+    <mat-tab-group><!-- (selectedTabChange)="whichApplication($event)"-->
+      <mat-tab label="HR SignIn">
+        <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box">
+          <form class="example-form mb-0"> 
+            <mat-form-field class="example-full-width pt-2">
+              <input matInput placeholder="Username" [(ngModel)]="uname" name="uname" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width pt-4">
+              <input matInput placeholder="Password" type="password" [(ngModel)]="pwd" name="pwd" />
+            </mat-form-field>
+            <div class="clearfix"></div>
+            <button mat-button class="btn btn-primary mt-4" (click)="isLogin()">Login</button>
+          </form>
+        </div>
+      </mat-tab>
+      <mat-tab label="HR SignUp">
+        <div class="col-sm-12 bg-white pt-3 pb-2 d-inline-block rad-box">
+            <!-- <h5 class="text-center">HR Signup</h5> -->
             <form class="example-form mb-0"> 
               <mat-form-field class="example-full-width pt-2">
-                <input matInput placeholder="Username" [(ngModel)]="uname" name="uname" />
+                <input matInput placeholder="Email" [(ngModel)]="email_id" name="email_id" />
+              </mat-form-field> 
+              <mat-form-field class="example-full-width pt-2">
+                <input matInput placeholder="Username" [(ngModel)]="name" name="name" />
               </mat-form-field>
-              <mat-form-field class="example-full-width pt-4">
-                <input matInput placeholder="Password" type="password" [(ngModel)]="pwd" name="pwd" />
+              <mat-form-field class="example-full-width pt-2">
+                <input matInput placeholder="Password" type="password" [(ngModel)]="password" name="password" />
               </mat-form-field>
               <div class="clearfix"></div>
-              <button mat-button class="btn btn-primary mt-4" (click)="isLogin()">Login</button>
+              <button mat-button class="btn btn-primary mt-4" (click)="signup()">SignUp</button>
             </form>
         </div>
-    </div> 
+      </mat-tab>
+    </mat-tab-group>
+  </div>
 </div>
+
+

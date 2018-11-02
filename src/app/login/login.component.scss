@@ -1,3 +1,13 @@
 .bg-white {
     box-shadow:0px 11px 20px -10px #aaa;
 }
+.log .mat-tab-body, .log .mat-tab-body.mat-tab-body-active{
+    right:0!important;
+    margin:8px 12px 8px!important;
+    max-width:100%!important;
+}.log .mat-tab-label{
+    min-width:50% !important;
+    line-height:46px;
+}.log .mat-ink-bar{
+    min-width:50% !important;
+}

@@ -30,8 +30,8 @@ export class ApiService {
     // abc@qcin.org
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
 
-    // URL: string = "http://13.127.13.175:5000/"
-    URL: string = "http://192.168.15.219:5000/"
+    URL: string = "http://13.127.13.175:5000/"
+    // URL: string = "http://192.168.15.219:5000/"
     // URL: string = "../../assets/data.json"
 
     token: string // Useful in Authentication
@@ -65,19 +65,31 @@ export class ApiService {
         let tmp: any = { email_id:uname, password:pwd }
         let data = JSON.stringify(tmp)
         return new Promise((resolve) => {
-            this.http.post(this.URL + 'lms/loginAdmin', data)
-                .map(res => res.json())
-                .subscribe(response => {
-                    if (response.success) {
-                        localStorage.setItem('token', response.token)
-                        setTimeout(() => {
-                            this.emitLogin.emit()
-                        }, 100)
-                    } else this.snackBars(response.message, response.success)
-                    resolve(true)
-                }, err => this.router.navigate(['/404']))
+        this.http.post(this.URL + 'lms/loginAdmin', data)
+        .map(res => res.json())
+        .subscribe(response => {
+            if (response.success) {
+                localStorage.setItem('token', response.token)
+                this.emitLogin.emit()
+            } else this.snackBars(response.message, response.success)
+            resolve(true)
+        }, err => this.router.navigate(['/404']))
         })
     }
+    signup(name: string, password: string, email_id: string){
+        let tmp: any = { name:name, password:password, email_id:email_id }
+        let data = JSON.stringify(tmp)
+        return new Promise((resolve) => {
+        this.http.post(this.URL + 'lms/addAdmin', data)
+        .map(res => res.json())
+        .subscribe(response => {
+            if (response.success) {
+                this.snackBars('Admin added','Kindly login')
+            } else this.snackBars(response.message, response.success)
+            resolve(true)
+        }, err => this.router.navigate(['/404']))
+        })
+    } 
     noDeclineReason() {
         this.snackBars("Note:", "Kindly fill reason to cancel")
     }
@@ -144,7 +156,13 @@ export class ApiService {
                         if (response.message.length == 0) console.log("No employee file uploaded yet!")
                         else this.emitgetEmpCSV.emit(response.message)
                     }
-                    else this.snackBars("Add Emp Get", response.success)
+                    else if ( response == 'Wrong Token' ){
+                        setTimeout(() => {
+                            this.router.navigate(['/'])
+                        }, 200 )
+                    } else {
+                        this.snackBars("Add Emp Get", response.success)
+                    }
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -156,7 +174,13 @@ export class ApiService {
                 .map(res => res.json())
                 .subscribe(response => {
                     if (response.success) this.emitgetEmployee.emit(response.data)
-                    else this.snackBars("Add Employee", response.success)
+                    else if ( response == 'Wrong Token' ){
+                        setTimeout(() => {
+                            this.router.navigate(['/'])
+                        }, 200 )
+                    } else {
+                        this.snackBars("Add Employee", response.success)
+                    }
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -168,7 +192,11 @@ export class ApiService {
                 .map(res => res.json())
                 .subscribe(response => {
                     if (response.success) this.emitMyLeaves.emit(response.data)
-                    else {
+                    else if ( response == 'Wrong Token' ){
+                        setTimeout(() => {
+                            this.router.navigate(['/'])
+                        }, 200 )
+                    } else {
                         if (response.messages == 'No application available currently') this.emitMyZero.emit(response)
                         else this.snackBars("Apply Leave", "Try Again")
                     }
@@ -185,7 +213,14 @@ export class ApiService {
                     if (response.success) {
                         if (response.data.length > 0) this.emitEOL.emit(response.data)
                         else this.emitZeroEOL.emit(response)
-                    } else this.snackBars("Input", response.success)
+                    }
+                    else if ( response == 'Wrong Token' ){
+                        setTimeout(() => {
+                            this.router.navigate(['/'])
+                        }, 200 )
+                    } else {
+                        this.snackBars("Input", response.success)
+                    }
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -200,7 +235,13 @@ export class ApiService {
                         if (response.result.length == 0) console.log("No holiday file uploaded yet !")
                         else this.emitgetHoliday.emit(response.result)
                     }
-                    else this.snackBars("Holiday", response.success)
+                    else if ( response == 'Wrong Token' ){
+                        setTimeout(() => {
+                            this.router.navigate(['/'])
+                        }, 200 )
+                    } else {
+                        this.snackBars("Holiday", response.success)
+                    }
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -212,7 +253,11 @@ export class ApiService {
                 .map(res => res.json())
                 .subscribe(response => {
                     if (response.success) this.emitApprovedApplication.emit(response.data)
-                    else this.snackBars("Output1", response.success)
+                    else if ( response == 'Wrong Token' ){
+                        setTimeout(() => {
+                            this.router.navigate(['/'])
+                        }, 200 )
+                    } else this.snackBars("Output1", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -224,7 +269,11 @@ export class ApiService {
                 .map(res => res.json())
                 .subscribe(response => {
                     if (response.success) this.emitCancelledApplication.emit(response.data)
-                    else this.snackBars("Output2", response.success)
+                    else if ( response == 'Wrong Token' ){
+                        setTimeout(() => {
+                            this.router.navigate(['/'])
+                        }, 200 )
+                    } else this.snackBars("Output2", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
@@ -240,6 +289,11 @@ export class ApiService {
                         this.emitMyApplication.emit(response)
                         this.snackBars("Application approved", "Successfully")
                         // does not refresh after response
+                    }
+                    else if ( response == 'Wrong Token' ){
+                        setTimeout(() => {
+                            this.router.navigate(['/'])
+                        }, 200 )
                     } else this.snackBars("Approve Leave", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
@@ -271,36 +325,54 @@ export class ApiService {
                     if (response.success) {
                         this.emitMyApplication.emit(response)
                         this.snackBars("Application declined", "Successfully")
+
+                    }
+                    else if ( response == 'Wrong Token' ){
+                        setTimeout(() => {
+                            this.router.navigate(['/'])
+                        }, 200 )
                     } else this.snackBars("Decline Leave", response.success)
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
     }
     // Post month dates to get employee on leave in a month
-    /* postEOLBSDate(data: any) {
+    postEOLBSDate(data: any) {
         let tmp = { dates: data }
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/count', tmp, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
-                    console.log(response)
                     if (response.success) {
                         this.emitCount.emit(response.data)
-                    } else return false//this.snackBars(response.message, response.success)
+                    }
+                    else if ( response == 'Wrong Token' ){
+                        setTimeout(() => {
+                            this.router.navigate(['/'])
+                        }, 200 )
+                    } else return false
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })
-    } */
+    }
     getEmpOnLeave(data:any) {
         let tmp = { date: data }
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/empOnLeave', tmp, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
+                    console.log(response)
                     if (response.success) {
                         this.emitEmpOnLeave.emit(response.data)
                         this.emitEmpApp.emit(response.app_detail)
+                    }
+                    
+                    else if ( response == 'Wrong Token' ){
+                        setTimeout(() => {
+                            this.router.navigate(['/'])
+                        }, 200 )
                     } else this.snackBars("EmpOn Leave", "response.success")
+                    
                     resolve(true)
                 }, err => this.router.navigate(['/404']))
         })

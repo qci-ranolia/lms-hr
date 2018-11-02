@@ -1,15 +1,13 @@
 import { EventEmitter, Component, OnInit, Inject, OnDestroy } from '@angular/core'
-import { DatePipe } from '@angular/common'
+import { MatDatepickerInputEvent } from "@angular/material/datepicker"
+import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { MatDialogRef, MatSnackBar } from '@angular/material'
 import { ApiService } from '../../../services/api.service'
 import { LmsService } from '../../../services/lms.service'
 import { MAT_DIALOG_DATA } from '@angular/material'
 import { DialogData } from '../newapp.component'
+import { DatePipe } from '@angular/common'
 import * as moment from 'moment'
-
-import { MatDatepickerInputEvent } from "@angular/material/datepicker"
-import { FormBuilder, FormGroup, Validators } from "@angular/forms"
-// import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-appinfo',
@@ -226,10 +224,12 @@ export class AppinfoComponent implements OnInit, OnDestroy {
       this.ifLeavesAreLess(this.ifLAL)
     }
   }
+
   disableSunDay = (d: Date): boolean => {
     const day = d.getDay()
     return day !== 0 && day !== 6 // Uncomment if saturday is disabled too
   }
+
   ifLeavesAreLess(item) {
     this.ifLAL = item
     var a = "bal_" + item,
@@ -246,7 +246,7 @@ export class AppinfoComponent implements OnInit, OnDestroy {
       //     }
       // }
     // More functionality added here, not the right name of a function ;-p
-    if ( item == "CL" ){
+    if ( item == "cl" ){
       if ( this.condition == true ){
         if ( this.showHalfDay == false && this.isHalfDay == true ) this.leavedays -= 0.5
         if ( this.sundaySaturday > 0 ) {
@@ -259,7 +259,7 @@ export class AppinfoComponent implements OnInit, OnDestroy {
       this.disabled = false
       if ( this.leavedays > 5 ) this.api.snackBars("Note:", "Casual leaves must be less than 5")
     }
-    else if ( item == "SL" || item == "PL" || item == "EOL" || item == "ML" || item == "PTL" )
+    else if ( item == "sl" || item == "pl" || item == "eol" || item == "ml" || item == "ptl" )
     {
       if ( this.showHalfDay == true && this.isHalfDay == true ) this.leavedays += 0.5
       if ( this.condition == false && this.sDate ){
@@ -295,8 +295,9 @@ export class AppinfoComponent implements OnInit, OnDestroy {
       this.proBar = false
     }, 2000)
   }
+
   // accept leave application
-  acceptApp(app_id, qci_id) {
+  acceptApp(app_id, qci_id){
     let date = new Date(),
       latest_date = this.datepipe.transform(date, 'dd/MM/yyyy'),
       tmp = { application_id: app_id, qci_id: qci_id, date_reviewed: latest_date }
@@ -306,8 +307,9 @@ export class AppinfoComponent implements OnInit, OnDestroy {
       this.proBar = false
     }, 2000)
   }
+
   // decline leave application
-  declineApp(dec_reason, app_ids) {
+  declineApp( dec_reason, app_ids ) {
     let date = moment().format("DD/MM/YYYY")
     let tmp = { application_id: app_ids, date_reviewed: date, decline_reason: dec_reason }
     this.proBar = true
@@ -316,6 +318,7 @@ export class AppinfoComponent implements OnInit, OnDestroy {
       this.proBar = false
     }, 2000) 
   }
+
   ngOnDestroy() {
     this.unsubGetEmployee.unsubscribe()
     this.unsubGetHoliday.unsubscribe()

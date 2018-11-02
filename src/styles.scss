@@ -23386,19 +23386,26 @@ form .ng-valid .mat-input-underline .mat-input-ripple {
   padding-top: 5% !important;
   padding-bottom: 1% !important
 }
-
 .mat-calendar-body-cell-content {
   height: 70% !important;
   border-radius: 2px !important;
   box-shadow: 1px 1px 2px 0px #777 !important;
   background: #fff
 }
-
 .mat-calendar-body-disabled>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
   color: rgba(0, 0, 0, 0.22)
 }
-
 .mat-calendar-body-selected {
   background: #ff4081 !important;
   color: #fff
+}
+.log .mat-tab-body, .log .mat-tab-body.mat-tab-body-active{
+    right:0!important;
+    margin:8px 12px 8px!important;
+    max-width:100%!important;
+} .log .mat-tab-label{
+    min-width:50% !important;
+    line-height:46px;
+} .log .mat-ink-bar{
+    min-width:50% !important;
 }

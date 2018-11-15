@@ -630,13 +630,7 @@ var LoginComponent = /** @class */ (function () {
         this.api.signup(this.name, this.password, this.email_id);
     };
     LoginComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.api.isLogin();
-        this.unsubLogin = this.api.emitLogin.subscribe(function (res) {
-            setTimeout(function () {
-                _this.router.navigate(['/']);
-            }, 200);
-        });
     };
     LoginComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -2676,8 +2670,8 @@ var StatComponent = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApiService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Subject__ = __webpack_require__("./node_modules/rxjs/_esm5/Subject.js");
@@ -2705,23 +2699,23 @@ var ApiService = /** @class */ (function () {
         this.http = http;
         this.router = router;
         this.httpClient = httpClient;
-        this.emitgetEmployees = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */](); // Emit Employees
-        this.emitgetEmployee = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */](); // Emit Employee
-        this.emitLogin = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */](); // Emit Login
-        this.emitErr = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */](); // Emit Err , not using right now
-        this.emitEOL = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */](); // Emit Employee On Leaves
-        this.emitgetHoliday = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.emitZeroEOL = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */](); // Emit Zero employees on leaves
-        this.emitMyApplication = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.emitApprovedApplication = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.emitCancelledApplication = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.emitCount = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.emitEmpOnLeave = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.emitEmpApp = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.emitgetEmpCSV = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.emitMyZero = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.emitMyLeaves = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.emitTotalLeave = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.emitgetEmployees = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */](); // Emit Employees
+        this.emitgetEmployee = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */](); // Emit Employee
+        this.emitLogin = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */](); // Emit Login
+        this.emitErr = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */](); // Emit Err , not using right now
+        this.emitEOL = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */](); // Emit Employee On Leaves
+        this.emitgetHoliday = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.emitZeroEOL = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */](); // Emit Zero employees on leaves
+        this.emitMyApplication = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.emitApprovedApplication = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.emitCancelledApplication = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.emitCount = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.emitEmpOnLeave = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.emitEmpApp = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.emitgetEmpCSV = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.emitMyZero = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.emitMyLeaves = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
+        this.emitTotalLeave = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["x" /* EventEmitter */]();
         // abc@qcin.org
         // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4YTExNDRkMjJkMzM0YmE5OTc0NjZlMjBkYmI1ZTc2NSJ9.RFhB_xFfJWTWU_Gx8oEdkdWYn_OJwLFTvzSpzQzryh8
         this.URL = "http://13.127.13.175:5000/";
@@ -2729,9 +2723,9 @@ var ApiService = /** @class */ (function () {
         // We will use both imports here. Are we using anywhere in comments only ???
         this.uid = localStorage.getItem('userName');
         this.token = localStorage.getItem('token'); // If this token available, login using can activate gaurd
-        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */](); // Default headers
+        this.headers = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */](); // Default headers
         this.headers.append('Authorization', this.token); // ADD/Append your authorized token to Default headers
-        this.opts = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]();
+        this.opts = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]();
         this.opts.headers = this.headers;
     }
     ApiService.prototype.snackBars = function (message, action) {
@@ -2740,7 +2734,7 @@ var ApiService = /** @class */ (function () {
         });
     };
     ApiService.prototype.isLogin = function () {
-        if (localStorage.getItem('token')) {
+        if (localStorage.getItem('token') != null) {
             this.router.navigate(['./']);
         }
     };
@@ -2755,7 +2749,16 @@ var ApiService = /** @class */ (function () {
                 .subscribe(function (response) {
                 if (response.success) {
                     localStorage.setItem('token', response.token);
-                    _this.emitLogin.emit();
+                    _this.token = localStorage.getItem('token'); // If this token available, login using can activate gaurd
+                    _this.headers = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Headers */](); // Default headers
+                    _this.headers.append('Authorization', _this.token); // ADD/Append your authorized token to Default headers
+                    _this.opts = new __WEBPACK_IMPORTED_MODULE_0__angular_http__["d" /* RequestOptions */]();
+                    _this.opts.headers = _this.headers;
+                    console.log(response);
+                    console.log(_this.token);
+                    console.log(_this.headers);
+                    console.log(_this.opts);
+                    _this.router.navigate(['/']);
                 }
                 else
                     _this.snackBars(response.message, response.success);
@@ -2853,11 +2856,6 @@ var ApiService = /** @class */ (function () {
                     else
                         _this.emitgetEmpCSV.emit(response.message);
                 }
-                else if (response == 'Wrong Token') {
-                    setTimeout(function () {
-                        _this.router.navigate(['/']);
-                    }, 200);
-                }
                 else {
                     _this.snackBars("Add Emp Get", response.success);
                 }
@@ -2874,11 +2872,6 @@ var ApiService = /** @class */ (function () {
                 .subscribe(function (response) {
                 if (response.success)
                     _this.emitgetEmployee.emit(response.data);
-                else if (response == 'Wrong Token') {
-                    setTimeout(function () {
-                        _this.router.navigate(['/']);
-                    }, 200);
-                }
                 else {
                     _this.snackBars("Add Employee", response.success);
                 }
@@ -2895,11 +2888,6 @@ var ApiService = /** @class */ (function () {
                 .subscribe(function (response) {
                 if (response.success)
                     _this.emitMyLeaves.emit(response.data);
-                else if (response == 'Wrong Token') {
-                    setTimeout(function () {
-                        _this.router.navigate(['/']);
-                    }, 200);
-                }
                 else {
                     if (response.messages == 'No application available currently')
                         _this.emitMyZero.emit(response);
@@ -2923,11 +2911,6 @@ var ApiService = /** @class */ (function () {
                     else
                         _this.emitZeroEOL.emit(response);
                 }
-                else if (response == 'Wrong Token') {
-                    setTimeout(function () {
-                        _this.router.navigate(['/']);
-                    }, 200);
-                }
                 else {
                     _this.snackBars("Input", response.success);
                 }
@@ -2948,11 +2931,6 @@ var ApiService = /** @class */ (function () {
                     else
                         _this.emitgetHoliday.emit(response.result);
                 }
-                else if (response == 'Wrong Token') {
-                    setTimeout(function () {
-                        _this.router.navigate(['/']);
-                    }, 200);
-                }
                 else {
                     _this.snackBars("Holiday", response.success);
                 }
@@ -2969,11 +2947,6 @@ var ApiService = /** @class */ (function () {
                 .subscribe(function (response) {
                 if (response.success)
                     _this.emitApprovedApplication.emit(response.data);
-                else if (response == 'Wrong Token') {
-                    setTimeout(function () {
-                        _this.router.navigate(['/']);
-                    }, 200);
-                }
                 else
                     _this.snackBars("Output1", response.success);
                 resolve(true);
@@ -2989,11 +2962,6 @@ var ApiService = /** @class */ (function () {
                 .subscribe(function (response) {
                 if (response.success)
                     _this.emitCancelledApplication.emit(response.data);
-                else if (response == 'Wrong Token') {
-                    setTimeout(function () {
-                        _this.router.navigate(['/']);
-                    }, 200);
-                }
                 else
                     _this.snackBars("Output2", response.success);
                 resolve(true);
@@ -3012,11 +2980,6 @@ var ApiService = /** @class */ (function () {
                     _this.emitMyApplication.emit(response);
                     _this.snackBars("Application approved", "Successfully");
                     // does not refresh after response
-                }
-                else if (response == 'Wrong Token') {
-                    setTimeout(function () {
-                        _this.router.navigate(['/']);
-                    }, 200);
                 }
                 else
                     _this.snackBars("Approve Leave", response.success);
@@ -3052,11 +3015,6 @@ var ApiService = /** @class */ (function () {
                     _this.emitMyApplication.emit(response);
                     _this.snackBars("Application declined", "Successfully");
                 }
-                else if (response == 'Wrong Token') {
-                    setTimeout(function () {
-                        _this.router.navigate(['/']);
-                    }, 200);
-                }
                 else
                     _this.snackBars("Decline Leave", response.success);
                 resolve(true);
@@ -3074,11 +3032,6 @@ var ApiService = /** @class */ (function () {
                 if (response.success) {
                     _this.emitCount.emit(response.data);
                 }
-                else if (response == 'Wrong Token') {
-                    setTimeout(function () {
-                        _this.router.navigate(['/']);
-                    }, 200);
-                }
                 else
                     return false;
                 resolve(true);
@@ -3092,15 +3045,9 @@ var ApiService = /** @class */ (function () {
             _this.http.post(_this.URL + 'lms/empOnLeave', tmp, _this.opts)
                 .map(function (res) { return res.json(); })
                 .subscribe(function (response) {
-                console.log(response);
                 if (response.success) {
                     _this.emitEmpOnLeave.emit(response.data);
                     _this.emitEmpApp.emit(response.app_detail);
-                }
-                else if (response == 'Wrong Token') {
-                    setTimeout(function () {
-                        _this.router.navigate(['/']);
-                    }, 200);
                 }
                 else
                     _this.snackBars("EmpOn Leave", "response.success");
@@ -3109,8 +3056,8 @@ var ApiService = /** @class */ (function () {
         });
     };
     ApiService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__angular_material__["B" /* MatSnackBar */], __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]])
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__angular_material__["B" /* MatSnackBar */], __WEBPACK_IMPORTED_MODULE_0__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]])
     ], ApiService);
     return ApiService;
 }());
@@ -3142,7 +3089,7 @@ var AuthService = /** @class */ (function () {
         this.router = router;
     }
     AuthService.prototype.canActivate = function () {
-        if (localStorage.getItem('token')) {
+        if (localStorage.getItem('token') != null) {
             return true;
         }
         this.router.navigate(['/login']);

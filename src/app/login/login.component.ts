@@ -9,14 +9,13 @@ import { ApiService } from '../services/api.service'
 })
 
 export class LoginComponent implements OnInit {
-
   uname: any
   pwd: any
   unsubLogin: any
   email_id:any
   name:any
   password:any
-  
+
   constructor(private api: ApiService, private router: Router) {}
 
   isLogin() {
@@ -30,11 +29,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.api.isLogin()
-    this.unsubLogin = this.api.emitLogin.subscribe((res) => {
-      setTimeout(() => {
-        this.router.navigate(['/'])
-      }, 200 )
-    })
   }
   
 }

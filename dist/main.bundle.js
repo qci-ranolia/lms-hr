@@ -2056,8 +2056,10 @@ var AppinfoComponent = /** @class */ (function () {
                         _this.date = "0" + d;
                     else
                         _this.date = d;
-                    if (m < 9)
+                    if (m < 9 && m > 0)
                         m++ && (_this.month = "0" + m);
+                    else if (m == 0)
+                        _this.month = "01";
                     else
                         m++ && (_this.month = m);
                     var today = String(_this.date + "/" + _this.month + "/" + _this.year);
@@ -2149,8 +2151,10 @@ var AppinfoComponent = /** @class */ (function () {
             this.date = "0" + d;
         else
             this.date = d;
-        if (m < 9)
+        if (m < 9 && m > 0)
             m++ && (this.month = "0" + m);
+        else if (m == 0)
+            this.month = "01";
         else
             m++ && (this.month = m);
         var getDate = String(this.year + "-" + this.month + "-" + this.date), temp = String(this.date + "/" + this.month + "/" + this.year);

@@ -91,7 +91,8 @@ export class AppinfoComponent implements OnInit, OnDestroy {
             m = this.month
           if (d < 10) this.date = "0" + d
           else this.date = d
-          if (m < 9) m++ && (this.month = "0" + m)
+          if (m < 9 && m > 0 ) m++ && (this.month = "0" + m)
+          else if ( m == 0 ) this.month = "01"
           else m++ && (this.month = m)
           var today = String(this.date + "/" + this.month + "/" + this.year)
           this.holidays.push({ Today: "Today", Date: today })
@@ -169,7 +170,8 @@ export class AppinfoComponent implements OnInit, OnDestroy {
     let d: number = this.date, m = this.month
     if (d < 10) this.date = "0" + d
     else this.date = d
-    if (m < 9) m++ && (this.month = "0" + m)
+    if (m < 9 && m > 0 ) m++ && (this.month = "0" + m)
+    else if ( m == 0 ) this.month = "01"
     else m++ && (this.month = m)
     var getDate = String(this.year + "-" + this.month + "-" + this.date),
       temp = String(this.date + "/" + this.month + "/" + this.year)

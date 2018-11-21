@@ -74,14 +74,12 @@ export class ApiService {
                 this.headers.append('Authorization', this.token) // ADD/Append your authorized token to Default headers
                 this.opts = new RequestOptions()
                 this.opts.headers = this.headers
-          
-
+                
+                
                 console.log(response)
                 console.log(this.token)
                 console.log(this.headers)
                 console.log(this.opts)
-                
-      
                 
                 this.router.navigate(['/'])
             } else this.snackBars(response.message, response.success)

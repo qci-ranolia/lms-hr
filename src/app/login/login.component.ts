@@ -16,7 +16,13 @@ export class LoginComponent implements OnInit {
   name:any
   password:any
 
-  constructor(private api: ApiService, private router: Router) {}
+  constructor(private api: ApiService, private router: Router) {
+    // if (router.url == '/'){
+    //   localStorage.removeItem('token')
+    //   localStorage.removeItem('userName')
+    //   localStorage.removeItem('qci_id')  
+    // }
+  }
 
   isLogin() {
     localStorage.setItem('userName', this.uname)

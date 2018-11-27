@@ -9,18 +9,19 @@
           <table id="table_new" class="table table-striped" cellspacing="0" width="100%">
             <thead>
               <tr>
+                <th class="wd-16">Application Date</th>
                 <th class="wd-12">Application ID</th>
                 <th class="wd-16">Employee name</th>
                 <th class="wd-15">QCI/Board</th>
                 <th class="wd-15">Leave Type</th>
                 <th class="wd-16">Date Applied</th>
-                <th class="wd-16">Application Date</th>
                 <th class="modify">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let app of application | reverse | filter : term; let i = index;">
-                <td class="wd-7">
+                <td class="wd-16">{{app.date_of_apply}}</td>
+                <td class="wd-12">
                   <a href="javascript:void(0)" class="text-primary" (click)="appInfo(app.application_id, app.qci_id)">
                     <u>{{app.application_id | slice:0:12 }}</u>
                   </a>
@@ -32,8 +33,7 @@
                   <span :matTooltip="{{app.board}}">{{app.board}}</span>
                 </td>
                 <td>{{app.leave_type}}</td>
-                <td class="wd-16">{{app.date_from}}-{{app.date_to}}</td>
-                <td class="wd-16">{{app.date_of_apply}}</td>
+                <td class="wd-15">{{app.date_from}}-{{app.date_to}}</td>
                 <td class="modify">
                  <!--  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(app.application_id, app.qci_id)"></i> -->
                   <i class="fa fa-check" aria-hidden="true" (click)="appAccept(app.application_id, app.qci_id)"></i>
@@ -50,18 +50,19 @@
           <table id="table_approve" class="table table-striped" cellspacing="0" width="100%">
             <thead>
               <tr>
+                <th class="wd-16">Application Date</th>
                 <th class="wd-12">Application ID</th>
                 <th class="wd-16">Employee name</th>
                 <th class="wd-15">QCI/Board</th>
                 <th class="wd-15">Leave Type</th>
                 <th class="wd-16">Date Applied</th>
-                <th class="wd-16">Application Date</th>
                 <th class="modify">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let approve of approvedLeave | reverse | filter : term; let i = index;">
-                <td class="wd-7">
+                <td class="wd-16">{{approve.date_of_apply}}</td>
+                <td class="wd-12">
                   <a href="javascript:void(0)" class="text-primary" (click)="appInfo(approve.application_id, approve.qci_id)">
                     <u>{{approve.application_id | slice:0:12 }}</u>
                   </a>
@@ -74,7 +75,6 @@
                 </td>
                 <td class="wd-15">{{approve.leave_type}}</td>
                 <td class="wd-16">{{approve.date_from}}-{{approve.date_to}}</td>
-                <td class="wd-16">{{approve.date_of_apply}}</td>
                 <td class="modify">
                   <small>No Actions</small>
                   <!-- <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(approve.application_id, approve.qci_id)"></i>
@@ -92,18 +92,19 @@
           <table id="table_cancel" class="table table-striped" cellspacing="0" width="100%">
             <thead>
               <tr>
+                <th class="wd-16">Application Date</th>
                 <th class="wd-12">Application ID</th>
                 <th class="wd-16">Employee name</th>
                 <th class="wd-15">QCI/Board</th>
                 <th class="wd-15">Leave Type</th>
                 <th class="wd-16">Date Applied</th>
-                <th class="wd-16">Application Date</th>
                 <th class="modify">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let cancel of cancelledLeave | reverse | filter : term; let i = index;">
-                <td class="wd-7">
+                <td class="wd-16">{{cancel.date_of_apply}}</td>
+                <td class="wd-12">
                   <a href="javascript:void(0)" class="text-primary" (click)="appInfo(cancel.application_id, cancel.qci_id)">
                     <u>{{cancel.application_id | slice:0:12 }}</u>
                   </a>
@@ -116,7 +117,6 @@
                 </td>
                 <td class="wd-15">{{cancel['leave_type']}}</td>
                 <td class="wd-16">{{cancel.date_from}}-{{cancel.date_to}}</td>
-                <td class="wd-16">{{cancel.date_of_apply}}</td>
                 <td class="modify">
                   <small>No Actions</small>
                   <!-- <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(cancel.application_id, cancel.qci_id)"></i>

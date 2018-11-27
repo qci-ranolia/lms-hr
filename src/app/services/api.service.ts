@@ -51,7 +51,7 @@ export class ApiService {
     }
     snackBars(message: string, action: string) {
         this.snackBar.open(message, action, {
-            duration: 12600,
+            duration:3600,
         })
     }
     isLogin(){
@@ -74,13 +74,6 @@ export class ApiService {
                 this.headers.append('Authorization', this.token) // ADD/Append your authorized token to Default headers
                 this.opts = new RequestOptions()
                 this.opts.headers = this.headers
-                
-                
-                console.log(response)
-                console.log(this.token)
-                console.log(this.headers)
-                console.log(this.opts)
-                
                 this.router.navigate(['/'])
             } else this.snackBars(response.message, response.success)
             resolve(true)
@@ -327,10 +320,12 @@ export class ApiService {
     }
     getEmpOnLeave(data:any) {
         let tmp = { date: data }
+        console.log(tmp)
         return new Promise((resolve) => {
             this.http.post(this.URL + 'lms/empOnLeave', tmp, this.opts)
                 .map(res => res.json())
                 .subscribe(response => {
+                    console.log(response)
                     if (response.success) {
                         this.emitEmpOnLeave.emit(response.data)
                         this.emitEmpApp.emit(response.app_detail)

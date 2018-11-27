@@ -5,6 +5,7 @@ import { DialogComponent } from "./dialog/dialog.component"
 import { CsvComponent } from "./csv/csv.component"
 import { LmsService } from "../../services/lms.service"
 import { ApiService } from "../../services/api.service"
+
 // declare var $: any
 @Component({
   selector: "app-dashboard",
@@ -98,6 +99,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     })
     this.unsubEmpOnLeaveTwo = this.api.emitEmpOnLeave.subscribe(r => {
       this.emp = r
+      console.log(r)
     })
     this.unsubEmpApplication = this.api.emitEmpApp.subscribe(r => {
       this.empApplications = r
@@ -130,7 +132,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       var x = Object.keys(r), y = Object.values(r) // count array
       let t: any = x, s: any = y
       if (!(this.combineDateEmp.length >= 1)) {
-        for (let i = 0; i < this.daysArr.length; i++) {
+        for ( let i = 0; i < this.daysArr.length; i++ ){
           // if date returned not equal to the date in a month on particular index then add holiday & assign '0' to the date key
           if (!(x[i] == this.totalDaysOfMonth[i])) t.splice(i, 0, this.totalDaysOfMonth[i]), s.splice(i, 0, 0)
           // create new array of the response from the server which includes holidays too
@@ -142,11 +144,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // CSV Dialog
   public openUploadDialog($e) {
     $e.stopPropagation()
-    let dialogRef = this.dialog.open(DialogComponent, { width: "50%", height: "50%" })
+    /* let dialogRef =  */this.dialog.open(DialogComponent, { width: "50%", height: "50%" })
   }
   public openCSV($e) {
     $e.stopPropagation()
-    let dialogRef = this.dialog.open(CsvComponent, { width: "50%", height: "85%" })
+    /* let dialogRef =  */this.dialog.open(CsvComponent, { width: "50%", height: "85%" })
   }
   public ngOnInit() {
     this.tDate = this.minDate.getDate() // Get date

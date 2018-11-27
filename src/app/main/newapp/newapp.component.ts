@@ -64,6 +64,7 @@ export class NewappComponent implements OnInit, OnDestroy {
     this.unsubEmployeeOnLeave = this.api.emitEOL.subscribe( el => {
       this.cmn.push(el)
       this.simplyfiData()
+      this.application = []
       this.application = this.cmn[this.cmn.length - 1]
       this.case = this.application
     })
@@ -71,6 +72,7 @@ export class NewappComponent implements OnInit, OnDestroy {
     this.unsubApprovedLeave = this.api.emitApprovedApplication.subscribe( el => {
       this.cmn.push(el)
       this.simplyfiData()
+      this.approvedLeave = []
       this.approvedLeave = this.cmn[this.cmn.length - 1]
     })
     // if cancelled leave

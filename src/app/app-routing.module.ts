@@ -19,7 +19,7 @@ import { AuthService } from './services/auth.service';
 export const routes: Routes = [
   {
     path: '', component: NavComponent, children: [
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthService] },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full', canActivate: [AuthService] },
       { path: 'add-employee', component: AddEmpComponent, canActivate: [AuthService] },
       { path: 'employee-list', component: CrudComponent, canActivate: [AuthService] },

@@ -13,6 +13,7 @@
                   <span *ngIf="lev.leave_type == 'ptl'">paternity leave</span>
                   <span *ngIf="lev.leave_type == 'ml'">maternity leave</span>
                   <span *ngIf="lev.leave_type == 'rh'">restricted leave</span>
+                  <span *ngIf="lev.leave_type == 'od'">On Duty</span>
                     on {{lev.date_of_apply}} from
                     <br />{{lev.date_from}} to {{lev.date_to}}
                     <br />
@@ -53,6 +54,7 @@
                   <div class="col-sm-2 float-left" *ngIf="employee.ptl && employee.ptl.bal !== 0">PTL</div>
                   <div class="col-sm-2 float-left" *ngIf="employee.ml && employee.ml.bal !== 0">MTL</div>
                   <div class="col-sm-2 float-left" *ngIf="employee.rh">RH</div>
+                  <div class="col-sm-2 float-left" *ngIf="employee.od">od</div>
                 </div>
                 <div class="clearfix col-sm-12 p-0 mt-2">
                   <mat-card-subtitle class="col-sm-2 float-left mb-0" *ngIf="employee.cl">{{employee.cl.total}}</mat-card-subtitle>
@@ -61,6 +63,7 @@
                   <mat-card-subtitle class="col-sm-2 float-left mb-0" *ngIf="employee.ptl && employee.ptl.bal !== 0">{{employee.ptl.total}}</mat-card-subtitle>
                   <mat-card-subtitle class="col-sm-2 float-left mb-0" *ngIf="employee.ml && employee.ml.bal !== 0">{{employee.ml.total}}</mat-card-subtitle>
                   <mat-card-subtitle class="col-sm-2 float-left mb-0" *ngIf="employee.rh">{{employee.rh.total}}</mat-card-subtitle>
+                  <mat-card-subtitle class="col-sm-2 float-left mb-0" *ngIf="employee.od">N.A.</mat-card-subtitle>
                 </div>
                 <div class="clearfix col-sm-12 p-0">
                   <mat-card-subtitle class="col-sm-2 float-left mb-0" *ngIf="employee.cl">{{employee.cl.bal}}</mat-card-subtitle>
@@ -69,6 +72,7 @@
                   <mat-card-subtitle class="col-sm-2 float-left mb-0" *ngIf="employee.ptl && employee.ptl.bal !== 0">{{employee.ptl.bal}}</mat-card-subtitle>
                   <mat-card-subtitle class="col-sm-2 float-left mb-0" *ngIf="employee.ml && employee.ml.bal !== 0">{{employee.ml.bal}}</mat-card-subtitle>
                   <mat-card-subtitle class="col-sm-2 float-left mb-0" *ngIf="employee.rh">{{employee.rh.bal}}</mat-card-subtitle>
+                  <mat-card-subtitle class="col-sm-2 float-left mb-0" *ngIf="employee.od">{{employee.od}}</mat-card-subtitle>
                 </div>
               </div>
             </div>

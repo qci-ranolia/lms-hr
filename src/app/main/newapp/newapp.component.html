@@ -38,6 +38,7 @@
                 <td class="wd-15" *ngIf="app.leave_type == 'ptl'" :matTooltip="Paternity Leave">Paternity</td>
                 <td class="wd-15" *ngIf="app.leave_type == 'ml'" :matTooltip="Maternity Leave">Maternity</td>
                 <td class="wd-15" *ngIf="app.leave_type == 'rh'" :matTooltip="Restricted Holiday">Restricted</td>
+                <td class="wd-15" *ngIf="app.leave_type == 'od'" :matTooltip="On Duty">On Duty</td>
                 <td class="wd-15">{{app.date_from}}-{{app.date_to}}</td>
                 <td class="modify">
                  <!--  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(app.application_id, app.qci_id)"></i> -->
@@ -84,6 +85,7 @@
                 <td class="wd-15" *ngIf="approve.leave_type == 'ptl'" :matTooltip="Paternity Leave">Paternity</td>
                 <td class="wd-15" *ngIf="approve.leave_type == 'ml'" :matTooltip="Maternity Leave">Maternity</td>
                 <td class="wd-15" *ngIf="approve.leave_type == 'rh'" :matTooltip="Restricted Holiday">Restricted</td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'od'" :matTooltip="On Duty">On Duty</td>
                 <td class="wd-16">{{approve.date_from}}-{{approve.date_to}}</td>
                 <td class="modify">
                   <small>No Actions</small>
@@ -131,6 +133,7 @@
                 <td class="wd-15" *ngIf="cancel.leave_type == 'ptl'" :matTooltip="Paternity Leave">Paternity</td>
                 <td class="wd-15" *ngIf="cancel.leave_type == 'ml'" :matTooltip="Maternity Leave">Maternity</td>
                 <td class="wd-15" *ngIf="cancel.leave_type == 'rh'" :matTooltip="Restricted Holiday">Restricted</td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'od'" :matTooltip="On Duty">On Duty</td>
                 <td class="wd-16">{{cancel.date_from}}-{{cancel.date_to}}</td>
                 <td class="modify">
                   <small>No Actions</small>

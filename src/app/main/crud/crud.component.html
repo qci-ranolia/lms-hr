@@ -51,19 +51,19 @@
             <td class="wd-14" :matTooltip="{{emp['ro_email_id']}}">{{emp.reporting_officer}}</td>
             <td class="tableInside wd-59">
               <table class="col-sm-12" *ngFor="let els of employeeLeave; let j = index;">
-                <tr *ngIf="i == j">
+                <tr *ngIf="i == j && emp.cl">
                   <td class="ss bs">CL</td>
                   <td class="ss bs">{{emp.cl.total}}</td>
                   <td class="ss" *ngFor="let el of els">{{el.cl}}</td>
                   <td class="ss bs">{{emp.cl.bal}}</td>
                 </tr>
-                <tr *ngIf="i == j">
+                <tr *ngIf="i == j && emp.sl">
                   <td class="ss bs">SL</td>
                   <td class="ss bs">{{emp.sl.total}}</td>
                   <td class="ss" *ngFor="let el of els">{{el.sl}}</td>
                   <td class="ss bs">{{emp.sl.bal}}</td>
                 </tr>
-                <tr *ngIf="i == j">
+                <tr *ngIf="i == j && emp.pl">
                   <td class="ss bs">PL</td>
                   <td class="ss bs">{{emp.pl.total}}</td>
                   <td class="ss" *ngFor="let el of els">{{el.pl}}</td>

@@ -32,7 +32,12 @@
                 <td class="wd-15">
                   <span :matTooltip="{{app.board}}">{{app.board}}</span>
                 </td>
-                <td>{{app.leave_type}}</td>
+                <td class="wd-15" *ngIf="app.leave_type == 'cl'" :matTooltip="Casual Leave">Casual</td>
+                <td class="wd-15" *ngIf="app.leave_type == 'sl'" :matTooltip="Sick Leave">Sick</td>
+                <td class="wd-15" *ngIf="app.leave_type == 'pl'" :matTooltip="Privileged Leave">Privileged</td>
+                <td class="wd-15" *ngIf="app.leave_type == 'ptl'" :matTooltip="Paternity Leave">Paternity</td>
+                <td class="wd-15" *ngIf="app.leave_type == 'ml'" :matTooltip="Maternity Leave">Maternity</td>
+                <td class="wd-15" *ngIf="app.leave_type == 'rh'" :matTooltip="Restricted Holiday">Restricted</td>
                 <td class="wd-15">{{app.date_from}}-{{app.date_to}}</td>
                 <td class="modify">
                  <!--  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="appEdit(app.application_id, app.qci_id)"></i> -->
@@ -73,7 +78,12 @@
                 <td class="wd-15">
                   <span :matTooltip="{{approve.board}}">{{approve.board}}</span>
                 </td>
-                <td class="wd-15">{{approve.leave_type}}</td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'cl'" :matTooltip="Casual Leave">Casual</td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'sl'" :matTooltip="Sick Leave">Sick</td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'pl'" :matTooltip="Privileged Leave">Privileged</td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'ptl'" :matTooltip="Paternity Leave">Paternity</td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'ml'" :matTooltip="Maternity Leave">Maternity</td>
+                <td class="wd-15" *ngIf="approve.leave_type == 'rh'" :matTooltip="Restricted Holiday">Restricted</td>
                 <td class="wd-16">{{approve.date_from}}-{{approve.date_to}}</td>
                 <td class="modify">
                   <small>No Actions</small>
@@ -115,7 +125,12 @@
                 <td class="wd-15">
                   <span :matTooltip="{{cancel.board}}">{{cancel.board}}</span>
                 </td>
-                <td class="wd-15">{{cancel['leave_type']}}</td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'cl'" :matTooltip="Casual Leave">Casual</td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'sl'" :matTooltip="Sick Leave">Sick</td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'pl'" :matTooltip="Privileged Leave">Privileged</td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'ptl'" :matTooltip="Paternity Leave">Paternity</td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'ml'" :matTooltip="Maternity Leave">Maternity</td>
+                <td class="wd-15" *ngIf="cancel.leave_type == 'rh'" :matTooltip="Restricted Holiday">Restricted</td>
                 <td class="wd-16">{{cancel.date_from}}-{{cancel.date_to}}</td>
                 <td class="modify">
                   <small>No Actions</small>

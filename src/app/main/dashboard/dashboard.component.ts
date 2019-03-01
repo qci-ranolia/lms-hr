@@ -99,7 +99,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     })
     this.unsubEmpOnLeaveTwo = this.api.emitEmpOnLeave.subscribe(r => {
       this.emp = r
-      console.log(r)
+      // console.log(r)
     })
     this.unsubEmpApplication = this.api.emitEmpApp.subscribe(r => {
       this.empApplications = r

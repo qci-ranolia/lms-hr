@@ -96,7 +96,8 @@ export function tokenGetter() {
     MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
     MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
     MatTabsModule, MatToolbarModule, MatTooltipModule,
-    RouterModule.forRoot(routes, { useHash: true })],
+    RouterModule.forRoot(routes, { useHash: true })
+  ],
   providers: [LmsService, ApiService, AuthService, DatePipe],
   exports: [
     DashboardComponent,
